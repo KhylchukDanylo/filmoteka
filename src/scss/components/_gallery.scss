@@ -1,0 +1,73 @@
+.film {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include tablert {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  @include desktop {
+    gap: 16px;
+  }
+  &__card {
+    list-style-type: none;
+    margin-bottom: 20px;
+    @include tablert {
+      list-style-type: none;
+      margin-bottom: 0;
+    }
+  }
+
+  &__img {
+    display: block;
+    width: 280px;
+    height: 402px;
+    @include tablert {
+      width: 336px;
+      height: 455px;
+    }
+    @include desktop {
+      width: 395px;
+      height: 574px;
+    }
+  }
+
+  &__text {
+    margin-top: 10px;
+    @include desktop {
+      margin-top: 12px;
+    }
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.16;
+    text-transform: uppercase;
+    margin: 0;
+
+    color: var(--text-color);
+    @include desktop {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+
+  &__genre {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    margin: 0;
+
+    color: var(--text-ganre-color);
+    @include desktop {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+}
