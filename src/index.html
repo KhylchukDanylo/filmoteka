@@ -11,10 +11,11 @@
     />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Homework 11</title>
+    <title>Filmoteka</title>
     <link rel="stylesheet" href="/css/main.css" />
   </head>
-  <main>
+  
+  <!-- <main>
     <div class="containter">
       <ul class="film">
         <li class="film__card">
@@ -26,9 +27,24 @@
         </li>
       </ul>
     </div>
-  </main>
+  </main> -->
 
   <body>
+    <header></header>
+    <main>
+      <form class="search-form" id="search-form">
+        <input
+          id="search-box"
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          placeholder="Search films..."
+          autofocus
+        />
+        <button type="submit">Go</button>
+      </form>
+      <ul class="movies-list"></ul>
+    </main>
     <footer class="footer">
       <h3 class="footer__text">
         <span class="footer__text--flex footer__text--bottom">
