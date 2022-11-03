@@ -30,5 +30,6 @@ async function fetchMoviesBySearch(searchQuery, page) {
   console.log(response);
   return response;
 };
+console.log(1);
 
 export { fetchPopularMovies, fetchMovieById, fetchMoviesGenres, fetchMoviesBySearch};
