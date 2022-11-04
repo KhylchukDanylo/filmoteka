@@ -12,9 +12,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="./scss/main.scss" />
   </head>
-  
+
   <!-- <main>
     <div class="containter">
       <ul class="film">
@@ -34,16 +34,21 @@
     <main>
       <form class="search-form" id="search-form">
         <input
-          id="search-box"
-          type="text"
-          name="searchQuery"
-          autocomplete="off"
-          placeholder="Search films..."
-          autofocus
+        id="search-box"
+        type="text"
+        name="searchQuery"
+        autocomplete="off"
+        placeholder="Search films..."
+        autofocus
         />
         <button type="submit">Go</button>
       </form>
       <ul class="movies-list"></ul>
+      <section class="pagination">
+        <div class="container">
+          <div class="pagination-list"></div>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <h3 class="footer__text">
