@@ -12,7 +12,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
-    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="./scss/main.scss" />
   </head>
 
   <!-- <main>
@@ -28,6 +28,7 @@
       </ul>
     </div>
   </main> -->
+
 
   <body>
     <header>
@@ -45,7 +46,12 @@
         />
         <button type="submit">Go</button>
       </form>
-      <ul class="movies-list"></ul>
+      <div class="container"><ul class="movie"></ul></div>
+      <section class="pagination">
+        <div class="container">
+          <div class="pagination-list"></div>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <h3 class="footer__text">
