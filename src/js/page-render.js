@@ -8,7 +8,7 @@ import {
 import { createPaginationMarkupBasedOnScreenSize } from './pagination';
 const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
-const listEl = document.querySelector('.movies-list');
+const listEl = document.querySelector('.movie');
 
 // ================Create array all movies genres==================//
 const arrayGenres = []; // <-- arrray all movies genres
@@ -89,8 +89,8 @@ function searchMovies(evt) {
 // ==================== Render Movies Card ===================== //
 function renderMoviesCard(movie, genres) {
   const { id, poster_path, title, original_title, release_date } = movie;
-  listEl.innerHTML += `<li class="movie-item">
-  <a href="#" class="movie-link" id="${id}">
+  listEl.innerHTML += `<li class="movie__card">
+  <a href="#" class="movie__link" id="${id}">
     <picture>
       <source
         media="(min-width:1200px)"
@@ -117,10 +117,11 @@ function renderMoviesCard(movie, genres) {
         height="574"
       />
     </picture>
-
-    <h3 class="../css/01-gallery.css">${original_title}</h3>
-    <p class="movie-genres">${genres.join(', ')}</p>
-    <p class="movie-year">${+parseInt(release_date)}</p>
+<div class="movie__text"><h3 class="movie__name">${original_title}</h3>
+    <p class="movie__genre">${genres.join(', ')} | ${+parseInt(
+    release_date
+  )}</p></div>
+    
   </a>
 </li>`;
 }
