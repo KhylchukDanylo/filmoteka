@@ -1,3 +1,5 @@
+import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix';
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
@@ -28,11 +30,11 @@ const btnLogOut = document.querySelector('.button__auth__logout');
 const btnRegister = document.querySelector('.button__auth__register');
 const input = document.querySelector('input');
 const formAuth = document.querySelector('.form__auth');
-const btnTest = document.querySelector('.test');
+const btnTest = document.querySelector('.btn__auth__library');
 
 btnLogin.addEventListener('click', onBtnLogin);
 btnRegister.addEventListener('click', onBtnRegister);
-input.addEventListener('input', onValidInput);
+input.addEventListener('input', throttle(onValidInput, 300));
 btnLogOut.addEventListener('click', onBtnLogOut);
 btnTest.addEventListener('click', onTestBtn);
 
@@ -48,11 +50,13 @@ function onBtnRegister(e) {
   fullName = document.querySelector('.input__auth__name').value;
 
   if (onValidInput(email) === false || validate_password(password) === false) {
-    alert('Email or Password is wrong!!');
+    Notify.failure('Email or Password is wrong!');
+    //alert('Email or Password is wrong!!');
     return;
   }
   if (validate_field(fullName) === false) {
-    alert('One or More Extra Fields is wrong!');
+    Notify.failure('One or More Extra Fields is wrong!');
+    //alert('One or More Extra Fields is wrong!');
     return;
   }
   createUserWithEmailAndPassword(auth, email, password).then(userCredential => {
@@ -65,10 +69,12 @@ function onBtnRegister(e) {
     })
       .then(() => {
         formAuth.classList.add('visually-hidden');
-        alert('User Created!!');
+        Notify.success('User created succesfully!');
+        //alert('User Created!!');
       })
       .catch(error => {
-        alert(error_message);
+        Notify.failure('Error!!!');
+        //alert(error_message);
       });
   });
 }
@@ -79,18 +85,20 @@ function onBtnLogin(e) {
   password = document.querySelector('.input__auth__password').value;
 
   if (onValidInput(email) === false || validate_password(password) === false) {
-    alert('Email or Password is wrong!!');
+    Notify.failure('Email or Password is wrong!');
+    //alert('Email or Password is wrong!!');
     return;
   }
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       formAuth.classList.add('visually-hidden');
-      alert('User logged in!');
-
-      alert('This email is already used!');
+      Notify.success('User logged in succesfully!');
+      //alert('User logged in!');
     })
     .catch(error => {
-      alert(error_message);
+      Notify.failure('Error!!!');
+      //Notify.failure(`${error.message}`);
+      // alert(error_message);
     });
 }
 
@@ -124,16 +132,22 @@ function userAuthState(e) {
   });
 }
 
-function onBtnLogOut() {
+function onBtnLogOut(e) {
+  e.preventDefault();
   signOut(auth)
     .then(() => {
       btnLogin.classList.remove('visually-hidden');
       btnLogOut.classList.add('visually-hidden');
     })
     .catch(error => {
-      const error_code = error.code;
-      const error_message = error.message;
-      alert(error_message);
+      if (error.code) {
+        return Notify.failure(`${error.code}`);
+      }
+      if (error.message) {
+        return Notify.failure(`${error.message}`);
+      }
+      Notify.failure(`${error.message}`);
+      //alert(error_message);
     });
 }
 
@@ -169,8 +183,8 @@ function validate_field(field) {
 window.addEventListener('keydown', onKeyDown);
 
 function onKeyDown(e) {
+  console.log(e.key);
   if (e.key !== 'Escape') return;
-
   formAuth.classList.add('visually-hidden');
   window.removeEventListener('keydown', onKeyDown);
 }
