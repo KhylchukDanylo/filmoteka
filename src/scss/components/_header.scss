@@ -1,0 +1,210 @@
+
+
+ul {
+    margin: 0;
+    padding-left: 0;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.list {
+    list-style: none;
+}
+
+
+.header {
+    background-image:
+     url(../images/abstract-background-with-red-lines-mob.jpg);
+    margin: 0;
+        
+        width: 100%;
+        max-width: 480px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 230px;
+
+    @media (min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image:
+                url(../images/abstract-background-with-red-lines-mob-2x.jpg);
+        }
+    
+        @include tablert {
+            height: 216px;
+            max-width: 768px;
+            background-image:
+                url(../images/abstract-background-with-red-lines-tab.jpg);
+    
+            @media (min-device-pixel-ratio: 2),
+            (min-resolution: 192dpi),
+            (min-resolution: 2dppx) {
+                background-image: 
+                    url(../images/abstract-background-with-red-lines-tab-2x.jpg);
+            }
+        }
+    
+        @include desktop {
+            max-width: 1280px;
+            background-image:
+                url(../images/abstract-background-with-red-lines-desc.jpg);
+    
+            @media (min-device-pixel-ratio: 2),
+            (min-resolution: 192dpi),
+            (min-resolution: 2dppx) {
+                background-image:
+                    url(../images/abstract-background-with-red-lines-desc-2x.jpg);
+            }
+        }
+        
+}
+
+
+.header-wrapper {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+}
+
+.nav {
+    display: flex;    
+    align-items: center;
+    margin-bottom: 55px;
+    padding: 0 30px;
+}
+
+.link-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    margin-right: 10px;
+}
+
+.logo-text {
+         display: none;
+@include tablert {
+        max-width: 768px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.17;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
+}
+
+.header__list {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.header__link-home {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.header__link-home:nth-child(1) {
+    margin-right: 40px;
+    border-bottom: solid #ff001b 3px;
+    }
+
+.header__link {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    }
+
+.search-form {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.14;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+    
+.search-form {
+    position: relative;
+        display: flex;
+}
+    
+.form__header-input {
+    border: none;
+    height: 20px;
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #00000000;
+    border-bottom: solid #FFFFFF 1px;
+    color: var(--color-btn-white);
+    @include tablert {
+        max-width: 768px;
+        border: none;
+        height: 20px;
+        width: 336px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #00000000;
+        border-bottom: solid #FFFFFF 1px;
+        color: var(--color-btn-white);
+        }
+    @include desktop {
+        max-width: 1280px;
+        border: none;
+        height: 20px;
+        width: 394px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #00000000;
+        border-bottom: solid #FFFFFF 1px;
+        color: var(--color-btn-white);
+    }
+
+}
+
+.form__header-btn {
+        border: none;
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        background-color: #00000000;
+        @include tablert {
+                max-width: 768px;
+                margin-right: 195px;
+    }
+        @include desktop {
+            max-width: 1280px;
+            margin-right: 420px;
+    }
+
+}
