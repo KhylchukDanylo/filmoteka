@@ -29,7 +29,7 @@ async function createMovieList(page) {
           genres: movie.genre_ids,
           year: movie.release_date.slice(0, 4),
         };
-
+console.log(1);
         popularMovies.push(movieData);
       });
     })
