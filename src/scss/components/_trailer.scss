@@ -11,7 +11,7 @@
  top: 0; 
  width: 100vw; 
  height: 100vh;
- background-color: grey; 
+ background: radial-gradient( gray 30%, transparent);
 }
 
 .trailer__modal{
@@ -19,10 +19,26 @@
     top: 50%;
     right: 50%;
     transform: translate(50%, -50%);
-    background-color: wheat;
-    width: 500px;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // background-color: wheat;
+    // width: 500px;
+    // height: 500px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+}
+
+
+.trailer__frame{
+    @include mobile {
+        width: 320px;
+        height: 180px;
+      }
+      @include tablert {
+        width: 768px;
+        height: 432px;
+      }
+      @include desktop {
+        width: 1280px;
+        height: 720px;
+      }
 }
