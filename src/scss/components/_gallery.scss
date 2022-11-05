@@ -1,4 +1,4 @@
-.film {
+.movie {
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -22,25 +22,20 @@
       margin-bottom: 0;
     }
   }
-
-  &__img {
-    display: block;
-    width: 280px;
-    height: 402px;
-    @include tablert {
-      width: 336px;
-      height: 455px;
-    }
-    @include desktop {
-      width: 395px;
-      height: 574px;
-    }
+  &__link {
+    text-decoration: none;
   }
 
   &__text {
     margin-top: 10px;
+    width: 280px;
+
+    @include tablert {
+      width: 336px;
+    }
     @include desktop {
       margin-top: 12px;
+      width: 394px;
     }
   }
 

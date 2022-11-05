@@ -14,22 +14,8 @@
     <title>Filmoteka</title>
     <link rel="stylesheet" href="./scss/main.scss" />
   </head>
-
-  <!-- <main>
-    <div class="containter">
-      <ul class="film">
-        <li class="film__card">
-          <img class="film__img" src="./images/Rectangle 17.png" alt="" />
-          <div class="film__text">
-            <h2 class="film__name">MOON</h2>
-            <h3 class="film__genre">Sci-Fi, Action, Thriller | 2010</h3>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </main> -->
-
   <body>
+
     <header class="header">
         <div class="container header-wrapper">
             <div class="nav">
@@ -56,12 +42,13 @@
 
     <main>
       
-      <ul class="movies-list"></ul>
+     
       <section class="pagination">
         <div class="container">
           <div class="pagination-list"></div>
         </div>
       </section>
+
     </main>
     <footer class="footer">
       <h3 class="footer__text">
@@ -78,6 +65,14 @@
         </span>
       </h3>
     </footer>
+    <div class="trailer__backdrop is-hidden">
+      <div class="trailer__modal">
+        <div class="trailer">
+          <iframe class="trailer__frame is-hidden" type="text/html" 
+frameborder="0" allowfullscreen>
+        </div>
+      </div>
+    </div>
     <script src="./js/index.js" type="module"></script>
   </body>
 </html>

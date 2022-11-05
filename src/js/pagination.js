@@ -1,4 +1,6 @@
 import { leftArrowIcon, rightArrowIcon } from './svg-icons';
+export const paginationList = document.querySelector('.pagination-list');
+export const containerEl = document.querySelector('.container');
 
 const leftArrow = `<button type="button" class="pagination-button pagination-button__arrow arrow-to-start-button-js">${leftArrowIcon}</button>`;
 const rightArrow = `<button type="button" class="pagination-button pagination-button__arrow arrow-to-end-button-js">${rightArrowIcon}</button>`;
@@ -6,7 +8,7 @@ const dots = '<div class="pagination-dots">...</div>'
 const currentBtn = currentPage => `<button type="button" class="pagination-button pagination-button__page--current">${currentPage}</button>`;
 const pageBtn = page => `<button type="button" class="pagination-button pagination-button__page">${page}</button>`;
 
-export function createPaginationMarkupBasedOnScreenSize({screenWidth, currentPage, totalPages}) {
+function createPaginationMarkupBasedOnScreenSize({screenWidth, currentPage, totalPages}) {
   if (screenWidth < 480) {
     return createPaginationMarkupForMobile(currentPage, totalPages);
   } 
@@ -83,4 +85,38 @@ function createPaginationMarkupForMobile(currentPage, totalPages) {
         return `${leftArrow} ${pageBtn(currentPage - 2)} ${pageBtn(currentPage - 1)} ${currentBtn(currentPage)}`;
     }
   }
+}
+
+
+// ==================== Render pagination buttons ===================== //
+
+function renderPagination(markup) {
+  paginationList.innerHTML = markup;
+}
+
+//===================== Choose a new currentPage based on the user's selection  ===========================//
+export function setTargetPage(element, currentPage) {
+  if (
+    element.closest('button').classList.contains('arrow-to-start-button-js')
+  ) {
+    return currentPage - 1;
+  }
+  if (element.closest('button').classList.contains('arrow-to-end-button-js')) {
+    return currentPage + 1;
+  }
+  return Number(element.closest('button').textContent);
+}
+
+
+export function addPagination({
+  screenWidth,
+  currentPage,
+  totalPages,
+}) {
+const markup = createPaginationMarkupBasedOnScreenSize({
+  screenWidth,
+  currentPage,
+  totalPages,
+});
+renderPagination(markup);
 }
