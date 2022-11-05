@@ -1,6 +1,6 @@
 import './api-service';
 
-import './page-render';
+// import './page-render';
 import './modal-auth';
 
 import './trailer.js';
