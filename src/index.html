@@ -12,8 +12,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
-    <link rel="stylesheet" href="./scss/main.scss" />
+    <link rel="stylesheet" href="/scss/main.css" />
   </head>
+  
   <!-- <main>
     <div class="containter">
       <ul class="film">
@@ -33,6 +34,41 @@
       <a href="./library.html">my library</a>
     </header>
     <main>
+      <section class="modal-auth">
+        <button class="test">TEST FOR MODAL</button>
+        <div class="form__auth visually-hidden">
+          <div class="form__auth__wrap">
+            <div class="form__auth__wrapper">
+              <h2 class="form__auth__header">Welcome to our site</h2>
+            </div>
+            <div class="input__auth__cont">
+              <div class="input__auth__container">
+                <input
+                  class="input__auth__name input-auth"
+                  type="text"
+                  placeholder="Full name"
+                />
+                <input
+                  class="input__auth__email input-auth"
+                  type="email"
+                  placeholder="Email"
+                />
+                <input
+                  class="input__auth__password input-auth"
+                  type="password"
+                  id="input__auth"
+                  placeholder="New Password"
+                />
+                <div class="button__auth">
+                  <button class="button__auth__login">Login</button>
+                  <button class="button__auth__register">Register</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="button__auth__logout visually-hidden">LogOut</button>
+      </section>
       <form class="search-form" id="search-form">
         <input
           id="search-box"
