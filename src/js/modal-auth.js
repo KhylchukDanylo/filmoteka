@@ -47,7 +47,7 @@ btnLogin.addEventListener('click', onBtnLogin);
 btnRegister.addEventListener('click', onBtnRegister);
 input.addEventListener('input', throttle(onValidInput, 300));
 btnLogOut.addEventListener('click', onBtnLogOut);
-btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
+//btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
 
 function onLoginGlobalBtn(e) {
   e.preventDefault();
@@ -80,7 +80,7 @@ function onBtnRegister(e) {
         lastLogin: Date.now(),
       });
       formAuth.classList.add('visually-hidden');
-      btnLoginGlobal.textContent = 'my library';
+      // btnLoginGlobal.textContent = 'my library';
       Notify.success('User created succesfully!');
     })
     .catch(error => {
@@ -102,7 +102,7 @@ function onBtnLogin(e) {
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       formAuth.classList.add('visually-hidden');
-      btnLoginGlobal.textContent = 'my library';
+      // btnLoginGlobal.textContent = 'my library';
       Notify.success('User logged in succesfully!');
       //alert('User logged in!');
     })
@@ -136,10 +136,10 @@ onAuthStateChanged(auth, user => {
     btnRegister.classList.add('visually-hidden');
     btnLogin.classList.add('visually-hidden');
     btnLogOut.classList.remove('visually-hidden');
-    btnLoginGlobal.textContent = 'my library';
+    //btnLoginGlobal.textContent = 'my library';
     return uid;
   } else {
-    btnLoginGlobal.classList.add('visually-hidden');
+    // btnLoginGlobal.classList.add('visually-hidden');
     localStorage.removeItem('uid');
   }
 });
@@ -150,7 +150,7 @@ function onBtnLogOut(e) {
     .then(() => {
       btnLogin.classList.remove('visually-hidden');
       btnLogOut.classList.add('visually-hidden');
-      btnLoginGlobal.textContent = 'Log in';
+      // btnLoginGlobal.textContent = 'Log in';
     })
     .catch(error => {
       if (error.code) {
