@@ -14,24 +14,68 @@
     <title>Filmoteka</title>
     <link rel="stylesheet" href="./scss/main.scss" />
   </head>
-
-  <!-- <main>
-    <div class="containter">
-      <ul class="film">
-        <li class="film__card">
-          <img class="film__img" src="./images/Rectangle 17.png" alt="" />
-          <div class="film__text">
-            <h2 class="film__name">MOON</h2>
-            <h3 class="film__genre">Sci-Fi, Action, Thriller | 2010</h3>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </main> -->
-
   <body>
-    <header></header>
+    <header class="header">
+        <div class="container header-wrapper">
+            <div class="nav">
+              <a class="link-logo link" href="index.html">
+                <svg class="logo-icon" width="24" height="24">
+                  <use href="./images/icons.svg#icon-film"></use>
+                </svg><span class="logo-text">Filmoteka</span>
+              </a>
+              <ul class="header__list list">
+                <li class="header__item"><a class="header__link-home link" href="./index.html">Home</a></li>
+                <li class="header__item"><a class="header__link link" href="./library.html">my library</a></li>
+              </ul>
+            </div> 
+            <form class="search-form" id="search-form">
+              <div class="header__search-form">
+                <input class="form__header-input" id="search-box" type="text" name="searchQuery" autocomplete="off" placeholder="Search films..." autofocus />
+                <button class="form__header-btn" type="submit">
+                    <svg class="btn__icon" width="12" height="12">
+                       <use href="./images/icons.svg#icon-search"></use>
+                    </svg>
+                </button>
+                </div>
+            </form>
+        </div>
+    </header>
     <main>
+      <section class="modal-auth">
+        <button class="btn__auth__library">Log in</button>
+        <div class="form__auth visually-hidden">
+          <div class="form__auth__wrap">
+            <div class="form__auth__wrapper">
+              <h2 class="form__auth__header">Welcome to our site</h2>
+            </div>
+            <div class="input__auth__cont">
+              <div class="input__auth__container">
+                <input
+                  class="input__auth__name input-auth"
+                  type="text"
+                  placeholder="Full name"
+                />
+                <input
+                  class="input__auth__email input-auth"
+                  type="email"
+                  placeholder="Email"
+                />
+                <input
+                  class="input__auth__password input-auth"
+                  type="password"
+                  id="input__auth"
+                  placeholder="New Password"
+                />
+                <div class="button__auth">
+                  <button class="button__auth__login">Login</button>
+                  <button class="button__auth__register">Register</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="button__auth__logout visually-hidden">LogOut</button>
+      </section>
       <form class="search-form" id="search-form">
         <input
           id="search-box"
@@ -43,12 +87,13 @@
         />
         <button type="submit">Go</button>
       </form>
-      <ul class="movies-list"></ul>
+      <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
         <div class="container">
           <div class="pagination-list"></div>
         </div>
       </section>
+
     </main>
     <footer class="footer">
       <h3 class="footer__text">
@@ -67,6 +112,14 @@
     </footer>
     <div class="backdrop is-hidden">
       <div class="movie__modal is-hidden"></div>
+    </div>
+    <div class="trailer__backdrop is-hidden">
+      <div class="trailer__modal">
+        <div class="trailer">
+          <iframe class="trailer__frame is-hidden" type="text/html" 
+            frameborder="0" allowfullscreen>
+        </div>
+      </div>
     </div>
     <script src="./js/index.js" type="module"></script>
   </body>
