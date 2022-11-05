@@ -1,0 +1,251 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  opacity: 1;
+  transition: top 0.7s, opacity 1s;
+  overflow-y: scroll;
+
+  &.is-hidden {
+    top: -100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media screen and (max-width: 479.5px) {
+    padding: 85px 20px;
+  }
+}
+
+.movie__modal {
+  position: relative;
+  max-width: 280px;
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 5px 5px 20px #d9d9d9, -5px -5px 20px #ffffff;
+  overflow: auto;
+  background-color: #ffffff;
+  top: 0;
+  opacity: 1;
+  transition: top 1.1s, opacity 1s;
+
+  &.is-hidden {
+    top: -100%;
+    opacity: 0;
+  }
+
+  @media screen and (min-width: 480px) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  @include tablert {
+    max-width: 704px;
+  }
+
+  @include desktop {
+    max-width: 806px;
+  }
+}
+
+.movie__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 20px 40px;
+
+  @include tablert {
+    flex-direction: row;
+    padding: 40px 72px 40px 36px;
+  }
+
+  @include desktop {
+    padding: 40px 12px;
+  }
+}
+
+.movie__poster {
+  max-width: 100%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  // width: 240px;
+  // height: 357px;
+  @include tablert {
+    width: 264px;
+    // height: 374px;
+    margin-right: 68px;
+    margin-bottom: 0;
+  }
+
+  @include desktop {
+    min-width: 375px;
+    height: 478px;
+    margin-right: 16px;
+  }
+}
+
+.movie__title {
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  margin-bottom: 20px;
+
+  @include desktop {
+    font-size: 30px;
+    line-height: 1.17;
+  }
+}
+
+.movie__info-list {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.movie__characters {
+  flex: 1 0 auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-right: 40px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  color: #8c8c8c;
+
+  & p {
+    margin: 0;
+    padding: 0;
+  }
+  & li:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  @include desktop {
+    flex: 0 1 auto;
+    margin-right: 80px;
+  }
+}
+
+.movie__data {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+
+  color: #000000;
+
+  & p {
+    margin: 0;
+    padding: 0;
+  }
+
+  & li:not(:last-child) {
+    margin-bottom: 8px;
+  }
+
+  &-rating {
+    background-color: #ff6b01;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 0 9px;
+  }
+
+  &-slash {
+    color: #8c8c8c;
+  }
+
+  &-count {
+    padding: 0 9px;
+    background: #f7f7f7;
+    border-radius: 5px;
+  }
+}
+
+.movie__about {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: #000000;
+}
+.movie__description {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.67;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.button-wrap {
+  display: flex;
+}
+.movie__btn-watched {
+  width: 110px;
+  height: 44px;
+  padding: 6px 27px;
+  border: none;
+  background: #ff6b01;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-right: 15px;
+  @include tablert {
+    width: 125px;
+    padding: 0;
+  }
+
+  @include desktop {
+    width: 136px;
+  }
+}
+.movie__btn-queue {
+  width: 110px;
+  height: 44px;
+  padding: 14px 0 12px;
+  border: 1px solid #000000;
+  background: #ffffff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  color: #000000;
+  @include tablert {
+    width: 125px;
+    padding: 0;
+  }
+
+  @include desktop {
+    width: 136px;
+  }
+}
+.movie__btn-close {
+  top: 8px;
+  right: 8px;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}

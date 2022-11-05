@@ -14,6 +14,6 @@
 //     // Error handling
 //   });
 
-
 import './api-service';
 import './page-render';
+import './modal-movie-render';
