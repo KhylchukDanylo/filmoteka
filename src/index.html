@@ -12,9 +12,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
-    <link rel="stylesheet" href="./scss/main.scss" />
+    <link rel="stylesheet" href="/scss/main.css" />
   </head>
-
+  
   <!-- <main>
     <div class="containter">
       <ul class="film">
@@ -30,7 +30,9 @@
   </main> -->
 
   <body>
-    <header></header>
+    <header>
+      <a href="./library.html">my library</a>
+    </header>
     <main>
       <section class="modal-auth">
         <button class="test">TEST FOR MODAL</button>
@@ -78,7 +80,12 @@
         />
         <button type="submit">Go</button>
       </form>
-      <ul class="movies-list"></ul>
+      <div class="container"><ul class="movie"></ul></div>
+      <section class="pagination">
+        <div class="container">
+          <div class="pagination-list"></div>
+        </div>
+      </section>
     </main>
     <footer class="footer">
       <h3 class="footer__text">
@@ -95,6 +102,14 @@
         </span>
       </h3>
     </footer>
+    <div class="trailer__backdrop is-hidden">
+      <div class="trailer__modal">
+        <div class="trailer">
+          <iframe class="trailer__frame" type="text/html" width="480" height="200"
+frameborder="0" allowfullscreen>
+        </div>
+      </div>
+    </div>
     <script src="./js/index.js" type="module"></script>
   </body>
 </html>
