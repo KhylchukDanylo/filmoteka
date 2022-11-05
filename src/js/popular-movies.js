@@ -1,24 +1,16 @@
-// import '../css/01-gallery.css';
 import { fetchPopularMovies, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { createPaginationMarkupBasedOnScreenSize } from './pagination';
-const formEl = document.querySelector('#search-form');
-const inputEl = document.querySelector('#search-box');
-const buttonEl = document.querySelector('.test');
+import { paginationList, addPagination, containerEl} from './pagination';
 const listEl = document.querySelector('.movie');
-const containerEl = document.querySelector('.container');
-const paginationList = document.querySelector('.pagination-list');
-let totalPages = null;
-let currentPage = null;
 let screenWidth = containerEl.offsetWidth;
 let popularMovies = [];
 
-// window.addEventListener('resize', onWindowSizeChange);
 
 // // ================ fetch popular movies for start pages ==================//
 createMovieList(1);
-async function createMovieList(page) {
-  await fetchPopularMovies(1)
+
+export async function createMovieList(page) {
+  await fetchPopularMovies(page)
     .then(({ data, data: { results } }) => {
       popularMovies = [];
       results.forEach(movie => {
@@ -29,9 +21,13 @@ async function createMovieList(page) {
           genres: movie.genre_ids,
           year: movie.release_date.slice(0, 4),
         };
-console.log(1);
+
         popularMovies.push(movieData);
       });
+      
+      paginationList.currentPage = data.page;
+      paginationList.totalPages = data.total_pages;
+      paginationList.currentState = 'popular';
     })
     .catch(error => console.log(error));
 
@@ -111,122 +107,15 @@ console.log(1);
     </picture>
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="gallery__text" data-id="${id}">${genres} | ${year}</p></div>
-    
+    <button type="button" class="show-trailer">trailer</button>
   </a>
 </li>`;
     })
     .join('');
-}
-
-// MARIA
-// currentPage = response.data.page;
-// totalPages = response.data.total_pages;
-
-// const markup = createPaginationMarkupBasedOnScreenSize({
-//   screenWidth,
-//   currentPage,
-//   totalPages,
-// });
-// renderPagination(markup);
-
-// paginationList.addEventListener('click', onPaginationBtnClick);
-// });
-
-// ====================== Fetch Movie By Query =================== //
-// formEl.addEventListener('submit', searchMovies);
-
-// function searchMovies(evt) {
-//   evt.preventDefault();
-
-//   const searchToMovie = inputEl.value.trim();
-//   clearMoviesContainer();
-//   fetchMoviesBySearch(searchToMovie, 1).then(response => {
-//     //<-- fetchPopularMovies( 1 <- number of page for pagination)
-//     console.log(response);
-//     const filmsArray = response.data.results;
-//     console.log(filmsArray);
-//     filmsArray.forEach(element => {
-//       const newGenresArray = [];
-//       const resultGenres = element.genre_ids.map(genreId => {
-//         const resulIdtArray = arrayGenres.map(item => {
-//           if (item.id === genreId) {
-//             newGenresArray.push(item.name);
-//           }
-//         });
-//       });
-//       renderMoviesCard(element, newGenresArray);
-//     });
-//   });
-// }
-
-// =================== Clear Movies Container =================== //
-
-// function clearMoviesContainer() {
-//   listEl.innerHTML = '';
-// }
-
-// ============= Callback for eventListener on pagination button ============== //
-
-function onPaginationBtnClick(evt) {
-  if (evt.target.closest('button') === null) {
-    return;
-  }
-  if (evt.target.textContent === `${currentPage}`) {
-    return;
-  }
-
-  currentPage = setTargetPage(evt.target, currentPage);
-  const markup = createPaginationMarkupBasedOnScreenSize({
-    screenWidth,
-    currentPage,
-    totalPages,
-  });
-  renderPagination(markup);
-
-  fetchPopularMovies(currentPage).then(response => {
-    clearMoviesContainer();
-    const filmsArray = response.data.results;
-    filmsArray.forEach(element => {
-      const newGenresArray = [];
-      const resultGenres = element.genre_ids.map(genreId => {
-        const resulIdtArray = arrayGenres.map(item => {
-          if (item.id === genreId) {
-            newGenresArray.push(item.name);
-          }
-        });
-      });
-      renderMoviesCard(element, newGenresArray);
-    });
-  });
-}
-
-//===================== Choose a new currentPage based on the user's selection  ===========================//
-function setTargetPage(element, currentPage) {
-  if (
-    element.closest('button').classList.contains('arrow-to-start-button-js')
-  ) {
-    return currentPage - 1;
-  }
-  if (element.closest('button').classList.contains('arrow-to-end-button-js')) {
-    return currentPage + 1;
-  }
-  return Number(element.closest('button').textContent);
-}
-
-// ==================== Render pagination buttons ===================== //
-
-function renderPagination(markup) {
-  paginationList.innerHTML = markup;
-}
-
-// ==================== Change pagination appearance while the screen is getting bigger or smaller ===================== //
-
-function onWindowSizeChange(evt) {
-  screenWidth = containerEl.offsetWidth;
-  const markup = createPaginationMarkupBasedOnScreenSize({
-    screenWidth,
-    currentPage,
-    totalPages,
-  });
-  renderPagination(markup);
+  
+  addPagination({
+  screenWidth,
+  currentPage: paginationList.currentPage,
+  totalPages: paginationList.totalPages,
+});
 }

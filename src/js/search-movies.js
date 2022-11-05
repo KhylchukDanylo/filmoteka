@@ -1,10 +1,15 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
+import { paginationList, addPagination, containerEl} from './pagination';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+
 import createMovieList from './popular-movies';
 
 const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
 const listEl = document.querySelector('.movie');
+let screenWidth = containerEl.offsetWidth;
 let moviesList = [];
 formEl.addEventListener('submit', searchMovies);
 
@@ -14,74 +19,88 @@ function searchMovies(evt) {
   createListBySearch(1);
 }
 
-async function createListBySearch(page) {
+export async function createListBySearch(page) {
   const searchToMovie = inputEl.value.trim();
 
   if (!searchToMovie) {
+    Notify.warning('Enter movie to search');
     console.log('enter movie to search');
     return;
   }
 
-  await fetchMoviesBySearch(searchToMovie, 1)
-    .then(response => {
-      const {
-        data,
-        data: { results },
-      } = response;
+  try {
+    await fetchMoviesBySearch(searchToMovie, page)
+      .then(response => {
+        const {
+          data,
+          data: { results },
+        } = response;
 
-      if (results.length === 0) {
-        formEl.reset();
-      } else {
-        moviesList = [];
-        results.forEach(movie => {
-          let moviesData = {
-            id: movie.id,
-            poster: movie.poster_path,
-            title: movie.original_title,
-            genres: movie.genre_ids,
-            year: movie.release_date.slice(0, 4),
-          };
-          moviesList.push(moviesData);
-        });
-      }
-    })
-    .catch(error => console.log(error));
-
-  await fetchMoviesGenres()
-    .then(response => {
-      const {
-        data: { genres },
-      } = response;
-
-      moviesList.forEach(movie => {
-        movie.genres = movie.genres.map(id => {
-          genres.forEach(object => {
-            if (object.id === id) {
-              id = object.name;
-            }
+        if (results.length === 0) {
+          formEl.reset();
+          Notify.failure('Sorry, but nothing was found');
+          throw new Error('nothing was found');
+        } else {
+          moviesList = [];
+          results.forEach(movie => {
+            let moviesData = {
+              id: movie.id,
+              poster: movie.poster_path,
+              title: movie.original_title,
+              genres: movie.genre_ids,
+              year: movie?.release_date?.slice(0, 4) || 'N/A',
+            };
+            moviesList.push(moviesData);
           });
-          return id;
-        });
-
-        switch (true) {
-          case movie.genres.length > 0 && movie.genres.length <= 2:
-            movie.genres = movie.genres.join(', ');
-            break;
-
-          case movie.genres.length > 2:
-            movie.genres[2] = 'Other';
-            movie.genres = movie.genres.slice(0, 3).join(', ');
-            break;
-
-          default:
-            movie.genres = 'N/A';
-            break;
+          paginationList.currentPage = data.page;
+          paginationList.totalPages = data.total_pages;
+          paginationList.currentState = 'search';
         }
-      });
-    })
-    .catch(error => console.log(error));
+      })
 
-  renderMoviesCard(moviesList);
+    await fetchMoviesGenres()
+      .then(response => {
+        const {
+          data: { genres },
+        } = response;
+
+        moviesList.forEach(movie => {
+          movie.genres = movie.genres.map(id => {
+            genres.forEach(object => {
+              if (object.id === id) {
+                id = object.name;
+              }
+            });
+            return id;
+          });
+
+          switch (true) {
+            case movie.genres.length > 0 && movie.genres.length <= 2:
+              movie.genres = movie.genres.join(', ');
+              break;
+
+            case movie.genres.length > 2:
+              movie.genres[2] = 'Other';
+              movie.genres = movie.genres.slice(0, 3).join(', ');
+              break;
+
+            default:
+              movie.genres = 'N/A';
+              break;
+          }
+        });
+      })
+
+    renderMoviesCard(moviesList);
+
+    addPagination({
+      screenWidth,
+      currentPage: paginationList.currentPage,
+      totalPages: paginationList.totalPages,
+    });
+  } catch(error) {
+    console.log(error);
+  }
 
   function renderMoviesCard(arrayMovies) {
     const markup = arrayMovies
