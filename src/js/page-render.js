@@ -121,7 +121,7 @@ function renderMoviesCard(movie, genres) {
     <p class="movie__genre">${genres.join(', ')} | ${+parseInt(
     release_date
   )}</p></div>
-    
+  <button type="button" class="show-trailer">trailer</button>
   </a>
 </li>`;
 }

@@ -1,0 +1,28 @@
+.show-trailer{
+    display: block;
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: zoom-in;
+    margin: 0 auto;
+}
+.trailer__backdrop{
+ position: absolute;
+ top: 0; 
+ width: 100vw; 
+ height: 100vh;
+ background-color: grey; 
+}
+
+.trailer__modal{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    background-color: wheat;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
