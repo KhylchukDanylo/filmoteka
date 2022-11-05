@@ -1,0 +1,148 @@
+.form__auth {
+  width: 70%;
+  height: 70%;
+  position: absolute;
+  margin: auto;
+  @include mobile {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  @include tablert {
+    max-width: 500px;
+  }
+}
+
+.form__auth__wrapper {
+  width: 100%;
+  height: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+
+  padding: 20px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(
+      25deg,
+      var(--color-text-footer),
+      var(--color-fon-footer),
+      var(--text-ganre-color)
+    )
+    1;
+  background: var(--text-ganre-color);
+}
+
+.form__auth__header {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 900px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  border-image: linear-gradient(
+      25deg,
+      var(--color-text-footer),
+      var(--color-fon-footer),
+      var(--text-ganre-color)
+    )
+    1;
+  background-clip: text;
+}
+
+.input__auth__cont {
+  width: 100%;
+  height: 90%;
+
+  float: left;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 30px;
+  background-color: var(--color-text-footer);
+}
+
+.input__auth__container {
+  width: 75%;
+  height: 100%;
+
+  float: left;
+}
+
+.input-auth {
+  width: 100%;
+  height: 40px;
+
+  padding-left: 10px;
+  margin-bottom: 20px;
+
+  background: var(--text-color);
+  font-family: Montserrat;
+  font-weight: 500;
+  color: var(--color-btn-white);
+  font-size: 14px;
+
+  border-bottom: 2px solid transparent;
+  border-top-left-radius: 2%;
+  border-top-right-radius: 2%;
+  border-image: linear-gradient(
+      25deg,
+      var(--color-text-footer),
+      var(--color-fon-footer),
+      var(--text-ganre-color)
+    )
+    1;
+}
+
+.button__auth {
+  width: 100%;
+  height: 10%;
+
+  color: var(--text-color);
+
+  float: left;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.button__auth__login,
+.button__auth__register,
+.button__auth__logout,
+.test {
+  width: 50%;
+  height: 40px;
+  float: left;
+
+  background: transparent;
+  color: inherit;
+  background-color: var(--text-ganre-color);
+
+  font-family: Montserrat;
+  letter-spacing: 1px;
+  font-weight: 900;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
