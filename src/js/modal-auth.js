@@ -139,7 +139,7 @@ onAuthStateChanged(auth, user => {
     btnLoginGlobal.textContent = 'my library';
     return uid;
   } else {
-    btnLoginGlobal.classList.add('visually hidden');
+    btnLoginGlobal.classList.add('visually-hidden');
     localStorage.removeItem('uid');
   }
 });
