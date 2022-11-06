@@ -149,7 +149,7 @@ export async function createListBySearch(page) {
                 />
               </picture>
           <div class="movie__text"><h3 class="movie__name">${title}</h3>
-          <p class="gallery__text" data-id="${id}">${genres} | ${year}</p></div>
+          <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
               
             </a>
           </li>`;
