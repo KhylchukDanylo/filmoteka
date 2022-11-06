@@ -10,13 +10,13 @@ function openModal(position){
     window.scrollTo(0, position);
 
     // type это тип модального окна, для фрейма, для контрибуторов и т.д.
-backdrop.classList.toggle('is-hidden');
+backdrop.classList.remove('is-hidden');
 backdrop.addEventListener('click', closeModal);
 }
 
 function closeModal(){
 
-    backdrop.classList.toggle('is-hidden');
+    backdrop.classList.add('is-hidden');
     backdrop.removeEventListener('click', closeModal);
 
 //костыль, думаю как исправить, этого кода тут не будет.
