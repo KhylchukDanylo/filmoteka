@@ -67,7 +67,7 @@ export async function createMovieList(page) {
 
   listEl.innerHTML = popularMovies
     .map(({ id, poster, title, genres, year }) => {
-      return `<li class="movie__card">
+      return `<li class="movie__item">
   <a href="#" class="movie__link" id="${id}">
     <picture>
       <source

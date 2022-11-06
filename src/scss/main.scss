@@ -1,6 +1,7 @@
 @import './utils/vars';
 @import './base/common';
 @import './base/mixins';
+@import './base/reset-styles';
 @import './components/containter';
 
 @import './components/gallery';
@@ -11,4 +12,4 @@
 @import './components/pagination';
 @import './components/trailer';
 @import './components/modal-auth';
-@import './components/contributors'
+@import './components/contributors';
