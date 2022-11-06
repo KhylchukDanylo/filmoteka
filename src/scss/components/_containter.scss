@@ -2,17 +2,16 @@
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 32px;
+  padding: 0 20px;
 
   @include mobile {
     width: 320px;
-    padding: 0 20px;
   }
   @include tablert {
     width: 768px;
+    padding: 0 32px;
   }
   @include desktop {
     width: 1280px;
-    
   }
 }
