@@ -1,0 +1,84 @@
+:root {
+  color-scheme: light dark;
+}
+
+.bg-body {
+  background-color: var(--bg-body-color);
+}
+
+.switcher {
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  padding: 2px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border: none;
+  &__legend {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  &__radio {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    background-size: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: filter 0.2s ease-in;
+    z-index: 1;
+    &:focus {
+      outline: none;
+    }
+    &--light {
+      background-image: url('./light.svg');
+    }
+    &--auto {
+      background-image: url('./auto.svg');
+    }
+    &--dark {
+      background-image: url('./dark.svg');
+    }
+  }
+  &__status {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 0 2px rgb(0 0 0 / 0.2);
+    border-radius: 18px;
+    background-color: rgba(255, 107, 1, 0.8);
+    background-repeat: no-repeat;
+    background-image: url('./status.svg');
+    background-size: 20px;
+    background-position: center;
+    transition: background-position 0.2s ease-in;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .switcher {
+    top: 12px;
+    right: 30px;
+  }
+}
+
+.switcher__radio:focus-visible ~ .switcher__status {
+  box-shadow: 0 0 0 2px black;
+}
+
+.switcher__radio--light:checked ~ .switcher__status {
+  background-position: left 2px center;
+}
+
+.switcher__radio--auto:checked ~ .switcher__status {
+  background-position: center center;
+}
+
+.switcher__radio--dark:checked ~ .switcher__status {
+  background-position: right 2px center;
+}

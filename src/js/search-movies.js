@@ -1,8 +1,7 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl} from './pagination';
+import { paginationList, addPagination, containerEl } from './pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
 
 import createMovieList from './popular-movies';
 
@@ -29,67 +28,65 @@ export async function createListBySearch(page) {
   }
 
   try {
-    await fetchMoviesBySearch(searchToMovie, page)
-      .then(response => {
-        const {
-          data,
-          data: { results },
-        } = response;
+    await fetchMoviesBySearch(searchToMovie, page).then(response => {
+      const {
+        data,
+        data: { results },
+      } = response;
 
-        if (results.length === 0) {
-          formEl.reset();
-          Notify.failure('Sorry, but nothing was found');
-          throw new Error('nothing was found');
-        } else {
-          moviesList = [];
-          results.forEach(movie => {
-            let moviesData = {
-              id: movie.id,
-              poster: movie.poster_path,
-              title: movie.original_title,
-              genres: movie.genre_ids,
-              year: movie?.release_date?.slice(0, 4) || 'N/A',
-            };
-            moviesList.push(moviesData);
-          });
-          paginationList.currentPage = data.page;
-          paginationList.totalPages = data.total_pages;
-          paginationList.currentState = 'search';
-        }
-      })
-
-    await fetchMoviesGenres()
-      .then(response => {
-        const {
-          data: { genres },
-        } = response;
-
-        moviesList.forEach(movie => {
-          movie.genres = movie.genres.map(id => {
-            genres.forEach(object => {
-              if (object.id === id) {
-                id = object.name;
-              }
-            });
-            return id;
-          });
-
-          switch (true) {
-            case movie.genres.length > 0 && movie.genres.length <= 2:
-              movie.genres = movie.genres.join(', ');
-              break;
-
-            case movie.genres.length > 2:
-              movie.genres[2] = 'Other';
-              movie.genres = movie.genres.slice(0, 3).join(', ');
-              break;
-
-            default:
-              movie.genres = 'N/A';
-              break;
-          }
+      if (results.length === 0) {
+        formEl.reset();
+        Notify.failure('Sorry, but nothing was found');
+        throw new Error('nothing was found');
+      } else {
+        moviesList = [];
+        results.forEach(movie => {
+          let moviesData = {
+            id: movie.id,
+            poster: movie.poster_path,
+            title: movie.original_title,
+            genres: movie.genre_ids,
+            year: movie?.release_date?.slice(0, 4) || 'N/A',
+          };
+          moviesList.push(moviesData);
         });
-      })
+        paginationList.currentPage = data.page;
+        paginationList.totalPages = data.total_pages;
+        paginationList.currentState = 'search';
+      }
+    });
+
+    await fetchMoviesGenres().then(response => {
+      const {
+        data: { genres },
+      } = response;
+
+      moviesList.forEach(movie => {
+        movie.genres = movie.genres.map(id => {
+          genres.forEach(object => {
+            if (object.id === id) {
+              id = object.name;
+            }
+          });
+          return id;
+        });
+
+        switch (true) {
+          case movie.genres.length > 0 && movie.genres.length <= 2:
+            movie.genres = movie.genres.join(', ');
+            break;
+
+          case movie.genres.length > 2:
+            movie.genres[2] = 'Other';
+            movie.genres = movie.genres.slice(0, 3).join(', ');
+            break;
+
+          default:
+            movie.genres = 'N/A';
+            break;
+        }
+      });
+    });
 
     renderMoviesCard(moviesList);
 
@@ -98,7 +95,7 @@ export async function createListBySearch(page) {
       currentPage: paginationList.currentPage,
       totalPages: paginationList.totalPages,
     });
-  } catch(error) {
+  } catch (error) {
     console.log(error);
   }
 
@@ -159,6 +156,6 @@ export async function createListBySearch(page) {
       })
       .join('');
 
-      listEl.innerHTML = markup;
+    listEl.innerHTML = markup;
   }
 }
