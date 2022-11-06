@@ -32,7 +32,6 @@ movieList.addEventListener('click', moviesClickHandling);
 const trailersHandling = trailersInfo =>
   renderTrailerModal(trailersInfo.data.results[0].key);
 
-<<<<<<< HEAD
 function renderTrailerModal(key){
 console.log(topPosition);
 
@@ -46,25 +45,3 @@ trailerFrame.src = `https://www.youtube.com/embed/${key}`;
 
 
 
-=======
-function renderTrailerModal(key) {
-  console.log(topPosition);
-
-  openModal(topPosition);
-  trailerFrame.classList.remove('is-hidden');
-  // console.log(key);
-  trailerBackdrop.classList.toggle('is-hidden');
-  trailerBackdrop.addEventListener('click', closeTrailerModal);
-  trailerFrame.classList.toggle('is-hidden');
-  trailerFrame.src = `https://www.youtube.com/embed/${key}`;
-}
-
-function closeTrailerModal(event) {
-  if (event.target === trailerBackdrop) {
-    trailerBackdrop.classList.toggle('is-hidden');
-    trailerBackdrop.removeEventListener('click', closeTrailerModal);
-    trailerFrame.classList.toggle('is-hidden');
-    trailerFrame.src = '';
-  }
-}
->>>>>>> 3ceb768521cca3bafa3cb607899c7bab0310256d
