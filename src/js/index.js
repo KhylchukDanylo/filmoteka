@@ -7,3 +7,4 @@ import './eventListeners';
 import './modal-auth';
 import './contributors-modal';
 import './backdrop';
+import './header';
