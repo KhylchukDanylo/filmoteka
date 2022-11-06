@@ -15,10 +15,11 @@ ul {
 
 
 .header {
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
     background-image:
-     url(../images/abstract-background-with-red-lines-mob.jpg);
-    margin: 0;
-        
+     url(../images/abstract-background-with-red-lines-mob.jpg);  
         width: 100%;
         max-width: 480px;
     background-repeat: no-repeat;
@@ -62,12 +63,10 @@ ul {
         
 }
 
-
 .header-wrapper {
     display: block;
     justify-content: space-between;
     align-items: center;
-    padding-top: 40px;
 }
 
 .nav {
@@ -75,6 +74,7 @@ ul {
     align-items: center;
     margin-bottom: 55px;
     padding: 0 30px;
+
 }
 
 .link-logo {
@@ -114,14 +114,28 @@ ul {
     font-weight: 500;
     font-size: 12px;
     line-height: 1.17;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 40px;
     text-transform: uppercase;
     color: #FFFFFF;
+    position: relative;
 }
 
-.header__link-home:nth-child(1) {
-    margin-right: 40px;
-    border-bottom: solid #ff001b 3px;
+.header__link-home::after {
+    content: "";
+        width: 100%;
+        height: 3px;
+        background-color: #ff001b;
+        display: block;
+        position: absolute;
+        bottom: 6px;
     }
+
+// .header__link-home:nth-child(1) {
+//     margin-right: 40px;
+//     border-bottom: solid #ff001b 3px;
+//     }
 
 .header__link {
     font-family: 'Roboto';
@@ -129,9 +143,23 @@ ul {
     font-weight: 500;
     font-size: 12px;
     line-height: 1.17;
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-transform: uppercase;
     color: #FFFFFF;
     }
+
+.header__link-home:hover,
+.header__link-home:focus {
+    color: #ff001b;
+    transition: background-color 250ms cubic-bezier(.4, 0, .2, 1), color 250ms cubic-bezier(.4, 0, .2, 1), box-shadow 250ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.header__link:hover,
+.header__link:focus {
+    color: #ff001b;
+    transition: background-color 250ms cubic-bezier(.4, 0, .2, 1), color 250ms cubic-bezier(.4, 0, .2, 1), box-shadow 250ms cubic-bezier(.4, 0, .2, 1);
+}
 
 .search-form {
     font-family: 'Roboto';
@@ -169,7 +197,6 @@ ul {
     color: white;
     background-color: #00000000;
     border-bottom: solid #FFFFFF 1px;
-    // color: var(--color-btn-white);
     @include tablert {
         max-width: 768px;
         border: none;
@@ -183,7 +210,6 @@ ul {
         color: white;
         background-color: #00000000;
         border-bottom: solid #FFFFFF 1px;
-        // color: var(--color-btn-white);
         }
     @include desktop {
         max-width: 1280px;
@@ -198,12 +224,9 @@ ul {
         color: white;
         background-color: #00000000;
         border-bottom: solid #FFFFFF 1px;
-        // color: var(--color-btn-white);
     }
 
 }
-
-
 
 .form__header-input:active,
 :hover,
@@ -212,10 +235,9 @@ ul {
     outline-offset: 0;
 }
 
-.form__header-input::-webkit-input {
-    color: #c0392b;
+.form__header-input:focus::-webkit-input-placeholder {
+    color: #ff001b;
 }
-
 
 .form__header-btn {
 width: 24px;
@@ -229,23 +251,124 @@ width: 24px;
     right: 1px;
     transform: translateY(-50%);
 }
-    
-    .form__header-btn:hover,
-    .form__header-btn:focus {
-color: #ff001b;
+
+.fixed-headers {
+    background-color: #2f364a;
+    background-image: 
+        url(../images/abstract-background-with-red-lines-mob.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 50px;
+    width: 100%;
+    max-width: 480px;
+    margin-right: auto;
+    margin-left: auto;
+    top: 0;
+    left: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        background-image:
+            url(../images/abstract-background-with-red-lines-mob-2x.jpg);
     }
 
-    //     border: none;
-    //     position: absolute;
-    //     bottom: 0px;
-    //     right: 0px;
-    //     background-color: #00000000;
-    //     @include tablert {
-    //             max-width: 768px;
-    //             margin-right: 195px;
-    // }
-    //     @include desktop {
-    //         max-width: 1280px;
-    //         margin-right: 420px;
-    // }
+    @media screen and (min-width: 480px) {
+        left: calc((100% - 480px) / 2);
+    }
 
+    @include tablert {
+        max-width: 768px;
+        padding-left: 32px;
+        padding-right: 32px;
+        left: calc((100% - 768px) / 2);
+        background-image:
+            url(../images/abstract-background-with-red-lines-tab.jpg);
+
+        @media (min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.56),
+                    rgba(0, 0, 0, 0.56)),
+                url(../images/abstract-background-with-red-lines-tab-2x.jpg);
+        }
+    }
+
+    @include desktop {
+        max-width: 1280px;
+        display: none;
+    }
+}
+
+.fixed-headers .fixed-list {
+    display: flex;
+    align-items: center;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.logo-text__fixed {
+    display: none;
+    @include tablert {
+        max-width: 768px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 1.17;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
+}
+
+.fixed-link-home {
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.17;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-right: 40px;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        position: relative;
+}
+
+.fixed-link-home::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    background-color: #ff001b;
+    display: block;
+    position: absolute;
+    bottom: 4px;
+}
+
+.fixed-link {
+    font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.17;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-transform: uppercase;
+        color: #FFFFFF;
+}
+
+.logo-link__fixed {
+    display: flex;
+    align-items: center;
+}
