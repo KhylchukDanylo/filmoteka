@@ -8,23 +8,17 @@
 }
 .trailer__backdrop{
  position: absolute;
- top: 0; 
  width: 100vw; 
  height: 100vh;
- background: radial-gradient( gray 30%, transparent);
+ background: radial-gradient( white 20%, transparent);
 }
 
 .trailer__modal{
     position: absolute;
+    z-index: 10;
     top: 50%;
     right: 50%;
     transform: translate(50%, -50%);
-    // background-color: wheat;
-    // width: 500px;
-    // height: 500px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
 }
 
 

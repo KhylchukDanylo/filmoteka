@@ -5,3 +5,5 @@ import './popular-movies';
 import './search-movies';
 import './eventListeners';
 import './modal-auth';
+import './contributors-modal';
+import './backdrop';

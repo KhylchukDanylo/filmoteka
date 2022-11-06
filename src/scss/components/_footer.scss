@@ -40,12 +40,17 @@
     }
   }
 
-  &__link {
+  &__button {
     font-weight: 400;
     font-size: 14px;
     line-height: 1.14;
 
     color: var(--color-text-footer);
+
+    padding: 15px 0;
+    border: none;
+    background-color: inherit;
+    text-decoration: underline;
   }
   &__icon {
     margin-left: 10px;
