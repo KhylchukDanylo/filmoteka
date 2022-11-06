@@ -300,9 +300,9 @@ onAuthStateChanged(auth, user => {
     refs.btnLogOut.classList.remove('visually-hidden');
     refs.btnLoginGlobal.textContent = 'log out';
     refs.btnMyLibrary.classList.remove('disabled');
-    refs.document.querySelector('.input__auth__email').value = '';
-    refs.document.querySelector('.input__auth__password').value = '';
-    refs.document.querySelector('.input__auth__name').value = '';
+    document.querySelector('.input__auth__email').value = '';
+    document.querySelector('.input__auth__password').value = '';
+    document.querySelector('.input__auth__name').value = '';
 
     return uid;
   } else {
