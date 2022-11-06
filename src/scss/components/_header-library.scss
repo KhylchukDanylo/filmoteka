@@ -1,0 +1,296 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  @include mobile {
+    max-width: 480px;
+  }
+  @include tablert {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+  @include desktop {
+    max-width: 1280px;
+  }
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.list {
+  list-style: none;
+}
+
+.header-library-container {
+  position: relative;
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.header-library {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #c4c4c4;
+  width: 100%;
+  max-width: 480px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(../images/library/header-bg-mobile.jpg);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/library/header-bg-mobile-2x.jpg);
+  }
+
+  @include tablert {
+    max-width: 768px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/library/header-bg-tablet.jpg);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/library/header-bg-tablet-2x.jpg);
+    }
+  }
+  @include desktop {
+    max-width: 1280px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/library/header-bg-desktop.jpg);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/library/header-bg-desktop-2x.jpg);
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  @include tablert {
+    margin-bottom: 40px;
+  }
+}
+
+.logo {
+  &__link {
+    font-style: normal;
+    font-size: 30px;
+    line-height: 1.17;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+  }
+  &__icon {
+    margin-right: 10px;
+    fill: currentColor;
+  }
+  &__text {
+    display: none;
+    @include tablert {
+      display: block;
+    }
+  }
+}
+
+.library-nav {
+  &__list {
+    display: flex;
+  }
+  &__item {
+    font-size: 12px;
+    line-height: 1.17;
+    text-transform: uppercase;
+  }
+  &__link {
+    color: #ffffff;
+  }
+}
+
+.library-nav__item + .library-nav__item {
+  margin-left: 40px;
+}
+
+.library-nav__item:nth-child(2) {
+  border-bottom: solid #ff001b 3px;
+}
+
+.library-btns {
+  &__list {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.library-btn {
+  min-width: 129px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 1.33;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+}
+
+.btn-active {
+  background-color: #ff6b01;
+  border: transparent;
+}
+
+.library-btns__item + .library-btns__item {
+  margin-left: 20px;
+  @include tablert {
+    margin-left: 32px;
+  }
+  @include desktop {
+    margin-left: 16px;
+  }
+}
+
+.fixed-header {
+  background-color: #2f364a;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+    url(../images/library/header-bg-mobile.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 50px;
+  width: 100%;
+  max-width: 480px;
+  margin-right: auto;
+  margin-left: auto;
+  top: 0;
+  left: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/library/header-bg-mobile-2x.jpg);
+  }
+  @media screen and (min-width: 480px) {
+    left: calc((100% - 480px) / 2);
+  }
+  @include tablert {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+    left: calc((100% - 768px) / 2);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/library/header-bg-tablet.jpg);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/library/header-bg-tablet-2x.jpg);
+    }
+  }
+  @include desktop {
+    max-width: 1280px;
+    left: calc((100% - 1280px) / 2);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
+      url(../images/library/header-bg-desktop.jpg);
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/library/header-bg-desktop-2x.jpg);
+    }
+  }
+}
+
+.fixed-header .library-btn {
+  max-height: 35px;
+  min-width: 90px;
+  @include tablert {
+    min-width: 144px;
+  }
+}
+
+.fixed-header .library-nav__list {
+  display: none;
+  @include tablert {
+    display: flex;
+  }
+}
+
+.is-hidden {
+  display: none;
+}
+
+// test gallery
+
+.div {
+  width: 100%;
+  height: 438px;
+  background-color: #ff6b01;
+  border-radius: 5px;
+  @include tablert {
+    width: calc((100% - 32px) / 2);
+    height: 495px;
+  }
+  @include desktop {
+    width: calc((100% - 32px) / 3);
+    height: 634px;
+  }
+}
+
+.gallery-container {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  @include tablert {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    gap: 32px;
+  }
+  @include desktop {
+    gap: 16px;
+    row-gap: 32px;
+  }
+}

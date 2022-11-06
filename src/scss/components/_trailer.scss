@@ -1,0 +1,38 @@
+.show-trailer{
+    display: block;
+    width: 100px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: zoom-in;
+    margin: 0 auto;
+}
+.trailer__backdrop{
+ position: absolute;
+ width: 100vw; 
+ height: 100vh;
+ background: radial-gradient( white 20%, transparent);
+}
+
+.trailer__modal{
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+
+.trailer__frame{
+    @include mobile {
+        width: 320px;
+        height: 180px;
+      }
+      @include tablert {
+        width: 768px;
+        height: 432px;
+      }
+      @include desktop {
+        width: 1280px;
+        height: 720px;
+      }
+}

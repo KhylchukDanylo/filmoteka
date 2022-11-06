@@ -10,26 +10,36 @@ async function fetchPopularMovies(page) {
   return response;
 }
 
-
-async function fetchMovieById (movieId) {
+async function fetchMovieById(movieId) {
   const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
   const response = await axios(url);
   console.log(response);
   return response;
-};
+}
 
 async function fetchMoviesGenres() {
   const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
   const genres = await axios(url);
   return genres;
-};
+}
 
 async function fetchMoviesBySearch(searchQuery, page) {
   const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`;
   const response = await axios(url);
   console.log(response);
   return response;
-};
-console.log(1);
+}
 
-export { fetchPopularMovies, fetchMovieById, fetchMoviesGenres, fetchMoviesBySearch};
+async function fetchTrailer(movieId) {
+  const url = `${BASE_URL}/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`;
+  const data = await axios(url);
+  return data;
+}
+
+export {
+  fetchPopularMovies,
+  fetchMovieById,
+  fetchMoviesGenres,
+  fetchMoviesBySearch,
+  fetchTrailer,
+};
