@@ -1,0 +1,35 @@
+.contributors{
+ background-color: white;
+ padding: 15px;
+   &__list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+&__item{
+    flex-basis: calc((100% - 60px) / 3);
+    border: 1px dashed black;
+    font-size: 12px;
+}
+&__photo{
+    margin: 0 auto;
+    border-radius: 50%;
+}
+&__social-list{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+&__link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+&__link:hover{
+    background-color: gray;
+}
+}
