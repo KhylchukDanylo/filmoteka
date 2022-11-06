@@ -6,14 +6,20 @@ import {
   fetchMoviesBySearch,
 } from './api-service';
 import { createPaginationMarkupBasedOnScreenSize } from './pagination';
+
+import { addSpinner } from './spinner';
+import { removeSpinner } from './spinner';
+
 const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
 const listEl = document.querySelector('.movies-list');
 
 // ================Create array all movies genres==================//
 const arrayGenres = []; // <-- arrray all movies genres
+
 fetchMoviesGenres().then(response => {
   // console.log(response);
+
   for (const elm of response.data.genres) {
     // console.log(elm);
     arrayGenres.push(elm);
@@ -64,7 +70,7 @@ formEl.addEventListener('submit', searchMovies);
 
 function searchMovies(evt) {
   evt.preventDefault();
-
+  addSpinner();
   const searchToMovie = inputEl.value.trim();
   clearMoviesContainer();
   fetchMoviesBySearch(searchToMovie, 1).then(response => {
@@ -83,6 +89,7 @@ function searchMovies(evt) {
       });
       renderMoviesCard(element, newGenresArray);
     });
+    removeSpinner();
   });
 }
 
