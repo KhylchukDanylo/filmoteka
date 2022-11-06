@@ -15,11 +15,13 @@ function onPaginationBtnClick(evt) {
 
     const targetPage = setTargetPage(evt.target, evt.currentTarget.currentPage);
     if (paginationList.currentState === 'popular') {
-        createMovieList(targetPage);
+      createMovieList(targetPage);
+      scrollToTop();
         return;
     }
     if (paginationList.currentState === 'search') {
-        createListBySearch(targetPage);
+      createListBySearch(targetPage);
+      scrollToTop();
         return;
     }
 }
@@ -30,5 +32,12 @@ function onWindowSizeChange() {
     screenWidth,
     currentPage: paginationList.currentPage,
     totalPages: paginationList.totalPages,
+  });
+}
+
+function scrollToTop() {
+    window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
   });
 }
