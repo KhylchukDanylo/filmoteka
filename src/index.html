@@ -25,7 +25,8 @@
               </a>
               <ul class="header__list list">
                 <li class="header__item"><a class="header__link-home link" href="./index.html">Home</a></li>
-                <li class="header__item"><a class="header__link link" href="./library.html">my library</a></li>
+                <li class="header__item header__my-library"><a class="header__link link disabled" href="./library.html">my library</a></li>
+                <li class="header__item auth__login-logout"><a class="header__link link auth-link" href="">log in</a></li>
               </ul>
             </div> 
             <form class="search-form" id="search-form">
@@ -42,7 +43,7 @@
     </header>
     <main>
       <section class="modal-auth">
-        <button class="btn__auth__library">Log in</button>
+       <!--- <button class="btn__auth__library">Log in</button>--->
         <div class="form__auth visually-hidden">
           <div class="form__auth__wrap">
             <div class="form__auth__wrapper">
@@ -69,12 +70,13 @@
                 <div class="button__auth">
                   <button class="button__auth__login">Login</button>
                   <button class="button__auth__register">Register</button>
+                  <button class="button__auth__logout visually-hidden">Log out</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <button class="button__auth__logout visually-hidden">LogOut</button>
+       <!-- <button class="button__auth__logout visually-hidden">LogOut</button>--->
       </section>
       <form class="search-form" id="search-form">
         <input
