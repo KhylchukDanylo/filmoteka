@@ -3,6 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- FavIcon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ff8c00">
+
+    <!-- Font-Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,7 +25,26 @@
     <link rel="stylesheet" href="./scss/main.scss" />
   </head>
   <body>
-    <header class="header">
+    <div class="loader loader--hidden">
+      <div class="loader__circles1">
+        <div class="loader__circle loader__circle--ad1"></div>
+        <div class="loader__circle loader__circle--ad2"></div>
+        <div class="loader__circle loader__circle--ad3"></div>
+        <div class="loader__circle loader__circle--ad4"></div>
+      </div>
+
+      <div class="loader__circles2">
+        <div class="loader__circle loader__circle--ad5"></div>
+        <div class="loader__circle loader__circle--ad6"></div>
+        <div class="loader__circle loader__circle--ad7"></div>
+        <div class="loader__circle loader__circle--ad8"></div>
+      </div>
+
+      <div class="loader__bigcon">
+        <div class="loader__lightball"></div>
+      </div>
+    </div>
+     <header class="header">
         <div class="container header-wrapper">
             <div class="nav">
               <a class="link-logo link" href="index.html">
@@ -25,7 +54,8 @@
               </a>
               <ul class="header__list list">
                 <li class="header__item"><a class="header__link-home link" href="./index.html">Home</a></li>
-                <li class="header__item"><a class="header__link link" href="./library.html">my library</a></li>
+                <li class="header__item header__my-library"><a class="header__link link disabled" href="./library.html">my library</a></li>
+                <li class="header__item auth__login-logout"><a class="header__link link auth-link" href="">log in</a></li>
               </ul>
             </div> 
             <form class="search-form" id="search-form">
@@ -57,7 +87,7 @@
     </header>
     <main>
       <section class="modal-auth">
-        <button class="btn__auth__library">Log in</button>
+       <!--- <button class="btn__auth__library">Log in</button>--->
         <div class="form__auth visually-hidden">
           <div class="form__auth__wrap">
             <div class="form__auth__wrapper">
@@ -84,31 +114,20 @@
                 <div class="button__auth">
                   <button class="button__auth__login">Login</button>
                   <button class="button__auth__register">Register</button>
+                  <button class="button__auth__logout visually-hidden">Log out</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <button class="button__auth__logout visually-hidden">LogOut</button>
+       <!-- <button class="button__auth__logout visually-hidden">LogOut</button>--->
       </section>
-      <form class="search-form" id="search-form">
-        <input
-          id="search-box"
-          type="text"
-          name="searchQuery"
-          autocomplete="off"
-          placeholder="Search films..."
-          autofocus
-        />
-        <button type="submit">Go</button>
-      </form>
-      <div class="container"><ul class="movie"></ul></div>
+          <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
         <div class="container">
           <div class="pagination-list"></div>
         </div>
       </section>
-
     </main>
     <footer class="footer">
       <h3 class="footer__text">
@@ -125,12 +144,11 @@
         </span>
       </h3>
     </footer>
- 
 
     <div class="backdrop is-hidden">
       <div class="movie__modal is-hidden"></div>
     </div>
-      <div class="trailer__backdrop is-hidden">
+    <div class="trailer__backdrop is-hidden">
         <div class="trailer__modal">
           <div class="contributors"></div>
           <iframe class="trailer__frame is-hidden" type="text/html" 
@@ -140,6 +158,3 @@ frameborder="0" allowfullscreen>
     <script src="./js/index.js" type="module"></script>
   </body>
 </html>
-
-
-

@@ -1,4 +1,3 @@
-// import './modal-movie-render';
 import './api-service';
 import './trailer.js';
 import './popular-movies';
@@ -8,3 +7,4 @@ import './modal-auth';
 import './contributors-modal';
 import './backdrop';
 import './header';
+import './modal-movie-render';

@@ -102,7 +102,7 @@ export async function createListBySearch(page) {
   function renderMoviesCard(arrayMovies) {
     const markup = arrayMovies
       .map(({ id, poster, title, genres, year }) => {
-        return `<li class="movie__card">
+        return `<li class="movie__item">
             <a href="#" class="movie__link" id="${id}">
               <picture>
                 <source
@@ -149,7 +149,7 @@ export async function createListBySearch(page) {
                 />
               </picture>
           <div class="movie__text"><h3 class="movie__name">${title}</h3>
-          <p class="gallery__text" data-id="${id}">${genres} | ${year}</p></div>
+          <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
               
             </a>
           </li>`;

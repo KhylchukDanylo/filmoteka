@@ -1,13 +1,14 @@
 import { fetchMovieById } from './api-service';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const listEl = document.querySelector('.movies-list');
+const listEl = document.querySelector('.movie');
 const movieModal = document.querySelector('.movie__modal');
 const backdrop = document.querySelector('.backdrop');
 
 listEl.addEventListener('click', onImgClick);
 
 function onImgClick(evt) {
+  evt.preventDefault();
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
@@ -33,7 +34,6 @@ async function openModal(id) {
   } = resp.data;
 
   backdrop.classList.remove('is-hidden');
-  backdrop.classList.add('scale-up-ver-center');
   movieModal.classList.remove('is-hidden');
   document.body.classList.add('stop-scrolling');
 
