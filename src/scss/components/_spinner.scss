@@ -4,8 +4,25 @@
 
 .bgcolor {
   background-color: #002031;
-  z-index: 1000;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stickyf {
+  flex: 0 0 auto;
+}
+
+.stickyh {
+  height: 100%;
+}
+
+.stickyhed {
+  flex: 0 0 auto;
+}
+
+.stickym {
+  flex: 1 0 auto;
 }
 
 .loader {

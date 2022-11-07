@@ -1,7 +1,7 @@
 import { fetchMovieById } from './api-service';
-import svgIcon from '../images/icons.svg'
-import  {refs} from './DOM-elements';
-const {trailerFrame} = refs;
+import svgIcon from '../images/icons.svg';
+import { refs } from './DOM-elements';
+const { trailerFrame } = refs;
 import { showTrailer } from './trailer';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
@@ -20,7 +20,7 @@ function onImgClick(evt) {
     return;
   }
 
-   movieId = parseInt(evt.target.parentElement.parentElement.id);
+  movieId = parseInt(evt.target.parentElement.parentElement.id);
   console.log(movieId);
 
   openModal(movieId);
@@ -90,10 +90,10 @@ async function openModal(id) {
     <p class="movie__about">About</p>
     <p class="movie__description">${overview}</p>
     <div class="button-wrap">
-      <button type="button" class="movie__btn-watched">
+      <button type="button" class="movie__btn-watched" id="btn-watched">
           add to Watched
       </button>
-          <button type="button" class="movie__btn-queue">
+          <button type="button" class="movie__btn-queue" id="btn-queue">
       add to queue
       </button>
     </div>
@@ -125,7 +125,7 @@ window.addEventListener('click', e => {
   if (e.target === backdrop && !hiddenMovieModal) {
     closeModal();
   }
-   //костыль, позже подумаю как сделать красиво
+  //костыль, позже подумаю как сделать красиво
   else if (e.target === backdrop && hiddenMovieModal) {
     movieModal.classList.remove('is-hidden');
     trailerFrame.classList.add('is-hidden');
@@ -137,7 +137,26 @@ window.addEventListener('click', e => {
     trailerFrame.classList.remove('is-hidden');
     console.log(movieId);
     showTrailer(movieId);
+  }
 
+  if (e.target.id === 'btn-watched') {
+    const btn = document.querySelector('#btn-watched');
+    btn.classList.toggle('selected');
+    if (btn.classList.contains('selected'))
+      btn.textContent = 'remove from watched';
+    else {
+      btn.textContent = 'add to watched';
+    }
+  }
+
+  if (e.target.id === 'btn-queue') {
+    const btn = document.querySelector('#btn-queue');
+    btn.classList.toggle('selected');
+    if (btn.classList.contains('selected'))
+      btn.textContent = 'remove from queue';
+    else {
+      btn.textContent = 'add to queue';
+    }
   }
 });
 
