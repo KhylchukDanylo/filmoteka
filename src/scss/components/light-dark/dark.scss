@@ -2,8 +2,28 @@
   --bg-body-color: #333333;
 }
 
+.footer {
+  --bg-footer: #333333;
+}
+
+.footer__text,
+.footer__button {
+  --color-footer: #fff;
+}
+
 .movie__name {
   --color-name-film: #fff;
+}
+
+.movie__inner {
+  --color-modal: #333;
+}
+
+.movie__title,
+.movie__data,
+.movie__about,
+.movie__description {
+  --text-color-dark: #fff;
 }
 
 .switcher__radio {
@@ -15,5 +35,10 @@
 }
 
 .switcher__status {
-  filter: invert(1);
+  filter: invert(0.2);
+  --bg-status-library: rgb(73, 42, 42);
+}
+
+.header-wrapper .switcher__status {
+  --bgc-status-main: rgb(73, 42, 42);
 }

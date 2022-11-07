@@ -55,6 +55,7 @@
 }
 
 .movie__inner {
+  background-color: var(--color-modal);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -94,7 +95,7 @@
 .movie__title {
   margin: 0;
   padding: 0;
-  color: var(--text-color);
+  color: var(--text-color-dark);
   font-weight: 500;
   font-size: 20px;
   line-height: 1.15;
@@ -143,8 +144,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
-
-  color: #000000;
+  color: var(--text-color-dark);
 
   & p {
     margin: 0;
@@ -170,6 +170,7 @@
     padding: 0 9px;
     background: #f7f7f7;
     border-radius: 5px;
+    color: #000000;
   }
 }
 
@@ -179,14 +180,14 @@
   line-height: 1.33;
   text-transform: uppercase;
   margin-bottom: 8px;
-  color: #000000;
+  color: var(--text-color-dark);
 }
 .movie__description {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
   margin-bottom: 20px;
-  color: #000000;
+  color: var(--text-color-dark);
 }
 
 .button-wrap {
