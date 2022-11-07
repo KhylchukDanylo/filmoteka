@@ -22,6 +22,7 @@ export async function createMovieList(page) {
           title: movie.original_title,
           genres: movie.genre_ids,
           year: movie.release_date.slice(0, 4),
+          rating: movie.vote_average.toFixed(1),
         };
 
         popularMovies.push(movieData);
@@ -59,9 +60,8 @@ export async function createMovieList(page) {
     }
   });
 
-
   listEl.innerHTML = popularMovies
-    .map(({ id, poster, title, genres, year }) => {
+    .map(({ id, poster, title, genres, year, rating }) => {
       return `<li class="movie__item">
   <a href="#" class="movie__link" id="${id}">
     <picture>
@@ -102,6 +102,10 @@ export async function createMovieList(page) {
     </picture>
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
+    <button type="button" class="show-trailer">trailer</button>
+    <div class="movie__rating movie__rating--${getClassByVote(
+      rating
+    )}">${rating}</div>
   </a>
 </li>`;
     })
@@ -113,4 +117,16 @@ export async function createMovieList(page) {
     currentPage: paginationList.currentPage,
     totalPages: paginationList.totalPages,
   });
+}
+
+// the function of determining the color of the border depending on the rating
+
+function getClassByVote(vote) {
+  if (vote >= 7) {
+    return 'green';
+  } else if (vote >= 5) {
+    return 'orange';
+  } else {
+    return 'red';
+  }
 }

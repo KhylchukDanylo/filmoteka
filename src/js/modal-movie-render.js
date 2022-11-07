@@ -45,11 +45,14 @@ async function openModal(id) {
   document.body.classList.add('stop-scrolling');
 
   movieModal.innerHTML = `<div class="movie__inner">
-  <img
+  <div class="image__thumb"> 
+   <img
     src="${IMG_URL}${poster_path}"
     alt="${original_title}"
     class="movie__poster"
   />
+  </div>
+
   <div class="movie__info">
     <h2 class="movie__title">${title}</h2>
     <div class="movie__info-list">
@@ -70,10 +73,76 @@ async function openModal(id) {
       <ul class="movie__data">
         <li>
           <p>
-            <span class="movie__data-rating">${vote_average.toFixed(
-              1
-            )}</span>  <span class="movie__data-slash">/</span> <span class="movie__data-count">${vote_count}</span>
-          </p>
+              <div class="rating">
+                <div class="rating__value">
+                ${vote_average.toFixed(1)}
+                </div>
+                <div class="rating__body">
+                  <div class="rating__active"></div>
+                  <div class="rating__items">
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="1"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="2"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="3"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="4"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="5"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="6"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="7"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="8"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="9"
+                      name="rating"
+                    />
+                    <input
+                      type="radio"
+                      class="rating__item"
+                      value="10"
+                      name="rating"
+                    />
+                  </div>
+                </div>
+              </div>
         </li>
         <li>
           <p>${popularity.toFixed(1)}</p>
@@ -106,6 +175,40 @@ async function openModal(id) {
     </a>
   </div>
 </div>`;
+
+  //rating functions
+  const ratings = document.querySelectorAll('.rating');
+
+  if (ratings.length > 0) {
+    initRatings();
+  }
+
+  //main function
+  function initRatings() {
+    let ratingActive, ratingValue;
+    //бегаем по всем рейтингам на странице
+    for (let i = 0; i < ratings.length; i++) {
+      const rating = ratings[i];
+      initRating(rating);
+    }
+    // инициализируем конкретный рейтинг
+    function initRating(rating) {
+      initRatinfVars(rating);
+      setRatingActiveWidth();
+    }
+
+    //инициализация переменных
+    function initRatinfVars(rating) {
+      ratingActive = rating.querySelector('.rating__active');
+      ratingValue = rating.querySelector('.rating__value');
+    }
+
+    //инициализируем ширину аутивных звезд
+    function setRatingActiveWidth(index = ratingValue.innerHTML) {
+      const ratingActiveWidth = index / 0.1;
+      ratingActive.style.width = `${ratingActiveWidth}%`;
+    }
+  }
 
   const btnClose = document.querySelector('.movie__btn-close');
   btnClose.addEventListener('click', () => closeModal());
@@ -170,3 +273,62 @@ window.addEventListener('keydown', e => {
     trailerFrame.src = '';
   }
 });
+
+//save original render
+// `<div class="movie__inner">
+//   <img
+//     src="${IMG_URL}${poster_path}"
+//     alt="${original_title}"
+//     class="movie__poster"
+//   />
+//   <div class="movie__info">
+//     <h2 class="movie__title">${title}</h2>
+//     <div class="movie__info-list">
+//       <ul class="movie__characters">
+//         <li>
+//           <p>Vote / Votes</p>
+//         </li>
+//         <li>
+//           <p>Popularity</p>
+//         </li>
+//         <li>
+//           <p>Original Title</p>
+//         </li>
+//         <li>
+//           <p>Genre</p>
+//         </li>
+//       </ul>
+//       <ul class="movie__data">
+//         <li>
+//           <p>
+//             <span class="movie__data-rating">${vote_average.toFixed(
+//               1
+//             )}</span>  <span class="movie__data-slash">/</span> <span class="movie__data-count">${vote_count}</span>
+//           </p>
+//         </li>
+//         <li>
+//           <p>${popularity.toFixed(1)}</p>
+//         </li>
+//         <li>
+//           <p>${original_title}</p>
+//         </li>
+//         <li>
+//           <p>${genres.map(genre => genre.name).join(', ')}</p>
+//         </li>
+//       </ul>
+//     </div>
+//     <p class="movie__about">About</p>
+//     <p class="movie__description">${overview}</p>
+//     <div class="button-wrap">
+//       <button type="button" class="movie__btn-watched">
+//           add to Watched
+//       </button>
+//           <button type="button" class="movie__btn-queue">
+//       add to queue
+//       </button>
+//     </div>
+//     <button type="button" class="movie__btn-close">
+//       X
+//     </button>
+//   </div>
+// </div>`;
