@@ -1,10 +1,9 @@
 import { fetchPopularMovies, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl} from './pagination';
+import { paginationList, addPagination, containerEl } from './pagination';
 const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let popularMovies = [];
-
 
 // // ================ fetch popular movies for start pages ==================//
 createMovieList(1);
@@ -20,11 +19,12 @@ export async function createMovieList(page) {
           title: movie.original_title,
           genres: movie.genre_ids,
           year: movie.release_date.slice(0, 4),
+          rating: movie.vote_average.toFixed(1),
         };
 
         popularMovies.push(movieData);
       });
-      
+
       paginationList.currentPage = data.page;
       paginationList.totalPages = data.total_pages;
       paginationList.currentState = 'popular';
@@ -66,7 +66,7 @@ export async function createMovieList(page) {
     .catch(error => console.log(error));
 
   listEl.innerHTML = popularMovies
-    .map(({ id, poster, title, genres, year }) => {
+    .map(({ id, poster, title, genres, year, rating }) => {
       return `<li class="movie__item">
   <a href="#" class="movie__link" id="${id}">
     <picture>
@@ -108,14 +108,29 @@ export async function createMovieList(page) {
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
     <button type="button" class="show-trailer">trailer</button>
+    <div class="movie__rating movie__rating--${getClassByVote(
+      rating
+    )}">${rating}</div>
   </a>
 </li>`;
     })
     .join('');
-  
+
   addPagination({
-  screenWidth,
-  currentPage: paginationList.currentPage,
-  totalPages: paginationList.totalPages,
-});
+    screenWidth,
+    currentPage: paginationList.currentPage,
+    totalPages: paginationList.totalPages,
+  });
+}
+
+// the function of determining the color of the border depending on the rating
+
+function getClassByVote(vote) {
+  if (vote >= 7) {
+    return 'green';
+  } else if (vote >= 5) {
+    return 'orange';
+  } else {
+    return 'red';
+  }
 }
