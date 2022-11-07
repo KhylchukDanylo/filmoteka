@@ -162,7 +162,6 @@ window.addEventListener('click', e => {
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !movieModal.classList.contains('is-hidden')) {
     closeModal();
-    console.log(e);
   }
   //костыль, позже подумаю как сделать красиво
   else if (e.key === 'Escape' && movieModal.classList.contains('is-hidden')) {
