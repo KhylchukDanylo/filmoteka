@@ -1,14 +1,15 @@
 import { fetchPopularMovies, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl} from './pagination';
+import { paginationList, addPagination, containerEl } from './pagination';
+import { addSpinner } from './spinner';
+import { removeSpinner } from './spinner';
 const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let popularMovies = [];
 
-
 // // ================ fetch popular movies for start pages ==================//
 createMovieList(1);
-
+addSpinner();
 export async function createMovieList(page) {
   await fetchPopularMovies(page)
     .then(({ data, data: { results } }) => {
@@ -24,7 +25,7 @@ export async function createMovieList(page) {
 
         popularMovies.push(movieData);
       });
-      
+
       paginationList.currentPage = data.page;
       paginationList.totalPages = data.total_pages;
       paginationList.currentState = 'popular';
@@ -107,15 +108,14 @@ export async function createMovieList(page) {
     </picture>
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
-    <button type="button" class="show-trailer">trailer</button>
   </a>
 </li>`;
     })
     .join('');
-  
+  removeSpinner();
   addPagination({
-  screenWidth,
-  currentPage: paginationList.currentPage,
-  totalPages: paginationList.totalPages,
-});
+    screenWidth,
+    currentPage: paginationList.currentPage,
+    totalPages: paginationList.totalPages,
+  });
 }

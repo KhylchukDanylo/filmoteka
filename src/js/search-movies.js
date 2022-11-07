@@ -3,6 +3,9 @@ import defaultImg from '../images/437973.webp';
 import { paginationList, addPagination, containerEl } from './pagination';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+import { addSpinner } from './spinner';
+import { removeSpinner } from './spinner';
+
 import createMovieList from './popular-movies';
 
 const formEl = document.querySelector('#search-form');
@@ -14,7 +17,7 @@ formEl.addEventListener('submit', searchMovies);
 
 function searchMovies(evt) {
   evt.preventDefault();
-
+  addSpinner();
   createListBySearch(1);
 }
 
@@ -89,7 +92,7 @@ export async function createListBySearch(page) {
     });
 
     renderMoviesCard(moviesList);
-
+    removeSpinner();
     addPagination({
       screenWidth,
       currentPage: paginationList.currentPage,

@@ -22,9 +22,34 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
+
+<!-- switcher theme -->
+<meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#333333"
+    />
+    <link
+      rel="stylesheet"
+      href="./scss/components/light-dark/light.scss"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="stylesheet"
+      href="./scss/components/light-dark/dark.scss"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="./scss/components/light-dark/styles.scss" />
+
     <link rel="stylesheet" href="./scss/main.scss" />
   </head>
-  <body>
+  <body class="bg-body">
     <div class="loader loader--hidden">
       <div class="loader__circles1">
         <div class="loader__circle loader__circle--ad1"></div>
@@ -68,7 +93,38 @@
                 </button>
                 </div>
             </form>
+
+            <!----------- dark-ligth switcher ------------>
+
+        <fieldset class="switcher">
+          <legend class="switcher__legend">Scheme</legend>
+          <input
+            class="switcher__radio switcher__radio--light"
+            type="radio"
+            name="color-scheme"
+            value="light"
+            aria-label="light"
+          />
+          <input
+            class="switcher__radio switcher__radio--auto"
+            type="radio"
+            name="color-scheme"
+            value="auto"
+            aria-label="Default"
+            checked
+          />
+          <input
+            class="switcher__radio switcher__radio--dark"
+            type="radio"
+            name="color-scheme"
+            value="dark"
+            aria-label="Dark"
+          />
+          <div class="switcher__status"></div>
+        </fieldset>
         </div>
+
+        <!-------------------------------------------->
 
       <div class="fixed-headers is-hidden">
         <a class="logo-link__fixed link" href="./index.html"><svg class="logo__icon" width="24" height="24">
@@ -144,17 +200,13 @@
         </span>
       </h3>
     </footer>
-
     <div class="backdrop is-hidden">
       <div class="movie__modal is-hidden"></div>
+      <iframe class="trailer__frame is-hidden"></iframe>
+      <div class="contributors is-hidden"></div>
     </div>
-    <div class="trailer__backdrop is-hidden">
-        <div class="trailer__modal">
-          <div class="contributors"></div>
-          <iframe class="trailer__frame is-hidden" type="text/html" 
-frameborder="0" allowfullscreen>
-        </div>
-      </div>
+      </body>
     <script src="./js/index.js" type="module"></script>
+    <script src="./scss/components/light-dark/light-dark.js"></script>
   </body>
 </html>
