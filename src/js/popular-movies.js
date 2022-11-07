@@ -9,8 +9,8 @@ let popularMovies = [];
 
 // // ================ fetch popular movies for start pages ==================//
 createMovieList(1);
-addSpinner();
 export async function createMovieList(page) {
+  addSpinner();
   await fetchPopularMovies(page)
     .then(({ data, data: { results } }) => {
       popularMovies = [];

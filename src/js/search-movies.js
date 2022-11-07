@@ -40,6 +40,7 @@ export async function createListBySearch(page) {
       if (results.length === 0) {
         formEl.reset();
         Notify.failure('Sorry, but nothing was found');
+        removeSpinner();
         throw new Error('nothing was found');
       } else {
         moviesList = [];
