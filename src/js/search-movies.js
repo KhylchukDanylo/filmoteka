@@ -1,6 +1,7 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
 import { paginationList, addPagination, containerEl } from './pagination';
+import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { addSpinner } from './spinner';
@@ -27,6 +28,7 @@ export async function createListBySearch(page) {
   if (!searchToMovie) {
     Notify.warning('Enter movie to search');
     console.log('enter movie to search');
+    removeSpinner();
     return;
   }
 
@@ -40,6 +42,7 @@ export async function createListBySearch(page) {
       if (results.length === 0) {
         formEl.reset();
         Notify.failure('Sorry, but nothing was found');
+        removeSpinner();
         throw new Error('nothing was found');
       } else {
         moviesList = [];
@@ -59,36 +62,30 @@ export async function createListBySearch(page) {
       }
     });
 
-    await fetchMoviesGenres().then(response => {
-      const {
-        data: { genres },
-      } = response;
-
-      moviesList.forEach(movie => {
-        movie.genres = movie.genres.map(id => {
-          genres.forEach(object => {
-            if (object.id === id) {
-              id = object.name;
-            }
-          });
-          return id;
+    moviesList.forEach(movie => {
+      movie.genres = movie.genres.map(id => {
+        allGenres.forEach(object => {
+          if (object.id === id) {
+            id = object.name;
+          }
         });
-
-        switch (true) {
-          case movie.genres.length > 0 && movie.genres.length <= 2:
-            movie.genres = movie.genres.join(', ');
-            break;
-
-          case movie.genres.length > 2:
-            movie.genres[2] = 'Other';
-            movie.genres = movie.genres.slice(0, 3).join(', ');
-            break;
-
-          default:
-            movie.genres = 'N/A';
-            break;
-        }
+        return id;
       });
+
+      switch (true) {
+        case movie.genres.length > 0 && movie.genres.length <= 2:
+          movie.genres = movie.genres.join(', ');
+          break;
+
+        case movie.genres.length > 2:
+          movie.genres[2] = 'Other';
+          movie.genres = movie.genres.slice(0, 3).join(', ');
+          break;
+
+        default:
+          movie.genres = 'N/A';
+          break;
+      }
     });
 
     renderMoviesCard(moviesList);
