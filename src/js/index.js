@@ -8,3 +8,4 @@ import './contributors-modal';
 import './backdrop';
 import './header';
 import './modal-movie-render';
+import './localstorage_movies';

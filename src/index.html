@@ -143,7 +143,6 @@
     </header>
     <main>
       <section class="modal-auth">
-       <!--- <button class="btn__auth__library">Log in</button>--->
         <div class="form__auth visually-hidden">
           <div class="form__auth__wrap">
             <div class="form__auth__wrapper">
@@ -176,7 +175,6 @@
             </div>
           </div>
         </div>
-       <!-- <button class="button__auth__logout visually-hidden">LogOut</button>--->
       </section>
           <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
@@ -205,7 +203,13 @@
       <iframe class="trailer__frame is-hidden"></iframe>
       <div class="contributors is-hidden"></div>
     </div>
-      </body>
+    <div class="trailer__backdrop is-hidden">
+        <div class="trailer__modal">
+          <div class="contributors"></div>
+          <iframe class="trailer__frame is-hidden" type="text/html" 
+           frameborder="0" allowfullscreen>
+        </div>
+      </div>
     <script src="./js/index.js" type="module"></script>
     <script src="./js/light-dark.js" type="module"></script>
   </body>
