@@ -28,6 +28,7 @@ export async function createListBySearch(page) {
   if (!searchToMovie) {
     Notify.warning('Enter movie to search');
     console.log('enter movie to search');
+    removeSpinner();
     return;
   }
 
@@ -61,33 +62,31 @@ export async function createListBySearch(page) {
       }
     });
 
-
-      moviesList.forEach(movie => {
-        movie.genres = movie.genres.map(id => {
-          allGenres.forEach(object => {
-            if (object.id === id) {
-              id = object.name;
-            }
-          });
-          return id;
+    moviesList.forEach(movie => {
+      movie.genres = movie.genres.map(id => {
+        allGenres.forEach(object => {
+          if (object.id === id) {
+            id = object.name;
+          }
         });
-
-        switch (true) {
-          case movie.genres.length > 0 && movie.genres.length <= 2:
-            movie.genres = movie.genres.join(', ');
-            break;
-
-          case movie.genres.length > 2:
-            movie.genres[2] = 'Other';
-            movie.genres = movie.genres.slice(0, 3).join(', ');
-            break;
-
-          default:
-            movie.genres = 'N/A';
-            break;
-        }
+        return id;
       });
- 
+
+      switch (true) {
+        case movie.genres.length > 0 && movie.genres.length <= 2:
+          movie.genres = movie.genres.join(', ');
+          break;
+
+        case movie.genres.length > 2:
+          movie.genres[2] = 'Other';
+          movie.genres = movie.genres.slice(0, 3).join(', ');
+          break;
+
+        default:
+          movie.genres = 'N/A';
+          break;
+      }
+    });
 
     renderMoviesCard(moviesList);
     removeSpinner();
