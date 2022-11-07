@@ -108,7 +108,6 @@ export async function createMovieList(page) {
     </picture>
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
-    <button type="button" class="show-trailer">trailer</button>
   </a>
 </li>`;
     })
