@@ -7,3 +7,4 @@ import './modal-auth';
 import './contributors-modal';
 import './backdrop';
 import './modal-movie-render';
+import './localstorage_movies';

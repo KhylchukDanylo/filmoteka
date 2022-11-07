@@ -12,4 +12,8 @@ export const refs = {
   formAuth: document.querySelector('.form__auth'),
   btnLoginGlobal: document.querySelector('.auth__login-logout'),
   btnMyLibrary: document.querySelector('.header__link'),
+  createQueue: document.querySelector('.movie__btn-queue'),
+  createWatched: document.querySelector('.movie__btn-watched'),
+  watchedBtn: document.querySelectorAll('#watched'),
+  queueBtn: document.querySelectorAll('#queue'),
 };
