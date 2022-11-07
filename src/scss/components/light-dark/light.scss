@@ -2,6 +2,30 @@
   --bg-body-color: #ffffff;
 }
 
+.footer {
+  --bg-footer: #f7f7f7;
+}
+
+.footer__text,
+.footer__button {
+  --color-footer: #545454;
+}
+
+.movie__name {
+  --color-name-film: #000;
+}
+
+.movie__inner {
+  --color-modal: #fff;
+}
+
+.movie__title,
+.movie__data,
+.movie__about,
+.movie__description {
+  --text-color-dark: #000;
+}
+
 .switcher__radio {
   filter: invert(0);
 }
@@ -11,5 +35,10 @@
 }
 
 .switcher__status {
-  filter: invert(0);
+  // filter: invert(0);
+  --bg-status-library: rgba(255, 107, 1, 0.8);
+}
+
+.header-wrapper .switcher__status {
+  --bgc-status-main: rgba(236, 29, 29, 0.801);
 }

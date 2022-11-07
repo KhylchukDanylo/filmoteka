@@ -1,21 +1,19 @@
-
-
 ul {
-    margin: 0;
-    padding-left: 0;
+  margin: 0;
+  padding-left: 0;
 }
 
 .link {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .list {
-    list-style: none;
+  list-style: none;
 }
-
 
 .header {
     padding-top: 40px;
+    padding-bottom: 60px;
     margin-left: auto;
     margin-right: auto;
     background-image:
@@ -26,64 +24,68 @@ ul {
     background-position: center;
     background-size: cover;
     height: 230px;
+  padding-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+  width: 100%;
+  max-width: 480px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 230px;
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url(../images/abstract-background-with-red-lines-mob-2x.jpg);
+  }
+
+  @include tablert {
+    height: 216px;
+    max-width: 768px;
+    background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi),
-        (min-resolution: 2dppx) {
-            background-image:
-                url(../images/abstract-background-with-red-lines-mob-2x.jpg);
-        }
-    
-        @include tablert {
-            height: 216px;
-            max-width: 768px;
-            background-image:
-                url(../images/abstract-background-with-red-lines-tab.jpg);
-    
-            @media (min-device-pixel-ratio: 2),
-            (min-resolution: 192dpi),
-            (min-resolution: 2dppx) {
-                background-image: 
-                    url(../images/abstract-background-with-red-lines-tab-2x.jpg);
-            }
-        }
-    
-        @include desktop {
-            max-width: 1280px;
-            background-image:
-                url(../images/abstract-background-with-red-lines-desc.jpg);
-    
-            @media (min-device-pixel-ratio: 2),
-            (min-resolution: 192dpi),
-            (min-resolution: 2dppx) {
-                background-image:
-                    url(../images/abstract-background-with-red-lines-desc-2x.jpg);
-            }
-        }
-        
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/abstract-background-with-red-lines-tab-2x.jpg);
+    }
+  }
+
+  @include desktop {
+    max-width: 1280px;
+    background-image: url(../images/abstract-background-with-red-lines-desc.jpg);
+
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/abstract-background-with-red-lines-desc-2x.jpg);
+    }
+  }
 }
 
 .header-wrapper {
-    display: block;
-    justify-content: space-between;
-    align-items: center;
+  position: relative;
+  display: block;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav {
     display: flex;    
     align-items: center;
     margin-bottom: 55px;
-    padding: 0 30px;
-
+    padding: 0 10px;
 }
 
 .link-logo {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo-icon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .logo-text {
@@ -108,34 +110,40 @@ ul {
     align-items: center;
 }
 
+.header__item {
+    display: flex;
+    align-items: center;
+}
+
+.header__list {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
 .header__link-home {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.17;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-right: 40px;
-    text-transform: uppercase;
-    color: #FFFFFF;
-    position: relative;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 20px;
+  text-transform: uppercase;
+  color: #ffffff;
+  position: relative;
 }
 
 .header__link-home::after {
-    content: "";
-        width: 100%;
-        height: 3px;
-        background-color: #ff001b;
-        display: block;
-        position: absolute;
-        bottom: 6px;
-    }
-
-// .header__link-home:nth-child(1) {
-//     margin-right: 40px;
-//     border-bottom: solid #ff001b 3px;
-//     }
+  content: '';
+  width: 100%;
+  height: 3px;
+  background-color: #ff001b;
+  display: block;
+  position: absolute;
+  bottom: 6px;
+}
 
 .header__link {
     font-family: 'Roboto';
@@ -143,52 +151,90 @@ ul {
     font-weight: 500;
     font-size: 12px;
     line-height: 1.17;
+    margin-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     text-transform: uppercase;
     color: #FFFFFF;
     }
+  
+
+.header__link-log {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
 
 .header__link-home:hover,
 .header__link-home:focus {
-    color: #ff001b;
-    transition: background-color 250ms cubic-bezier(.4, 0, .2, 1), color 250ms cubic-bezier(.4, 0, .2, 1), box-shadow 250ms cubic-bezier(.4, 0, .2, 1);
+  color: #ff001b;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header__link:hover,
 .header__link:focus {
+  color: #ff001b;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header__link-log:hover,
+.header__link-log:focus {
     color: #ff001b;
     transition: background-color 250ms cubic-bezier(.4, 0, .2, 1), color 250ms cubic-bezier(.4, 0, .2, 1), box-shadow 250ms cubic-bezier(.4, 0, .2, 1);
 }
 
 .search-form {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.14;
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
-    transition: stroke .25s cubic-bezier(.4, 0, .2, 1);
-        position: relative;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.14;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
-    
+
 .search-form {
-    justify-content: center;
-        align-items: center;
-        display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .header__search-form {
-    position: relative;
-        display: flex;
+  position: relative;
+  display: flex;
 }
-    
+
 .form__header-input {
+  border: none;
+  height: 20px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  background-color: #00000000;
+  border-bottom: solid #ffffff 1px;
+  @include tablert {
+    max-width: 768px;
     border: none;
     height: 20px;
-    width: 280px;
+    width: 336px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -196,179 +242,164 @@ ul {
     margin-right: auto;
     color: white;
     background-color: #00000000;
-    border-bottom: solid #FFFFFF 1px;
-    @include tablert {
-        max-width: 768px;
-        border: none;
-        height: 20px;
-        width: 336px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
-        color: white;
-        background-color: #00000000;
-        border-bottom: solid #FFFFFF 1px;
-        }
-    @include desktop {
-        max-width: 1280px;
-        border: none;
-        height: 20px;
-        width: 394px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
-        color: white;
-        background-color: #00000000;
-        border-bottom: solid #FFFFFF 1px;
-    }
-
+    border-bottom: solid #ffffff 1px;
+  }
+  @include desktop {
+    max-width: 1280px;
+    border: none;
+    height: 20px;
+    width: 394px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    background-color: #00000000;
+    border-bottom: solid #ffffff 1px;
+  }
 }
 
 .form__header-input:active,
 :hover,
 :focus {
-    outline: 0;
-    outline-offset: 0;
+  outline: 0;
+  outline-offset: 0;
 }
 
 .form__header-input:focus::-webkit-input-placeholder {
-    color: #ff001b;
+  color: #ff001b;
 }
 
 .form__header-btn {
-width: 24px;
-    height: 24px;
-    cursor: pointer;
-    background: 0 0;
-    border: none;
-    transition: stroke .25s cubic-bezier(.4, 0, .2, 1);
-    position: absolute;
-    top: 50%;
-    right: 1px;
-    transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background: 0 0;
+  border: none;
+  transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  transform: translateY(-50%);
 }
 
 .fixed-headers {
-    background-color: #2f364a;
-    background-image: 
-        url(../images/abstract-background-with-red-lines-mob.jpg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: fixed;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    min-height: 50px;
-    width: 100%;
-    max-width: 480px;
-    margin-right: auto;
-    margin-left: auto;
-    top: 0;
-    left: 0;
-    padding-left: 20px;
-    padding-right: 20px;
+  background-color: #2f364a;
+  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 50px;
+  width: 100%;
+  max-width: 480px;
+  margin-right: auto;
+  margin-left: auto;
+  top: 0;
+  left: 0;
+  padding-left: 20px;
+  padding-right: 20px;
 
-    @media (min-device-pixel-ratio: 2),
+  @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-        background-image:
-            url(../images/abstract-background-with-red-lines-mob-2x.jpg);
-    }
+    background-image: url(../images/abstract-background-with-red-lines-mob-2x.jpg);
+  }
 
-    @media screen and (min-width: 480px) {
-        left: calc((100% - 480px) / 2);
-    }
+  @media screen and (min-width: 480px) {
+    left: calc((100% - 480px) / 2);
+  }
 
-    @include tablert {
-        max-width: 768px;
-        padding-left: 32px;
-        padding-right: 32px;
-        left: calc((100% - 768px) / 2);
-        background-image:
-            url(../images/abstract-background-with-red-lines-tab.jpg);
+  @include tablert {
+    max-width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+    left: calc((100% - 768px) / 2);
+    background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
-        @media (min-device-pixel-ratio: 2),
-        (min-resolution: 192dpi),
-        (min-resolution: 2dppx) {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.56),
-                    rgba(0, 0, 0, 0.56)),
-                url(../images/abstract-background-with-red-lines-tab-2x.jpg);
-        }
+    @media (min-device-pixel-ratio: 2),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/abstract-background-with-red-lines-tab-2x.jpg);
     }
+  }
 
-    @include desktop {
-        max-width: 1280px;
-        display: none;
-    }
+  @include desktop {
+    max-width: 1280px;
+    display: none;
+  }
 }
 
 .fixed-headers .fixed-list {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .is-hidden {
-    display: none;
+  display: none;
 }
 
 .logo-text__fixed {
-    display: none;
-    @include tablert {
-        max-width: 768px;
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 30px;
-        line-height: 1.17;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        color: #FFFFFF;
-    }
+  display: none;
+  @include tablert {
+    max-width: 768px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.17;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+  }
 }
 
 .fixed-link-home {
-    font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.17;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        margin-right: 40px;
-        text-transform: uppercase;
-        color: #FFFFFF;
-        position: relative;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 40px;
+  text-transform: uppercase;
+  color: #ffffff;
+  position: relative;
 }
 
 .fixed-link-home::after {
-    content: "";
-    width: 100%;
-    height: 3px;
-    background-color: #ff001b;
-    display: block;
-    position: absolute;
-    bottom: 4px;
+  content: '';
+  width: 100%;
+  height: 3px;
+  background-color: #ff001b;
+  display: block;
+  position: absolute;
+  bottom: 4px;
 }
 
 .fixed-link {
-    font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.17;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-transform: uppercase;
-        color: #FFFFFF;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  color: #ffffff;
 }
 
 .logo-link__fixed {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }

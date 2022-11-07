@@ -1,6 +1,4 @@
 export const refs = {
-  trailerBackdrop: document.querySelector('.trailer__backdrop'),
-  trailerModal: document.querySelector('.trailer__modal'),
   movieList: document.querySelector('.movie'),
   trailerFrame: document.querySelector('.trailer__frame'),
   teamModalButton: document.querySelector('.footer__button'),
@@ -12,4 +10,9 @@ export const refs = {
   formAuth: document.querySelector('.form__auth'),
   btnLoginGlobal: document.querySelector('.auth__login-logout'),
   btnMyLibrary: document.querySelector('.header__link'),
+  createQueue: document.querySelector('.movie__btn-queue'),
+  createWatched: document.querySelector('.movie__btn-watched'),
+  watchedBtn: document.querySelectorAll('#watched'),
+  queueBtn: document.querySelectorAll('#queue'),
+  movieBackdrop: document.querySelector('.backdrop'),
 };

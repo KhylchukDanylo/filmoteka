@@ -1,29 +1,11 @@
-.show-trailer{
-
-    display: block;
-    width: 100px;
-    padding: 5px;
-    border-radius: 5px;
-    cursor: zoom-in;
-    margin: 0 auto;
-}
-.trailer__backdrop{
- position: absolute;
- width: 100vw; 
- height: 100vh;
- background: radial-gradient( white 20%, transparent);
-}
-
-.trailer__modal{
-    position: absolute;
-    z-index: 10;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-}
-
-
 .trailer__frame{
+  position: absolute;
+  // z-index: 10;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  border: none;
+  box-shadow: 5px 5px 20px #d9d9d9, -5px -5px 20px #ffffff;
     @include mobile {
         width: 320px;
         height: 180px;
@@ -36,4 +18,37 @@
         width: 1280px;
         height: 720px;
       }
+}
+
+.show-trailer{
+  position: absolute;
+
+  opacity: 0.8;
+  cursor: pointer;
+  @include mobile {  
+    left: 90px;
+    top: 168px;
+  }
+  @include tablert {
+    left: 115px;
+    top: 200px;
+  }
+  @include desktop {
+    left: 150px;
+    top: 255px;
+
+  }
+
+}
+.show-trailer:hover::after{
+  content: "watch trailer";
+  color: black;
+  position: absolute;
+  top: -20px;
+  right: 10px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  opacity: 1;
 }

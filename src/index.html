@@ -22,9 +22,34 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
+
+<!-- switcher theme -->
+<meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#333333"
+    />
+    <link
+      rel="stylesheet"
+      href="./scss/components/light-dark/light.scss"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="stylesheet"
+      href="./scss/components/light-dark/dark.scss"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="./scss/components/light-dark/styles.scss" />
+
     <link rel="stylesheet" href="./scss/main.scss" />
   </head>
-  <body>
+  <body class="bg-body">
     <div class="loader loader--hidden">
       <div class="loader__circles1">
         <div class="loader__circle loader__circle--ad1"></div>
@@ -55,7 +80,7 @@
               <ul class="header__list list">
                 <li class="header__item"><a class="header__link-home link" href="./index.html">Home</a></li>
                 <li class="header__item header__my-library"><a class="header__link link" href="./library.html">my library</a></li>
-                <li class="header__item auth__login-logout"><a class="header__link link auth-link" href="">log in</a></li>
+                <li class="header__item auth__login-logout"><a class="header__link-log link auth-link" href="">log in</a></li>
               </ul>
             </div> 
             <form class="search-form" id="search-form">
@@ -68,7 +93,38 @@
                 </button>
                 </div>
             </form>
+
+            <!----------- dark-ligth switcher ------------>
+
+        <fieldset class="switcher">
+          <legend class="switcher__legend">Scheme</legend>
+          <input
+            class="switcher__radio switcher__radio--light"
+            type="radio"
+            name="color-scheme"
+            value="light"
+            aria-label="light"
+          />
+          <input
+            class="switcher__radio switcher__radio--auto"
+            type="radio"
+            name="color-scheme"
+            value="auto"
+            aria-label="Default"
+            checked
+          />
+          <input
+            class="switcher__radio switcher__radio--dark"
+            type="radio"
+            name="color-scheme"
+            value="dark"
+            aria-label="Dark"
+          />
+          <div class="switcher__status"></div>
+        </fieldset>
         </div>
+
+        <!-------------------------------------------->
 
       <div class="fixed-headers is-hidden">
         <a class="logo-link__fixed link" href="./index.html"><svg class="logo__icon" width="24" height="24">
@@ -87,7 +143,6 @@
     </header>
     <main>
       <section class="modal-auth">
-       <!--- <button class="btn__auth__library">Log in</button>--->
         <div class="form__auth visually-hidden">
           <div class="form__auth__wrap">
             <div class="form__auth__wrapper">
@@ -120,7 +175,6 @@
             </div>
           </div>
         </div>
-       <!-- <button class="button__auth__logout visually-hidden">LogOut</button>--->
       </section>
           <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
@@ -144,17 +198,19 @@
         </span>
       </h3>
     </footer>
-
     <div class="backdrop is-hidden">
       <div class="movie__modal is-hidden"></div>
+      <iframe class="trailer__frame is-hidden"></iframe>
+      <div class="contributors is-hidden"></div>
     </div>
     <div class="trailer__backdrop is-hidden">
         <div class="trailer__modal">
           <div class="contributors"></div>
           <iframe class="trailer__frame is-hidden" type="text/html" 
-frameborder="0" allowfullscreen>
+           frameborder="0" allowfullscreen>
         </div>
       </div>
     <script src="./js/index.js" type="module"></script>
+    <script src="./js/light-dark.js" type="module"></script>
   </body>
 </html>
