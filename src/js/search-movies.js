@@ -1,6 +1,7 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
 import { paginationList, addPagination, containerEl } from './pagination';
+import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import { addSpinner } from './spinner';
@@ -60,14 +61,10 @@ export async function createListBySearch(page) {
       }
     });
 
-    await fetchMoviesGenres().then(response => {
-      const {
-        data: { genres },
-      } = response;
 
       moviesList.forEach(movie => {
         movie.genres = movie.genres.map(id => {
-          genres.forEach(object => {
+          allGenres.forEach(object => {
             if (object.id === id) {
               id = object.name;
             }
@@ -90,7 +87,7 @@ export async function createListBySearch(page) {
             break;
         }
       });
-    });
+ 
 
     renderMoviesCard(moviesList);
     removeSpinner();
