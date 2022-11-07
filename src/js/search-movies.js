@@ -1,7 +1,11 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
 import { paginationList, addPagination, containerEl } from './pagination';
+import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+import { addSpinner } from './spinner';
+import { removeSpinner } from './spinner';
 
 import createMovieList from './popular-movies';
 
@@ -14,7 +18,7 @@ formEl.addEventListener('submit', searchMovies);
 
 function searchMovies(evt) {
   evt.preventDefault();
-
+  addSpinner();
   createListBySearch(1);
 }
 
@@ -37,6 +41,7 @@ export async function createListBySearch(page) {
       if (results.length === 0) {
         formEl.reset();
         Notify.failure('Sorry, but nothing was found');
+        removeSpinner();
         throw new Error('nothing was found');
       } else {
         moviesList = [];
@@ -56,14 +61,10 @@ export async function createListBySearch(page) {
       }
     });
 
-    await fetchMoviesGenres().then(response => {
-      const {
-        data: { genres },
-      } = response;
 
       moviesList.forEach(movie => {
         movie.genres = movie.genres.map(id => {
-          genres.forEach(object => {
+          allGenres.forEach(object => {
             if (object.id === id) {
               id = object.name;
             }
@@ -86,10 +87,10 @@ export async function createListBySearch(page) {
             break;
         }
       });
-    });
+ 
 
     renderMoviesCard(moviesList);
-
+    removeSpinner();
     addPagination({
       screenWidth,
       currentPage: paginationList.currentPage,
@@ -102,7 +103,7 @@ export async function createListBySearch(page) {
   function renderMoviesCard(arrayMovies) {
     const markup = arrayMovies
       .map(({ id, poster, title, genres, year }) => {
-        return `<li class="movie__card">
+        return `<li class="movie__item">
             <a href="#" class="movie__link" id="${id}">
               <picture>
                 <source

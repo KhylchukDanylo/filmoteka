@@ -1,4 +1,8 @@
 import { fetchMovieById } from './api-service';
+import svgIcon from '../images/icons.svg';
+import { refs } from './DOM-elements';
+const { trailerFrame } = refs;
+import { showTrailer } from './trailer';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listEl = document.querySelector('.movie');
@@ -7,13 +11,16 @@ const backdrop = document.querySelector('.backdrop');
 
 listEl.addEventListener('click', onImgClick);
 
+//сделал переменную через let ибо для открытия трейлера тоже нужен id
+let movieId;
+
 function onImgClick(evt) {
   evt.preventDefault();
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
 
-  const movieId = parseInt(evt.target.parentElement.parentElement.id);
+  movieId = parseInt(evt.target.parentElement.parentElement.id);
   console.log(movieId);
 
   openModal(movieId);
@@ -82,16 +89,21 @@ async function openModal(id) {
     <p class="movie__about">About</p>
     <p class="movie__description">${overview}</p>
     <div class="button-wrap">
-      <button type="button" class="movie__btn-watched">
+      <button type="button" class="movie__btn-watched" id="btn-watched">
           add to Watched
       </button>
-          <button type="button" class="movie__btn-queue">
+          <button type="button" class="movie__btn-queue" id="btn-queue">
       add to queue
       </button>
     </div>
     <button type="button" class="movie__btn-close">
       X
     </button>
+    <a class="show-trailer" type="button" >
+       <svg class="youtube__icon" width="100" height="75">
+           <use href="${svgIcon}#youtube"></use>
+       </svg>
+    </a>
   </div>
 </div>`;
 
@@ -107,14 +119,54 @@ function closeModal() {
 }
 
 window.addEventListener('click', e => {
+  const hiddenMovieModal = movieModal.classList.contains('is-hidden');
   console.log(e.target);
-  if (e.target === backdrop) {
+  if (e.target === backdrop && !hiddenMovieModal) {
     closeModal();
+  }
+  //костыль, позже подумаю как сделать красиво
+  else if (e.target === backdrop && hiddenMovieModal) {
+    movieModal.classList.remove('is-hidden');
+    trailerFrame.classList.add('is-hidden');
+    trailerFrame.src = '';
+  }
+  if (e.target.closest('.show-trailer')) {
+    console.log('hello');
+    movieModal.classList.add('is-hidden');
+    trailerFrame.classList.remove('is-hidden');
+    console.log(movieId);
+    showTrailer(movieId);
+  }
+
+  if (e.target.id === 'btn-watched') {
+    const btn = document.querySelector('#btn-watched');
+    btn.classList.toggle('selected');
+    if (btn.classList.contains('selected'))
+      btn.textContent = 'remove from watched';
+    else {
+      btn.textContent = 'add to watched';
+    }
+  }
+
+  if (e.target.id === 'btn-queue') {
+    const btn = document.querySelector('#btn-queue');
+    btn.classList.toggle('selected');
+    if (btn.classList.contains('selected'))
+      btn.textContent = 'remove from queue';
+    else {
+      btn.textContent = 'add to queue';
+    }
   }
 });
 
 window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
+  if (e.key === 'Escape' && !movieModal.classList.contains('is-hidden')) {
     closeModal();
+  }
+  //костыль, позже подумаю как сделать красиво
+  else if (e.key === 'Escape' && movieModal.classList.contains('is-hidden')) {
+    movieModal.classList.remove('is-hidden');
+    trailerFrame.classList.add('is-hidden');
+    trailerFrame.src = '';
   }
 });

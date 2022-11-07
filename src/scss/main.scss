@@ -1,14 +1,17 @@
 @import './utils/vars';
 @import './base/common';
 @import './base/mixins';
+@import './base/reset-styles';
 @import './components/containter';
 
 @import './components/gallery';
 @import './components/footer';
+
+@import './components/spinner';
 @import './components/movie-modal';
 @import './components/header';
 @import './components/header-library';
 @import './components/pagination';
 @import './components/trailer';
 @import './components/modal-auth';
-@import './components/contributors'
+@import './components/contributors';

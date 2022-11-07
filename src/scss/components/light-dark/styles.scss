@@ -82,3 +82,18 @@
 .switcher__radio--dark:checked ~ .switcher__status {
   background-position: right 2px center;
 }
+
+.header-wrapper .switcher {
+  top: -25px;
+  right: 50px;
+}
+
+.header-wrapper .switcher__status {
+  background-color: rgba(236, 29, 29, 0.801);
+}
+
+@media screen and (min-width: 768px) {
+  .header-wrapper .switcher {
+    right: 60px;
+  }
+}
