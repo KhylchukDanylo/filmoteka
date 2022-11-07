@@ -220,6 +220,14 @@ const firebaseConfig = {
   messagingSenderId: '668791484535',
   appId: '1:668791484535:web:6b079499ab77f0ae261672',
 };
+// const firebaseConfig = {
+//   apiKey: 'AIzaSyBZkjjPSgKTrK81upOuojasaqYpoCFTjGk',
+//   authDomain: 'filmoteka-54689.firebaseapp.com',
+//   projectId: 'filmoteka-54689',
+//   storageBucket: 'filmoteka-54689.appspot.com',
+//   messagingSenderId: '1057842121366',
+//   appId: '1:1057842121366:web:2942f60adb19c15de790b7',
+// };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
