@@ -1,6 +1,6 @@
 import { paginationList, containerEl, setTargetPage, addPagination } from './pagination';
 import { createMovieList } from './popular-movies';
-import { createListBySearch } from './search-movies';
+import { createMovieListBySearch } from './search-movies';
 
 paginationList.addEventListener('click', onPaginationBtnClick);
 window.addEventListener('resize', onWindowSizeChange);
@@ -20,7 +20,7 @@ function onPaginationBtnClick(evt) {
         return;
     }
     if (paginationList.currentState === 'search') {
-      createListBySearch(targetPage);
+      createMovieListBySearch(paginationList.movieToSearch, targetPage);
       scrollToTop();
         return;
     }
