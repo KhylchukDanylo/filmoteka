@@ -10,4 +10,4 @@ import './header';
 import './modal-movie-render';
 // import './range-slider';
 import './filters';
-import './localstorage_movies';
+// import './localstorage_movies';
