@@ -1,7 +1,15 @@
 import { fetchPopularMovies, fetchMoviesGenres } from './api-service';
 import { createMovieListBySearch } from './search-movies';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl, CURRENT_PAGE, TOTAL_PAGES, CURRENT_STATE, MOVIE_TO_SEARCH, } from './pagination';
+import {
+  paginationList,
+  addPagination,
+  containerEl,
+  CURRENT_PAGE,
+  TOTAL_PAGES,
+  CURRENT_STATE,
+  MOVIE_TO_SEARCH,
+} from './pagination';
 import { refs } from './DOM-elements';
 import { allGenres } from './data/jenres.js';
 import { addSpinner } from './spinner';
@@ -20,7 +28,7 @@ try {
   }
   const totalPages = JSON.parse(localStorage.getItem(TOTAL_PAGES));
   const currentState = JSON.parse(localStorage.getItem(CURRENT_STATE));
-  
+
   paginationList.currentPage = currentPage;
   paginationList.totalPages = totalPages;
   paginationList.currentState = currentState;
@@ -35,7 +43,7 @@ try {
   }
   paginationList.movieToSearch = movie;
 } catch (err) {
-  console.log("There are no movies to search in local Storage yet");
+  console.log('There are no movies to search in local Storage yet');
 }
 
 if (!paginationList.currentState || paginationList.currentState === 'popular') {
@@ -48,8 +56,8 @@ if (paginationList.currentState === 'search') {
   );
 }
 // // ================ fetch popular movies for start pages ==================//
-  // createMovieList(1);
-  
+// createMovieList(1);
+
 export async function createMovieList(page) {
   addSpinner();
   await fetchPopularMovies(page)
@@ -154,7 +162,6 @@ export async function createMovieList(page) {
     </picture>
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
-    <button type="button" class="show-trailer">trailer</button>
     <div class="movie__rating movie__rating--${getClassByVote(
       rating
     )}">${rating}</div>
