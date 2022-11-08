@@ -1,6 +1,6 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl } from './pagination';
+import { paginationList, addPagination, containerEl, CURRENT_PAGE, TOTAL_PAGES, CURRENT_STATE, MOVIE_TO_SEARCH } from './pagination';
 import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -31,8 +31,14 @@ export async function createListBySearch(page) {
     removeSpinner();
     return;
   }
+  
+  localStorage.setItem(MOVIE_TO_SEARCH, JSON.stringify(searchToMovie));
+  paginationList.movieToSearch = searchToMovie;
+  createMovieListBySearch(paginationList.movieToSearch, page);
+}
 
-  try {
+export async function createMovieListBySearch(searchToMovie, page) {
+    try {
     await fetchMoviesBySearch(searchToMovie, page).then(response => {
       const {
         data,
@@ -59,6 +65,9 @@ export async function createListBySearch(page) {
         paginationList.currentPage = data.page;
         paginationList.totalPages = data.total_pages;
         paginationList.currentState = 'search';
+      localStorage.setItem(CURRENT_PAGE, JSON.stringify(paginationList.currentPage));
+      localStorage.setItem(TOTAL_PAGES, JSON.stringify(paginationList.totalPages));
+      localStorage.setItem(CURRENT_STATE, JSON.stringify(paginationList.currentState));
       }
     });
 

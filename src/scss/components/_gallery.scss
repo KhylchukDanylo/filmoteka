@@ -56,9 +56,9 @@
     }
   }
   &__item {
-    // position: relative;
+    position: relative;
     display: grid;
-    overflow: hidden;
+    // overflow: hidden;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
       0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   }
@@ -95,5 +95,32 @@
 
   &__link:hover {
     cursor: zoom-in;
+  }
+}
+
+.movie__rating {
+  position: absolute;
+  top: -18px;
+  left: -10px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #161f23;
+
+  color: #fff;
+  font-size: 18px;
+  z-index: 2;
+
+  &--green {
+    border: 2px solid green;
+  }
+  &--orange {
+    border: 2px solid orange;
+  }
+  &--red {
+    border: 2px solid red;
   }
 }
