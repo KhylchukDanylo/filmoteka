@@ -2,7 +2,7 @@ export const refs = {
   movieList: document.querySelector('.movie'),
   trailerFrame: document.querySelector('.trailer__frame'),
   teamModalButton: document.querySelector('.footer__button'),
-  contributors: document.querySelector('.contributors'),
+  contributorsWrapper: document.querySelector('.contributors'),
   btnLogin: document.querySelector('.button__auth__login'),
   btnLogOut: document.querySelector('.button__auth__logout'),
   btnRegister: document.querySelector('.button__auth__register'),

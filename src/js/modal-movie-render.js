@@ -21,13 +21,14 @@ function onImgClick(evt) {
   }
 
   movieId = parseInt(evt.target.parentElement.parentElement.id);
-  console.log(movieId);
+  // console.log(movieId);
 
   openModal(movieId);
 }
 
 async function openModal(id) {
   const resp = await fetchMovieById(id);
+
 
   const {
     poster_path,
@@ -223,7 +224,7 @@ function closeModal() {
 
 window.addEventListener('click', e => {
   const hiddenMovieModal = movieModal.classList.contains('is-hidden');
-  console.log(e.target);
+  // console.log(e.target);
   if (e.target === backdrop && !hiddenMovieModal) {
     closeModal();
   }
@@ -233,11 +234,10 @@ window.addEventListener('click', e => {
     trailerFrame.classList.add('is-hidden');
     trailerFrame.src = '';
   }
-  if (e.target.closest('.show-trailer')) {
-    console.log('hello');
+  if(e.target.closest('.show-trailer')){
     movieModal.classList.add('is-hidden');
     trailerFrame.classList.remove('is-hidden');
-    console.log(movieId);
+    // console.log(movieId);
     showTrailer(movieId);
   }
 
@@ -261,6 +261,8 @@ window.addEventListener('click', e => {
     }
   }
 });
+
+
 
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !movieModal.classList.contains('is-hidden')) {
