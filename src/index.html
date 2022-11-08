@@ -4,13 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- FavIcon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-    <link rel="manifest" href="./favicon/site.webmanifest">
-    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ff8c00">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="./favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ff8c00" />
 
     <!-- Font-Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,8 +41,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
 
-<!-- switcher theme -->
-<meta name="color-scheme" content="light dark" />
+    <!-- switcher theme -->
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: light)"
@@ -69,32 +87,46 @@
         <div class="loader__lightball"></div>
       </div>
     </div>
-     <header class="header">
-        <div class="container header-wrapper">
-            <div class="nav">
-              <a class="link-logo link" href="index.html">
-                <svg class="logo-icon" width="24" height="24">
-                  <use href="./images/icons.svg#icon-film"></use>
-                </svg><span class="logo-text">Filmoteka</span>
-              </a>
-              <ul class="header__list list">
-                <li class="header__item"><a class="header__link-home link" href="./index.html">Home</a></li>
-                <li class="header__item header__my-library"><a class="header__link link" href="./library.html">my library</a></li>
-                <li class="header__item auth__login-logout"><a class="header__link-log link auth-link" href="">log in</a></li>
-              </ul>
-            </div> 
-            <form class="search-form" id="search-form">
-              <div class="header__search-form">
-                <input class="form__header-input" id="search-box" type="text" name="searchQuery" autocomplete="off" placeholder="Search films..." autofocus />
-                <button class="form__header-btn" type="submit">
-                    <svg class="btn__icon" width="12" height="12">
-                       <use href="./images/icons.svg#icon-search"></use>
-                    </svg>
-                </button>
-                </div>
-            </form>
+    <header class="header">
+      <div class="container header-wrapper">
+        <div class="nav">
+          <a class="link-logo link" href="index.html">
+            <svg class="logo-icon" width="24" height="24">
+              <use href="./images/icons.svg#icon-film"></use></svg
+            ><span class="logo-text">Filmoteka</span>
+          </a>
+          <ul class="header__list list">
+            <li class="header__item">
+              <a class="header__link-home link" href="./index.html">Home</a>
+            </li>
+            <li class="header__item header__my-library">
+              <a class="header__link link" href="./library.html">my library</a>
+            </li>
+            <li class="header__item auth__login-logout">
+              <a class="header__link-log link auth-link" href="">log in</a>
+            </li>
+          </ul>
+        </div>
+        <form class="search-form" id="search-form">
+          <div class="header__search-form">
+            <input
+              class="form__header-input"
+              id="search-box"
+              type="text"
+              name="searchQuery"
+              autocomplete="off"
+              placeholder="Search films..."
+              autofocus
+            />
+            <button class="form__header-btn" type="submit">
+              <svg class="btn__icon" width="12" height="12">
+                <use href="./images/icons.svg#icon-search"></use>
+              </svg>
+            </button>
+          </div>
+        </form>
 
-            <!----------- dark-ligth switcher ------------>
+        <!----------- dark-ligth switcher ------------>
 
         <fieldset class="switcher">
           <legend class="switcher__legend">Scheme</legend>
@@ -122,24 +154,25 @@
           />
           <div class="switcher__status"></div>
         </fieldset>
-        </div>
+      </div>
 
-        <!-------------------------------------------->
+      <!-------------------------------------------->
 
       <div class="fixed-headers is-hidden">
-        <a class="logo-link__fixed link" href="./index.html"><svg class="logo__icon" width="24" height="24">
-            <use href="./images/icons.svg#icon-film"></use>
-          </svg><span class="logo-text__fixed">Filmoteka</span></a>
-          <ul class="fixed-list list">
-            <li class="fixed-item">
-              <a class="fixed-link-home link" href="./index.html">Home</a>
-            </li>
-            <li class="fixed-item">
-              <a class="fixed-link link" href="./library.html">my library</a>
-            </li>
-          </ul>
-          </div>
-
+        <a class="logo-link__fixed link" href="./index.html"
+          ><svg class="logo__icon" width="24" height="24">
+            <use href="./images/icons.svg#icon-film"></use></svg
+          ><span class="logo-text__fixed">Filmoteka</span></a
+        >
+        <ul class="fixed-list list">
+          <li class="fixed-item">
+            <a class="fixed-link-home link" href="./index.html">Home</a>
+          </li>
+          <li class="fixed-item">
+            <a class="fixed-link link" href="./library.html">my library</a>
+          </li>
+        </ul>
+      </div>
     </header>
     <main>
       <section class="modal-auth">
@@ -169,14 +202,16 @@
                 <div class="button__auth">
                   <button class="button__auth__login">Login</button>
                   <button class="button__auth__register">Register</button>
-                  <button class="button__auth__logout visually-hidden">Log out</button>
+                  <button class="button__auth__logout visually-hidden">
+                    Log out
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-          <div class="container"><ul class="movie"></ul></div>
+      <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
         <div class="container">
           <div class="pagination-list"></div>

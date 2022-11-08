@@ -1,8 +1,11 @@
 import { fetchMovieById } from './api-service';
 import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
+import defaultImg from '../images/437973.webp';
 const { trailerFrame } = refs;
 import { showTrailer } from './trailer';
+import { addSpinner } from './spinner';
+import { removeSpinner } from './spinner';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listEl = document.querySelector('.movie');
@@ -21,14 +24,13 @@ function onImgClick(evt) {
   }
 
   movieId = parseInt(evt.target.parentElement.parentElement.id);
-  // console.log(movieId);
 
   openModal(movieId);
 }
 
 async function openModal(id) {
+  addSpinner();
   const resp = await fetchMovieById(id);
-
 
   const {
     poster_path,
@@ -47,11 +49,39 @@ async function openModal(id) {
 
   movieModal.innerHTML = `<div class="movie__inner">
   <div class="image__thumb"> 
-   <img
-    src="${IMG_URL}${poster_path}"
-    alt="${original_title}"
-    class="movie__poster"
-  />
+  <picture>
+      <source
+        media="(min-width:1200px)"
+        srcset="${poster_path ? `${IMG_URL}${poster_path}` : defaultImg}"
+        type="image/jpeg"
+      />
+      <source
+        media="(min-width:768px)"
+        srcset="${
+          poster_path
+            ? `https://image.tmdb.org/t/p/w342/${poster_path}`
+            : defaultImg
+        }"
+        type="image/jpeg"
+      />
+      <source
+        media="(max-width:767px)"
+        srcset="${
+          poster_path
+            ? `https://image.tmdb.org/t/p/w342/${poster_path}`
+            : defaultImg
+        }"
+        type="image/jpeg"
+      />
+      <img
+        class="movie__poster"
+        src="${poster_path ? `${IMG_URL}${poster_path}` : defaultImg}"
+        loading="lazy"
+        alt="${original_title}"
+        width="395"
+        height="574"
+      />
+    </picture>
   </div>
 
   <div class="movie__info">
@@ -59,7 +89,7 @@ async function openModal(id) {
     <div class="movie__info-list">
       <ul class="movie__characters">
         <li>
-          <p>Vote / Votes</p>
+          <p>Vote</p>
         </li>
         <li>
           <p>Popularity</p>
@@ -73,8 +103,9 @@ async function openModal(id) {
       </ul>
       <ul class="movie__data">
         <li>
-          <p>
-              <div class="rating">
+           ${
+             vote_average
+               ? `<div class="rating">
                 <div class="rating__value">
                 ${vote_average.toFixed(1)}
                 </div>
@@ -143,7 +174,10 @@ async function openModal(id) {
                     />
                   </div>
                 </div>
-              </div>
+              </div>`
+               : `<div>No votes yet</div>`
+           }    
+              
         </li>
         <li>
           <p>${popularity.toFixed(1)}</p>
@@ -210,7 +244,7 @@ async function openModal(id) {
       ratingActive.style.width = `${ratingActiveWidth}%`;
     }
   }
-
+  removeSpinner();
   const btnClose = document.querySelector('.movie__btn-close');
   btnClose.addEventListener('click', () => closeModal());
 }
@@ -234,7 +268,7 @@ window.addEventListener('click', e => {
     trailerFrame.classList.add('is-hidden');
     trailerFrame.src = '';
   }
-  if(e.target.closest('.show-trailer')){
+  if (e.target.closest('.show-trailer')) {
     movieModal.classList.add('is-hidden');
     trailerFrame.classList.remove('is-hidden');
     // console.log(movieId);
@@ -261,8 +295,6 @@ window.addEventListener('click', e => {
     }
   }
 });
-
-
 
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !movieModal.classList.contains('is-hidden')) {
@@ -334,3 +366,11 @@ window.addEventListener('keydown', e => {
 //     </button>
 //   </div>
 // </div>`;
+
+//original img
+
+//  <img
+//    src="${IMG_URL}${poster_path}"
+//    alt="${original_title}"
+//    class="movie__poster"
+//  />;
