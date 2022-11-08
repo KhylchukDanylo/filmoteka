@@ -19,4 +19,5 @@ export const refs = {
   logoFromFixedeHader: document.querySelector('.logo-link__fixed'),
   logoFromLibrarysHeader: document.querySelector('.logo__link'),
   logoFromLibrarysFixedHeader: document.querySelector('.logo__link--fixed'),
+  containerEl: document.querySelector('.container'),
 };
