@@ -29,7 +29,6 @@ function onImgClick(evt) {
 async function openModal(id) {
   const resp = await fetchMovieById(id);
 
-
   const {
     poster_path,
     original_title,
@@ -234,7 +233,7 @@ window.addEventListener('click', e => {
     trailerFrame.classList.add('is-hidden');
     trailerFrame.src = '';
   }
-  if(e.target.closest('.show-trailer')){
+  if (e.target.closest('.show-trailer')) {
     movieModal.classList.add('is-hidden');
     trailerFrame.classList.remove('is-hidden');
     // console.log(movieId);
@@ -262,8 +261,6 @@ window.addEventListener('click', e => {
   }
 });
 
-
-
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !movieModal.classList.contains('is-hidden')) {
     closeModal();
@@ -276,6 +273,8 @@ window.addEventListener('keydown', e => {
   }
 });
 
+export { movieId };
+export { backdrop };
 //save original render
 // `<div class="movie__inner">
 //   <img
