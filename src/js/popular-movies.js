@@ -18,7 +18,6 @@ const { logoFromHeader } = refs;
 const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let popularMovies = [];
-// const noRating = 'NA';
 
 logoFromHeader.addEventListener('click', onLogoClick);
 
