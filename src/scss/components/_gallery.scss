@@ -88,6 +88,7 @@
   }
 
   &__link {
+    overflow: hidden; // add by Yurov
     display: block;
     text-decoration: none;
     height: 100%;
@@ -122,5 +123,8 @@
   }
   &--red {
     border: 2px solid red;
+  }
+  &--grey {
+    border: 2px solid grey;
   }
 }
