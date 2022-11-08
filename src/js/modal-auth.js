@@ -9,6 +9,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { getDatabase, ref, set, remove } from 'firebase/database';
+import { backdrop } from './modal-movie-render';
 
 /*const firebaseConfig = {
   apiKey: 'AIzaSyD4R5ow53nXeGgXQPCsfLs6LgP-O91YSD8',
@@ -100,9 +101,10 @@ function onBtnLogin(e) {
     });
 }
 
+let uid;
 onAuthStateChanged(auth, user => {
   if (user !== null) {
-    const uid = user.uid;
+    uid = user.uid;
     localStorage.setItem('uid', uid);
     refs.formAuth.classList.add('visually-hidden');
     refs.btnRegister.classList.add('visually-hidden');
@@ -116,7 +118,7 @@ onAuthStateChanged(auth, user => {
 
     return uid;
   } else {
-    localStorage.removeItem('uid');
+    localStorage.removeItem('uid', uid);
   }
 });
 
@@ -129,7 +131,7 @@ function onBtnLogOut(e) {
       refs.formAuth.classList.remove('visually-hidden');
       refs.btnLogOut.classList.add('visually-hidden');
       refs.btnLoginGlobal.textContent = 'Log in';
-      const uid = user.uid;
+      uid = user.uid;
       uid = null;
     })
     .catch(error => {
@@ -166,17 +168,27 @@ function validate_field(field) {
   }
 }
 
-window.addEventListener('keydown', onKeyDown);
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !refs.formAuth.classList.contains('is-hidden')) {
+    closeModal();
+  }
+});
 
-function onKeyDown(e) {
-  console.log(e.key);
-  if (e.key !== 'Escape') return;
-  refs.formAuth.classList.add('visually-hidden');
+const btnCloseAuth = document.querySelector('.auth__btn-close');
+btnCloseAuth.addEventListener('click', () => closeModal());
+
+function closeModal() {
+  refs.formAuth.classList.add('is-hidden');
+  backdrop.classList.add('is-hidden');
   window.location.reload();
-  window.removeEventListener('keydown', onKeyDown);
 }
-/*function onBackdropClick(event) {
-  if (event.target === event.currentTarget) {
-    onCloseModalAuth();
+
+/*function noScroll() {
+  if (!refs.formAuth.classList.contains('visually-hidden')) {
+    document.body.classList.add('stop-scrolling');
+  } else {
+    document.body.classList.remove('stop-scrolling');
   }
 }*/
+
+export { uid };

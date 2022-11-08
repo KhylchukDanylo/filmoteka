@@ -308,6 +308,8 @@ window.addEventListener('keydown', e => {
   }
 });
 
+export { movieId };
+export { backdrop };
 //save original render
 // `<div class="movie__inner">
 //   <img

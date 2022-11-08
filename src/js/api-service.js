@@ -36,10 +36,25 @@ async function fetchTrailer(movieId) {
   return data;
 }
 
+async function fetchMoviesByFilters(params, page) {
+  const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}${params}&page=${page}`;
+  const response = await axios(url);
+  return response;
+};
+
+async function fetchMoviesByRating() {
+  const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&primary_release_date.gte=2000&primary_release_date.lte=2010&page=1`;
+  const response = await axios(url);
+  return response;
+};
+
 export {
   fetchPopularMovies,
   fetchMovieById,
   fetchMoviesGenres,
   fetchMoviesBySearch,
   fetchTrailer,
+  fetchMoviesByFilters,
+  fetchMoviesByRating,
 };
+

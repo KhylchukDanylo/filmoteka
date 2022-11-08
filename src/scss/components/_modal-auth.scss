@@ -1,6 +1,7 @@
 .form__auth {
   width: 70%;
   height: 70%;
+  z-index: 4;
   position: absolute;
   margin: auto;
   @include mobile {
@@ -146,15 +147,18 @@
   white-space: nowrap;
   width: 1px;
 }
-.auth__login-logout {
-  color: var(--color-btn-white);
-  font-family: Roboto;
-  font-style: 'Medium';
-  font-size: 30px;
-  line-height: 1.17;
-  line-height: 100%;
-}
+
 
 .disabled {
   pointer-events: none;
+}
+
+.auth__btn-close {
+  top: 8px;
+  right: 8px;
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }

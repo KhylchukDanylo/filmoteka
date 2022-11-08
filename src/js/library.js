@@ -1,6 +1,11 @@
 const throttle = require('lodash.throttle');
 import { refs } from './DOM-elements';
-import { CURRENT_PAGE, TOTAL_PAGES, CURRENT_STATE, MOVIE_TO_SEARCH } from './pagination';
+import {
+  CURRENT_PAGE,
+  TOTAL_PAGES,
+  CURRENT_STATE,
+  MOVIE_TO_SEARCH,
+} from './pagination';
 const { logoFromLibrarysHeader, logoFromLibrarysFixedHeader } = refs;
 
 let header = document.querySelector('.header-library');
