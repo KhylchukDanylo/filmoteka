@@ -1,5 +1,5 @@
 import { refs } from "./DOM-elements";
-const {movieBackdrop:backdrop, contributors} = refs;
+const {movieBackdrop:backdrop, contributorsWrapper} = refs;
 
 function openModal(){
 backdrop.classList.remove('is-hidden');
@@ -11,7 +11,7 @@ function closeModal(){
     backdrop.removeEventListener('click', closeModal);
 
 //костыль, думаю как исправить, этого кода тут не будет.
-contributors.classList.add('is-hidden');
+contributorsWrapper.classList.add('is-hidden');
 //------
 }
 export{openModal};

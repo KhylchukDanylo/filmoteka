@@ -297,8 +297,12 @@
     </header>
     <main>
       <section class="modal-auth">
+       <!-- <div class="backdrop is-hidden">-->
         <div class="form__auth visually-hidden">
           <div class="form__auth__wrap">
+            <button type="button" class="auth__btn-close">
+             X
+            </button>
             <div class="form__auth__wrapper">
               <h2 class="form__auth__header">Welcome to our site</h2>
             </div>
@@ -329,6 +333,7 @@
             </div>
           </div>
         </div>
+       <!---- </div>--->
       </section>
           <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
@@ -354,16 +359,9 @@
     </footer>
     <div class="backdrop is-hidden">
       <div class="movie__modal is-hidden"></div>
-      <iframe class="trailer__frame is-hidden"></iframe>
+      <iframe class="trailer__frame is-hidden" allowfullscreen></iframe>
       <div class="contributors is-hidden"></div>
     </div>
-    <div class="trailer__backdrop is-hidden">
-        <div class="trailer__modal">
-          <div class="contributors"></div>
-          <iframe class="trailer__frame is-hidden" type="text/html" 
-           frameborder="0" allowfullscreen>
-        </div>
-      </div>
     <script src="./js/index.js" type="module"></script>
     <script src="./js/light-dark.js" type="module"></script>
   </body>

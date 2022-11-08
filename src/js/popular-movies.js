@@ -1,15 +1,63 @@
 import { fetchPopularMovies, fetchMoviesGenres } from './api-service';
+import { createMovieListBySearch } from './search-movies';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl } from './pagination';
+import {
+  paginationList,
+  addPagination,
+  containerEl,
+  CURRENT_PAGE,
+  TOTAL_PAGES,
+  CURRENT_STATE,
+  MOVIE_TO_SEARCH,
+} from './pagination';
+import { refs } from './DOM-elements';
 import { allGenres } from './data/jenres.js';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
+const { logoFromHeader } = refs;
 const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let popularMovies = [];
 
+logoFromHeader.addEventListener('click', onLogoClick);
+
+try {
+  const currentPage = JSON.parse(localStorage.getItem(CURRENT_PAGE));
+  if (currentPage === null) {
+    throw new Error();
+  }
+  const totalPages = JSON.parse(localStorage.getItem(TOTAL_PAGES));
+  const currentState = JSON.parse(localStorage.getItem(CURRENT_STATE));
+
+  paginationList.currentPage = currentPage;
+  paginationList.totalPages = totalPages;
+  paginationList.currentState = currentState;
+} catch (err) {
+  paginationList.currentPage = 1;
+}
+
+try {
+  const movie = JSON.parse(localStorage.getItem(MOVIE_TO_SEARCH));
+  if (movie === null) {
+    throw new Error();
+  }
+  paginationList.movieToSearch = movie;
+} catch (err) {
+  console.log('There are no movies to search in local Storage yet');
+}
+
+if (!paginationList.currentState || paginationList.currentState === 'popular') {
+  createMovieList(paginationList.currentPage);
+}
+if (paginationList.currentState === 'search') {
+  createMovieListBySearch(
+    paginationList.movieToSearch,
+    paginationList.currentPage
+  );
+}
 // // ================ fetch popular movies for start pages ==================//
-createMovieList(1);
+// createMovieList(1);
+
 export async function createMovieList(page) {
   addSpinner();
   await fetchPopularMovies(page)
@@ -31,6 +79,18 @@ export async function createMovieList(page) {
       paginationList.currentPage = data.page;
       paginationList.totalPages = data.total_pages;
       paginationList.currentState = 'popular';
+      localStorage.setItem(
+        CURRENT_PAGE,
+        JSON.stringify(paginationList.currentPage)
+      );
+      localStorage.setItem(
+        TOTAL_PAGES,
+        JSON.stringify(paginationList.totalPages)
+      );
+      localStorage.setItem(
+        CURRENT_STATE,
+        JSON.stringify(paginationList.currentState)
+      );
     })
     .catch(error => console.log(error));
 
@@ -102,7 +162,6 @@ export async function createMovieList(page) {
     </picture>
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
-    <button type="button" class="show-trailer">trailer</button>
     <div class="movie__rating movie__rating--${getClassByVote(
       rating
     )}">${rating}</div>
@@ -129,4 +188,11 @@ function getClassByVote(vote) {
   } else {
     return 'red';
   }
+}
+
+function onLogoClick() {
+  localStorage.removeItem(CURRENT_PAGE);
+  localStorage.removeItem(TOTAL_PAGES);
+  localStorage.removeItem(CURRENT_STATE);
+  localStorage.removeItem(MOVIE_TO_SEARCH);
 }

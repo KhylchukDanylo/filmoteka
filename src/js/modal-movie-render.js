@@ -21,7 +21,7 @@ function onImgClick(evt) {
   }
 
   movieId = parseInt(evt.target.parentElement.parentElement.id);
-  console.log(movieId);
+  // console.log(movieId);
 
   openModal(movieId);
 }
@@ -234,10 +234,9 @@ window.addEventListener('click', e => {
     trailerFrame.src = '';
   }
   if (e.target.closest('.show-trailer')) {
-    console.log('hello');
     movieModal.classList.add('is-hidden');
     trailerFrame.classList.remove('is-hidden');
-    console.log(movieId);
+    // console.log(movieId);
     showTrailer(movieId);
   }
 
@@ -274,6 +273,8 @@ window.addEventListener('keydown', e => {
   }
 });
 
+export { movieId };
+export { backdrop };
 //save original render
 // `<div class="movie__inner">
 //   <img

@@ -1,6 +1,10 @@
 import { leftArrowIcon, rightArrowIcon } from './svg-icons';
 export const paginationList = document.querySelector('.pagination-list');
 export const containerEl = document.querySelector('.container');
+export const CURRENT_PAGE = 'paginationCurrentPage';
+export const TOTAL_PAGES = 'paginationTotalPages';
+export const CURRENT_STATE = 'paginationCurrentState';
+export const MOVIE_TO_SEARCH = 'paginationMovieToSearch';
 
 const leftArrow = `<button type="button" class="pagination-button pagination-button__arrow arrow-to-start-button-js">${leftArrowIcon}</button>`;
 const rightArrow = `<button type="button" class="pagination-button pagination-button__arrow arrow-to-end-button-js">${rightArrowIcon}</button>`;
