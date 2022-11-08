@@ -245,17 +245,18 @@
       
           <div class="sort">
             <form class="sort__form">
-              <label for="sort">Sort by</label>
-              <select id="sort" name="sort">
+              <label for="sort">Sort by
+              <select class="custom-select" id="sort" name="sort">
                 <option value="popularity.desc" selected>Popularity</option>
                 <option value="vote_average.desc">Rating</option>
                 <option value="release_date.desc">Newest</option>
                 <option value="release_date.asc">Oldest</option>
               </select>
+              </label>
             </form>
           </div>
       
-          <div class="adult">
+          <div class="adult">  
             <form class="adult__form">
               <label>
                 <input type="checkbox" name="adult" value="adult" />

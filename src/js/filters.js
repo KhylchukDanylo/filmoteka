@@ -122,9 +122,10 @@ function onFormReset(evt) {
     generalFilterParams['primary_release_date.gte'] = '1900';
     // console.log(generalFilterParams);
   }
-    
-    openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
-    openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+  openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+    // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+    // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
 }
 
 function updateGenresParams(form) {
@@ -354,10 +355,14 @@ function hideFiltersByGenres() {
   }
 
   openFilterByGenresBtn.textContent = selectedGenres;
-  openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
+  // openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
+  console.log('color!!!!!');
+  openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
 
-    if (openFilterByGenresBtn.textContent === "Genres") {
-        openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+
+  if (openFilterByGenresBtn.textContent === "Genres") {
+    openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+        // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
     }
   document.removeEventListener('click', closeGenresFilterOptions);
 }
@@ -370,13 +375,15 @@ function hideFiltersByYears() {
     selectedYear = generalFilterParams['primary_release_date.gte'];
   }
   if ((generalFilterParams['primary_release_date.gte'] === '1900' && generalFilterParams['primary_release_date.lte'] === '2022')) {
-    selectedYear = 'Years';
+    selectedYear = "Years";
   }
-    openFilterByYearsBtn.textContent = selectedYear;
-    openFilterByYearsBtn.style.borderColor = 'rgba(0,128,0,0.7)';
-    
-    if (openFilterByYearsBtn.textContent === "Years") {
-        openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  openFilterByYearsBtn.textContent = selectedYear;
+  openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
+    // openFilterByYearsBtn.style.borderColor = 'rgba(0,128,0,0.7)';
+      
+  if (openFilterByYearsBtn.textContent === "Years") {
+    openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+        // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
     }
   document.removeEventListener('click', closeYearsFilterOptions);
 }
