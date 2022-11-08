@@ -223,7 +223,7 @@ function closeModal() {
 
 window.addEventListener('click', e => {
   const hiddenMovieModal = movieModal.classList.contains('is-hidden');
-  console.log(e.target);
+  // console.log(e.target);
   if (e.target === backdrop && !hiddenMovieModal) {
     closeModal();
   }

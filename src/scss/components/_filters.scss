@@ -1,0 +1,111 @@
+.genres,
+.years {
+    position: relative;
+}
+
+.filters__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.filters {
+    margin-top: 28px;
+    color: rgba(255,255,255,0.85);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+
+    &__button {
+        display: block;
+        width: 140px;
+        height: 37px;
+        border: 1px solid rgba(255, 0, 27, 0.7);
+        border-radius: 20px;
+
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.33;
+        color: rgba(255, 255, 255, 0.8);
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    &__button--clear {
+        background-color: rgba(255, 0, 27, 0.6);
+        border: none;
+        // margin-left: 50px;
+    }
+}
+
+// add .years__form
+.genres__form {
+    position: absolute;
+    z-index: 100;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 230px;
+    outline: 1px solid green;
+    // background-color: rgba(255, 107, 1, 0.1);
+    color: #000;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.years__form {
+    position: absolute;
+        z-index: 100;
+        top: 75px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 400px;
+        height: 170px;
+        outline: 1px solid green;
+        // background-color: rgba(255, 107, 1, 0.1);
+        color: #000;
+        background-color: rgba(39, 46, 52, 0.92);
+        border-radius: 5px;
+        padding: 30px 50px;
+}
+
+.genres__wrap,
+.years__wrap {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.button {
+    &__wrap {
+        display: flex;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        line-height: 1.33;
+    }
+
+    &__reset {
+        width: 50%;
+        height: 42px;
+        outline: 1px solid red;
+        font: inherit;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #ff6b01;
+        background-color: #fff;
+    }
+
+    &__submit {
+        width: 50%;
+        height: 42px;
+        outline: 1px solid blue;
+        font: inherit;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #ff6b01;
+        background-color: #fff;
+    }
+}
