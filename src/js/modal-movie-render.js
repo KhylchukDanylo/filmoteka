@@ -21,7 +21,7 @@ function onImgClick(evt) {
   }
 
   movieId = parseInt(evt.target.parentElement.parentElement.id);
-  console.log(movieId);
+  // console.log(movieId);
 
   openModal(movieId);
 }
@@ -121,7 +121,7 @@ function closeModal() {
 
 window.addEventListener('click', e => {
   const hiddenMovieModal = movieModal.classList.contains('is-hidden');
-  console.log(e.target);
+  // console.log(e.target);
   if (e.target === backdrop && !hiddenMovieModal) {
     closeModal();
   }
@@ -132,10 +132,9 @@ window.addEventListener('click', e => {
     trailerFrame.src = '';
   }
   if(e.target.closest('.show-trailer')){
-    console.log('hello');
     movieModal.classList.add('is-hidden');
     trailerFrame.classList.remove('is-hidden');
-    console.log(movieId);
+    // console.log(movieId);
     showTrailer(movieId);
   }
 

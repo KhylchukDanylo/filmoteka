@@ -9,14 +9,14 @@ const createWatched = document.querySelector('.movie__btn-watched');
 
 //const movieId = parseInt(e.target.parentElement.parentElement.id);
 
-createQueue.addEventListener('click', onCreateQueueClick);
+// createQueue.addEventListener('click', onCreateQueueClick);
 //queueBtn.addEventListener('click', oncQueueBtnClick);
-createWatched.addEventListener('click', onCreateWatchedClick);
+// createWatched.addEventListener('click', onCreateWatchedClick);
 //watchedBtn.addEventListener('click', onWatchedBtnClick);
 
 const watchedMovies = [];
 const queueMovies = [];
-const UID = localsrorage.setItem('uid');
+// const UID = localsrorage.setItem('uid');
 
 //fetchMovieById();
 //const movieId = parseInt(e.target.parentElement.parentElement.id);

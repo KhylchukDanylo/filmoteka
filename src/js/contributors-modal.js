@@ -3,13 +3,13 @@ const main = document.querySelector('main');
 
 import { refs } from "./DOM-elements";
 import { openModal } from "./backdrop";
-import { contributorsMarkup } from "./contributors-markup";
-const {movieBackdrop:backdrop, teamModalButton, contributors} = refs;
+import {renderCotributorsModal} from './contributors-markup';
+const {movieBackdrop:backdrop, teamModalButton, contributorsWrapper} = refs;
 
-teamModalButton.addEventListener('click', renderCotributorsModal);
+teamModalButton.addEventListener('click', showModal);
 
-function renderCotributorsModal(){
+function showModal(){
     openModal();
-    contributors.innerHTML = contributorsMarkup;
-    contributors.classList.remove('is-hidden');
+    contributorsWrapper.classList.remove('is-hidden');
+    renderCotributorsModal();
 }
