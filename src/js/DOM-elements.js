@@ -15,4 +15,8 @@ export const refs = {
   watchedBtn: document.querySelectorAll('#watched'),
   queueBtn: document.querySelectorAll('#queue'),
   movieBackdrop: document.querySelector('.backdrop'),
+  logoFromHeader: document.querySelector('.link-logo'),
+  logoFromFixedeHader: document.querySelector('.logo-link__fixed'),
+  logoFromLibrarysHeader: document.querySelector('.logo__link'),
+  logoFromLibrarysFixedHeader: document.querySelector('.logo__link--fixed'),
 };
