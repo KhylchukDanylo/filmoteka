@@ -170,3 +170,6 @@ window.addEventListener('keydown', e => {
     trailerFrame.src = '';
   }
 });
+
+export { movieId };
+export { backdrop };
