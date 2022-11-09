@@ -2,7 +2,13 @@ import { fetchMovieById } from './api-service';
 import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
-const { trailerFrame, movieModal, movieBackdrop: backdrop } = refs;
+const {
+  trailerFrame,
+  movieModal,
+  movieBackdrop: backdrop,
+  genresForm,
+  yearsForm,
+} = refs;
 // import { showTrailer } from './trailer';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
@@ -16,16 +22,36 @@ listEl.addEventListener('click', onImgClick);
 
 //сделал переменную через let ибо для открытия трейлера тоже нужен id
 let movieId;
+let queueText = '';
+let watchedText = '';
+const queueMovies = JSON.parse(localStorage.getItem('queue-movies')) || [];
+const watchedMovies = JSON.parse(localStorage.getItem('wached-movies')) || [];
 
 function onImgClick(evt) {
   evt.preventDefault();
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
+  // movieId = parseInt(evt.target.closest('li').id) ;
+  movieId = +evt.target.closest('li').id;
 
-  movieId = parseInt(evt.target.parentElement.parentElement.id);
+  const filterIsOpened =
+    !genresForm.classList.contains('is-hidden') ||
+    !yearsForm.classList.contains('is-hidden');
+  if (filterIsOpened) {
+    return;
+  }
+
+  // movieId = parseInt(evt.target.parentElement.parentElement.id);
 
   openModal(movieId);
+
+  queueText = queueMovies.includes(movieId)
+    ? 'remove from queue'
+    : 'add to queue';
+  watchedText = watchedMovies.includes(movieId)
+    ? 'remove from watched'
+    : 'add to watched';
 }
 
 async function openModal(id) {
@@ -195,10 +221,10 @@ async function openModal(id) {
     <p class="movie__description">${overview}</p>
     <div class="button-wrap">
       <button type="button" class="movie__btn movie__btn-watched" id="btn-watched">
-          add to Watched
+          ${watchedText}
       </button>
           <button type="button" class="movie__btn movie__btn-queue" id="btn-queue">
-      add to queue
+     ${queueText}
       </button>
     </div>
     <button type="button" class="movie__btn-close">
@@ -264,13 +290,25 @@ window.addEventListener('click', e => {
     closeModal();
   }
 
+  // if (e.target.id === 'btn-watched') {
+  //   const btn = document.querySelector('#btn-watched');
+  //   btn.classList.toggle('selected');
+  //   if (btn.classList.contains('selected'))
+  //     btn.textContent = 'remove from watched';
+  //   else {
+  //     btn.textContent = 'add to watched';
+  //   }
+  // }
+
   if (e.target.id === 'btn-watched') {
     const btn = document.querySelector('#btn-watched');
-    btn.classList.toggle('selected');
-    if (btn.classList.contains('selected')) {
+    if (!watchedMovies.includes(movieId)) {
+      addToWached(movieId);
+      watchedText = 'remove from watched';
       btn.textContent = 'remove from watched';
-      btn.style.padding = '0';
     } else {
+      removeFromWached(movieId);
+      watchedText = 'add to watched';
       btn.textContent = 'add to watched';
       btn.style.padding = '6px 27px';
     }
@@ -278,11 +316,13 @@ window.addEventListener('click', e => {
 
   if (e.target.id === 'btn-queue') {
     const btn = document.querySelector('#btn-queue');
-    btn.classList.toggle('selected');
-    if (btn.classList.contains('selected')) {
+    if (!queueMovies.includes(movieId)) {
+      addToQueue(movieId);
+      queueText = 'remove from queue';
       btn.textContent = 'remove from queue';
-      btn.style.padding = '0';
     } else {
+      removeFromQueue(movieId);
+      queueText = 'add to queue';
       btn.textContent = 'add to queue';
     }
   }
@@ -294,5 +334,43 @@ window.addEventListener('keydown', e => {
   }
 });
 
-export { movieId };
-export { backdrop };
+function addToQueue(movieId) {
+  console.log(movieId, 'added to queue');
+  queueMovies.push(movieId);
+  console.log(queueMovies);
+  localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
+}
+
+function removeFromQueue(movieId) {
+  localStorage.removeItem('queue-movies');
+  const movieIndex = queueMovies.findIndex((element, index) =>
+    element === movieId ? index : null
+  );
+  console.log(movieIndex);
+  console.log(movieId, 'removed from queue');
+  queueMovies.splice(movieIndex, 1);
+  console.log(queueMovies);
+  localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
+}
+
+function addToWached(movieId) {
+  console.log(movieId, 'added to wached');
+  watchedMovies.push(movieId);
+  console.log(watchedMovies);
+
+  localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
+}
+
+function removeFromWached(movieId) {
+  localStorage.removeItem('wached-movies');
+  const movieIndex = watchedMovies.findIndex((element, index) =>
+    element === movieId ? index : null
+  );
+  console.log(movieIndex);
+  console.log(movieId, 'removed from wached');
+  watchedMovies.splice(movieIndex, 1);
+  console.log(watchedMovies);
+  localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
+}
+
+export { movieId, backdrop };

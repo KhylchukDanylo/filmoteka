@@ -13,7 +13,6 @@ ul {
 
 .header {
   padding-top: 40px;
-  // padding-bottom: 60px;
   padding-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -23,7 +22,7 @@ ul {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 230px;
+  height: 270px;
   padding-top: 40px;
   margin-left: auto;
   margin-right: auto;
@@ -33,7 +32,6 @@ ul {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 230px;
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
@@ -42,7 +40,7 @@ ul {
   }
 
   @include tablert {
-    height: 216px;
+    height: 229px;
     max-width: 768px;
     background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
@@ -54,6 +52,7 @@ ul {
   }
 
   @include desktop {
+    height: 216px;
     max-width: 1280px;
     background-image: url(../images/abstract-background-with-red-lines-desc.jpg);
 
@@ -78,6 +77,14 @@ ul {
   // margin-bottom: 55px;
   padding: 0 10px;
   margin-bottom: 40px;
+
+  @include tablert {
+    margin-bottom: 30px;
+  }
+
+  @include desktop {
+    margin-bottom: 40px;
+  }
 }
 
 .link-logo {
@@ -302,6 +309,7 @@ ul {
   background-position: center;
   background-size: cover;
   position: fixed;
+  z-index: 11;
   display: flex;
   justify-content: space-around;
   align-items: center;

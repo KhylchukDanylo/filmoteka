@@ -1,4 +1,4 @@
-import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
+import { fetchMoviesBySearch} from './api-service';
 import defaultImg from '../images/437973.webp';
 import {
   paginationList,
@@ -11,15 +11,16 @@ import {
 } from './pagination';
 import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { deleteNotFoundPage, onClearFiltersButtonClick } from './filters';
 
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 
 import createMovieList from './popular-movies';
 
-const formEl = document.querySelector('#search-form');
+export const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
-const listEl = document.querySelector('.movie');
+export const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let moviesList = [];
 formEl.addEventListener('submit', searchMovies);
@@ -27,6 +28,10 @@ formEl.addEventListener('submit', searchMovies);
 function searchMovies(evt) {
   evt.preventDefault();
   addSpinner();
+  if (paginationList.currentState === 'filter') {
+    onClearFiltersButtonClick();
+  }
+  deleteNotFoundPage();
   createListBySearch(1);
 }
 
@@ -56,6 +61,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
       if (results.length === 0) {
         formEl.reset();
         Notify.failure('Sorry, but nothing was found');
+
         removeSpinner();
         throw new Error('nothing was found');
       } else {
@@ -91,6 +97,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
 
     moviesList.forEach(movie => {
       movie.genres = movie.genres.map(id => {
+        
         allGenres.forEach(object => {
           if (object.id === id) {
             id = object.name;
@@ -129,9 +136,10 @@ export async function createMovieListBySearch(searchToMovie, page) {
   function renderMoviesCard(arrayMovies) {
     const markup = arrayMovies
       .map(({ id, poster, title, genres, year, rating }) => {
-        return `<li class="movie__item">
-            <a href="#" class="movie__link" id="${id}">
-              <picture>
+        return `<li class="movie__item" id="${id}">
+            <a href="#" class="movie__link" >
+            <div class="movie__wrapper" >
+            <picture>
                 <source
                   media="(min-width:1200px)"
                   
@@ -175,6 +183,9 @@ export async function createMovieListBySearch(searchToMovie, page) {
                   height="574"
                 />
               </picture>
+            
+            </div>
+              
           <div class="movie__text"><h3 class="movie__name">${title}</h3>
           <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
               ${
@@ -190,6 +201,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
       .join('');
 
     listEl.innerHTML = markup;
+    // formEl.reset();
   }
 }
 
