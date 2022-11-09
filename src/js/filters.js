@@ -8,7 +8,7 @@ import { allGenres } from './data/jenres.js';
 import { listEl } from './search-movies';
 import notFoundImg from '../images/page-not-found-404.jpg';
 import { addSpinner, removeSpinner } from './spinner';
-import {getClassByVote} from './search-movies';
+import { getClassByVote } from './search-movies';
 const {
   filterForm,
   genresForm,
@@ -31,9 +31,9 @@ const initialFilterParams = {
   // primary_release_year: '',
   include_adult: false,
   sort_by: 'popularity.desc',
-}
+};
 let generalFilterParams = {
- ...initialFilterParams,
+  ...initialFilterParams,
 };
 // localStorage.setItem('generalFilterParams', JSON.stringify(generalFilterParams));
 let lastFetchedParams = {
@@ -41,7 +41,9 @@ let lastFetchedParams = {
 };
 // --------------------------------Form list of genres----------------------
 let listOfGenres = {};
-allGenres.map(genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` }));
+allGenres.map(
+  genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` })
+);
 console.log('list', listOfGenres);
 
 filterForm.addEventListener('change', onFormChange);
@@ -119,18 +121,19 @@ function onFormReset(evt) {
 
   if (isGenresForm) {
     generalFilterParams.with_genres = '';
-    openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+    openFilterByGenresBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   }
   if (isYearsForm) {
     generalFilterParams['primary_release_date.lte'] = '2022';
     generalFilterParams['primary_release_date.gte'] = '1900';
-    openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+    openFilterByYearsBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   }
   openFilterByGenresBtn.style.boxShadow =
     'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   openFilterByYearsBtn.style.boxShadow =
     'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-
 }
 
 function updateGenresParams(form) {
@@ -201,37 +204,36 @@ export async function renderFiltersResult(list) {
   paginationList.currentPage = data.page;
   paginationList.totalPages = data.total_pages;
 
-      movies.forEach(movie => {
-      movie.genres = movie.genres.map(id => {
-        allGenres.forEach(object => {
-          if (object.id === id) {
-            id = object.name;
-          }
-        });
-        return id;
+  movies.forEach(movie => {
+    movie.genres = movie.genres.map(id => {
+      allGenres.forEach(object => {
+        if (object.id === id) {
+          id = object.name;
+        }
       });
-
-      switch (true) {
-        case movie.genres.length > 0 && movie.genres.length <= 2:
-          movie.genres = movie.genres.join(', ');
-          break;
-
-        case movie.genres.length > 2:
-          movie.genres[2] = 'Other';
-          movie.genres = movie.genres.slice(0, 3).join(', ');
-          break;
-
-        default:
-          movie.genres = 'N/A';
-          break;
-      }
+      return id;
     });
 
+    switch (true) {
+      case movie.genres.length > 0 && movie.genres.length <= 2:
+        movie.genres = movie.genres.join(', ');
+        break;
+
+      case movie.genres.length > 2:
+        movie.genres[2] = 'Other';
+        movie.genres = movie.genres.slice(0, 3).join(', ');
+        break;
+
+      default:
+        movie.genres = 'N/A';
+        break;
+    }
+  });
 
   movieList.innerHTML = movies
     .map(({ id, poster, title, genres, year, rating }) => {
-      return `<li class="movie__item">
-  <a href="#" class="movie__link" id="${id}">
+      return `<li class="movie__item" id="${id}">
+  <a href="#" class="movie__link" >
   <div class="movie__wrapper">
   <picture>
       <source
@@ -287,7 +289,6 @@ ${
 </li>`;
     })
     .join('');
-
 
   addPagination({
     screenWidth,
@@ -366,7 +367,7 @@ function hideFiltersByGenres() {
 
   openFilterByGenresBtn.textContent = selectedGenres;
   // openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
-  openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
+  openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
 
   if (openFilterByGenresBtn.textContent === 'Genres') {
     openFilterByGenresBtn.style.boxShadow =
@@ -454,19 +455,19 @@ function fetchAndRenderMoviesByFilter() {
       } else {
         deleteNotFoundPage();
         renderFiltersResult(resp);
-      } 
+      }
       removeSpinner();
     })
     .catch(err => console.log(err));
 }
 
 function renderNotFoundPage() {
-const photo = `<img class='not-found-img' src="${notFoundImg}" alt="404">`
+  const photo = `<img class='not-found-img' src="${notFoundImg}" alt="404">`;
   notFoundPage.innerHTML = photo;
   listEl.innerHTML = '';
   paginationList.innerHTML = '';
   console.dir(paginationList);
-//        -----------------------------------------------------------------------------------------------------------
+  //        -----------------------------------------------------------------------------------------------------------
 }
 
 export function deleteNotFoundPage() {
@@ -495,8 +496,8 @@ export function onClearFiltersButtonClick() {
   listOfForms.forEach(form => form.reset());
   openFilterByGenresBtn.textContent = 'Genres';
   openFilterByYearsBtn.textContent = 'Years';
-  generalFilterParams = { ...initialFilterParams, };
-  lastFetchedParams = { ...initialFilterParams, };
+  generalFilterParams = { ...initialFilterParams };
+  lastFetchedParams = { ...initialFilterParams };
   deleteNotFoundPage();
   createMovieList(1);
 }
