@@ -2,7 +2,7 @@
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  justify-content: center;
+
   @include mobile {
     padding: 20px 0;
     grid-template-columns: 280px;
@@ -10,19 +10,15 @@
   }
 
   @include tablert {
-    // display: grid;
     padding: 60px 0;
-    grid-template-columns: 336px 336px;
+    grid-template-columns: repeat(2, 336px);
     gap: 32px;
-    // justify-content: center;
   }
 
   @include desktop {
-    // display: grid;
     padding: 60px 0;
-    grid-template-columns: 395px 395px 395px;
+    grid-template-columns: repeat(3, 395px);
     gap: 32px 16px;
-    // justify-content: center;
   }
 
   &__text {
@@ -34,7 +30,7 @@
     font-size: 12px;
     line-height: 1.16;
     text-transform: uppercase;
-    // margin-top: 12px;
+    
 
     color: var(--color-name-film);
     @include desktop {
@@ -57,27 +53,26 @@
   }
   &__item {
     position: relative;
-    display: grid;
-    // overflow: hidden;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-      0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    align-self: center;
+    justify-self: center;
   }
 
   &-image:hover {
-    transform: scale(1.02);
+    transform: scale(1.07);
   }
 
   &-image {
-    max-width: 280px;
-    max-height: 402px;
+    border-radius: 5px;
+    width: 280px;
+    height: 402px;
 
     @include tablert {
-      max-width: 336px;
-      max-height: 455px;
+      width: 336px;
+      height: 455px;
     }
     @include desktop {
-      max-width: 395px;
-      max-height: 574px;
+      width: 395px;
+      height: 574px;
     }
 
     height: 100%;
@@ -93,8 +88,13 @@
     height: 100%;
   }
 
+  &__wrapper {
+    overflow: hidden;
+    border-radius: 5px;
+  }
+
   &__link:hover {
-    cursor: zoom-in;
+    cursor: pointer;
   }
 }
 
