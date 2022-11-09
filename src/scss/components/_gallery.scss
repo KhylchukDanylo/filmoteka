@@ -83,7 +83,6 @@
   }
 
   &__link {
-    overflow: hidden; // add by Yurov
     display: block;
     text-decoration: none;
     height: 100%;
@@ -101,16 +100,16 @@
 
 .movie__rating {
   position: absolute;
-  top: -14px;
+  top: -18px;
   left: -10px;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(#000000, #434343);
-  font-size: 15px;
+  background-color: #161f23;
+
   color: #fff;
   z-index: 2;
 
@@ -122,15 +121,5 @@
   }
   &--red {
     border: 2px solid red;
-  }
-  &--grey {
-    border: 2px solid grey;
-  }
-
-  @include tablert {
-    top: -18px;
-    width: 44px;
-    height: 44px;
-    font-size: 18px;
   }
 }

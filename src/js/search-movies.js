@@ -1,4 +1,4 @@
-import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
+import { fetchMoviesBySearch} from './api-service';
 import defaultImg from '../images/437973.webp';
 import {
   paginationList,
@@ -135,7 +135,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
 
   function renderMoviesCard(arrayMovies) {
     const markup = arrayMovies
-      .map(({ id, poster, title, genres, year }) => {
+      .map(({ id, poster, title, genres, year, rating }) => {
         return `<li class="movie__item" id="${id}">
             <a href="#" class="movie__link" >
             <div class="movie__wrapper" >
@@ -201,7 +201,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
       .join('');
 
     listEl.innerHTML = markup;
-    formEl.reset();
+    // formEl.reset();
   }
 }
 

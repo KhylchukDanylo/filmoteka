@@ -191,6 +191,7 @@ export async function renderFiltersResult(list) {
       title: movie.original_title,
       genres: movie.genre_ids,
       year: movie?.release_date?.slice(0, 4) || 'N/A',
+      rating: movie.vote_average.toFixed(1),
     };
 
     movies.push(movieData);
@@ -227,7 +228,7 @@ export async function renderFiltersResult(list) {
 
 
   movieList.innerHTML = movies
-    .map(({ id, poster, title, genres, year }) => {
+    .map(({ id, poster, title, genres, year, rating }) => {
       return `<li class="movie__card">
   <a href="#" class="movie__link" id="${id}">
   <div class="movie__wrapper">
@@ -273,10 +274,12 @@ export async function renderFiltersResult(list) {
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="gallery__text" data-id="${id}">${genres} | ${year}</p>
 </div>
+
   </a>
 </li>`;
     })
     .join('');
+
 
   addPagination({
     screenWidth,
