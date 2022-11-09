@@ -162,9 +162,13 @@ export async function createMovieList(page) {
     </picture>
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
-    <div class="movie__rating movie__rating--${getClassByVote(
-      rating
-    )}">${rating}</div>
+${
+  !rating || rating == '0.0'
+    ? `<div class="movie__rating movie__rating--grey">NA</div>`
+    : `<div class="movie__rating movie__rating--${getClassByVote(
+        rating
+      )}">${rating}</div>`
+}
   </a>
 </li>`;
     })

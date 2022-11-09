@@ -1,8 +1,16 @@
+.hide-it.trailer__frame{
+  transform: translate(50%, -50%) scale(0.5);
+  visibility: hidden;
+}
+
 .trailer__frame{
   position: absolute;
   top: 50%;
   right: 50%;
-  transform: translate(50%, -50%);
+  transform: translate(50%, -50%) scale(1);
+  opacity: 1;
+  transition: transform var(--animation-duration) var(--timing-function);
+  visibility: visible;
   border: none;
   box-shadow: 5px 5px 20px #d9d9d9, -5px -5px 20px #ffffff;
     @include mobile {
@@ -23,10 +31,8 @@
   position: absolute;
   opacity: 0.8;
   cursor: pointer;
-  @include mobile {  
     left: 90px;
     top: 168px;
-  }
   @include tablert {
     left: 115px;
     top: 200px;
