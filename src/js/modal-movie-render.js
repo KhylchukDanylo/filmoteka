@@ -2,7 +2,7 @@ import { fetchMovieById } from './api-service';
 import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
-const { trailerFrame, movieModal, movieBackdrop: backdrop } = refs;
+const { trailerFrame, movieModal, movieBackdrop: backdrop, genresForm, yearsForm } = refs;
 // import { showTrailer } from './trailer';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
@@ -29,6 +29,13 @@ function onImgClick(evt) {
   }
   // movieId = parseInt(evt.target.closest('li').id) ;
   movieId = +(evt.target.closest('li').id) ;
+  
+  const filterIsOpened = !genresForm.classList.contains('is-hidden') || !yearsForm.classList.contains('is-hidden');
+  if (filterIsOpened) {
+    return;
+  }
+
+  // movieId = parseInt(evt.target.parentElement.parentElement.id);
 
   openModal(movieId);
   
