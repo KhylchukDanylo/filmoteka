@@ -191,8 +191,17 @@ const formData = {
 
 let currentFormData = formData;
 
-//resultForm();
+resultForm();
 
+/*function onLoginGlobalBtn() {
+  refs.formAuth.classlist.remove('is-hidden-auth');
+}*/
+
+/*function onBtnLogOut() {
+  if (refs.formAuth.classlist.contains('is-hidde-auth')) {
+    refs.formAuth.classlist.remove('is-hidden-auth');
+  }
+}*/
 function onFormInput(e) {
   currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
   const value = JSON.stringify(currentFormData);
@@ -200,10 +209,20 @@ function onFormInput(e) {
 }
 
 function resultForm() {
-  const { name, email, password } = populateEmail();
-  name = refs.inputName.value;
-  email = refs.inputEmail.value;
-  password = refs.inputPassword.value;
+  if (
+    refs.inputName.value === '' ||
+    refs.inputEmail.value === '' ||
+    refs.inputPassword.value === ''
+  ) {
+    Notify.failure(
+      'Your form has empty fields. Add information and try again.'
+    );
+  } else {
+    const { name, email, password } = populateEmail();
+    refs.inputName.value = name;
+    refs.inputEmail.value = email;
+    refs.inputPassword.value = password;
+  }
 }
 
 function onFormSubmit(e) {
@@ -212,19 +231,25 @@ function onFormSubmit(e) {
   const value = JSON.stringify(currentFormData);
   localStorage.setItem(STORAGE_KEY, value);
   refs.formAuth.reset();
-  //localStorage.removeItem('feedback-form-state');
+  //localStorage.removeItem('feedback-form');
+  //refs.formAuth.classlist.add('is-hidden-auth');
 }
 
 function populateEmail() {
   currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  console.log(currentFormData);
   return currentFormData;
 }
 
 function onBtnSubmit() {
-  if (refs.input.value === '') {
-    return Notify.failure(
-      'Your form has empty fields. Add information and try again.'
-    );
+  if (
+    refs.inputName.value === '' ||
+    refs.inputEmail.value === '' ||
+    refs.inputPassword.value === ''
+  ) {
+    // Notify.failure(
+    //   'Your form has empty fields. Add information and try again.'
+    //  );
   }
   console.log(currentFormData);
 }
