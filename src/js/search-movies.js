@@ -11,15 +11,16 @@ import {
 } from './pagination';
 import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { deleteNotFoundPage, onClearFiltersButtonClick } from './filters';
 
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 
 import createMovieList from './popular-movies';
 
-const formEl = document.querySelector('#search-form');
+export const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
-const listEl = document.querySelector('.movie');
+export const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let moviesList = [];
 formEl.addEventListener('submit', searchMovies);
@@ -27,6 +28,10 @@ formEl.addEventListener('submit', searchMovies);
 function searchMovies(evt) {
   evt.preventDefault();
   addSpinner();
+  if (paginationList.currentState === 'filter') {
+    onClearFiltersButtonClick();
+  }
+  deleteNotFoundPage();
   createListBySearch(1);
 }
 

@@ -1,4 +1,15 @@
 const throttle = require('lodash.throttle');
+import { refs } from './DOM-elements';
+import { createMovieList } from './popular-movies';
+import { formEl } from './search-movies';
+import {
+  CURRENT_PAGE,
+  TOTAL_PAGES,
+  CURRENT_STATE,
+  MOVIE_TO_SEARCH,
+} from './pagination';
+import { scrollToTop } from './eventListeners';
+const { logoFromFixedHeader } = refs;
 
 let header = document.querySelector('.header');
 let fixedHeader = document.querySelector('.fixed-headers');
@@ -14,3 +25,15 @@ function showFixedHeader() {
   }
 }
 
+logoFromFixedHeader.addEventListener('click', onLogoClick);
+
+function onLogoClick(evt) {
+  evt.preventDefault();
+  localStorage.removeItem(CURRENT_PAGE);
+  localStorage.removeItem(TOTAL_PAGES);
+  localStorage.removeItem(CURRENT_STATE);
+  localStorage.removeItem(MOVIE_TO_SEARCH);
+  createMovieList(1);
+  scrollToTop();
+  formEl.reset();
+}

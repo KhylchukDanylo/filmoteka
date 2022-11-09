@@ -1,8 +1,12 @@
-import { fetchMoviesGenres, fetchMoviesByFilters } from './api-service';
+import { fetchMoviesByFilters } from './api-service';
+import { allGenres } from './data/jenres.js';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
 import { addPagination, paginationList } from './pagination';
 import { createMovieList } from './popular-movies';
+import { listEl } from './search-movies';
+import notFoundImg from '../images/page-not-found-404.jpg';
+import { addSpinner, removeSpinner } from './spinner';
 const {
   filterForm,
   genresForm,
@@ -15,25 +19,28 @@ const {
   lowerValueInput,
   higerValueInput,
   rangeValues,
+  notFoundPage,
 } = refs;
 let screenWidth = container.offsetWidth;
-const generalFilterParams = {
+const initialFilterParams = {
   with_genres: '',
   'primary_release_date.lte': '2022',
   'primary_release_date.gte': '1900',
   // primary_release_year: '',
   include_adult: false,
   sort_by: 'popularity.desc',
+}
+let generalFilterParams = {
+ ...initialFilterParams,
 };
 // localStorage.setItem('generalFilterParams', JSON.stringify(generalFilterParams));
 let lastFetchedParams = {
-  with_genres: '',
-  'primary_release_date.lte': '2022',
-  'primary_release_date.gte': '1900',
-  // primary_release_year: '',
-  include_adult: false,
-  sort_by: 'popularity.desc',
+  ...initialFilterParams,
 };
+// --------------------------------Form list of genres----------------------
+let listOfGenres = {};
+allGenres.map(genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` }));
+console.log('list', listOfGenres);
 
 filterForm.addEventListener('change', onFormChange);
 filterForm.addEventListener('reset', onFormReset);
@@ -51,18 +58,13 @@ async function onFormSubmit(evt) {
   hideFiltersByYears();
 
   if (isInitialGeneralFilterParams(generalFilterParams)) {
+    deleteNotFoundPage();
     createMovieList(1);
     lastFetchedParams = { ...generalFilterParams };
     return;
   }
   fetchAndRenderMoviesByFilter();
   lastFetchedParams = { ...generalFilterParams };
-
-  //     paginationList.currentState = 'filter';
-  //     paginationList.queryParams = {...generalFilterParams};
-
-  // const queryString = transformParamsIntoQuery(generalFilterParams);
-  // fetchMoviesByFilters(queryString, 1).then(renderFiltersResult).catch(err => console.log(err));
 }
 
 function onFormChange(evt) {
@@ -115,15 +117,13 @@ function onFormReset(evt) {
 
   if (isGenresForm) {
     generalFilterParams.with_genres = '';
-    // console.log(generalFilterParams);
+    openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
   }
   if (isYearsForm) {
     generalFilterParams['primary_release_date.lte'] = '2022';
     generalFilterParams['primary_release_date.gte'] = '1900';
-    // console.log(generalFilterParams);
+    openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
   }
-  openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
-  openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
     // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
     // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
 }
@@ -191,14 +191,9 @@ export async function renderFiltersResult(list) {
   paginationList.currentPage = data.page;
   paginationList.totalPages = data.total_pages;
 
-  await fetchMoviesGenres().then(response => {
-    const {
-      data: { genres },
-    } = response;
-
-    movies.forEach(movie => {
+      movies.forEach(movie => {
       movie.genres = movie.genres.map(id => {
-        genres.forEach(object => {
+        allGenres.forEach(object => {
           if (object.id === id) {
             id = object.name;
           }
@@ -221,7 +216,7 @@ export async function renderFiltersResult(list) {
           break;
       }
     });
-  });
+
 
   movieList.innerHTML = movies
     .map(({ id, poster, title, genres, year }) => {
@@ -333,14 +328,6 @@ function closeYearsFilterOptions(evt) {
   }
 }
 
-// --------------------------------Form list of genres----------------------
-let listOfGenres = {};
-fetchMoviesGenres().then(({ data: { genres } }) => {
-  genres.map(
-    genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` })
-  );
-});
-
 function hideFiltersByGenres() {
   genresForm.classList.add('is-hidden');
   const selectedGenresArr = generalFilterParams.with_genres.split(',');
@@ -356,7 +343,6 @@ function hideFiltersByGenres() {
 
   openFilterByGenresBtn.textContent = selectedGenres;
   // openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
-  console.log('color!!!!!');
   openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
 
 
@@ -396,6 +382,8 @@ function clickOutOfFiltersByGenres() {
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (isInitialGeneralFilterParams(generalFilterParams)) {
+    console.log('start page');
+    deleteNotFoundPage();
     createMovieList(1);
     lastFetchedParams = { ...generalFilterParams };
     return;
@@ -427,12 +415,33 @@ function fetchAndRenderMoviesByFilter() {
   paginationList.currentState = 'filter';
   paginationList.queryParams = { ...generalFilterParams };
 
+  addSpinner();
   const queryString = transformParamsIntoQuery(generalFilterParams);
   fetchMoviesByFilters(queryString, 1)
-    .then(renderFiltersResult)
+    .then(resp => {
+      if (resp.data['total_results'] === 0) {
+        renderNotFoundPage();
+      } else {
+        deleteNotFoundPage();
+        renderFiltersResult(resp);
+      } 
+      removeSpinner();
+    })
     .catch(err => console.log(err));
 }
 
+function renderNotFoundPage() {
+const photo = `<img class='not-found-img' src="${notFoundImg}" alt="404">`
+  notFoundPage.innerHTML = photo;
+  listEl.innerHTML = '';
+  paginationList.innerHTML = '';
+  console.dir(paginationList);
+//        -----------------------------------------------------------------------------------------------------------
+}
+
+export function deleteNotFoundPage() {
+  notFoundPage.innerHTML = '';
+}
 // Check for equality of two objects with the same list of keys
 function areEqual(obj, otherObj) {
   const keys = Object.keys(obj);
@@ -445,21 +454,26 @@ function areEqual(obj, otherObj) {
   return true;
 }
 
-function onClearFiltersButtonClick() {
-  const listOfForms = this.closest('.filters__form').querySelectorAll('form');
+export function onClearFiltersButtonClick() {
+  console.log('currentState', paginationList.currentState);
+  if (paginationList.currentState !== 'filter') {
+    return;
+  }
+
+  const listOfForms = filterForm.querySelectorAll('form');
+  // const listOfForms = this.closest('.filters__form').querySelectorAll('form');
   listOfForms.forEach(form => form.reset());
   openFilterByGenresBtn.textContent = 'Genres';
   openFilterByYearsBtn.textContent = 'Years';
+  generalFilterParams = { ...initialFilterParams, };
+  lastFetchedParams = { ...initialFilterParams, };
+  deleteNotFoundPage();
   createMovieList(1);
 }
 
 function isInitialGeneralFilterParams(obj) {
   const initialGeneralFilterParams = {
-    with_genres: '',
-  'primary_release_date.lte': '2022',
-  'primary_release_date.gte': '1900',
-    include_adult: false,
-    sort_by: 'popularity.desc',
+    ...initialFilterParams,
   };
   return areEqual(obj, initialGeneralFilterParams);
 }
