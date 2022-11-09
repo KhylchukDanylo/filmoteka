@@ -9,7 +9,8 @@
   z-index: 3;
   opacity: 1;
   transition: top 0.7s, opacity 1s;
-  overflow-y: scroll;
+  overflow: hidden;
+  overflow-y: auto;
   cursor: pointer;
 
   &.is-hidden {
@@ -194,9 +195,10 @@
 
 .button-wrap {
   display: flex;
+  justify-content: space-between;
 }
 .movie__btn-watched {
-  width: 110px;
+  width: 118px;
   height: 44px;
   padding: 6px 27px;
   border: none;
@@ -207,8 +209,10 @@
   line-height: 1.33;
   text-transform: uppercase;
   color: #ffffff;
-  margin-right: 15px;
+  margin-right: 20px;
+
   @include tablert {
+    margin-right: 15px;
     width: 125px;
     padding: 0;
   }
@@ -218,7 +222,7 @@
   }
 }
 .movie__btn-queue {
-  width: 110px;
+  width: 118px;
   height: 44px;
   padding: 14px 0 12px;
   border: 1px solid #000000;
@@ -229,6 +233,7 @@
   line-height: 1.33;
   text-transform: uppercase;
   color: #000000;
+
   @include tablert {
     width: 125px;
     padding: 0;
@@ -244,8 +249,17 @@
   position: absolute;
   background-color: transparent;
   border: none;
-  font-size: 20px;
   cursor: pointer;
+
+  transition: all 0.3s ease;
+  &:hover,
+  &:focus {
+    fill: #ff6b01;
+  }
+  &:focus {
+    outline: 1px solid black;
+    outline-offset: 3px;
+  }
 }
 
 .stop-scrolling {

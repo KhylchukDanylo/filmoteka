@@ -201,7 +201,9 @@ async function openModal(id) {
       </button>
     </div>
     <button type="button" class="movie__btn-close">
-      X
+      <svg width="16" height="16">
+           <use href="${svgIcon}#icon-cross"></use>
+       </svg>
     </button>
     <a class="show-trailer" type="button" >
        <svg class="youtube__icon" width="100" height="75">
@@ -278,19 +280,22 @@ window.addEventListener('click', e => {
   if (e.target.id === 'btn-watched') {
     const btn = document.querySelector('#btn-watched');
     btn.classList.toggle('selected');
-    if (btn.classList.contains('selected'))
+    if (btn.classList.contains('selected')) {
       btn.textContent = 'remove from watched';
-    else {
+      btn.style.padding = '0';
+    } else {
       btn.textContent = 'add to watched';
+      btn.style.padding = '6px 27px';
     }
   }
 
   if (e.target.id === 'btn-queue') {
     const btn = document.querySelector('#btn-queue');
     btn.classList.toggle('selected');
-    if (btn.classList.contains('selected'))
+    if (btn.classList.contains('selected')) {
       btn.textContent = 'remove from queue';
-    else {
+      btn.style.padding = '0';
+    } else {
       btn.textContent = 'add to queue';
     }
   }
@@ -310,64 +315,6 @@ window.addEventListener('keydown', e => {
 
 export { movieId };
 export { backdrop };
-//save original render
-// `<div class="movie__inner">
-//   <img
-//     src="${IMG_URL}${poster_path}"
-//     alt="${original_title}"
-//     class="movie__poster"
-//   />
-//   <div class="movie__info">
-//     <h2 class="movie__title">${title}</h2>
-//     <div class="movie__info-list">
-//       <ul class="movie__characters">
-//         <li>
-//           <p>Vote / Votes</p>
-//         </li>
-//         <li>
-//           <p>Popularity</p>
-//         </li>
-//         <li>
-//           <p>Original Title</p>
-//         </li>
-//         <li>
-//           <p>Genre</p>
-//         </li>
-//       </ul>
-//       <ul class="movie__data">
-//         <li>
-//           <p>
-//             <span class="movie__data-rating">${vote_average.toFixed(
-//               1
-//             )}</span>  <span class="movie__data-slash">/</span> <span class="movie__data-count">${vote_count}</span>
-//           </p>
-//         </li>
-//         <li>
-//           <p>${popularity.toFixed(1)}</p>
-//         </li>
-//         <li>
-//           <p>${original_title}</p>
-//         </li>
-//         <li>
-//           <p>${genres.map(genre => genre.name).join(', ')}</p>
-//         </li>
-//       </ul>
-//     </div>
-//     <p class="movie__about">About</p>
-//     <p class="movie__description">${overview}</p>
-//     <div class="button-wrap">
-//       <button type="button" class="movie__btn-watched">
-//           add to Watched
-//       </button>
-//           <button type="button" class="movie__btn-queue">
-//       add to queue
-//       </button>
-//     </div>
-//     <button type="button" class="movie__btn-close">
-//       X
-//     </button>
-//   </div>
-// </div>`;
 
 //original img
 
