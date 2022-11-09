@@ -3,34 +3,87 @@
   position: relative;
 }
 
-.filters__form {
+.filters__wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
+   
+  @include desktop{
+    gap: 30px;
+  }
+}
+
+.filters__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+
+  @include tablert {
+gap: 8px;
+  }
+
+  @include desktop {
+    flex-direction: row;
+    gap: 30PX;
+  }
+}
+
+.filters__container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 11;
+
+  @include tablert {
+    gap: 20px;
+  }
+
+  @include desktop {
+    gap: 30px;
+  }
 }
 
 .filters {
-  margin-top: 28px;
+  margin-top: 18px;
   color: rgba(255, 255, 255, 0.85);
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
 
+  @include tablert {
+  margin-top: 20px;
+  }
+  
   &__button {
     display: block;
-    width: 140px;
-    height: 37px;
-    box-shadow: inset 0 0 8px 1px rgba(255, 0, 27, 0.7);
     border-radius: 20px;
     border: none;
-
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
+    width: 95px;
+      height: 31px;
+    box-shadow: inset 0 0 8px 1px rgba(255, 0, 27, 0.7);
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
     line-height: 1.33;
     color: rgba(255, 255, 255, 0.8);
     background-color: transparent;
     transition: transform 250ms linear;
+    
+    @include tablert {
+      width: 120px;
+      height: 33px;
+      box-shadow: inset 0 0 8px 1px rgba(255, 0, 27, 0.7);
+    }
+    
+    @include desktop {
+      width: 140px;
+        height: 37px;
+      font-size: 14px;
+
+    }
   }
 
   &__button:hover {
@@ -42,6 +95,10 @@
     background-color: rgba(255, 0, 27, 0.6);
     border: none;
     transition: transform 250ms linear;
+
+    @media screen and (max-width: 767.5px) {
+      width: 115px;
+    }
   }
 
   &__button--clear:hover {
@@ -54,10 +111,10 @@
 .genres__form {
   position: absolute;
   z-index: 100;
-  top: 75px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 230px;
+  width: 170px;
   background-color: rgba(39, 46, 52, 0.92);
   border-radius: 5px;
 
@@ -65,19 +122,39 @@
   font-weight: 400;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.85);
+
+  @include tablert {
+  width: 230px;
+}
+
+@include desktop {
+    top: 75px;
+  }
 }
 
 .years__form {
   position: absolute;
   z-index: 100;
-  top: 75px;
-  left: 50%;
+  top: 40px;
+  left: 28%;
   transform: translateX(-50%);
-  width: 400px;
-  height: 170px;
+  width: 215px;
+  height: 130px;
   background-color: rgba(39, 46, 52, 0.92);
   border-radius: 5px;
+  padding: 18px 15px;
+
+  @include tablert {
+  width: 400px;
+  height: 170px;
   padding: 30px 50px;
+  top: 40px;
+  left: 50%;
+  }
+
+  @include desktop {
+    top: 75px;
+  }
 }
 
 .genres__wrap,
@@ -85,8 +162,12 @@
   display: flex;
   flex-direction: column;
   padding: 10px 15px;
-  height: 350px;
+  height: 255px;
   overflow-y: scroll;
+
+  @include tablert {
+  height: 350px;
+  }
 }
 
 .button {
@@ -99,30 +180,49 @@
 
   &__reset {
     width: 50%;
-    height: 42px;
-    // outline: 1px solid red;
+    height: 37px;
     font: inherit;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     color: rgba(39, 46, 52, 0.92);
     background-color: rgba(255, 255, 255, 0.75);
+
+    @include tablert {
+    height: 42px;
+    font-size: 14px;
+    }
   }
 
   &__submit {
     width: 50%;
-    height: 42px;
-    // outline: 1px solid blue;
+    height: 37px;
     font: inherit;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     color: rgba(39, 46, 52, 0.92);
     background-color: rgba(255, 255, 255, 0.75);
+
+    @include tablert {
+      height: 42px;
+      font-size: 14px;
+    }
   }
+
+     
 }
 
 .button:hover,
 .button:focus {
   cursor: pointer;
+}
+
+.adult{
+  margin-left: 15px;
+  font-size: 12px;
+
+  @include tablert {
+    margin-left: 0;
+  }
 }
 
 input[type='checkbox'] {
@@ -158,61 +258,104 @@ input[type='checkbox']:checked::before {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 14px;
+  font-size: 13px;
+
+  @include desktop {
+    font-size: 14px;
+  }
 }
 
 .genres__wrap > label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+
+  @include tablert{
+  font-size: 15px;
+  }
 }
+
+
+
+
+
+
+
+
+
+
 
 $glass: rgba(255, 255, 255, 0.2);
 $glass-icon: rgba(255, 255, 255, 0.3);
 $gradient: linear-gradient(35deg, red, purple);
 $option: #320a28;
 
+.sort__form {
+  font-size: 13px;
+
+  @include desktop {
+    font-size: 14px;
+  }
+}
+
 /* <select> styles */
 .custom-select {
-    /* Reset */
-    margin-left: 6px;
-    appearance: none;
-    border: 0;
-    outline: 0;
-    font: inherit;
-    /* Personalize */
-    width: 135px;
-    height: 27px;
-    padding: 0 4em 0 1em;
-    background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg) no-repeat right 0.8em center / 1.4em,
-        linear-gradient(to left, $glass-icon 3em, $glass 3em);
-    color: white;
-    border-radius: 0.25em;
-    box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+  /* Reset */
+  margin-left: 6px;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  /* Personalize */
+  width: 124px;
+  height: 22px;
+  padding: 0 4em 0 1em;
+  background: url(https://upload.wikimedia.org/wikipedia/commons/9/9d/Caret_down_font_awesome_whitevariation.svg)
+      no-repeat right 0.8em center / 1.4em,
+    linear-gradient(to left, $glass-icon 3em, $glass 3em);
+  color: white;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 
-    /* <option> colors */
-    option {
-        color: inherit;
-        background-color: $option;
-    }
+  @include tablert {
+      width: 135px;
+      height: 27px;
+  }
 
-  
+  /* <option> colors */
+  option {
+    color: inherit;
+    background-color: $option;
+  }
 
-    /* Remove focus outline */
-    &:focus {
-        outline: none;
-    }
+  /* Remove focus outline */
+  &:focus {
+    outline: none;
+  }
 
-    /* Remove IE arrow */
-    &::-ms-expand {
-        display: none;
-    }
+  /* Remove IE arrow */
+  &::-ms-expand {
+    display: none;
+  }
 }
 
 .not-found-img {
   display: block;
-  margin: 30px auto;
-  width: 50vw;
+  margin: 15px auto;
+  width: 75vw;
+
+  @media screen and (min-width: 480px) {
+    width: 360px;
+  }
+
+  @include tablert {
+width: 576px;
+  }
+
+  @include desktop {
+    margin: 30px auto;
+      width: 700px;
+  }
 }
