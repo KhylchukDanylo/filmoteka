@@ -17,11 +17,11 @@ async function fetchMovieById(movieId) {
   return response;
 }
 
-async function fetchMoviesGenres() {
-  const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
-  const genres = await axios(url);
-  return genres;
-}
+// async function fetchMoviesGenres() {
+//   const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}`;
+//   const genres = await axios(url);
+//   return genres;
+// }
 
 async function fetchMoviesBySearch(searchQuery, page) {
   const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`;

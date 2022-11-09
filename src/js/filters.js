@@ -3,6 +3,7 @@ import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
 import { addPagination, paginationList } from './pagination';
 import { createMovieList } from './popular-movies';
+import { allGenres } from './data/jenres.js';
 const {
   filterForm,
   genresForm,
@@ -122,10 +123,12 @@ function onFormReset(evt) {
     generalFilterParams['primary_release_date.gte'] = '1900';
     // console.log(generalFilterParams);
   }
-  openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
-  openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
-    // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
-    // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  openFilterByGenresBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  openFilterByYearsBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
 }
 
 function updateGenresParams(form) {
@@ -134,9 +137,13 @@ function updateGenresParams(form) {
 }
 
 function updateYearsParams(form) {
-let minValue = form.elements[0].value;
-let maxValue = form.elements[1].value;
-    if( minValue > maxValue ){ const additionalVar = maxValue; maxValue = minValue; minValue = additionalVar; }
+  let minValue = form.elements[0].value;
+  let maxValue = form.elements[1].value;
+  if (minValue > maxValue) {
+    const additionalVar = maxValue;
+    maxValue = minValue;
+    minValue = additionalVar;
+  }
 
   generalFilterParams['primary_release_date.gte'] = minValue;
   generalFilterParams['primary_release_date.lte'] = maxValue;
@@ -191,14 +198,9 @@ export async function renderFiltersResult(list) {
   paginationList.currentPage = data.page;
   paginationList.totalPages = data.total_pages;
 
-  await fetchMoviesGenres().then(response => {
-    const {
-      data: { genres },
-    } = response;
-
     movies.forEach(movie => {
       movie.genres = movie.genres.map(id => {
-        genres.forEach(object => {
+        allGenres.forEach(object => {
           if (object.id === id) {
             id = object.name;
           }
@@ -219,15 +221,16 @@ export async function renderFiltersResult(list) {
         default:
           movie.genres = 'N/A';
           break;
-      }
-    });
+      
+    }
   });
 
   movieList.innerHTML = movies
     .map(({ id, poster, title, genres, year }) => {
       return `<li class="movie__card">
   <a href="#" class="movie__link" id="${id}">
-    <picture>
+  <div class="movie__wrapper">
+  <picture>
       <source
         media="(min-width:1200px)"
         
@@ -263,6 +266,9 @@ export async function renderFiltersResult(list) {
         height="574"
       />
     </picture>
+  
+  </div>
+    
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="gallery__text" data-id="${id}">${genres} | ${year}</p>
 </div>
@@ -357,13 +363,13 @@ function hideFiltersByGenres() {
   openFilterByGenresBtn.textContent = selectedGenres;
   // openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
   console.log('color!!!!!');
-  openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
+  openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
 
-
-  if (openFilterByGenresBtn.textContent === "Genres") {
-    openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
-        // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
-    }
+  if (openFilterByGenresBtn.textContent === 'Genres') {
+    openFilterByGenresBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+    // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  }
   document.removeEventListener('click', closeGenresFilterOptions);
 }
 
@@ -371,20 +377,27 @@ function hideFiltersByYears() {
   yearsForm.classList.add('is-hidden');
 
   let selectedYear = `${generalFilterParams['primary_release_date.gte']} - ${generalFilterParams['primary_release_date.lte']}`;
-  if ((generalFilterParams['primary_release_date.gte'] === generalFilterParams['primary_release_date.lte'])) {
+  if (
+    generalFilterParams['primary_release_date.gte'] ===
+    generalFilterParams['primary_release_date.lte']
+  ) {
     selectedYear = generalFilterParams['primary_release_date.gte'];
   }
-  if ((generalFilterParams['primary_release_date.gte'] === '1900' && generalFilterParams['primary_release_date.lte'] === '2022')) {
-    selectedYear = "Years";
+  if (
+    generalFilterParams['primary_release_date.gte'] === '1900' &&
+    generalFilterParams['primary_release_date.lte'] === '2022'
+  ) {
+    selectedYear = 'Years';
   }
   openFilterByYearsBtn.textContent = selectedYear;
-  openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
-    // openFilterByYearsBtn.style.borderColor = 'rgba(0,128,0,0.7)';
-      
-  if (openFilterByYearsBtn.textContent === "Years") {
-    openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
-        // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
-    }
+  openFilterByYearsBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
+  // openFilterByYearsBtn.style.borderColor = 'rgba(0,128,0,0.7)';
+
+  if (openFilterByYearsBtn.textContent === 'Years') {
+    openFilterByYearsBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+    // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  }
   document.removeEventListener('click', closeYearsFilterOptions);
 }
 
@@ -456,14 +469,13 @@ function onClearFiltersButtonClick() {
 function isInitialGeneralFilterParams(obj) {
   const initialGeneralFilterParams = {
     with_genres: '',
-  'primary_release_date.lte': '2022',
-  'primary_release_date.gte': '1900',
+    'primary_release_date.lte': '2022',
+    'primary_release_date.gte': '1900',
     include_adult: false,
     sort_by: 'popularity.desc',
   };
   return areEqual(obj, initialGeneralFilterParams);
 }
-
 
 function onInputChange(evt) {
   let minValue = generalFilterParams['primary_release_date.gte'];
@@ -475,8 +487,12 @@ function onInputChange(evt) {
   if (evt.target.classList.contains('higher-value')) {
     maxValue = evt.target.value;
   }
-    
-    if( minValue > maxValue ){ const additionalVar = maxValue; maxValue = minValue; minValue = additionalVar; }
+
+  if (minValue > maxValue) {
+    const additionalVar = maxValue;
+    maxValue = minValue;
+    minValue = additionalVar;
+  }
 
   if (Number(minValue) === Number(maxValue)) {
     rangeValues.innerHTML = minValue;

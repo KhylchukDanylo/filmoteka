@@ -19,8 +19,12 @@ function onImgClick(evt) {
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
+  // movieId = parseInt(evt.target.closest('li').id) ;
+  movieId = +(evt.target.closest('li').id) ;
+  console.log(evt.target.closest('li').id);
 
-  movieId = parseInt(evt.target.parentElement.parentElement.id);
+  // console.log(movieId);
+  // movieId = parseInt(evt.target.parentElement.parentElement.id);
   // console.log(movieId);
 
   openModal(movieId);

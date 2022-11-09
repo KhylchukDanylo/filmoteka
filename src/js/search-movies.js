@@ -1,6 +1,14 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl, CURRENT_PAGE, TOTAL_PAGES, CURRENT_STATE, MOVIE_TO_SEARCH } from './pagination';
+import {
+  paginationList,
+  addPagination,
+  containerEl,
+  CURRENT_PAGE,
+  TOTAL_PAGES,
+  CURRENT_STATE,
+  MOVIE_TO_SEARCH,
+} from './pagination';
 import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -31,14 +39,14 @@ export async function createListBySearch(page) {
     removeSpinner();
     return;
   }
-  
+
   localStorage.setItem(MOVIE_TO_SEARCH, JSON.stringify(searchToMovie));
   paginationList.movieToSearch = searchToMovie;
   createMovieListBySearch(paginationList.movieToSearch, page);
 }
 
 export async function createMovieListBySearch(searchToMovie, page) {
-    try {
+  try {
     await fetchMoviesBySearch(searchToMovie, page).then(response => {
       const {
         data,
@@ -48,6 +56,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
       if (results.length === 0) {
         formEl.reset();
         Notify.failure('Sorry, but nothing was found');
+
         removeSpinner();
         throw new Error('nothing was found');
       } else {
@@ -65,14 +74,24 @@ export async function createMovieListBySearch(searchToMovie, page) {
         paginationList.currentPage = data.page;
         paginationList.totalPages = data.total_pages;
         paginationList.currentState = 'search';
-      localStorage.setItem(CURRENT_PAGE, JSON.stringify(paginationList.currentPage));
-      localStorage.setItem(TOTAL_PAGES, JSON.stringify(paginationList.totalPages));
-      localStorage.setItem(CURRENT_STATE, JSON.stringify(paginationList.currentState));
+        localStorage.setItem(
+          CURRENT_PAGE,
+          JSON.stringify(paginationList.currentPage)
+        );
+        localStorage.setItem(
+          TOTAL_PAGES,
+          JSON.stringify(paginationList.totalPages)
+        );
+        localStorage.setItem(
+          CURRENT_STATE,
+          JSON.stringify(paginationList.currentState)
+        );
       }
     });
 
     moviesList.forEach(movie => {
       movie.genres = movie.genres.map(id => {
+        
         allGenres.forEach(object => {
           if (object.id === id) {
             id = object.name;
@@ -111,9 +130,10 @@ export async function createMovieListBySearch(searchToMovie, page) {
   function renderMoviesCard(arrayMovies) {
     const markup = arrayMovies
       .map(({ id, poster, title, genres, year }) => {
-        return `<li class="movie__item">
-            <a href="#" class="movie__link" id="${id}">
-              <picture>
+        return `<li class="movie__item" id="${id}">
+            <a href="#" class="movie__link" >
+            <div class="movie__wrapper" >
+            <picture>
                 <source
                   media="(min-width:1200px)"
                   
@@ -157,6 +177,9 @@ export async function createMovieListBySearch(searchToMovie, page) {
                   height="574"
                 />
               </picture>
+            
+            </div>
+              
           <div class="movie__text"><h3 class="movie__name">${title}</h3>
           <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
               
@@ -166,5 +189,6 @@ export async function createMovieListBySearch(searchToMovie, page) {
       .join('');
 
     listEl.innerHTML = markup;
+    formEl.reset();
   }
 }
