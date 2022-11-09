@@ -2,7 +2,7 @@ import { contributors } from "./data/contributors";
 import icon from '../images/icons.svg';
 import { refs } from "./DOM-elements";
 
-const {contributorsWrapper} = refs;
+const {contributorsModal} = refs;
 
 function renderCotributorsModal(){
   const contributorsMarkup = contributors.reduce((result, person) => {
@@ -29,7 +29,7 @@ function renderCotributorsModal(){
 </ul>
 </li>`
 }, '')
-contributorsWrapper.innerHTML = `  <ul class="contributors__list"> ${contributorsMarkup} </ul>`;
+contributorsModal.innerHTML = `  <ul class="contributors__list"> ${contributorsMarkup} </ul>`;
 }
 
 export {renderCotributorsModal};
