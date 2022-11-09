@@ -92,8 +92,9 @@
         <div class="nav">
           <a class="link-logo link" href="index.html">
             <svg class="logo-icon" width="24" height="24">
-              <use href="./images/icons.svg#icon-film"></use></svg>
-              <span class="logo-text">Filmoteka</span>
+              <use href="./images/icons.svg#icon-film"></use>
+            </svg>
+            <span class="logo-text">Filmoteka</span>
           </a>
           <ul class="header__list list">
             <li class="header__item">
@@ -366,13 +367,13 @@
         </div>
       </div>
 
-      <!-------------------------------------------->
+      <!------------------------------------------------------------>
 
       <div class="fixed-headers is-hidden">
         <a class="logo-link__fixed link" href="./index.html"
           ><svg class="logo__icon" width="24" height="24">
-            <use href="./images/icons.svg#icon-film"></use></svg>
-            <span class="logo-text__fixed">Filmoteka</span></a
+            <use href="./images/icons.svg#icon-film"></use></svg
+          ><span class="logo-text__fixed">Filmoteka</span></a
         >
         <ul class="fixed-list list">
           <li class="fixed-item">
@@ -385,42 +386,48 @@
       </div>
     </header>
     <main>
+      <!---------------Modal Authentification------------------------->
       <section class="modal-auth">
-        <!-- <div class="backdrop is-hidden">-->
-        <div class="form__auth visually-hidden">
-          <div class="form__auth__wrap">
-            <button type="button" class="auth__btn-close">X</button>
-            <div class="form__auth__wrapper">
-              <h2 class="form__auth__header">Welcome to our site</h2>
-            </div>
-            <div class="input__auth__cont">
-              <div class="input__auth__container">
-                <input
-                  class="input__auth__name input-auth"
-                  type="text"
-                  placeholder="Full name"
-                />
-                <input
-                  class="input__auth__email input-auth"
-                  type="email"
-                  placeholder="Email"
-                />
-                <input
-                  class="input__auth__password input-auth"
-                  type="password"
-                  id="input__auth"
-                  placeholder="New Password"
-                />
-                <div class="button__auth">
-                  <button class="button__auth__login">Login</button>
-                  <button class="button__auth__register">Register</button>
-                  <button class="button__auth__logout visually-hidden">
-                    Log out
-                  </button>
-                </div>
+        <div class="modal-auth__backdrop">
+          <form class="form__auth" autocomplete="off">
+            <div class="form__auth__wrap">
+              <button type="button" class="auth__btn-close">X</button>
+              <div class="form__auth__wrapper">
+                <h2 class="form__auth__header">Welcome to our site</h2>
+              </div>
+              <div class="input__auth__cont">
+                <lable class="input__auth__container">
+                  <input
+                    class="input__auth__name input-auth"
+                    type="name"
+                    name="name"
+                    placeholder="Full name"
+                  />
+                  <input
+                    class="input__auth__email input-auth"
+                    type="email"
+                    name="email"
+                    autofocus
+                    placeholder="Email"
+                  />
+                  <input
+                    class="input__auth__password input-auth"
+                    type="password"
+                    name="password"
+                    autofocus
+                    placeholder="Password"
+                  />
+                  <div class="button__auth">
+                    <button class="button__auth__login">Login</button>
+                    <button class="button__auth__register">Register</button>
+                    <button class="button__auth__logout visually-hidden">
+                      Log out
+                    </button>
+                  </div>
+                </lable>
               </div>
             </div>
-          </div>
+          </form>
         </div>
         <!---- </div>--->
       </section>
