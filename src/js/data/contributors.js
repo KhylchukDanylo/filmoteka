@@ -7,7 +7,6 @@ import yurov from '../../images/contributors/dmitry-yurov.jpg';
 import zhezheria from '../../images/contributors/dmitro-zhezheria.jpg';
 import aleksandr from '../../images/contributors/aleksandr-didorchuck.jpg';
 import michael from '../../images/contributors/michael-kononenko.jpg';
-// import icon from '../images/icons.svg';
 
 const contributors = [
     {

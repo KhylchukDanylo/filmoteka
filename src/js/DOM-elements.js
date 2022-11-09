@@ -2,7 +2,8 @@ export const refs = {
   movieList: document.querySelector('.movie'),
   trailerFrame: document.querySelector('.trailer__frame'),
   teamModalButton: document.querySelector('.footer__button'),
-  contributorsWrapper: document.querySelector('.contributors'),
+  contributorsModal: document.querySelector('.contributors__modal'),
+  contributorsBackdrop: document.querySelector('.contributors__backdrop'),
   btnLogin: document.querySelector('.button__auth__login'),
   btnLogOut: document.querySelector('.button__auth__logout'),
   btnRegister: document.querySelector('.button__auth__register'),
@@ -16,6 +17,7 @@ export const refs = {
   //queueBtn: document.querySelectorAll('#queue'),
   movieBackdrop: document.querySelector('.backdrop'),
   filterForm: document.querySelector('.filters__form'),
+  //ниже дублируеться строка
   container: document.querySelector('.container'),
   openFilterByGenresBtn: document.querySelector('.filters__genres-button'),
   openFilterByYearsBtn: document.querySelector('.filters__years-button'),
@@ -29,5 +31,9 @@ export const refs = {
   logoFromFixedeHader: document.querySelector('.logo-link__fixed'),
   logoFromLibrarysHeader: document.querySelector('.logo__link'),
   logoFromLibrarysFixedHeader: document.querySelector('.logo__link--fixed'),
+  //этот элемент уже есть выше
   containerEl: document.querySelector('.container'),
+  // showTrailerButton: document.querySelector('.show-trailer'),
+  // trailerIcon: document.querySelector('.youtube__icon'),
+  movieModal: document.querySelector('.movie__modal'),
 };

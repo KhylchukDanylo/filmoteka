@@ -2,15 +2,16 @@ import { fetchMovieById } from './api-service';
 import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
-const { trailerFrame } = refs;
-import { showTrailer } from './trailer';
+const { trailerFrame,movieModal, movieBackdrop:backdrop } = refs;
+// import { showTrailer } from './trailer';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 
+
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listEl = document.querySelector('.movie');
-const movieModal = document.querySelector('.movie__modal');
-const backdrop = document.querySelector('.backdrop');
+// const movieModal = document.querySelector('.movie__modal'); перенёс в DOM-elements.js
+// const backdrop = document.querySelector('.backdrop');
 
 listEl.addEventListener('click', onImgClick);
 
@@ -29,6 +30,7 @@ function onImgClick(evt) {
 }
 
 async function openModal(id) {
+  trailerFrame.classList.add('hide-it');
   addSpinner();
   const resp = await fetchMovieById(id);
 
@@ -257,22 +259,9 @@ function closeModal() {
 }
 
 window.addEventListener('click', e => {
-  const hiddenMovieModal = movieModal.classList.contains('is-hidden');
   // console.log(e.target);
-  if (e.target === backdrop && !hiddenMovieModal) {
+  if (e.target === backdrop ) {
     closeModal();
-  }
-  //костыль, позже подумаю как сделать красиво
-  else if (e.target === backdrop && hiddenMovieModal) {
-    movieModal.classList.remove('is-hidden');
-    trailerFrame.classList.add('is-hidden');
-    trailerFrame.src = '';
-  }
-  if (e.target.closest('.show-trailer')) {
-    movieModal.classList.add('is-hidden');
-    trailerFrame.classList.remove('is-hidden');
-    // console.log(movieId);
-    showTrailer(movieId);
   }
 
   if (e.target.id === 'btn-watched') {
@@ -297,19 +286,12 @@ window.addEventListener('click', e => {
 });
 
 window.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !movieModal.classList.contains('is-hidden')) {
+  if (e.key === 'Escape') {
     closeModal();
-  }
-  //костыль, позже подумаю как сделать красиво
-  else if (e.key === 'Escape' && movieModal.classList.contains('is-hidden')) {
-    movieModal.classList.remove('is-hidden');
-    trailerFrame.classList.add('is-hidden');
-    trailerFrame.src = '';
   }
 });
 
-export { movieId };
-export { backdrop };
+export {movieId, backdrop };
 //save original render
 // `<div class="movie__inner">
 //   <img
