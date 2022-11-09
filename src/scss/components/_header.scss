@@ -12,19 +12,18 @@ ul {
 }
 
 .header {
-    padding-top: 40px;
-    // padding-bottom: 60px;
-    padding-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    background-image:
-     url(../images/abstract-background-with-red-lines-mob.jpg);  
-        width: 100%;
-        max-width: 480px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 230px;
+  padding-top: 40px;
+  // padding-bottom: 60px;
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+  width: 100%;
+  max-width: 480px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 230px;
   padding-top: 40px;
   margin-left: auto;
   margin-right: auto;
@@ -74,11 +73,11 @@ ul {
 }
 
 .nav {
-    display: flex;    
-    align-items: center;
-    // margin-bottom: 55px;
-    padding: 0 10px;
-    margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  // margin-bottom: 55px;
+  padding: 0 10px;
+  margin-bottom: 40px;
 }
 
 .link-logo {
@@ -161,15 +160,15 @@ ul {
 }
 
 .auth__login-logout {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.17;
-    text-transform: uppercase;
-    color: #FFFFFF;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  text-transform: uppercase;
+  color: #ffffff;
 }
-    
+
 .header__link-log {
   font-family: 'Roboto';
   font-style: normal;

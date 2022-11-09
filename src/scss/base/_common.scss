@@ -30,10 +30,9 @@ body {
     var(--primary-cubic-function);
   visibility: hidden;
   pointer-events: none;
-  
 }
 
-.hide-it{
+.hide-it {
   opacity: 0;
   transition: opacity var(--animation-duration) var(--timing-function);
   visibility: hidden;

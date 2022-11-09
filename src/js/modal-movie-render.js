@@ -2,11 +2,10 @@ import { fetchMovieById } from './api-service';
 import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
-const { trailerFrame,movieModal, movieBackdrop:backdrop } = refs;
+const { trailerFrame, movieModal, movieBackdrop: backdrop } = refs;
 // import { showTrailer } from './trailer';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
-
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listEl = document.querySelector('.movie');
@@ -203,7 +202,9 @@ async function openModal(id) {
       </button>
     </div>
     <button type="button" class="movie__btn-close">
-      X
+      <svg width="16" height="16">
+           <use href="${svgIcon}#icon-cross"></use>
+       </svg>
     </button>
     <a class="show-trailer" type="button" >
        <svg class="youtube__icon" width="100" height="75">
@@ -260,26 +261,29 @@ function closeModal() {
 
 window.addEventListener('click', e => {
   // console.log(e.target);
-  if (e.target === backdrop ) {
+  if (e.target === backdrop) {
     closeModal();
   }
 
   if (e.target.id === 'btn-watched') {
     const btn = document.querySelector('#btn-watched');
     btn.classList.toggle('selected');
-    if (btn.classList.contains('selected'))
+    if (btn.classList.contains('selected')) {
       btn.textContent = 'remove from watched';
-    else {
+      btn.style.padding = '0';
+    } else {
       btn.textContent = 'add to watched';
+      btn.style.padding = '6px 27px';
     }
   }
 
   if (e.target.id === 'btn-queue') {
     const btn = document.querySelector('#btn-queue');
     btn.classList.toggle('selected');
-    if (btn.classList.contains('selected'))
+    if (btn.classList.contains('selected')) {
       btn.textContent = 'remove from queue';
-    else {
+      btn.style.padding = '0';
+    } else {
       btn.textContent = 'add to queue';
     }
   }
@@ -291,7 +295,8 @@ window.addEventListener('keydown', e => {
   }
 });
 
-export {movieId, backdrop };
+export { movieId };
+export { backdrop };
 //save original render
 // `<div class="movie__inner">
 //   <img
