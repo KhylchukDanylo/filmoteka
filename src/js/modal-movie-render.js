@@ -1,18 +1,26 @@
 import { fetchMovieById } from './api-service';
 import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
-const { trailerFrame } = refs;
-import { showTrailer } from './trailer';
+import defaultImg from '../images/437973.webp';
+const { trailerFrame, movieModal, movieBackdrop: backdrop } = refs;
+// import { showTrailer } from './trailer';
+import { addSpinner } from './spinner';
+import { removeSpinner } from './spinner';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listEl = document.querySelector('.movie');
-const movieModal = document.querySelector('.movie__modal');
-const backdrop = document.querySelector('.backdrop');
+// const movieModal = document.querySelector('.movie__modal'); перенёс в DOM-elements.js
+// const backdrop = document.querySelector('.backdrop');
 
 listEl.addEventListener('click', onImgClick);
 
 //сделал переменную через let ибо для открытия трейлера тоже нужен id
 let movieId;
+let queueText = '';
+let watchedText = '';
+const queueMovies = JSON.parse(localStorage.getItem('queue-movies')) || [];
+const watchedMovies = JSON.parse(localStorage.getItem('wached-movies')) || [];
+
 
 function onImgClick(evt) {
   evt.preventDefault();
@@ -21,16 +29,16 @@ function onImgClick(evt) {
   }
   // movieId = parseInt(evt.target.closest('li').id) ;
   movieId = +(evt.target.closest('li').id) ;
-  console.log(evt.target.closest('li').id);
-
-  // console.log(movieId);
-  // movieId = parseInt(evt.target.parentElement.parentElement.id);
-  // console.log(movieId);
 
   openModal(movieId);
+  
+ queueText = queueMovies.includes(movieId) ? 'remove from queue' : 'add to queue';
+ watchedText = watchedMovies.includes(movieId) ? 'remove from watched' : 'add to watched';
 }
 
 async function openModal(id) {
+  trailerFrame.classList.add('hide-it');
+  addSpinner();
   const resp = await fetchMovieById(id);
 
   const {
@@ -50,11 +58,39 @@ async function openModal(id) {
 
   movieModal.innerHTML = `<div class="movie__inner">
   <div class="image__thumb"> 
-   <img
-    src="${IMG_URL}${poster_path}"
-    alt="${original_title}"
-    class="movie__poster"
-  />
+  <picture>
+      <source
+        media="(min-width:1200px)"
+        srcset="${poster_path ? `${IMG_URL}${poster_path}` : defaultImg}"
+        type="image/jpeg"
+      />
+      <source
+        media="(min-width:768px)"
+        srcset="${
+          poster_path
+            ? `https://image.tmdb.org/t/p/w342/${poster_path}`
+            : defaultImg
+        }"
+        type="image/jpeg"
+      />
+      <source
+        media="(max-width:767px)"
+        srcset="${
+          poster_path
+            ? `https://image.tmdb.org/t/p/w342/${poster_path}`
+            : defaultImg
+        }"
+        type="image/jpeg"
+      />
+      <img
+        class="movie__poster"
+        src="${poster_path ? `${IMG_URL}${poster_path}` : defaultImg}"
+        loading="lazy"
+        alt="${original_title}"
+        width="395"
+        height="574"
+      />
+    </picture>
   </div>
 
   <div class="movie__info">
@@ -62,7 +98,7 @@ async function openModal(id) {
     <div class="movie__info-list">
       <ul class="movie__characters">
         <li>
-          <p>Vote / Votes</p>
+          <p>Vote</p>
         </li>
         <li>
           <p>Popularity</p>
@@ -76,8 +112,9 @@ async function openModal(id) {
       </ul>
       <ul class="movie__data">
         <li>
-          <p>
-              <div class="rating">
+           ${
+             vote_average
+               ? `<div class="rating">
                 <div class="rating__value">
                 ${vote_average.toFixed(1)}
                 </div>
@@ -146,7 +183,10 @@ async function openModal(id) {
                     />
                   </div>
                 </div>
-              </div>
+              </div>`
+               : `<div>No votes yet</div>`
+           }    
+              
         </li>
         <li>
           <p>${popularity.toFixed(1)}</p>
@@ -163,14 +203,16 @@ async function openModal(id) {
     <p class="movie__description">${overview}</p>
     <div class="button-wrap">
       <button type="button" class="movie__btn-watched" id="btn-watched">
-          add to Watched
+          ${watchedText}
       </button>
           <button type="button" class="movie__btn-queue" id="btn-queue">
-      add to queue
+     ${queueText}
       </button>
     </div>
     <button type="button" class="movie__btn-close">
-      X
+      <svg width="16" height="16">
+           <use href="${svgIcon}#icon-cross"></use>
+       </svg>
     </button>
     <a class="show-trailer" type="button" >
        <svg class="youtube__icon" width="100" height="75">
@@ -213,7 +255,7 @@ async function openModal(id) {
       ratingActive.style.width = `${ratingActiveWidth}%`;
     }
   }
-
+  removeSpinner();
   const btnClose = document.querySelector('.movie__btn-close');
   btnClose.addEventListener('click', () => closeModal());
 }
@@ -226,59 +268,99 @@ function closeModal() {
 }
 
 window.addEventListener('click', e => {
-  const hiddenMovieModal = movieModal.classList.contains('is-hidden');
   // console.log(e.target);
-  if (e.target === backdrop && !hiddenMovieModal) {
+  if (e.target === backdrop) {
     closeModal();
   }
-  //костыль, позже подумаю как сделать красиво
-  else if (e.target === backdrop && hiddenMovieModal) {
-    movieModal.classList.remove('is-hidden');
-    trailerFrame.classList.add('is-hidden');
-    trailerFrame.src = '';
-  }
-  if (e.target.closest('.show-trailer')) {
-    movieModal.classList.add('is-hidden');
-    trailerFrame.classList.remove('is-hidden');
-    // console.log(movieId);
-    showTrailer(movieId);
-  }
+
+  // if (e.target.id === 'btn-watched') {
+  //   const btn = document.querySelector('#btn-watched');
+  //   btn.classList.toggle('selected');
+  //   if (btn.classList.contains('selected'))
+  //     btn.textContent = 'remove from watched';
+  //   else {
+  //     btn.textContent = 'add to watched';
+  //   }
+  // }
 
   if (e.target.id === 'btn-watched') {
     const btn = document.querySelector('#btn-watched');
-    btn.classList.toggle('selected');
-    if (btn.classList.contains('selected'))
+    if(!watchedMovies.includes(movieId)){
+      addToWached(movieId);
+      watchedText = 'remove from watched';
       btn.textContent = 'remove from watched';
-    else {
-      btn.textContent = 'add to watched';
     }
-  }
+      else{
+      removeFromWached(movieId);
+      watchedText = 'add to watched';
+      btn.textContent = 'add to watched';
+      btn.style.padding = '6px 27px';
+    }
+}
+
+
+ 
+
 
   if (e.target.id === 'btn-queue') {
     const btn = document.querySelector('#btn-queue');
-    btn.classList.toggle('selected');
-    if (btn.classList.contains('selected'))
-      btn.textContent = 'remove from queue';
-    else {
-      btn.textContent = 'add to queue';
-    }
+        if(!queueMovies.includes(movieId)){
+          addToQueue(movieId);
+          queueText = 'remove from queue';
+          btn.textContent = 'remove from queue';
+        }
+          else{
+          removeFromQueue(movieId);
+          queueText = 'add to queue';
+          btn.textContent = 'add to queue';
+        }
   }
 });
 
 window.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !movieModal.classList.contains('is-hidden')) {
+  if (e.key === 'Escape') {
     closeModal();
-  }
-  //костыль, позже подумаю как сделать красиво
-  else if (e.key === 'Escape' && movieModal.classList.contains('is-hidden')) {
-    movieModal.classList.remove('is-hidden');
-    trailerFrame.classList.add('is-hidden');
-    trailerFrame.src = '';
   }
 });
 
-export { movieId };
-export { backdrop };
+
+function addToQueue(movieId){
+console.log(movieId, 'added to queue');
+queueMovies.push(movieId);
+console.log(queueMovies);
+localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
+}
+
+function removeFromQueue(movieId){
+  localStorage.removeItem('queue-movies');
+  const movieIndex = queueMovies.findIndex((element, index) => element === movieId ? index : null);
+  console.log(movieIndex);
+  console.log(movieId, 'removed from queue');
+  queueMovies.splice(movieIndex, 1);
+  console.log(queueMovies);
+  localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
+}
+
+
+function addToWached(movieId){
+console.log(movieId, 'added to wached');
+watchedMovies.push(movieId);
+console.log(watchedMovies);
+
+localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
+}
+
+function removeFromWached(movieId){
+  localStorage.removeItem('wached-movies');
+  const movieIndex = watchedMovies.findIndex((element, index) => element === movieId ? index : null);
+  console.log(movieIndex);
+  console.log(movieId, 'removed from wached');
+  watchedMovies.splice(movieIndex, 1);
+  console.log(watchedMovies);
+  localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
+}
+
+export {movieId, backdrop };
 //save original render
 // `<div class="movie__inner">
 //   <img
@@ -337,3 +419,11 @@ export { backdrop };
 //     </button>
 //   </div>
 // </div>`;
+
+//original img
+
+//  <img
+//    src="${IMG_URL}${poster_path}"
+//    alt="${original_title}"
+//    class="movie__poster"
+//  />;

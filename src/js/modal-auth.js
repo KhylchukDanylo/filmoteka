@@ -1,4 +1,6 @@
-import throttle from 'lodash.throttle';
+//////////////////////////FIREBASE//////////////////////////////////////////////////
+
+/*import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
 import { initializeApp } from 'firebase/app';
 import {
@@ -7,9 +9,10 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from 'firebase/auth';
+} 
+from 'firebase/auth';
 import { getDatabase, ref, set, remove } from 'firebase/database';
-import { backdrop } from './modal-movie-render';
+import { refs } from './DOM-elements';*/
 
 /*const firebaseConfig = {
   apiKey: 'AIzaSyD4R5ow53nXeGgXQPCsfLs6LgP-O91YSD8',
@@ -22,7 +25,7 @@ import { backdrop } from './modal-movie-render';
   measurementId: 'G-VKQT91CF12',
 };*/
 
-const firebaseConfig = {
+/*const firebaseConfig = {
   apiKey: 'AIzaSyDO3O5qj1fBFaBjqh7PNPAjYn5I4RWI-q4',
   authDomain: 'filmoteka-9038d.firebaseapp.com',
   databaseURL: 'https://filmoteka-9038d-default-rtdb.firebaseio.com',
@@ -46,7 +49,8 @@ refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
 
 function onLoginGlobalBtn(e) {
   e.preventDefault();
-  refs.formAuth.classList.remove('visually-hidden');
+  refs.formAuth.classList.remove('is-hidden-auth');
+  refs.modalAuthBackdrop.classList.remove('visually-hidden');
 }
 
 function onBtnRegister(e) {
@@ -56,8 +60,7 @@ function onBtnRegister(e) {
   fullName = document.querySelector('.input__auth__name').value;
 
   if (onValidInput(email) === false || validate_password(password) === false) {
-    Notify.failure('Email or Password is wrong!');
-    return;
+    return Notify.failure('Email or Password is wrong!');
   }
   if (validate_field(fullName) === false) {
     Notify.failure('One or More Extra Fields is wrong!');
@@ -72,7 +75,8 @@ function onBtnRegister(e) {
         fullName,
         lastLogin: Date.now(),
       });
-      refs.formAuth.classList.add('visually-hidden');
+      refs.formAuth.classList.add('is-hidden-auth');
+      refs.modalAuthBackdrop.classList.add('visually-hidden');
       refs.btnMyLibrary.classList.remove('disabled');
       Notify.success('User created succesfully!');
     })
@@ -92,7 +96,8 @@ function onBtnLogin(e) {
   }
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
-      refs.formAuth.classList.add('visually-hidden');
+      refs.formAuth.classList.add('is-hidden-auth');
+      refs.modalAuthBackdrop.classList.add('visually-hidden');
       refs.btnMyLibrary.classList.remove('disabled');
       Notify.success('User logged in succesfully!');
     })
@@ -106,7 +111,8 @@ onAuthStateChanged(auth, user => {
   if (user !== null) {
     uid = user.uid;
     localStorage.setItem('uid', uid);
-    refs.formAuth.classList.add('visually-hidden');
+    refs.formAuth.classList.add('is-hidden-auth');
+    refs.modalAuthBackdrop.classList.add('visually-hidden');
     refs.btnRegister.classList.add('visually-hidden');
     refs.btnLogin.classList.add('visually-hidden');
     refs.btnLogOut.classList.remove('visually-hidden');
@@ -128,7 +134,8 @@ function onBtnLogOut(e) {
     .then(() => {
       refs.btnLogin.classList.remove('visually-hidden');
       refs.btnRegister.classList.remove('visually-hidden');
-      refs.formAuth.classList.remove('visually-hidden');
+      refs.formAuth.classList.remove('is-hidden-auth');
+      refs.modalAuthBackdrop.classList.remove('visually-hidden');
       refs.btnLogOut.classList.add('visually-hidden');
       refs.btnLoginGlobal.textContent = 'Log in';
       uid = user.uid;
@@ -139,37 +146,14 @@ function onBtnLogOut(e) {
     });
 }
 
-function onValidInput(email) {
-  expression = /^[^@]+@\w+(\.\w+)+\w$/;
-  if (expression.test(email) === true) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
-function validate_password(password) {
-  if (password < 6) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-function validate_field(field) {
-  if (field === null) {
-    return false;
-  }
-
-  if (field.length <= 0) {
-    return false;
-  } else {
-    return true;
-  }
-}
++
 
 window.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && !refs.formAuth.classList.contains('is-hidden')) {
+  if (
+    e.key === 'Escape' &&
+    !refs.formAuth.classList.contains('is-hidden-auth')
+  ) {
     closeModal();
   }
 });
@@ -178,17 +162,94 @@ const btnCloseAuth = document.querySelector('.auth__btn-close');
 btnCloseAuth.addEventListener('click', () => closeModal());
 
 function closeModal() {
-  refs.formAuth.classList.add('is-hidden');
-  backdrop.classList.add('is-hidden');
+  refs.formAuth.classList.add('is-hidden-auth');
+  refs.modalAuthBackdrop.classList.add('visually-hidden');
   window.location.reload();
 }
 
-/*function noScroll() {
-  if (!refs.formAuth.classList.contains('visually-hidden')) {
-    document.body.classList.add('stop-scrolling');
-  } else {
-    document.body.classList.remove('stop-scrolling');
-  }
+export { uid };*/
+
+/////////////////////////////////LOCALSTORAGE/////////////////////////////////////////
+import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix';
+import { refs } from './DOM-elements';
+
+//refs.btnLogin.addEventListener('click', onBtnLogin);
+refs.btnRegister.addEventListener('click', onBtnSubmit);
+refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
+refs.formAuth.addEventListener('submit', onFormSubmit);
+//refs.btnLogOut.addEventListener('click', onBtnLogOut);
+//refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
+
+const STORAGE_KEY = 'feedback-form';
+
+const formData = {
+  name: '',
+  email: '',
+  password: '',
+};
+
+let currentFormData = formData;
+
+resultForm();
+
+/*function onLoginGlobalBtn() {
+  refs.formAuth.classlist.remove('is-hidden-auth');
 }*/
 
-export { uid };
+/*function onBtnLogOut() {
+  if (refs.formAuth.classlist.contains('is-hidde-auth')) {
+    refs.formAuth.classlist.remove('is-hidden-auth');
+  }
+}*/
+function onFormInput(e) {
+  currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
+  const value = JSON.stringify(currentFormData);
+  localStorage.setItem(STORAGE_KEY, value);
+}
+
+function resultForm() {
+  if (
+    refs.inputName.value === '' ||
+    refs.inputEmail.value === '' ||
+    refs.inputPassword.value === ''
+  ) {
+    Notify.failure(
+      'Your form has empty fields. Add information and try again.'
+    );
+  } else {
+    const { name, email, password } = populateEmail();
+    refs.inputName.value = name;
+    refs.inputEmail.value = email;
+    refs.inputPassword.value = password;
+  }
+}
+
+function onFormSubmit(e) {
+  e.preventDefault();
+  currentFormData = formData;
+  const value = JSON.stringify(currentFormData);
+  localStorage.setItem(STORAGE_KEY, value);
+  refs.formAuth.reset();
+  //localStorage.removeItem('feedback-form');
+  //refs.formAuth.classlist.add('is-hidden-auth');
+}
+
+function populateEmail() {
+  currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  console.log(currentFormData);
+  return currentFormData;
+}
+
+function onBtnSubmit() {
+  if (
+    refs.inputName.value === '' ||
+    refs.inputEmail.value === '' ||
+    refs.inputPassword.value === ''
+  ) {
+    // Notify.failure(
+    //   'Your form has empty fields. Add information and try again.'
+    //  );
+  }
+  console.log(currentFormData);
+}

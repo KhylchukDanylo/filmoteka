@@ -4,13 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- FavIcon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-    <link rel="manifest" href="./favicon/site.webmanifest">
-    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ff8c00">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="./favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ff8c00" />
 
     <!-- Font-Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -23,8 +41,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmoteka</title>
 
-<!-- switcher theme -->
-<meta name="color-scheme" content="light dark" />
+    <!-- switcher theme -->
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="theme-color"
       media="(prefers-color-scheme: light)"
@@ -69,32 +87,47 @@
         <div class="loader__lightball"></div>
       </div>
     </div>
-     <header class="header">
-        <div class="container header-wrapper">
-            <div class="nav">
-              <a class="link-logo link" href="index.html">
-                <svg class="logo-icon" width="24" height="24">
-                  <use href="./images/icons.svg#icon-film"></use>
-                </svg><span class="logo-text">Filmoteka</span>
-              </a>
-              <ul class="header__list list">
-                <li class="header__item"><a class="header__link-home link" href="./index.html">Home</a></li>
-                <li class="header__item header__my-library"><a class="header__link link" href="./library.html">my library</a></li>
-                <li class="header__item auth__login-logout"><a class="header__link-log link auth-link" href="">log in</a></li>
-              </ul>
-            </div> 
-            <form class="search-form" id="search-form">
-              <div class="header__search-form">
-                <input class="form__header-input" id="search-box" type="text" name="searchQuery" autocomplete="off" placeholder="Search films..." autofocus />
-                <button class="form__header-btn" type="submit">
-                    <svg class="btn__icon" width="12" height="12">
-                       <use href="./images/icons.svg#icon-search"></use>
-                    </svg>
-                </button>
-                </div>
-            </form>
+    <header class="header">
+      <div class="container header-wrapper">
+        <div class="nav">
+          <a class="link-logo link" href="index.html">
+            <svg class="logo-icon" width="24" height="24">
+              <use href="./images/icons.svg#icon-film"></use>
+            </svg>
+            <span class="logo-text">Filmoteka</span>
+          </a>
+          <ul class="header__list list">
+            <li class="header__item">
+              <a class="header__link-home link" href="./index.html">Home</a>
+            </li>
+            <li class="header__item header__my-library">
+              <a class="header__link link" href="./library.html">my library</a>
+            </li>
+            <li class="header__item auth__login-logout">
+              <a class="header__link-log link auth-link" href="">log in</a>
+            </li>
+          </ul>
+        </div>
+        <form class="search-form" id="search-form">
+          <div class="header__search-form">
+            <input
+              class="form__header-input"
+              id="search-box"
+              type="text"
+              name="searchQuery"
+              autocomplete="off"
+              placeholder="Search films..."
+              autofocus
+            />
+            <button class="form__header-btn" type="submit">
+              <svg class="btn__icon" width="12" height="12">
+                <use href="./images/icons.svg#icon-search"></use>
+              </svg>
+            </button>
+          </div>
+        </form>
 
-            <!----------- dark-ligth switcher ------------>
+        <!----------- dark-ligth switcher ------------>
 
         <fieldset class="switcher">
           <legend class="switcher__legend">Scheme</legend>
@@ -122,220 +155,244 @@
           />
           <div class="switcher__status"></div>
         </fieldset>
-       
-      <!------------ filters -------------->
-      
-      <div class="filters">
-        <div class="filters__form">
-          <div class="genres">
-            <button data-filter='open' type="button" class="filters__button filters__genres-button">Genres</button>
-      
-            <form class="genres__form is-hidden">
-              <div class="genres__wrap">
-                <label>
-                  <input type="checkbox" name="with_genres" value="28" />
-                  Action</label><label>
-                  <input type="checkbox" name="with_genres" value="12" />
-                  Adventure</label><label>
-                  <input type="checkbox" name="with_genres" value="16" />
-                  Animation </label><label>
-                  <input type="checkbox" name="with_genres" value="35" />
-                  Comedy </label><label>
-                  <input type="checkbox" name="with_genres" value="80" />
-                  Crime </label><label>
-                  <input type="checkbox" name="with_genres" value="99" />
-                  Documentary </label><label>
-                  <input type="checkbox" name="with_genres" value="18" />
-                  Drama </label><label>
-                  <input type="checkbox" name="with_genres" value="10751" />
-                  Family </label><label>
-                  <input type="checkbox" name="with_genres" value="14" />
-                  Fantasy </label><label>
-                  <input type="checkbox" name="with_genres" value="36" />
-                  History </label><label>
-                  <input type="checkbox" name="with_genres" value="27" />
-                  Horror </label><label>
-                  <input type="checkbox" name="with_genres" value="10402" />
-                  Music </label><label>
-                  <input type="checkbox" name="with_genres" value="9648" />
-                  Mystery </label><label>
-                  <input type="checkbox" name="with_genres" value="10749" />
-                  Romance </label><label>
-                  <input type="checkbox" name="with_genres" value="878" />
-                  Science Fiction </label><label>
-                  <input type="checkbox" name="with_genres" value="10770" />
-                  TV Movie </label><label>
-                  <input type="checkbox" name="with_genres" value="53" />
-                  Thriller </label><label>
-                  <input type="checkbox" name="with_genres" value="10752" />
-                  War </label><label>
-                  <input type="checkbox" name="with_genres" value="37" />
-                  Western
-                </label>
+
+        <!------------ filters -------------->
+
+
+        <div class="filters">
+          <div class="filters__form">
+            <div class="filters__container">
+            <div class="filters__wrap">
+              <div class="genres">
+                <button
+                  data-filter="open"
+                  type="button"
+                  class="filters__button filters__genres-button"
+                >
+                  Genres
+                </button>
+
+                <form class="genres__form is-hidden">
+                  <div class="genres__wrap">
+                    <label>
+                      <input type="checkbox" name="with_genres" value="28" />
+                      Action</label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="12" />
+                      Adventure</label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="16" />
+                      Animation </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="35" />
+                      Comedy </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="80" />
+                      Crime </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="99" />
+                      Documentary </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="18" />
+                      Drama </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="10751" />
+                      Family </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="14" />
+                      Fantasy </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="36" />
+                      History </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="27" />
+                      Horror </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="10402" />
+                      Music </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="9648" />
+                      Mystery </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="10749" />
+                      Romance </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="878" />
+                      Science Fiction </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="10770" />
+                      TV Movie </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="53" />
+                      Thriller </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="10752" />
+                      War </label
+                    ><label>
+                      <input type="checkbox" name="with_genres" value="37" />
+                      Western
+                    </label>
+                  </div>
+
+                  <div class="button__wrap">
+                    <button
+                      data-filter="reset"
+                      class="button__reset genres__reset-button"
+                      type="reset"
+                    >
+                      Reset
+                    </button>
+
+
+                    <button
+                      data-filter="genres"
+                      class="button__submit genres__submit-button"
+                      type="submit"
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </form>
               </div>
-      
-              <div class="button__wrap">
-                <button data-filter='reset' class='button__reset genres__reset-button' type="reset">Reset</button>
-                <button data-filter="genres" class='button__submit genres__submit-button' type="submit">Apply</button>
+
+              <div class="years">
+                <button
+                  data-filter="open"
+                  type="button"
+                  class="filters__button filters__years-button"
+                >
+                  Years
+                </button>
+
+                <form class="years__form is-hidden">
+                  <p class="range-description">Years Range:</p>
+                  <div class="range-slider">
+                    <span class="range-values"></span>
+                    <input
+                      class="lower-value"
+                      value="1900"
+                      min="1900"
+                      max="2022"
+                      step="1"
+                      type="range"
+                    />
+                    <input
+                      class="higher-value"
+                      value="2022"
+                      min="1900"
+                      max="2022"
+                      step="1"
+                      type="range"
+                    />
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-      
-          <div class="years">
-            <button data-filter='open' type="button" class="filters__button filters__years-button">Years</button>
-      
-            <form class="years__form is-hidden">
-              <p class="range-description">Time Range:</p>
-              <div class="range-slider">
-                <span class="range-values"></span>
-                <input class="lower-value" value="1900" min="1900" max="2022" step="1" type="range">
-                <input class="higher-value" value="2022" min="1900" max="2022" step="1" type="range">
+            </div>
+            <div class="filters__wrap">
+              <div class="sort">
+                <form class="sort__form">
+                  <label for="sort"
+                    >Sort by
+                    <select class="custom-select" id="sort" name="sort">
+                      <option value="popularity.desc" selected>
+                        Popularity
+                      </option>
+                      <option value="vote_average.desc">Rating</option>
+                      <option value="release_date.desc">Newest</option>
+                      <option value="release_date.asc">Oldest</option>
+                    </select>
+                  </label>
+                </form>
               </div>
-            </form>
-            <!-- <form class="years__form is-hidden">
-              <div class="years__wrap">
-                <label>
-                  <input type="radio" name="year" value="2022" />
-                  2022
-                </label>
-                <label>
-                  <input type="radio" name="year" value="2021" />
-                  2021
-                </label><label>
-                  <input type="radio" name="year" value="2020" />
-                  2020
-                </label><label>
-                  <input type="radio" name="year" value="2019" />
-                  2019
-                </label><label>
-                  <input type="radio" name="year" value="2018" />
-                  2018
-                </label><label>
-                  <input type="radio" name="year" value="2017" />
-                  2017
-                </label><label>
-                  <input type="radio" name="year" value="2016" />
-                  2016
-                </label><label>
-                  <input type="radio" name="year" value="2015" />
-                  2015
-                </label><label>
-                  <input type="radio" name="year" value="2014" />
-                  2014
-                </label><label>
-                  <input type="radio" name="year" value="2013" />
-                  2013
-                </label><label>
-                  <input type="radio" name="year" value="2012" />
-                  2012
-                </label><label>
-                  <input type="radio" name="year" value="2011" />
-                  2011
-                </label><label>
-                  <input type="radio" name="year" value="2010" />
-                  2010 and earlier
-                </label>
+              
+              <div class="adult">
+                <form class="adult__form">
+                  <label>
+                    <input type="checkbox" name="adult" value="adult" />
+                    Adult
+                  </label>
+                </form>
               </div>
-              <div class="button__wrap">
-                <button data-filter='reset' class='button__reset years__reset-button' type="reset">Reset</button>
-                <button data-filter='years' class='button__submit years__submit-button' type="submit">Apply</button>
-              </div>
-            </form> -->
-          </div>
-      
-          <div class="sort">
-            <form class="sort__form">
-              <label for="sort">Sort by
-              <select class="custom-select" id="sort" name="sort">
-                <option value="popularity.desc" selected>Popularity</option>
-                <option value="vote_average.desc">Rating</option>
-                <option value="release_date.desc">Newest</option>
-                <option value="release_date.asc">Oldest</option>
-              </select>
-              </label>
-            </form>
-          </div>
-      
-          <div class="adult">  
-            <form class="adult__form">
-              <label>
-                <input type="checkbox" name="adult" value="adult" />
-                Adult
-              </label>
-            </form>
-          </div>
-      
-          <div class="clear-button-wrap">
-            <button class="filters__button filters__button--clear" type="button">Clear all filters</button>
+            </div>
+            </div>
+            <div class="clear-button-wrap">
+              <button
+                class="filters__button filters__button--clear"
+                type="button"
+              >
+                Clear all filters
+              </button>
+            </div>
           </div>
         </div>
-
-
-
-      </div>
-      
       </div>
 
-       
-
-        <!-------------------------------------------->
+      <!-------------------------------------------->
 
       <div class="fixed-headers is-hidden">
-        <a class="logo-link__fixed link" href="./index.html"><svg class="logo__icon" width="24" height="24">
-            <use href="./images/icons.svg#icon-film"></use>
-          </svg><span class="logo-text__fixed">Filmoteka</span></a>
-          <ul class="fixed-list list">
-            <li class="fixed-item">
-              <a class="fixed-link-home link" href="./index.html">Home</a>
-            </li>
-            <li class="fixed-item">
-              <a class="fixed-link link" href="./library.html">my library</a>
-            </li>
-          </ul>
-          </div>
-
+        <a class="logo-link__fixed link" href="./index.html"
+          ><svg class="logo__icon" width="24" height="24">
+            <use href="./images/icons.svg#icon-film"></use></svg
+          ><span class="logo-text__fixed">Filmoteka</span></a
+        >
+        <ul class="fixed-list list">
+          <li class="fixed-item">
+            <a class="fixed-link-home link" href="./index.html">Home</a>
+          </li>
+          <li class="fixed-item">
+            <a class="fixed-link link" href="./library.html">my library</a>
+          </li>
+        </ul>
+      </div>
     </header>
     <main>
+      <div class="not-found-page"></div>
+      <!---------------Modal Authentification------------------------->
       <section class="modal-auth">
-       <!-- <div class="backdrop is-hidden">-->
-        <div class="form__auth visually-hidden">
-          <div class="form__auth__wrap">
-            <button type="button" class="auth__btn-close">
-             X
-            </button>
-            <div class="form__auth__wrapper">
-              <h2 class="form__auth__header">Welcome to our site</h2>
-            </div>
-            <div class="input__auth__cont">
-              <div class="input__auth__container">
-                <input
-                  class="input__auth__name input-auth"
-                  type="text"
-                  placeholder="Full name"
-                />
-                <input
-                  class="input__auth__email input-auth"
-                  type="email"
-                  placeholder="Email"
-                />
-                <input
-                  class="input__auth__password input-auth"
-                  type="password"
-                  id="input__auth"
-                  placeholder="New Password"
-                />
-                <div class="button__auth">
-                  <button class="button__auth__login">Login</button>
-                  <button class="button__auth__register">Register</button>
-                  <button class="button__auth__logout visually-hidden">Log out</button>
-                </div>
+        <!----<div class="modal-auth__backdrop">---->
+          <form class="form__auth is-hidden-auth" autocomplete="off">
+            <div class="form__auth__wrap">
+              <button type="button" class="auth__btn-close">X</button>
+              <div class="form__auth__wrapper">
+                <h2 class="form__auth__header">Welcome to our site</h2>
+              </div>
+              <div class="input__auth__cont">
+                <lable class="input__auth__container">
+                  <input
+                    class="input__auth__name input-auth"
+                    type="name"
+                    name="name"
+                    placeholder="Full name"
+                  />
+                  <input
+                    class="input__auth__email input-auth"
+                    type="email"
+                    name="email"
+                    autofocus
+                    placeholder="Email"
+                  />
+                  <input
+                    class="input__auth__password input-auth"
+                    type="password"
+                    name="password"
+                    autofocus
+                    placeholder="Password"
+                  />
+                  <div class="button__auth">
+                    <button class="button__auth__login">Login</button>
+                    <button class="button__auth__register">Register</button>
+                    <button class="button__auth__logout visually-hidden">
+                      Log out
+                    </button>
+                  </div>
+                </lable>
               </div>
             </div>
-          </div>
+          </form>
         </div>
-       <!---- </div>--->
+        <!---- </div>--->
       </section>
-          <div class="container"><ul class="movie"></ul></div>
+      <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
         <div class="container">
           <div class="pagination-list"></div>
@@ -353,14 +410,18 @@
             <use href="./images/icons.svg#icon-Vector"></use>
           </svg>
           by
-          <button class="footer__button" href="">GoIT Students</button>
+          <button class="footer__button">GoIT Students</button>
         </span>
       </h3>
     </footer>
     <div class="backdrop is-hidden">
       <div class="movie__modal is-hidden"></div>
-      <iframe class="trailer__frame is-hidden" allowfullscreen></iframe>
-      <div class="contributors is-hidden"></div>
+      <!-- <iframe class="trailer__frame hide-it" allowfullscreen></iframe> -->
+      <!-- <div class="contributors is-hidden"></div> -->
+    </div>
+    <div class="contributors__backdrop hide-it">
+      <div class="contributors__modal hide-it"></div>
+      <iframe class="trailer__frame hide-it" allowfullscreen></iframe>
     </div>
     <script src="./js/index.js" type="module"></script>
     <script src="./js/light-dark.js" type="module"></script>

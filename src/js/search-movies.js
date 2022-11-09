@@ -11,15 +11,16 @@ import {
 } from './pagination';
 import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { deleteNotFoundPage, onClearFiltersButtonClick } from './filters';
 
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 
 import createMovieList from './popular-movies';
 
-const formEl = document.querySelector('#search-form');
+export const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
-const listEl = document.querySelector('.movie');
+export const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let moviesList = [];
 formEl.addEventListener('submit', searchMovies);
@@ -27,6 +28,10 @@ formEl.addEventListener('submit', searchMovies);
 function searchMovies(evt) {
   evt.preventDefault();
   addSpinner();
+  if (paginationList.currentState === 'filter') {
+    onClearFiltersButtonClick();
+  }
+  deleteNotFoundPage();
   createListBySearch(1);
 }
 
@@ -68,6 +73,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
             title: movie.original_title,
             genres: movie.genre_ids,
             year: movie?.release_date?.slice(0, 4) || 'N/A',
+            rating: movie.vote_average.toFixed(1),
           };
           moviesList.push(moviesData);
         });
@@ -182,7 +188,13 @@ export async function createMovieListBySearch(searchToMovie, page) {
               
           <div class="movie__text"><h3 class="movie__name">${title}</h3>
           <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
-              
+              ${
+                !rating || rating == '0.0'
+                  ? `<div class="movie__rating movie__rating--grey">NA</div>`
+                  : `<div class="movie__rating movie__rating--${getClassByVote(
+                      rating
+                    )}">${rating}</div>`
+              }
             </a>
           </li>`;
       })
@@ -190,5 +202,17 @@ export async function createMovieListBySearch(searchToMovie, page) {
 
     listEl.innerHTML = markup;
     formEl.reset();
+  }
+}
+
+// the function of determining the color of the border depending on the rating
+
+function getClassByVote(vote) {
+  if (vote >= 7) {
+    return 'green';
+  } else if (vote >= 5) {
+    return 'orange';
+  } else {
+    return 'red';
   }
 }

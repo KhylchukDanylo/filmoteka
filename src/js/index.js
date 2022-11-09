@@ -1,5 +1,5 @@
 import './api-service';
-import './trailer.js';
+import './trailer';
 import './popular-movies';
 import './search-movies';
 import './eventListeners';

@@ -1,4 +1,4 @@
-import { Notify } from 'notiflix';
+/*import { Notify } from 'notiflix';
 //import { refs } from './DOM-elements';
 import { fetchMovieById } from './api-service';
 import { movieId } from './modal-movie-render';
@@ -73,4 +73,4 @@ function onQueueBtnClick() {
     }, '');
     return listOfQueueMovies;
   }
-}
+}*/

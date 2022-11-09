@@ -48,6 +48,7 @@ function onBtnClick(e) {
 }
 
 function onLogoClick() {
+  console.log('logolibrary');
   localStorage.removeItem(CURRENT_PAGE);
   localStorage.removeItem(TOTAL_PAGES);
   localStorage.removeItem(CURRENT_STATE);
