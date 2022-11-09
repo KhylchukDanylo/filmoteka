@@ -26,8 +26,9 @@ export const refs = {
   higerValueInput: document.querySelector('.higher-value'),
   rangeValues: document.querySelector('.range-values'),
   logoFromHeader: document.querySelector('.link-logo'),
-  logoFromFixedeHader: document.querySelector('.logo-link__fixed'),
+  logoFromFixedHeader: document.querySelector('.logo-link__fixed'),
   logoFromLibrarysHeader: document.querySelector('.logo__link'),
   logoFromLibrarysFixedHeader: document.querySelector('.logo__link--fixed'),
   containerEl: document.querySelector('.container'),
+  notFoundPage: document.querySelector('.not-found-page')
 };

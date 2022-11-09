@@ -198,6 +198,8 @@ $option: #320a28;
         background-color: $option;
     }
 
+  
+
     /* Remove focus outline */
     &:focus {
         outline: none;
@@ -207,4 +209,10 @@ $option: #320a28;
     &::-ms-expand {
         display: none;
     }
+}
+
+.not-found-img {
+  display: block;
+  margin: 30px auto;
+  width: 50vw;
 }

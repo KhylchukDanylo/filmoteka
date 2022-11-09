@@ -1,17 +1,26 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl, CURRENT_PAGE, TOTAL_PAGES, CURRENT_STATE, MOVIE_TO_SEARCH } from './pagination';
+import {
+  paginationList,
+  addPagination,
+  containerEl,
+  CURRENT_PAGE,
+  TOTAL_PAGES,
+  CURRENT_STATE,
+  MOVIE_TO_SEARCH,
+} from './pagination';
 import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { deleteNotFoundPage, onClearFiltersButtonClick } from './filters';
 
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 
 import createMovieList from './popular-movies';
 
-const formEl = document.querySelector('#search-form');
+export const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
-const listEl = document.querySelector('.movie');
+export const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 let moviesList = [];
 formEl.addEventListener('submit', searchMovies);
@@ -19,6 +28,10 @@ formEl.addEventListener('submit', searchMovies);
 function searchMovies(evt) {
   evt.preventDefault();
   addSpinner();
+  if (paginationList.currentState === 'filter') {
+    onClearFiltersButtonClick();
+  }
+  deleteNotFoundPage();
   createListBySearch(1);
 }
 
@@ -31,14 +44,14 @@ export async function createListBySearch(page) {
     removeSpinner();
     return;
   }
-  
+
   localStorage.setItem(MOVIE_TO_SEARCH, JSON.stringify(searchToMovie));
   paginationList.movieToSearch = searchToMovie;
   createMovieListBySearch(paginationList.movieToSearch, page);
 }
 
 export async function createMovieListBySearch(searchToMovie, page) {
-    try {
+  try {
     await fetchMoviesBySearch(searchToMovie, page).then(response => {
       const {
         data,
@@ -65,9 +78,18 @@ export async function createMovieListBySearch(searchToMovie, page) {
         paginationList.currentPage = data.page;
         paginationList.totalPages = data.total_pages;
         paginationList.currentState = 'search';
-      localStorage.setItem(CURRENT_PAGE, JSON.stringify(paginationList.currentPage));
-      localStorage.setItem(TOTAL_PAGES, JSON.stringify(paginationList.totalPages));
-      localStorage.setItem(CURRENT_STATE, JSON.stringify(paginationList.currentState));
+        localStorage.setItem(
+          CURRENT_PAGE,
+          JSON.stringify(paginationList.currentPage)
+        );
+        localStorage.setItem(
+          TOTAL_PAGES,
+          JSON.stringify(paginationList.totalPages)
+        );
+        localStorage.setItem(
+          CURRENT_STATE,
+          JSON.stringify(paginationList.currentState)
+        );
       }
     });
 
