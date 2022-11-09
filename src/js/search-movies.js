@@ -216,3 +216,5 @@ function getClassByVote(vote) {
     return 'red';
   }
 }
+
+export {getClassByVote} ;

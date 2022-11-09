@@ -8,6 +8,7 @@ import { allGenres } from './data/jenres.js';
 import { listEl } from './search-movies';
 import notFoundImg from '../images/page-not-found-404.jpg';
 import { addSpinner, removeSpinner } from './spinner';
+import {getClassByVote} from './search-movies';
 const {
   filterForm,
   genresForm,
@@ -229,7 +230,7 @@ export async function renderFiltersResult(list) {
 
   movieList.innerHTML = movies
     .map(({ id, poster, title, genres, year, rating }) => {
-      return `<li class="movie__card">
+      return `<li class="movie__item">
   <a href="#" class="movie__link" id="${id}">
   <div class="movie__wrapper">
   <picture>
@@ -274,6 +275,13 @@ export async function renderFiltersResult(list) {
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="gallery__text" data-id="${id}">${genres} | ${year}</p>
 </div>
+${
+  !rating || rating == '0.0'
+    ? `<div class="movie__rating movie__rating--grey">NA</div>`
+    : `<div class="movie__rating movie__rating--${getClassByVote(
+        rating
+      )}">${rating}</div>`
+}
 
   </a>
 </li>`;
