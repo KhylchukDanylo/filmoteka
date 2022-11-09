@@ -4,6 +4,7 @@ import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
 import { addPagination, paginationList } from './pagination';
 import { createMovieList } from './popular-movies';
+import { allGenres } from './data/jenres.js';
 import { listEl } from './search-movies';
 import notFoundImg from '../images/page-not-found-404.jpg';
 import { addSpinner, removeSpinner } from './spinner';
@@ -124,8 +125,11 @@ function onFormReset(evt) {
     generalFilterParams['primary_release_date.gte'] = '1900';
     openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
   }
-    // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
-    // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  openFilterByGenresBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  openFilterByYearsBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+
 }
 
 function updateGenresParams(form) {
@@ -134,9 +138,13 @@ function updateGenresParams(form) {
 }
 
 function updateYearsParams(form) {
-let minValue = form.elements[0].value;
-let maxValue = form.elements[1].value;
-    if( minValue > maxValue ){ const additionalVar = maxValue; maxValue = minValue; minValue = additionalVar; }
+  let minValue = form.elements[0].value;
+  let maxValue = form.elements[1].value;
+  if (minValue > maxValue) {
+    const additionalVar = maxValue;
+    maxValue = minValue;
+    minValue = additionalVar;
+  }
 
   generalFilterParams['primary_release_date.gte'] = minValue;
   generalFilterParams['primary_release_date.lte'] = maxValue;
@@ -222,7 +230,8 @@ export async function renderFiltersResult(list) {
     .map(({ id, poster, title, genres, year }) => {
       return `<li class="movie__card">
   <a href="#" class="movie__link" id="${id}">
-    <picture>
+  <div class="movie__wrapper">
+  <picture>
       <source
         media="(min-width:1200px)"
         
@@ -258,6 +267,9 @@ export async function renderFiltersResult(list) {
         height="574"
       />
     </picture>
+  
+  </div>
+    
 <div class="movie__text"><h3 class="movie__name">${title}</h3>
 <p class="gallery__text" data-id="${id}">${genres} | ${year}</p>
 </div>
@@ -345,11 +357,11 @@ function hideFiltersByGenres() {
   // openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
   openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
 
-
-  if (openFilterByGenresBtn.textContent === "Genres") {
-    openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
-        // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
-    }
+  if (openFilterByGenresBtn.textContent === 'Genres') {
+    openFilterByGenresBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+    // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  }
   document.removeEventListener('click', closeGenresFilterOptions);
 }
 
@@ -357,20 +369,27 @@ function hideFiltersByYears() {
   yearsForm.classList.add('is-hidden');
 
   let selectedYear = `${generalFilterParams['primary_release_date.gte']} - ${generalFilterParams['primary_release_date.lte']}`;
-  if ((generalFilterParams['primary_release_date.gte'] === generalFilterParams['primary_release_date.lte'])) {
+  if (
+    generalFilterParams['primary_release_date.gte'] ===
+    generalFilterParams['primary_release_date.lte']
+  ) {
     selectedYear = generalFilterParams['primary_release_date.gte'];
   }
-  if ((generalFilterParams['primary_release_date.gte'] === '1900' && generalFilterParams['primary_release_date.lte'] === '2022')) {
-    selectedYear = "Years";
+  if (
+    generalFilterParams['primary_release_date.gte'] === '1900' &&
+    generalFilterParams['primary_release_date.lte'] === '2022'
+  ) {
+    selectedYear = 'Years';
   }
   openFilterByYearsBtn.textContent = selectedYear;
-  openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
-    // openFilterByYearsBtn.style.borderColor = 'rgba(0,128,0,0.7)';
-      
-  if (openFilterByYearsBtn.textContent === "Years") {
-    openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
-        // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
-    }
+  openFilterByYearsBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
+  // openFilterByYearsBtn.style.borderColor = 'rgba(0,128,0,0.7)';
+
+  if (openFilterByYearsBtn.textContent === 'Years') {
+    openFilterByYearsBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+    // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
+  }
   document.removeEventListener('click', closeYearsFilterOptions);
 }
 
@@ -478,7 +497,6 @@ function isInitialGeneralFilterParams(obj) {
   return areEqual(obj, initialGeneralFilterParams);
 }
 
-
 function onInputChange(evt) {
   let minValue = generalFilterParams['primary_release_date.gte'];
   let maxValue = generalFilterParams['primary_release_date.lte'];
@@ -489,8 +507,12 @@ function onInputChange(evt) {
   if (evt.target.classList.contains('higher-value')) {
     maxValue = evt.target.value;
   }
-    
-    if( minValue > maxValue ){ const additionalVar = maxValue; maxValue = minValue; minValue = additionalVar; }
+
+  if (minValue > maxValue) {
+    const additionalVar = maxValue;
+    maxValue = minValue;
+    minValue = additionalVar;
+  }
 
   if (Number(minValue) === Number(maxValue)) {
     rangeValues.innerHTML = minValue;

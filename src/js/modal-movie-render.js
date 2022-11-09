@@ -27,13 +27,15 @@ function onImgClick(evt) {
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
+  // movieId = parseInt(evt.target.closest('li').id) ;
+  movieId = +(evt.target.closest('li').id) ;
   
   const filterIsOpened = !genresForm.classList.contains('is-hidden') || !yearsForm.classList.contains('is-hidden');
   if (filterIsOpened) {
     return;
   }
 
-  movieId = parseInt(evt.target.parentElement.parentElement.id);
+  // movieId = parseInt(evt.target.parentElement.parentElement.id);
 
   openModal(movieId);
   
