@@ -101,18 +101,17 @@
 
 .movie__rating {
   position: absolute;
-  top: -18px;
+  top: -14px;
   left: -10px;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #161f23;
-
+  background: linear-gradient(#000000, #434343);
+  font-size: 15px;
   color: #fff;
-  font-size: 18px;
   z-index: 2;
 
   &--green {
@@ -126,5 +125,12 @@
   }
   &--grey {
     border: 2px solid grey;
+  }
+
+  @include tablert {
+    top: -18px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
   }
 }
