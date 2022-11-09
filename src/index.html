@@ -92,8 +92,9 @@
         <div class="nav">
           <a class="link-logo link" href="index.html">
             <svg class="logo-icon" width="24" height="24">
-              <use href="./images/icons.svg#icon-film"></use></svg
-            ><span class="logo-text">Filmoteka</span>
+              <use href="./images/icons.svg#icon-film"></use>
+            </svg>
+            <span class="logo-text">Filmoteka</span>
           </a>
           <ul class="header__list list">
             <li class="header__item">
@@ -428,8 +429,8 @@
             </div>
           </form>
         </div>
+        <!---- </div>--->
       </section>
-      <!----------------------------------------------------------------->
       <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
         <div class="container">
@@ -448,14 +449,18 @@
             <use href="./images/icons.svg#icon-Vector"></use>
           </svg>
           by
-          <button class="footer__button" href="">GoIT Students</button>
+          <button class="footer__button">GoIT Students</button>
         </span>
       </h3>
     </footer>
     <div class="backdrop is-hidden">
       <div class="movie__modal is-hidden"></div>
-      <iframe class="trailer__frame is-hidden" allowfullscreen></iframe>
-      <div class="contributors is-hidden"></div>
+      <!-- <iframe class="trailer__frame hide-it" allowfullscreen></iframe> -->
+      <!-- <div class="contributors is-hidden"></div> -->
+    </div>
+    <div class="contributors__backdrop hide-it">
+      <div class="contributors__modal hide-it"></div>
+      <iframe class="trailer__frame hide-it" allowfullscreen></iframe>
     </div>
     <script src="./js/index.js" type="module"></script>
     <script src="./js/light-dark.js" type="module"></script>

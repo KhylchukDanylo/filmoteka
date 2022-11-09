@@ -1,6 +1,14 @@
 import { fetchMoviesBySearch, fetchMoviesGenres } from './api-service';
 import defaultImg from '../images/437973.webp';
-import { paginationList, addPagination, containerEl, CURRENT_PAGE, TOTAL_PAGES, CURRENT_STATE, MOVIE_TO_SEARCH } from './pagination';
+import {
+  paginationList,
+  addPagination,
+  containerEl,
+  CURRENT_PAGE,
+  TOTAL_PAGES,
+  CURRENT_STATE,
+  MOVIE_TO_SEARCH,
+} from './pagination';
 import { allGenres } from './data/jenres.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -31,14 +39,14 @@ export async function createListBySearch(page) {
     removeSpinner();
     return;
   }
-  
+
   localStorage.setItem(MOVIE_TO_SEARCH, JSON.stringify(searchToMovie));
   paginationList.movieToSearch = searchToMovie;
   createMovieListBySearch(paginationList.movieToSearch, page);
 }
 
 export async function createMovieListBySearch(searchToMovie, page) {
-    try {
+  try {
     await fetchMoviesBySearch(searchToMovie, page).then(response => {
       const {
         data,
@@ -59,15 +67,25 @@ export async function createMovieListBySearch(searchToMovie, page) {
             title: movie.original_title,
             genres: movie.genre_ids,
             year: movie?.release_date?.slice(0, 4) || 'N/A',
+            rating: movie.vote_average.toFixed(1),
           };
           moviesList.push(moviesData);
         });
         paginationList.currentPage = data.page;
         paginationList.totalPages = data.total_pages;
         paginationList.currentState = 'search';
-      localStorage.setItem(CURRENT_PAGE, JSON.stringify(paginationList.currentPage));
-      localStorage.setItem(TOTAL_PAGES, JSON.stringify(paginationList.totalPages));
-      localStorage.setItem(CURRENT_STATE, JSON.stringify(paginationList.currentState));
+        localStorage.setItem(
+          CURRENT_PAGE,
+          JSON.stringify(paginationList.currentPage)
+        );
+        localStorage.setItem(
+          TOTAL_PAGES,
+          JSON.stringify(paginationList.totalPages)
+        );
+        localStorage.setItem(
+          CURRENT_STATE,
+          JSON.stringify(paginationList.currentState)
+        );
       }
     });
 
@@ -110,7 +128,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
 
   function renderMoviesCard(arrayMovies) {
     const markup = arrayMovies
-      .map(({ id, poster, title, genres, year }) => {
+      .map(({ id, poster, title, genres, year, rating }) => {
         return `<li class="movie__item">
             <a href="#" class="movie__link" id="${id}">
               <picture>
@@ -159,12 +177,30 @@ export async function createMovieListBySearch(searchToMovie, page) {
               </picture>
           <div class="movie__text"><h3 class="movie__name">${title}</h3>
           <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
-              
+              ${
+                !rating || rating == '0.0'
+                  ? `<div class="movie__rating movie__rating--grey">NA</div>`
+                  : `<div class="movie__rating movie__rating--${getClassByVote(
+                      rating
+                    )}">${rating}</div>`
+              }
             </a>
           </li>`;
       })
       .join('');
 
     listEl.innerHTML = markup;
+  }
+}
+
+// the function of determining the color of the border depending on the rating
+
+function getClassByVote(vote) {
+  if (vote >= 7) {
+    return 'green';
+  } else if (vote >= 5) {
+    return 'orange';
+  } else {
+    return 'red';
   }
 }
