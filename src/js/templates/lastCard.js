@@ -1,4 +1,4 @@
-export const lastCard = `<div class="movie__last-img">
+export const lastCard = `<li class="movie__last-img">
 <div class="wrapper">
 <a class="cta" href="#">
   <span class="cta-span">NEXT</span>
@@ -13,4 +13,4 @@ export const lastCard = `<div class="movie__last-img">
   </span> 
 </a>
 </div>
-</div>`
+</li>`

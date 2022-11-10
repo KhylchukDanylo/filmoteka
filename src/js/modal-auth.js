@@ -175,7 +175,7 @@ import { refs } from './DOM-elements';
 refs.btnRegister.addEventListener('click', onBtnSubmit);
 refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
 refs.formAuth.addEventListener('submit', onFormSubmit);
-//refs.btnLogOut.addEventListener('click', onBtnLogOut);
+refs.btnLogOut.addEventListener('click', onBtnLogOut);
 refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
 
 const STORAGE_KEY = 'feedback-form';
@@ -190,19 +190,22 @@ let currentFormData = formData;
 
 resultForm();
 
-function onLoginGlobalBtn() {
+function onLoginGlobalBtn(e) {
   e.preventDefault();
-  refs.modalAuthBackdrop.classList.remove('visually-hidden');
+  refs.formAuth.classList.remove('visually-hidden');
   // if (!refs.modalHidden.classList.contains('is-hidden-auth'))
   //   refs.modalHidden.classList.add('is-hidden-auth');
+  console.log(onLoginGlobalBtn());
 }
 
-function onBtnLogOut() {
-  if (refs.formAuth.classlist.contains('is-hidde-auth')) {
-    refs.formAuth.classlist.remove('is-hidden-auth');
+function onBtnLogOut(e) {
+  e.preventDefault();
+  if (refs.formAuth.classlist.contains('visually-hidden')) {
+    refs.formAuth.classlist.remove('visually-hidden');
   }
 }
 function onFormInput(e) {
+  e.preventDefault();
   currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
   const value = JSON.stringify(currentFormData);
   localStorage.setItem(STORAGE_KEY, value);
@@ -223,7 +226,8 @@ function resultForm() {
   }
 }
 
-function onFormSubmit() {
+function onFormSubmit(e) {
+  e.preventDefault();
   currentFormData = formData;
   const value = JSON.stringify(currentFormData);
   localStorage.setItem(STORAGE_KEY, value);
@@ -246,7 +250,7 @@ function onBtnSubmit(e) {
     Notify.failure(
       'Your form has empty fields. Add information and try again.'
     );
-    refs.formAuth.reset();
+    //  refs.formAuth.reset();
   }
   console.log(currentFormData);
 }
@@ -254,7 +258,7 @@ function onBtnSubmit(e) {
 window.addEventListener('keydown', e => {
   if (
     e.key === 'Escape' &&
-    !refs.modalAuthBackdrop.classList.contains('visually-hidden')
+    !refs.formAuth.classList.contains('visually-hidden')
   ) {
     closeModal();
   }
@@ -264,31 +268,12 @@ const btnCloseAuth = document.querySelector('.auth__btn-close');
 btnCloseAuth.addEventListener('click', () => closeModal());
 
 function closeModal() {
-  refs.modalAuthBackdrop.classList.add('visually-hidden');
+  refs.formAuth.classList.add('visually-hidden');
   //window.location.reload();
 }
-////////////////////////////////////TEST OPEN MODAL/////////////////////////////
 
-/*import { refs } from './DOM-elements';
-refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
-function onLoginGlobalBtn() {
-  e.preventDefault();
-  refs.modalAuthBackdrop.classList.remove('visually-hidden');
-}
-
-window.addEventListener('keydown', e => {
-  if (
-    e.key === 'Escape' &&
-    !refs.modalAuthBackdrop.classList.contains('visually-hidden')
-  ) {
-    closeModal();
-  }
-});
-
-const btnCloseAuth = document.querySelector('.auth__btn-close');
-btnCloseAuth.addEventListener('click', () => closeModal());
-
-function closeModal() {
-  refs.modalAuthBackdrop.classList.add('visually-hidden');
-  //window.location.reload();
-}*/
+/*Notify.failure('Log in please!', {
+      fontSize: '22px',
+      timeout: 2000,
+      width: '600px',
+    });*/

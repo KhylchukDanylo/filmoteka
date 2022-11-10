@@ -44,4 +44,5 @@ export const refs = {
   trailerBackdrop: document.querySelector('.trailer-backdrop'),
   addFilterBtn: document.querySelector('.add__filter'),
   formFilter: document.querySelector('.filters'),
+  lastGalleryCard: document.querySelector('.movie__last-img'),
 };

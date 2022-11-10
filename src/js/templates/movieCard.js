@@ -1,7 +1,10 @@
 import { getClassByVote } from '../search-movies';
 import defaultImg from '../../images/437973.webp';
 import { refs } from '../DOM-elements';
-import {addLastCard} from '../popular-movies';
+import { addLastCard } from '../popular-movies';
+import { setTargetPage, paginationList } from '../pagination';
+import { renderTargetPage } from '../eventListeners';
+
 const { movieList, formEl } = refs;
 export function renderMoviesCard(moviesList) {
     const markup = moviesList
@@ -70,7 +73,18 @@ export function renderMoviesCard(moviesList) {
       })
       .join('');
 
-    movieList.innerHTML = markup;
+  movieList.innerHTML = markup;
+
+  if (paginationList.currentPage < paginationList.totalPages) { 
     addLastCard();
+
+      const lastCard = document.querySelector('.movie__last-img');
+    lastCard.addEventListener('click', onLastCardClick);
+  }
     formEl.reset();
-  };
+};
+  
+function onLastCardClick(evt) {
+  const targetPage = setTargetPage(evt.currentTarget, paginationList.currentPage);
+  renderTargetPage(targetPage); 
+}
