@@ -40,4 +40,5 @@ export const refs = {
   inputPassword: document.querySelector('.input__auth__password'),
   movieModal: document.querySelector('.movie__modal'),
   trailerBackdrop: document.querySelector('.trailer-backdrop'),
+  libraryGallery: document.querySelector('.gallery-container'),
 };

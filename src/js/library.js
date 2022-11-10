@@ -1,3 +1,4 @@
+import './library-render';
 const throttle = require('lodash.throttle');
 import { refs } from './DOM-elements';
 import {
