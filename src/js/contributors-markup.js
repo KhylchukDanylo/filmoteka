@@ -29,7 +29,7 @@ function renderCotributorsModal(){
 </ul>
 </li>`
 }, '')
-contributorsModal.innerHTML = `  <ul class="contributors__list"> ${contributorsMarkup} </ul>`;
+contributorsModal.innerHTML = `<ul class="contributors__list"> ${contributorsMarkup} </ul>`;
 }
 
 export {renderCotributorsModal};

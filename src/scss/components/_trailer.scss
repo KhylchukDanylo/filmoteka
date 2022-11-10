@@ -1,6 +1,15 @@
-.hide-it.trailer__frame {
-  transform: translate(50%, -50%) scale(0.5);
-  visibility: hidden;
+.trailer-backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
+}
+
+.hide-it .trailer__frame{
+  transform: translate(50%, -50%) scale(0.3);
 }
 
 .trailer__frame {
@@ -9,7 +18,7 @@
   right: 50%;
   transform: translate(50%, -50%) scale(1);
   opacity: 1;
-  transition: transform var(--animation-duration) var(--timing-function);
+  transition: transform var(--open-modal-time) var(--timing-function);
   visibility: visible;
   border: none;
   box-shadow: 5px 5px 20px #d9d9d9, -5px -5px 20px #ffffff;
@@ -28,6 +37,7 @@
 }
 
 .show-trailer {
+  transition: fill var(--animation-duration) var(--timing-function);
   position: absolute;
   opacity: 0.8;
   cursor: pointer;
@@ -41,6 +51,10 @@
     left: 150px;
     top: 255px;
   }
+}
+.show-trailer:hover{
+  fill: var(--color-active-btn);
+  transition: fill var(--animation-duration) var(--timing-function);
 }
 
 .show-trailer:hover::after {

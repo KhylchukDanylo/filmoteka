@@ -38,7 +38,6 @@ export const refs = {
   inputName: document.querySelector('.input__auth__name'),
   inputEmail: document.querySelector('.input__auth__email'),
   inputPassword: document.querySelector('.input__auth__password'),
-  // showTrailerButton: document.querySelector('.show-trailer'),
-  // trailerIcon: document.querySelector('.youtube__icon'),
   movieModal: document.querySelector('.movie__modal'),
+  trailerBackdrop: document.querySelector('.trailer-backdrop'),
 };
