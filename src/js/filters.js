@@ -1,30 +1,23 @@
 import { fetchMoviesByFilters } from './api-service';
 import { allGenres } from './data/jenres.js';
 import { refs } from './DOM-elements';
-import defaultImg from '../images/437973.webp';
 import { addPagination, paginationList } from './pagination';
 import { createMovieList } from './popular-movies';
 import { listEl } from './search-movies';
-import notFoundImg from '../images/page-not-found-404.jpg';
+import notFoundImg from '../images/library/gallery-nothing.jpg';
 import { addSpinner, removeSpinner } from './spinner';
 import {renderMoviesCard} from './templates/movieCard';
 import {genresMaker} from './templates/genres-maker';
-import { getClassByVote } from './search-movies';
-import {addLastCard} from './popular-movies';
 const {
   filterForm,
   genresForm,
   yearsForm,
   openFilterByGenresBtn,
   openFilterByYearsBtn,
-  movieList,
   container,
   clearFiltersButton,
-  lowerValueInput,
-  higerValueInput,
   rangeValues,
   notFoundPage,
-  lastCardLink,
 } = refs;
 let screenWidth = container.offsetWidth;
 const initialFilterParams = {
@@ -42,7 +35,6 @@ let generalFilterParams = {
 let lastFetchedParams = {
   ...initialFilterParams,
 };
-// --------------------------------Form list of genres----------------------
 let listOfGenres = {};
 allGenres.map(
   genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` })
@@ -96,7 +88,6 @@ function onFormChange(evt) {
   }
   if (isAdultForm) {
     updateAdultParams(evt.target);
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     if (isInitialGeneralFilterParams(generalFilterParams)) {
       createMovieList(1);
       lastFetchedParams = { ...generalFilterParams };
@@ -262,14 +253,14 @@ function showFiltersByYears() {
 function closeGenresFilterOptions(evt) {
   if (!evt.target.closest('.genres__form')) {
     evt.preventDefault();
-    clickOutOfFiltersByGenres(); //hideFiltersByGenres()
+    clickOutOfFiltersByGenres(); 
   }
 }
 
 function closeYearsFilterOptions(evt) {
   if (!evt.target.closest('.years__form')) {
     evt.preventDefault();
-    clickOutOfFiltersByYears(); //hideFiltersByYears()
+    clickOutOfFiltersByYears(); 
   }
 }
 
@@ -287,13 +278,11 @@ function hideFiltersByGenres() {
   }
 
   openFilterByGenresBtn.textContent = selectedGenres;
-  // openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
   openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
 
   if (openFilterByGenresBtn.textContent === 'Genres') {
     openFilterByGenresBtn.style.boxShadow =
       'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-    // openFilterByGenresBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
   }
   document.removeEventListener('click', closeGenresFilterOptions);
 }
@@ -316,12 +305,10 @@ function hideFiltersByYears() {
   }
   openFilterByYearsBtn.textContent = selectedYear;
   openFilterByYearsBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
-  // openFilterByYearsBtn.style.borderColor = 'rgba(0,128,0,0.7)';
 
   if (openFilterByYearsBtn.textContent === 'Years') {
     openFilterByYearsBtn.style.boxShadow =
       'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-    // openFilterByYearsBtn.style.borderColor = 'rgba(255, 0, 27, 0.5)';
   }
   document.removeEventListener('click', closeYearsFilterOptions);
 }
@@ -332,7 +319,6 @@ function clickOutOfFiltersByGenres() {
   if (areEqual(generalFilterParams, lastFetchedParams)) {
     return;
   }
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (isInitialGeneralFilterParams(generalFilterParams)) {
     console.log('start page');
     deleteNotFoundPage();
@@ -350,15 +336,11 @@ function clickOutOfFiltersByYears() {
   if (areEqual(generalFilterParams, lastFetchedParams)) {
     return;
   }
-  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////----------------------
-  console.log('who knows', isInitialGeneralFilterParams(generalFilterParams));
-  console.log(generalFilterParams);
   if (isInitialGeneralFilterParams(generalFilterParams)) {
     createMovieList(1);
     lastFetchedParams = { ...generalFilterParams };
     return;
   }
-  console.log('do fetch');
   fetchAndRenderMoviesByFilter();
   lastFetchedParams = { ...generalFilterParams };
 }
@@ -413,7 +395,6 @@ export function onClearFiltersButtonClick() {
   }
 
   const listOfForms = filterForm.querySelectorAll('form');
-  // const listOfForms = this.closest('.filters__form').querySelectorAll('form');
   listOfForms.forEach(form => form.reset());
   openFilterByGenresBtn.textContent = 'Genres';
   openFilterByYearsBtn.textContent = 'Years';

@@ -341,19 +341,20 @@ $option: #320a28;
 .not-found-img {
   display: block;
   margin: 15px auto;
-  width: 75vw;
+  width: 100vw;
 
   @media screen and (min-width: 480px) {
-    width: 360px;
+    width: 480px;
   }
 
   @include tablert {
-    width: 576px;
+    margin: 20px auto;
+    width: 700px;
   }
 
   @include desktop {
     margin: 30px auto;
-    width: 700px;
+    width: 1050px;
   }
 }
 
