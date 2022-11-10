@@ -39,5 +39,7 @@ export const refs = {
   inputEmail: document.querySelector('.input__auth__email'),
   inputPassword: document.querySelector('.input__auth__password'),
   movieModal: document.querySelector('.movie__modal'),
+  lastCardLink: document.querySelector('.cta'),
+  formEl: document.querySelector('#search-form'),
   trailerBackdrop: document.querySelector('.trailer-backdrop'),
 };

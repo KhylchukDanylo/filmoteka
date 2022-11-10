@@ -4,11 +4,13 @@ import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
 import { addPagination, paginationList } from './pagination';
 import { createMovieList } from './popular-movies';
-import { allGenres } from './data/jenres.js';
 import { listEl } from './search-movies';
 import notFoundImg from '../images/page-not-found-404.jpg';
 import { addSpinner, removeSpinner } from './spinner';
+import {renderMoviesCard} from './templates/movieCard';
+import {genresMaker} from './templates/genres-maker';
 import { getClassByVote } from './search-movies';
+import {addLastCard} from './popular-movies';
 const {
   filterForm,
   genresForm,
@@ -22,6 +24,7 @@ const {
   higerValueInput,
   rangeValues,
   notFoundPage,
+  lastCardLink,
 } = refs;
 let screenWidth = container.offsetWidth;
 const initialFilterParams = {
@@ -204,91 +207,9 @@ export async function renderFiltersResult(list) {
   paginationList.currentPage = data.page;
   paginationList.totalPages = data.total_pages;
 
-  movies.forEach(movie => {
-    movie.genres = movie.genres.map(id => {
-      allGenres.forEach(object => {
-        if (object.id === id) {
-          id = object.name;
-        }
-      });
-      return id;
-    });
+  genresMaker(movies);
 
-    switch (true) {
-      case movie.genres.length > 0 && movie.genres.length <= 2:
-        movie.genres = movie.genres.join(', ');
-        break;
-
-      case movie.genres.length > 2:
-        movie.genres[2] = 'Other';
-        movie.genres = movie.genres.slice(0, 3).join(', ');
-        break;
-
-      default:
-        movie.genres = 'N/A';
-        break;
-    }
-  });
-
-  movieList.innerHTML = movies
-    .map(({ id, poster, title, genres, year, rating }) => {
-      return `<li class="movie__item" id="${id}">
-  <a href="#" class="movie__link" >
-  <div class="movie__wrapper">
-  <picture>
-      <source
-        media="(min-width:1200px)"
-        
-        srcset="${
-          poster ? `https://image.tmdb.org/t/p/w500${poster}` : defaultImg
-        }"
-        type="image/jpeg"
-      />
-      <source
-        media="(min-width:768px)"
-        srcset="${
-          poster ? `https://image.tmdb.org/t/p/w342/${poster}` : defaultImg
-        }"
-        type="image/jpeg"
-      />
-      <source
-        media="(max-width:767px)"
-        
-        srcset="${
-          poster ? `https://image.tmdb.org/t/p/w342/${poster}` : defaultImg
-        }"
-        type="image/jpeg"
-      />
-
-      <img
-        class="movie-image"
-        src="${
-          poster ? `https://image.tmdb.org/t/p/w500/${poster}` : defaultImg
-        }"
-        loading="lazy"
-        alt="${title}"
-        width="395"
-        height="574"
-      />
-    </picture>
-  
-  </div>
-    
-<div class="movie__text"><h3 class="movie__name">${title}</h3>
-<p class="gallery__text" data-id="${id}">${genres} | ${year}</p>
-</div>
-${
-  !rating || rating == '0.0'
-    ? `<div class="movie__rating movie__rating--grey">NA</div>`
-    : `<div class="movie__rating movie__rating--${getClassByVote(
-        rating
-      )}">${rating}</div>`
-}
-
-  </a>
-</li>`;
-    })
-    .join('');
+renderMoviesCard(movies);
 
   addPagination({
     screenWidth,
