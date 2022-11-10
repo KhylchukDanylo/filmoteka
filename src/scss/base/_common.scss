@@ -34,7 +34,7 @@ body {
 
 .hide-it {
   opacity: 0;
-  transition: opacity var(--animation-duration) var(--timing-function);
+  transition: opacity var(--open-modal-time) var(--timing-function);
   visibility: hidden;
   pointer-events: none;
 }
