@@ -38,7 +38,6 @@ function showTrailerModal(){
 
 function closeTrailer(event){
   if(event.target === event.currentTarget){
-    console.log(event.currentTarget);
     trailerFrame.src = '';
     trailerBackdrop.classList.add('hide-it');
     backdrop.classList.remove('hide-modal');;

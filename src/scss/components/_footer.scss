@@ -1,5 +1,4 @@
 .footer {
-
   background-color: var(--bg-footer);
   // min-width: 320px;
   max-width: 100%;
@@ -56,5 +55,18 @@
   &__icon {
     margin-left: 10px;
     margin-right: 10px;
+    animation: anime;
+    animation-duration: 300ms;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in;
+  }
+}
+@keyframes anime {
+  from {
+    -webkit-transform: scale(1);
+  }
+  to {
+    -webkit-transform: scale(1.5);
   }
 }

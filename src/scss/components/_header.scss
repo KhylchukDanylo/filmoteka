@@ -1,65 +1,66 @@
-ul {
-  margin: 0;
-  padding-left: 0;
-}
-
-.link {
-  text-decoration: none;
-}
-
-.list {
-  list-style: none;
-}
 
 .header {
   padding-top: 40px;
   padding-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
-  width: 100%;
-  max-width: 480px;
-  background-repeat: no-repeat;
+  background-color: #c4c4c4;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+  url(../images/abstract-background-with-red-lines-mob.jpg);
+  max-width: 100%;
+  // max-width: 480px;
+  background-repeat: repeat;
+  // background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+  // width: 100%;
+  // max-width: 480px;
+  // background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 270px;
-  padding-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
-  width: 100%;
-  max-width: 480px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  // padding-top: 40px;
+  // margin-left: auto;
+  // margin-right: auto;
+  // background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+  // width: 100%;
+  // max-width: 480px;
+  // // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    background-image: url(../images/abstract-background-with-red-lines-mob-2x.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
 
   @include tablert {
     height: 229px;
-    max-width: 768px;
-    background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
+    // max-width: 768px;
+    max-width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url(../images/abstract-background-with-red-lines-tab-2x.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      url(../images/abstract-background-with-red-lines-tab-2x.jpg);
     }
   }
 
   @include desktop {
     height: 216px;
-    max-width: 1280px;
-    background-image: url(../images/abstract-background-with-red-lines-desc.jpg);
+    // max-width: 1280px;
+    max-width: 100%;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url(../images/abstract-background-with-red-lines-desc.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url(../images/abstract-background-with-red-lines-desc-2x.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      url(../images/abstract-background-with-red-lines-desc-2x.jpg);
     }
   }
 }
@@ -304,7 +305,8 @@ ul {
 
 .fixed-headers {
   background-color: #2f364a;
-  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+  url(../images/abstract-background-with-red-lines-mob.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -326,7 +328,8 @@ ul {
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    background-image: url(../images/abstract-background-with-red-lines-mob-2x.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
 
   @media screen and (min-width: 480px) {
@@ -338,7 +341,8 @@ ul {
     padding-left: 32px;
     padding-right: 32px;
     left: calc((100% - 768px) / 2);
-    background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),

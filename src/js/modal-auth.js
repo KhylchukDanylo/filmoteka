@@ -146,9 +146,6 @@ function onBtnLogOut(e) {
     });
 }
 
-
-+
-
 window.addEventListener('keydown', e => {
   if (
     e.key === 'Escape' &&
@@ -179,7 +176,7 @@ refs.btnRegister.addEventListener('click', onBtnSubmit);
 refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
 refs.formAuth.addEventListener('submit', onFormSubmit);
 //refs.btnLogOut.addEventListener('click', onBtnLogOut);
-//refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
+refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
 
 const STORAGE_KEY = 'feedback-form';
 
@@ -193,15 +190,18 @@ let currentFormData = formData;
 
 resultForm();
 
-/*function onLoginGlobalBtn() {
-  refs.formAuth.classlist.remove('is-hidden-auth');
-}*/
+function onLoginGlobalBtn() {
+  e.preventDefault();
+  refs.modalAuthBackdrop.classList.remove('visually-hidden');
+  // if (!refs.modalHidden.classList.contains('is-hidden-auth'))
+  //   refs.modalHidden.classList.add('is-hidden-auth');
+}
 
-/*function onBtnLogOut() {
+function onBtnLogOut() {
   if (refs.formAuth.classlist.contains('is-hidde-auth')) {
     refs.formAuth.classlist.remove('is-hidden-auth');
   }
-}*/
+}
 function onFormInput(e) {
   currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
   const value = JSON.stringify(currentFormData);
@@ -214,9 +214,7 @@ function resultForm() {
     refs.inputEmail.value === '' ||
     refs.inputPassword.value === ''
   ) {
-    Notify.failure(
-      'Your form has empty fields. Add information and try again.'
-    );
+    console.log('Form has empty fields!');
   } else {
     const { name, email, password } = populateEmail();
     refs.inputName.value = name;
@@ -225,14 +223,11 @@ function resultForm() {
   }
 }
 
-function onFormSubmit(e) {
-  e.preventDefault();
+function onFormSubmit() {
   currentFormData = formData;
   const value = JSON.stringify(currentFormData);
   localStorage.setItem(STORAGE_KEY, value);
-  refs.formAuth.reset();
-  //localStorage.removeItem('feedback-form');
-  //refs.formAuth.classlist.add('is-hidden-auth');
+  // refs.formAuth.reset();
 }
 
 function populateEmail() {
@@ -241,15 +236,59 @@ function populateEmail() {
   return currentFormData;
 }
 
-function onBtnSubmit() {
+function onBtnSubmit(e) {
+  e.preventDefault();
   if (
     refs.inputName.value === '' ||
     refs.inputEmail.value === '' ||
     refs.inputPassword.value === ''
   ) {
-    // Notify.failure(
-    //   'Your form has empty fields. Add information and try again.'
-    //  );
+    Notify.failure(
+      'Your form has empty fields. Add information and try again.'
+    );
+    refs.formAuth.reset();
   }
   console.log(currentFormData);
 }
+
+window.addEventListener('keydown', e => {
+  if (
+    e.key === 'Escape' &&
+    !refs.modalAuthBackdrop.classList.contains('visually-hidden')
+  ) {
+    closeModal();
+  }
+});
+
+const btnCloseAuth = document.querySelector('.auth__btn-close');
+btnCloseAuth.addEventListener('click', () => closeModal());
+
+function closeModal() {
+  refs.modalAuthBackdrop.classList.add('visually-hidden');
+  //window.location.reload();
+}
+////////////////////////////////////TEST OPEN MODAL/////////////////////////////
+
+/*import { refs } from './DOM-elements';
+refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
+function onLoginGlobalBtn() {
+  e.preventDefault();
+  refs.modalAuthBackdrop.classList.remove('visually-hidden');
+}
+
+window.addEventListener('keydown', e => {
+  if (
+    e.key === 'Escape' &&
+    !refs.modalAuthBackdrop.classList.contains('visually-hidden')
+  ) {
+    closeModal();
+  }
+});
+
+const btnCloseAuth = document.querySelector('.auth__btn-close');
+btnCloseAuth.addEventListener('click', () => closeModal());
+
+function closeModal() {
+  refs.modalAuthBackdrop.classList.add('visually-hidden');
+  //window.location.reload();
+}*/
