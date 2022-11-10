@@ -18,7 +18,7 @@ import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 import {lastCard} from './templates/lastCard';
 import {renderMoviesCard} from './templates/movieCard';
-const { logoFromHeader, lastCardLink } = refs;
+const { logoFromHeader} = refs;
 const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
 export let popularMovies = [];
@@ -60,7 +60,6 @@ if (paginationList.currentState === 'search') {
   );
 }
 // // ================ fetch popular movies for start pages ==================//
-// createMovieList(1);
 
 export async function createMovieList(page) {
   addSpinner();
@@ -110,8 +109,8 @@ export async function createMovieList(page) {
     currentPage: paginationList.currentPage,
     totalPages: paginationList.totalPages,
   });
-}
 
+}
 
 function onLogoClick() {
   localStorage.removeItem(CURRENT_PAGE);
@@ -122,5 +121,4 @@ function onLogoClick() {
 
 export function addLastCard() {
   listEl.insertAdjacentHTML('beforeend', lastCard);
-  // lastCard.addEventListener('click', toNextPage);// 
 }
