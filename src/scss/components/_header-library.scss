@@ -82,18 +82,18 @@ ul {
 
 .logo {
   &__link {
-    font-style: normal;
-    font-size: 30px;
-    line-height: 1.17;
     display: flex;
     align-items: center;
-    color: #ffffff;
+    color: #fff;
   }
   &__icon {
     margin-right: 10px;
     fill: currentColor;
   }
   &__text {
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.17;
     display: none;
     @include tablert {
       display: block;
@@ -105,13 +105,17 @@ ul {
   &__list {
     display: flex;
   }
-  &__item {
+  // &__item {
+  //   font-size: 12px;
+  //   line-height: 1.17;
+  //   text-transform: uppercase;
+  // }
+  &__link {
+    color: #ffffff;
+    font-weight: 500;
     font-size: 12px;
     line-height: 1.17;
     text-transform: uppercase;
-  }
-  &__link {
-    color: #ffffff;
   }
 }
 
@@ -180,6 +184,7 @@ ul {
   margin-left: auto;
   top: 0;
   left: 0;
+  z-index: 1;
   padding-left: 20px;
   padding-right: 20px;
   @media (min-device-pixel-ratio: 2),
@@ -240,9 +245,9 @@ ul {
   }
 }
 
-.is-hidden {
-  display: none;
-}
+// .is-hidden {
+//   display: none;
+// }
 
 // test gallery
 
@@ -276,5 +281,19 @@ ul {
   @include desktop {
     gap: 16px;
     row-gap: 32px;
+  }
+}
+
+.wrap-gallery {
+  background-image: url('../images/library/gallery-nothing.jpg');
+  height: 200px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  @include tablert {
+    height: 400px;
+  }
+  @include desktop {
+    height: 600px;
   }
 }
