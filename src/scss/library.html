@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filmoteka</title>
+
+    <!-- switcher theme -->
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#333333"
+    />
+
+    <link
+      rel="stylesheet"
+      href="./scss/components/light-dark/light.scss"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="stylesheet"
+      href="./scss/components/light-dark/dark.scss"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="stylesheet" href="./scss/components/light-dark/styles.scss" />
+
+    <link rel="stylesheet" href="./scss/main.scss" />
+  </head>
+
+  <body class="bg-body">
+    <header class="header-library">
+      <div class="container header-library-container">
+        <div class="header-library__wrap">
+          <a class="logo__link link" href="./index.html"
+            ><svg class="logo__icon" width="24" height="24">
+              <use href="./images/icons.svg#icon-film"></use></svg
+            ><span class="logo__text">Filmoteka</span></a
+          >
+          <ul class="library-nav__list list">
+            <li class="library-nav__item">
+              <a class="library-nav__link link" href="./index.html">Home</a>
+            </li>
+            <li class="library-nav__item">
+              <a class="library-nav__link link" href="./library.html"
+                >my library</a
+              >
+            </li>
+          </ul>
+        </div>
+        <ul class="library-btns__list list">
+          <li class="library-btns__item">
+            <button class="library-btn btn-active" type="button" id="watched">
+              watched
+            </button>
+          </li>
+          <li class="library-btns__item">
+            <button class="library-btn" type="button" id="queue">queue</button>
+          </li>
+        </ul>
+
+        <!----------- fixed header ------------->
+
+        <div class="fixed-header is-hidden">
+          <a class="logo__link logo__link--fixed link" href="./index.html"
+            ><svg class="logo__icon" width="24" height="24">
+              <use href="./images/icons.svg#icon-film"></use></svg
+            ><span class="logo__text">Filmoteka</span></a
+          >
+          <ul class="library-btns__list list">
+            <li class="library-btns__item">
+              <button class="library-btn btn-active" type="button" id="watched">
+                watched
+              </button>
+            </li>
+            <li class="library-btns__item">
+              <button class="library-btn" type="button" id="queue">
+                queue
+              </button>
+            </li>
+          </ul>
+          <ul class="library-nav__list list">
+            <li class="library-nav__item">
+              <a class="library-nav__link link" href="./index.html">Home</a>
+            </li>
+            <li class="library-nav__item">
+              <a class="library-nav__link link" href="./library.html"
+                >my library</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!----------- dark-ligth switcher ------------>
+
+        <fieldset class="switcher">
+          <legend class="switcher__legend">Scheme</legend>
+          <input
+            class="switcher__radio switcher__radio--light"
+            type="radio"
+            name="color-scheme"
+            value="light"
+            aria-label="light"
+          />
+          <input
+            class="switcher__radio switcher__radio--auto"
+            type="radio"
+            name="color-scheme"
+            value="auto"
+            aria-label="Default"
+            checked
+          />
+          <input
+            class="switcher__radio switcher__radio--dark"
+            type="radio"
+            name="color-scheme"
+            value="dark"
+            aria-label="Dark"
+          />
+          <div class="switcher__status"></div>
+        </fieldset>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="gallery-container">
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+        </div>
+        <ul class="movies-list"></ul>
+      </div>
+    </main>
+    <footer class="footer">
+      <h3 class="footer__text">
+        <span class="footer__text--flex footer__text--bottom">
+          © 2020 | All Rights Reserved |
+        </span>
+        <span class="text__footer">
+          Developed withc
+          <svg class="footer__icon" width="14" height="12.75">
+            <use href="./images/icons.svg#icon-Vector"></use>
+          </svg>
+          by
+          <a class="footer__link" href="">GoIT Students</a>
+        </span>
+      </h3>
+    </footer>
+    <script src="./js/library.js" type="module"></script>
+    <script src="./js/light-dark.js" type="module"></script>
+  </body>
+</html>
+Footer © 2022 GitHub, Inc. Footer navigation Terms Privacy Security Status Docs
+Contact GitHub Pricing API Training Blog About

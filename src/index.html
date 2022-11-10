@@ -158,162 +158,184 @@
 
         <!------------ filters -------------->
 
-
         <div class="filters">
           <div class="filters__form">
             <div class="filters__container">
-            <div class="filters__wrap">
-              <div class="genres">
-                <button
-                  data-filter="open"
-                  type="button"
-                  class="filters__button filters__genres-button"
-                >
-                  Genres
-                </button>
+              <div class="filters__wrap">
+                <div class="genres">
+                  <button
+                    data-filter="open"
+                    type="button"
+                    class="filters__button filters__genres-button"
+                  >
+                    Genres
+                  </button>
 
-                <form class="genres__form is-hidden">
-                  <div class="genres__wrap">
-                    <label>
-                      <input type="checkbox" name="with_genres" value="28" />
-                      Action</label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="12" />
-                      Adventure</label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="16" />
-                      Animation </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="35" />
-                      Comedy </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="80" />
-                      Crime </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="99" />
-                      Documentary </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="18" />
-                      Drama </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="10751" />
-                      Family </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="14" />
-                      Fantasy </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="36" />
-                      History </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="27" />
-                      Horror </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="10402" />
-                      Music </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="9648" />
-                      Mystery </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="10749" />
-                      Romance </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="878" />
-                      Science Fiction </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="10770" />
-                      TV Movie </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="53" />
-                      Thriller </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="10752" />
-                      War </label
-                    ><label>
-                      <input type="checkbox" name="with_genres" value="37" />
-                      Western
+                  <form class="genres__form is-hidden">
+                    <div class="genres__wrap">
+                      <label>
+                        <input type="checkbox" name="with_genres" value="28" />
+                        Action</label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="12" />
+                        Adventure</label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="16" />
+                        Animation </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="35" />
+                        Comedy </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="80" />
+                        Crime </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="99" />
+                        Documentary </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="18" />
+                        Drama </label
+                      ><label>
+                        <input
+                          type="checkbox"
+                          name="with_genres"
+                          value="10751"
+                        />
+                        Family </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="14" />
+                        Fantasy </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="36" />
+                        History </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="27" />
+                        Horror </label
+                      ><label>
+                        <input
+                          type="checkbox"
+                          name="with_genres"
+                          value="10402"
+                        />
+                        Music </label
+                      ><label>
+                        <input
+                          type="checkbox"
+                          name="with_genres"
+                          value="9648"
+                        />
+                        Mystery </label
+                      ><label>
+                        <input
+                          type="checkbox"
+                          name="with_genres"
+                          value="10749"
+                        />
+                        Romance </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="878" />
+                        Science Fiction </label
+                      ><label>
+                        <input
+                          type="checkbox"
+                          name="with_genres"
+                          value="10770"
+                        />
+                        TV Movie </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="53" />
+                        Thriller </label
+                      ><label>
+                        <input
+                          type="checkbox"
+                          name="with_genres"
+                          value="10752"
+                        />
+                        War </label
+                      ><label>
+                        <input type="checkbox" name="with_genres" value="37" />
+                        Western
+                      </label>
+                    </div>
+
+                    <div class="button__wrap">
+                      <button
+                        data-filter="reset"
+                        class="button__reset genres__reset-button"
+                        type="reset"
+                      >
+                        Reset
+                      </button>
+
+                      <button
+                        data-filter="genres"
+                        class="button__submit genres__submit-button"
+                        type="submit"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="years">
+                  <button
+                    data-filter="open"
+                    type="button"
+                    class="filters__button filters__years-button"
+                  >
+                    Years
+                  </button>
+
+                  <form class="years__form is-hidden">
+                    <p class="range-description">Years Range:</p>
+                    <div class="range-slider">
+                      <span class="range-values"></span>
+                      <input
+                        class="lower-value"
+                        value="1900"
+                        min="1900"
+                        max="2022"
+                        step="1"
+                        type="range"
+                      />
+                      <input
+                        class="higher-value"
+                        value="2022"
+                        min="1900"
+                        max="2022"
+                        step="1"
+                        type="range"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="filters__wrap">
+                <div class="sort">
+                  <form class="sort__form">
+                    <label for="sort"
+                      >Sort by
+                      <select class="custom-select" id="sort" name="sort">
+                        <option value="popularity.desc" selected>
+                          Popularity
+                        </option>
+                        <option value="vote_average.desc">Rating</option>
+                        <option value="release_date.desc">Newest</option>
+                        <option value="release_date.asc">Oldest</option>
+                      </select>
                     </label>
-                  </div>
+                  </form>
+                </div>
 
-                  <div class="button__wrap">
-                    <button
-                      data-filter="reset"
-                      class="button__reset genres__reset-button"
-                      type="reset"
-                    >
-                      Reset
-                    </button>
-
-
-                    <button
-                      data-filter="genres"
-                      class="button__submit genres__submit-button"
-                      type="submit"
-                    >
-                      Apply
-                    </button>
-                  </div>
-                </form>
+                <div class="adult">
+                  <form class="adult__form">
+                    <label>
+                      <input type="checkbox" name="adult" value="adult" />
+                      Adult
+                    </label>
+                  </form>
+                </div>
               </div>
-
-              <div class="years">
-                <button
-                  data-filter="open"
-                  type="button"
-                  class="filters__button filters__years-button"
-                >
-                  Years
-                </button>
-
-                <form class="years__form is-hidden">
-                  <p class="range-description">Years Range:</p>
-                  <div class="range-slider">
-                    <span class="range-values"></span>
-                    <input
-                      class="lower-value"
-                      value="1900"
-                      min="1900"
-                      max="2022"
-                      step="1"
-                      type="range"
-                    />
-                    <input
-                      class="higher-value"
-                      value="2022"
-                      min="1900"
-                      max="2022"
-                      step="1"
-                      type="range"
-                    />
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="filters__wrap">
-              <div class="sort">
-                <form class="sort__form">
-                  <label for="sort"
-                    >Sort by
-                    <select class="custom-select" id="sort" name="sort">
-                      <option value="popularity.desc" selected>
-                        Popularity
-                      </option>
-                      <option value="vote_average.desc">Rating</option>
-                      <option value="release_date.desc">Newest</option>
-                      <option value="release_date.asc">Oldest</option>
-                    </select>
-                  </label>
-                </form>
-              </div>
-              
-              <div class="adult">
-                <form class="adult__form">
-                  <label>
-                    <input type="checkbox" name="adult" value="adult" />
-                    Adult
-                  </label>
-                </form>
-              </div>
-            </div>
             </div>
             <div class="clear-button-wrap">
               <button
@@ -332,7 +354,8 @@
       <div class="fixed-headers is-hidden">
         <a class="logo-link__fixed link" href="./index.html"
           ><svg class="logo__icon" width="24" height="24">
-            <use href="./images/icons.svg#icon-film"></use></svg><span class="logo-text__fixed">Filmoteka</span></a
+            <use href="./images/icons.svg#icon-film"></use></svg
+          ><span class="logo-text__fixed">Filmoteka</span></a
         >
         <ul class="fixed-list list">
           <li class="fixed-item">
@@ -348,8 +371,8 @@
       <div class="not-found-page"></div>
       <!---------------Modal Authentification------------------------->
       <section class="modal-auth">
-        <!----<div class="modal-auth__backdrop">---->
-          <form class="form__auth is-hidden-auth" autocomplete="off">
+        <div class="modal-auth__backdrop">
+          <form class="form__auth" autocomplete="off">
             <div class="form__auth__wrap">
               <button type="button" class="auth__btn-close">X</button>
               <div class="form__auth__wrapper">
@@ -378,9 +401,15 @@
                     placeholder="Password"
                   />
                   <div class="button__auth">
-                    <button class="button__auth__login">Login</button>
-                    <button class="button__auth__register">Register</button>
-                    <button class="button__auth__logout visually-hidden">
+                    <button class="button__auth__login button-authent">
+                      Login
+                    </button>
+                    <button class="button__auth__register button-authent">
+                      Register
+                    </button>
+                    <button
+                      class="button__auth__logout visually-hidden button-authent"
+                    >
                       Log out
                     </button>
                   </div>
@@ -389,7 +418,6 @@
             </div>
           </form>
         </div>
-        <!---- </div>--->
       </section>
       <div class="container"><ul class="movie"></ul></div>
       <section class="pagination">
@@ -420,15 +448,15 @@
       <div class="contributors__modal"></div>
     </div>
     <div class="trailer-backdrop hide-it">
-      <iframe class="trailer__frame"  allowfullscreen></iframe> 
+      <iframe class="trailer__frame" allowfullscreen></iframe>
     </div>
     <script src="./js/index.js" type="module"></script>
     <script src="./js/light-dark.js" type="module"></script>
   </body>
- 
-<div class="movie__last-img">
-  <button class="movie__last-button">
-    <span class="movie__last-text">Next page</span>
-  </button>
-</div>
+
+  <div class="movie__last-img">
+    <button class="movie__last-button">
+      <span class="movie__last-text">Next page</span>
+    </button>
+  </div>
 </html>
