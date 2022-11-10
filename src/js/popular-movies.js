@@ -102,6 +102,8 @@ export async function createMovieList(page) {
 
   renderMoviesCard(popularMovies);
 
+  
+
   removeSpinner();
   addPagination({
     screenWidth,
