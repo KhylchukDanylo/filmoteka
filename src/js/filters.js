@@ -4,11 +4,13 @@ import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
 import { addPagination, paginationList } from './pagination';
 import { createMovieList } from './popular-movies';
-import { allGenres } from './data/jenres.js';
 import { listEl } from './search-movies';
 import notFoundImg from '../images/page-not-found-404.jpg';
 import { addSpinner, removeSpinner } from './spinner';
-import {getClassByVote} from './search-movies';
+import {renderMoviesCard} from './templates/movieCard';
+import {genresMaker} from './templates/genres-maker';
+import { getClassByVote } from './search-movies';
+import {addLastCard} from './popular-movies';
 const {
   filterForm,
   genresForm,
@@ -22,6 +24,7 @@ const {
   higerValueInput,
   rangeValues,
   notFoundPage,
+  lastCardLink,
 } = refs;
 let screenWidth = container.offsetWidth;
 const initialFilterParams = {
@@ -31,9 +34,9 @@ const initialFilterParams = {
   // primary_release_year: '',
   include_adult: false,
   sort_by: 'popularity.desc',
-}
+};
 let generalFilterParams = {
- ...initialFilterParams,
+  ...initialFilterParams,
 };
 // localStorage.setItem('generalFilterParams', JSON.stringify(generalFilterParams));
 let lastFetchedParams = {
@@ -41,7 +44,9 @@ let lastFetchedParams = {
 };
 // --------------------------------Form list of genres----------------------
 let listOfGenres = {};
-allGenres.map(genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` }));
+allGenres.map(
+  genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` })
+);
 console.log('list', listOfGenres);
 
 filterForm.addEventListener('change', onFormChange);
@@ -119,18 +124,19 @@ function onFormReset(evt) {
 
   if (isGenresForm) {
     generalFilterParams.with_genres = '';
-    openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+    openFilterByGenresBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   }
   if (isYearsForm) {
     generalFilterParams['primary_release_date.lte'] = '2022';
     generalFilterParams['primary_release_date.gte'] = '1900';
-    openFilterByYearsBtn.style.boxShadow = "inset 0 0 8px 1px rgba(255, 0, 27, 0.6)";
+    openFilterByYearsBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   }
   openFilterByGenresBtn.style.boxShadow =
     'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   openFilterByYearsBtn.style.boxShadow =
     'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-
 }
 
 function updateGenresParams(form) {
@@ -201,93 +207,9 @@ export async function renderFiltersResult(list) {
   paginationList.currentPage = data.page;
   paginationList.totalPages = data.total_pages;
 
-      movies.forEach(movie => {
-      movie.genres = movie.genres.map(id => {
-        allGenres.forEach(object => {
-          if (object.id === id) {
-            id = object.name;
-          }
-        });
-        return id;
-      });
+  genresMaker(movies);
 
-      switch (true) {
-        case movie.genres.length > 0 && movie.genres.length <= 2:
-          movie.genres = movie.genres.join(', ');
-          break;
-
-        case movie.genres.length > 2:
-          movie.genres[2] = 'Other';
-          movie.genres = movie.genres.slice(0, 3).join(', ');
-          break;
-
-        default:
-          movie.genres = 'N/A';
-          break;
-      }
-    });
-
-
-  movieList.innerHTML = movies
-    .map(({ id, poster, title, genres, year, rating }) => {
-      return `<li class="movie__item">
-  <a href="#" class="movie__link" id="${id}">
-  <div class="movie__wrapper">
-  <picture>
-      <source
-        media="(min-width:1200px)"
-        
-        srcset="${
-          poster ? `https://image.tmdb.org/t/p/w500${poster}` : defaultImg
-        }"
-        type="image/jpeg"
-      />
-      <source
-        media="(min-width:768px)"
-        srcset="${
-          poster ? `https://image.tmdb.org/t/p/w342/${poster}` : defaultImg
-        }"
-        type="image/jpeg"
-      />
-      <source
-        media="(max-width:767px)"
-        
-        srcset="${
-          poster ? `https://image.tmdb.org/t/p/w342/${poster}` : defaultImg
-        }"
-        type="image/jpeg"
-      />
-
-      <img
-        class="movie-image"
-        src="${
-          poster ? `https://image.tmdb.org/t/p/w500/${poster}` : defaultImg
-        }"
-        loading="lazy"
-        alt="${title}"
-        width="395"
-        height="574"
-      />
-    </picture>
-  
-  </div>
-    
-<div class="movie__text"><h3 class="movie__name">${title}</h3>
-<p class="gallery__text" data-id="${id}">${genres} | ${year}</p>
-</div>
-${
-  !rating || rating == '0.0'
-    ? `<div class="movie__rating movie__rating--grey">NA</div>`
-    : `<div class="movie__rating movie__rating--${getClassByVote(
-        rating
-      )}">${rating}</div>`
-}
-
-  </a>
-</li>`;
-    })
-    .join('');
-
+renderMoviesCard(movies);
 
   addPagination({
     screenWidth,
@@ -366,7 +288,7 @@ function hideFiltersByGenres() {
 
   openFilterByGenresBtn.textContent = selectedGenres;
   // openFilterByGenresBtn.style.borderColor = 'rgba(0,128,0,0.7)';
-  openFilterByGenresBtn.style.boxShadow = "inset 0 0 8px 1px rgba(0,128,0,0.6)";
+  openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
 
   if (openFilterByGenresBtn.textContent === 'Genres') {
     openFilterByGenresBtn.style.boxShadow =
@@ -454,19 +376,19 @@ function fetchAndRenderMoviesByFilter() {
       } else {
         deleteNotFoundPage();
         renderFiltersResult(resp);
-      } 
+      }
       removeSpinner();
     })
     .catch(err => console.log(err));
 }
 
 function renderNotFoundPage() {
-const photo = `<img class='not-found-img' src="${notFoundImg}" alt="404">`
+  const photo = `<img class='not-found-img' src="${notFoundImg}" alt="404">`;
   notFoundPage.innerHTML = photo;
   listEl.innerHTML = '';
   paginationList.innerHTML = '';
   console.dir(paginationList);
-//        -----------------------------------------------------------------------------------------------------------
+  //        -----------------------------------------------------------------------------------------------------------
 }
 
 export function deleteNotFoundPage() {
@@ -495,8 +417,8 @@ export function onClearFiltersButtonClick() {
   listOfForms.forEach(form => form.reset());
   openFilterByGenresBtn.textContent = 'Genres';
   openFilterByYearsBtn.textContent = 'Years';
-  generalFilterParams = { ...initialFilterParams, };
-  lastFetchedParams = { ...initialFilterParams, };
+  generalFilterParams = { ...initialFilterParams };
+  lastFetchedParams = { ...initialFilterParams };
   deleteNotFoundPage();
   createMovieList(1);
 }
