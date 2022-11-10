@@ -1,9 +1,10 @@
 .form__auth {
   width: 70%;
-  height: 70%;
   z-index: 4;
   position: absolute;
   margin: auto;
+  border-radius: 10px;
+  box-shadow: 10px 10px 30px 30px rgba(235, 231, 231, 0.5);
   @include mobile {
     top: 50%;
     left: 50%;
@@ -34,10 +35,11 @@
       25deg,
       var(--color-text-footer),
       var(--color-fon-footer),
-      var(--text-ganre-color)
+      var(--color-modal)
     )
     1;
-  background: var(--text-ganre-color);
+  background: var(--color-modal);
+  color: var(--color-btn-white);
 }
 
 .form__auth__header {
@@ -51,7 +53,7 @@
       25deg,
       var(--color-text-footer),
       var(--color-fon-footer),
-      var(--text-ganre-color)
+      var(--color-modal)
     )
     1;
   background-clip: text;
@@ -85,7 +87,7 @@
   padding-left: 10px;
   margin-bottom: 20px;
 
-  background: var(--text-color);
+  background: rgba(250, 249, 249, 0.5);
   font-family: Montserrat;
   font-weight: 500;
   color: var(--color-btn-white);
@@ -98,9 +100,18 @@
       25deg,
       var(--color-text-footer),
       var(--color-fon-footer),
-      var(--text-ganre-color)
+      var(--color-modal)
     )
     1;
+}
+
+.input-auth:hover,
+.input-auth:focus {
+  background: white;
+  color: var(--text-color);
+  display: inline-block;
+  box-shadow: 0 14px 28px rgba(245, 242, 242, 0.25),
+    0 10px 10px rgba(250, 248, 248, 0.22);
 }
 
 .button__auth {
@@ -116,8 +127,7 @@
 
 .button__auth__login,
 .button__auth__register,
-.button__auth__logout,
-.test {
+.button__auth__logout {
   width: 50%;
   height: 40px;
   float: left;
@@ -162,7 +172,7 @@
   cursor: pointer;
 }
 
-.backdrop-auth {
+/*.backdrop-auth {
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   font-family: sans-serif;
@@ -172,10 +182,26 @@
   max-width: 50%;
   max-height: 50%;
   padding: 20px 40px;
-}
+}*/
 
 .is-hidden-auth {
   top: -100%;
   opacity: 0;
   pointer-events: none;
+}
+
+.button-authent {
+  background-color: var(--color-modal);
+  text-align: center;
+  color: var(--color-btn-white);
+  border-color: var(--color-btn-white);
+}
+
+.button-authent:hover,
+.button-authent:focus {
+  background: white;
+  color: var(--text-color);
+  display: inline-block;
+  box-shadow: 0 14px 28px rgba(245, 242, 242, 0.25),
+    0 10px 10px rgba(250, 248, 248, 0.22);
 }
