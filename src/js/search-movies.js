@@ -201,7 +201,7 @@ export async function createMovieListBySearch(searchToMovie, page) {
       .join('');
 
     listEl.innerHTML = markup;
-    // formEl.reset();
+    formEl.reset();
   }
 }
 

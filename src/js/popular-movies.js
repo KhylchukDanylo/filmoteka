@@ -14,6 +14,7 @@ import { refs } from './DOM-elements';
 import { allGenres } from './data/jenres.js';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
+import {lastCard} from './templates/lastCard';
 const { logoFromHeader } = refs;
 const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
@@ -178,6 +179,8 @@ ${
     })
     .join('');
 
+    addLastCard();
+
   removeSpinner();
   addPagination({
     screenWidth,
@@ -203,4 +206,8 @@ function onLogoClick() {
   localStorage.removeItem(TOTAL_PAGES);
   localStorage.removeItem(CURRENT_STATE);
   localStorage.removeItem(MOVIE_TO_SEARCH);
+}
+
+function addLastCard() {
+  listEl.insertAdjacentHTML('beforeend', lastCard);
 }
