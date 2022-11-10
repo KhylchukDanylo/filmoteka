@@ -41,4 +41,6 @@ export const refs = {
   // showTrailerButton: document.querySelector('.show-trailer'),
   // trailerIcon: document.querySelector('.youtube__icon'),
   movieModal: document.querySelector('.movie__modal'),
+  lastCardLink: document.querySelector('.cta'),
+  formEl: document.querySelector('#search-form'),
 };
