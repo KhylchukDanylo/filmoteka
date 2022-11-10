@@ -42,4 +42,6 @@ export const refs = {
   lastCardLink: document.querySelector('.cta'),
   formEl: document.querySelector('#search-form'),
   trailerBackdrop: document.querySelector('.trailer-backdrop'),
+  addFilterBtn: document.querySelector('.add__filter'),
+  formFilter: document.querySelector('.filters'),
 };
