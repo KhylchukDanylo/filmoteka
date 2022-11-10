@@ -87,7 +87,7 @@
   }
 
   &__button:hover {
-    transform: scale(1.05);
+    // transform: scale(1.05);
     cursor: pointer;
   }
 
@@ -110,10 +110,10 @@
     }
   }
 
-  &__button--clear:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
+  // &__button--clear:hover {
+  //   transform: scale(1.05);
+  //   cursor: pointer;
+  // }
 }
 
 // add .years__form
