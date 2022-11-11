@@ -317,17 +317,19 @@ window.addEventListener('keydown', e => {
   }
 });
 
+
+const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};
 function addToQueue(movieId, movieTitle) {
   const btn = document.querySelector('#btn-queue');
   queueText = 'remove from queue';
   btn.textContent = queueText;
-  Notify.success(`"${movieTitle}" added to queue`);
+  Notify.success(`"${movieTitle}" added to queue`, trailerNotifyOptions);
   queueMovies.push(movieId);
   localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
 }
 
 function removeFromQueue(movieId, movieTitle) {
-  Notify.warning(`"${movieTitle}" removed from queue`);
+  Notify.warning(`"${movieTitle}" removed from queue`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-queue');
   queueText = 'add to queue';
   btn.textContent = queueText;
@@ -340,7 +342,7 @@ function removeFromQueue(movieId, movieTitle) {
 }
 
 function addToWached(movieId, movieTitle) {
-  Notify.success(`"${movieTitle}" added to wached`);
+  Notify.success(`"${movieTitle}" added to wached`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-watched');
   btn.style.padding = '0';
   watchedText = 'remove from watched';
@@ -350,7 +352,7 @@ function addToWached(movieId, movieTitle) {
 }
 
 function removeFromWached(movieId, movieTitle) {
-  Notify.warning(`"${movieTitle}" removed from wached`);
+  Notify.warning(`"${movieTitle}" removed from wached`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-watched');
   watchedText = 'add to watched';
   btn.style.padding = '6px 27px';
@@ -366,3 +368,9 @@ function removeFromWached(movieId, movieTitle) {
 }
 
 export { movieId, backdrop };
+
+// const processingKeys = ['addToQueue', 'removeFromQueue', 'removeFromWached', 'removeItem']
+
+// function localStorageMovieHandling(movieId, processingKey){
+
+// }
