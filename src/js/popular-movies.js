@@ -18,6 +18,7 @@ import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 import {lastCard} from './templates/lastCard';
 import {renderMoviesCard} from './templates/movieCard';
+import { FILTERS_PARAMS } from './filters';
 const { logoFromHeader} = refs;
 const listEl = document.querySelector('.movie');
 let screenWidth = containerEl.offsetWidth;
@@ -50,6 +51,18 @@ try {
   console.log('There are no movies to search in local Storage yet');
 }
 
+try {
+  const filtersParams = JSON.parse(localStorage.getItem(FILTERS_PARAMS));
+  if (filtersParams === null) {
+    throw new Error();
+  }
+  const currentState = JSON.parse(localStorage.getItem(CURRENT_STATE));
+  paginationList.currentState = currentState;
+  paginationList.queryParams = { ...filtersParams };
+} catch (err) {
+  console.log("no filters params");
+}
+
 if (!paginationList.currentState || paginationList.currentState === 'popular') {
   createMovieList(paginationList.currentPage);
 }
@@ -58,6 +71,10 @@ if (paginationList.currentState === 'search') {
     paginationList.movieToSearch,
     paginationList.currentPage
   );
+}
+import {fetchAndRenderMoviesByFilter} from './filters'
+if (paginationList.currentState === 'filter') {
+  fetchAndRenderMoviesByFilter();
 }
 // // ================ fetch popular movies for start pages ==================//
 
@@ -94,6 +111,8 @@ export async function createMovieList(page) {
         CURRENT_STATE,
         JSON.stringify(paginationList.currentState)
       );
+      localStorage.removeItem(FILTERS_PARAMS);
+
     })
     .catch(error => console.log(error));
 

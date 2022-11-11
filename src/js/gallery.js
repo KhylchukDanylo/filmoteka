@@ -9,7 +9,6 @@ const queueList = localStorage.getItem('queue-movies');
 const parsedQueueList = JSON.parse(queueList);
 
 export { showWatchedList, showQueueList, parsedWatchedList, parsedQueueList };
-
 let moviesList = [];
 
 function showWatchedList(list) {
