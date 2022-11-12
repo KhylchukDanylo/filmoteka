@@ -3,6 +3,7 @@ import { fetchMovieById } from './api-service';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 import { closeModal } from './modal-movie-render';
+import { genresMaker } from './templates/genres-maker';
 
 const movieList = document.querySelector('.movie');
 const containerNothing = document.querySelector('.wrap-gallery');
@@ -68,12 +69,25 @@ async function createMovieList(id) {
       id: response.data.id,
       poster: response.data.poster_path,
       title: response.data.original_title,
-      genres: response.data.genre_ids,
+      genres: response.data.genres.map(genre => genre.name),
       year: response.data?.release_date?.slice(0, 4) || 'N/A',
       rating: response.data.vote_average.toFixed(1),
     };
-
     moviesList.push(moviesData);
+
+    switch (true) {
+      case moviesData.genres.length > 0 && moviesData.genres.length <= 2:
+        moviesData.genres = moviesData.genres.join(', ');
+        break;
+      case moviesData.genres.length > 2:
+        moviesData.genres[2] = 'Other';
+        moviesData.genres = moviesData.genres.slice(0, 3).join(', ');
+        break;
+      default:
+        moviesData.genres = 'N/A';
+        break;
+    }
+
 
     renderMoviesCard(moviesList);
   } catch (error) {
