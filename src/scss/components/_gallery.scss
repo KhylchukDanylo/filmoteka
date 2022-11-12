@@ -30,7 +30,6 @@
     font-size: 12px;
     line-height: 1.16;
     text-transform: uppercase;
-    
 
     color: var(--color-name-film);
     @include desktop {
@@ -100,15 +99,16 @@
 
 .movie__rating {
   position: absolute;
-  top: -18px;
-  left: -10px;
-  border-radius: 50%;
   width: 44px;
   height: 44px;
+  top: -18px;
+  left: -10px;
+  font-size: 18px;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #161f23;
+  background: linear-gradient(#000000, #434343);
 
   color: #fff;
   z-index: 2;
@@ -121,5 +121,8 @@
   }
   &--red {
     border: 2px solid red;
+  }
+  &--grey {
+    border: 2px solid grey;
   }
 }

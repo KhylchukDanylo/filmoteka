@@ -71,7 +71,6 @@ async function openModal(id) {
   } = resp.data;
 
   backdrop.classList.remove('hide-modal');
-  // movieModal.classList.remove('is-hidden');
   document.body.classList.add('stop-scrolling');
 
   movieModal.innerHTML = `<div class="movie__inner">
@@ -221,10 +220,10 @@ async function openModal(id) {
     <p class="movie__description">${overview}</p>
     <div class="button-wrap">
       <button type="button" class="movie__btn movie__btn-watched" id="btn-watched">
-          ${watchedText}
-      </button>
+         ${watchedText}
+     </button>
           <button type="button" class="movie__btn movie__btn-queue" id="btn-queue">
-     ${queueText}
+    ${queueText}
       </button>
     </div>
     <button type="button" class="movie__btn-close">
@@ -278,12 +277,18 @@ async function openModal(id) {
   btnClose.addEventListener('click', () => closeModal());
 }
 
-function closeModal() {
-  // movieModal.classList.add('is-hidden');
-  backdrop.classList.add('hide-modal');
+//close modal function and closing by backdrop & 'Escape'//
 
+function closeModal() {
+  backdrop.classList.add('hide-modal');
   document.body.classList.remove('stop-scrolling');
 }
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+});
 
 window.addEventListener('click', e => {
   if (e.target === backdrop) {
@@ -325,12 +330,6 @@ window.addEventListener('click', e => {
       queueText = 'add to queue';
       btn.textContent = 'add to queue';
     }
-  }
-});
-
-window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeModal();
   }
 });
 
