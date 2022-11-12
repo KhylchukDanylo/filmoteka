@@ -32,7 +32,6 @@ const initialFilterParams = {
   with_genres: '',
   'primary_release_date.lte': '2022',
   'primary_release_date.gte': '1900',
-  // primary_release_year: '',
   include_adult: false,
   sort_by: 'popularity.desc',
 };
@@ -51,7 +50,10 @@ try {
   lastFetchedParams = { ...response };
   if (response['include_adult']) {
     checkingForBeingAdultInput.setAttribute('checked', true);
-}
+  }
+  
+  const selectedSortQuery = response["sort_by"];
+  console.log('selectedSortQuery',selectedSortQuery);
 } catch (err) {
   console.log("You haven't selected any filters yet");
 }
@@ -241,11 +243,13 @@ function openFiltersOptions(evt) {
 
   if (isGenresBtn) {
     showFiltersByGenres();
+    filterForm.removeEventListener('click', openFiltersOptions);
     return;
   }
 
   if (isYearsBtn) {
     showFiltersByYears();
+    filterForm.removeEventListener('click', openFiltersOptions);
     return;
   }
 }
@@ -274,7 +278,7 @@ function showFiltersByGenres() {
       document.addEventListener('click', closeGenresFilterOptions);
     },
     { once: true }
-  );
+    );
 }
 
 function showFiltersByYears() {
@@ -304,6 +308,7 @@ function closeGenresFilterOptions(evt) {
   if (!evt.target.closest('.genres__form')) {
     evt.preventDefault();
     clickOutOfFiltersByGenres(); 
+    filterForm.addEventListener('click', openFiltersOptions);
   }
 }
 
@@ -346,11 +351,6 @@ function clickOutOfFiltersByYears() {
 }
 
 function hideFiltersByGenres() {
-// const checked = document.querySelector('.genres__wrap input');
-// checked.setAttribute('checked', true)
-// console.log('checked',checked);
-
-
   genresForm.classList.add('is-hidden');
   const selectedGenresArr = generalFilterParams.with_genres.split(',');
 

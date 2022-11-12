@@ -33,12 +33,14 @@ function onImgClick(evt) {
   }
   movieId = +evt.target.closest('li').id;
 
-  // const filterIsOpened =
-  //   !genresForm.classList.contains('is-hidden') ||
-  //   !yearsForm.classList.contains('is-hidden');
-  // if (filterIsOpened) {
-  //   return;
-  // }
+  if (genresForm) { 
+  const filterIsOpened =
+    !genresForm.classList.contains('is-hidden') ||
+    !yearsForm.classList.contains('is-hidden');
+  if (filterIsOpened) {
+    return;
+  }
+}
 
   openModal(movieId);
 
