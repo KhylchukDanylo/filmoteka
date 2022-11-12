@@ -1,5 +1,8 @@
 import defaultImg from '../images/437973.webp';
-import axios from 'axios';
+import { fetchMovieById } from './api-service';
+import { addSpinner } from './spinner';
+import { removeSpinner } from './spinner';
+import { closeModal } from './modal-movie-render';
 
 const movieList = document.querySelector('.movie');
 const containerNothing = document.querySelector('.wrap-gallery');
@@ -9,6 +12,20 @@ const queueList = localStorage.getItem('queue-movies');
 const parsedQueueList = JSON.parse(queueList);
 
 export { showWatchedList, showQueueList, parsedWatchedList, parsedQueueList };
+
+window.addEventListener('click', e => {
+  if (e.target.id === 'btn-watched') {
+    closeModal();
+    clear();
+    showWatchedList(parsedWatchedList);
+  }
+  if (e.target.id === 'btn-queue') {
+    closeModal();
+    clear();
+    showQueueList(parsedQueueList);
+  }
+});
+
 let moviesList = [];
 
 function showWatchedList(list) {
@@ -43,12 +60,6 @@ function clear() {
 
 showWatchedList(parsedWatchedList);
 
-async function fetchMovieById(movieId) {
-  const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=7653694c4941db1f3bfb7af19c86b9a8&language=en-US`;
-  const response = await axios(url);
-  return response;
-}
-
 async function createMovieList(id) {
   try {
     const response = await fetchMovieById(id);
@@ -79,7 +90,7 @@ function renderMoviesCard(moviesList) {
         <picture>
             <source
               media="(min-width:1200px)"
-              
+
               srcset="${
                 poster ? `https://image.tmdb.org/t/p/w500${poster}` : defaultImg
               }"
@@ -96,7 +107,7 @@ function renderMoviesCard(moviesList) {
             />
             <source
               media="(max-width:767px)"
-              
+
               srcset="${
                 poster
                   ? `https://image.tmdb.org/t/p/w342/${poster}`
@@ -104,7 +115,7 @@ function renderMoviesCard(moviesList) {
               }"
               type="image/jpeg"
             />
-        
+
             <img
               class="movie-image"
               src="${
@@ -118,9 +129,9 @@ function renderMoviesCard(moviesList) {
               height="574"
             />
           </picture>
-        
+
         </div>
-          
+
         <div class="movie__text"><h3 class="movie__name">${title}</h3>
         <p class="movie__genre" data-id="${id}">${genres} | ${year}</p></div>
           ${
@@ -130,7 +141,7 @@ function renderMoviesCard(moviesList) {
                   rating
                 )}">${rating}</div>`
           }
-        
+
         </a>
         </li>`;
     })
