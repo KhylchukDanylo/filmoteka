@@ -5,7 +5,6 @@ import './search-movies';
 import './eventListeners';
 import './modal-auth';
 import './contributors-modal';
-import './backdrop';
 import './header';
 import './modal-movie-render';
 // import './range-slider';
