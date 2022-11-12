@@ -102,13 +102,20 @@ onAuthStateChanged(auth, user => {
     refs.btnLogOut.classList.remove('visually-hidden');
     refs.btnLoginGlobal.textContent = 'log out';
     refs.btnMyLibrary.classList.remove('disabled');
-    document.querySelector('.input__auth__email').value = '';
-    document.querySelector('.input__auth__password').value = '';
-    document.querySelector('.input__auth__name').value = '';
-
+    refs.inputName.value = '';
+    refs.inputEmail.value = '';
+    refs.inputPassword.value = '';
+    refs.inputName.disabled = true;
+    refs.inputEmail.disabled = true;
+    refs.inputPassword.disabled = true;
+    refs.btnMyLibrary.classList.remove('disabled');
     return uid;
   } else {
     localStorage.removeItem('uid');
+    refs.inputName.disabled = false;
+    refs.inputEmail.disabled = false;
+    refs.inputPassword.disabled = false;
+    refs.btnMyLibrary.classList.add('disabled');
   }
 });
 
@@ -125,7 +132,7 @@ function onBtnLogOut(e) {
       uid = null;
     })
     .catch(error => {
-      Notify.failure('User is logged out!');
+      Notify.warning('User is logged out!');
     });
 }
 
@@ -169,47 +176,34 @@ btnCloseAuth.addEventListener('click', () => closeModal());
 
 function closeModal() {
   refs.formAuth.classList.add('is-hidden');
-  backdrop.classList.add('is-hidden');
+  // backdrop.classList.add('is-hidden');
   window.location.reload();
-}*/
-
-/*function noScroll() {
-  if (!refs.formAuth.classList.contains('visually-hidden')) {
-    document.body.classList.add('stop-scrolling');
-  } else {
-    document.body.classList.remove('stop-scrolling');
-  }
-}*/
-
-/*function onBackdropClick(event) {
-  if (event.target === event.currentTarget) {
-    onCloseModalAuth();
-  }
-}*/
-
+}
+*/
 ///////////////////////////LOCALSTORAGE//////////////////////////////
-
-import throttle from 'lodash.throttle';
+/*import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
 import { refs } from './DOM-elements';
+
 refs.btnLogin.addEventListener('click', onBtnLogin);
 refs.btnRegister.addEventListener('click', onBtnSubmit);
 refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
-refs.formAuth.addEventListener('submit', onFormSubmit);
+//refs.formAuth.addEventListener('submit', onFormSubmit);
 refs.btnLogOut.addEventListener('click', onBtnLogOut);
 refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
 
 const STORAGE_KEY = 'feedback-form';
+//const STORAGE_KEY_NEW = 'feedback-form-login';
 
 const formData = {
-  text: '',
+  name: '',
   email: '',
   password: '',
 };
 
 let currentFormData = formData;
 
-resultForm();
+const { name, email, password } = formData;
 
 function onLoginGlobalBtn(e) {
   e.preventDefault();
@@ -241,6 +235,28 @@ function onBtnLogOut() {
   refs.btnLoginGlobal.textContent = 'Log in';
   closeModal();
 }
+
+function onBtnSubmit(e) {
+  e.preventDefault();
+  refs.inputName.value = name;
+  refs.inputEmail.value = email;
+  refs.inputPassword.value = password;
+
+  if (
+    onValidInput(email) === false ||
+    validate_password(password) === false ||
+    validate_name(name) === false
+  ) {
+    return Notify.failure('Name or Email or Password is wrong!');
+  } else {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
+    Notify.success('Welcome to our site!');
+  }
+  refs.btnLoginGlobal.textContent = 'Log out';
+  closeModal();
+  refs.formAuth.reset();
+}
+
 function onFormInput(e) {
   e.preventDefault();
   currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
@@ -248,47 +264,48 @@ function onFormInput(e) {
   localStorage.setItem(STORAGE_KEY, value);
 }
 
-function resultForm() {
-  const { text, email, password } = populateEmail();
-  refs.inputName.value = text;
-  refs.inputEmail.value = email;
-  refs.inputPassword.value = password;
-}
-
-function onFormSubmit(e) {
+function onBtnLogin(e) {
   e.preventDefault();
-  currentFormData = formData;
-  const value = JSON.stringify(currentFormData);
-  localStorage.setItem(STORAGE_KEY, value);
-
-  //window.location.reload();
-}
-
-function populateEmail() {
-  currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || formData;
-  console.log(currentFormData);
-  return currentFormData;
-}
-
-function onBtnSubmit() {
-  if (
-    refs.inputName.value !== '' ||
-    refs.inputEmail.value !== '' ||
-    refs.inputPassword.value !== ''
-  ) {
+  currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (STORAGE_KEY in localStorage) {
     Notify.success('Welcome to our site!');
-    refs.btnLoginGlobal.textContent = 'Log out';
   } else {
-    Notify.failure(
-      'Your form has empty fields. Add information and try again.'
+    return Notify.failure(
+      'Fields to have wrong information. Check plesase and try again!'
     );
   }
-  refs.formAuth.reset();
-  closeModal();
+}
+
+function onValidInput(email) {
+  expression = /^[^@]+@\w+(\.\w+)+\w$/;
+  if (expression.test(email) === true) {
+    return true;
+  } else {
+    return Notify.failure('Email is wrong!');
+  }
+}
+
+function validate_password(password) {
+  if (password < 6) {
+    return Notify.failure('Password is wrong!');
+  } else {
+    return true;
+  }
+}
+
+function validate_name(name) {
+  if (name === '') {
+    return Notify.failure('Name is wrong!');
+  } else {
+    return true;
+  }
 }
 
 window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
+  if (
+    e.key === 'Escape' &&
+    !refs.formAuth.classList.contains('visually-hidden')
+  ) {
     closeModal();
   }
 });
@@ -298,22 +315,172 @@ btnCloseAuth.addEventListener('click', () => closeModal());
 
 function closeModal() {
   refs.formAuth.classList.add('visually-hidden');
-  //window.location.reload();
 }
 
-function onBtnLogin() {
-  const currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  let newCurrentFormData =
-    'refs.inputName.value && refs.inputEmail.value && refs.inputPassword.value';
-  if (currentFormData === newCurrentFormData) {
-    Notify.success('Welcome to our site!');
-    console.log('Login successful');
-  } else {
-    Notify.failure('ERROR');
-    console.log('Wrong user');
+*/
+/////////////////////ТЕКУЩЕЕ РАЗБИРАТЕЛЬСТВО/////////////
+
+import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix';
+import { refs } from './DOM-elements';
+
+refs.btnLogin.addEventListener('click', onBtnLogin);
+refs.btnRegister.addEventListener('click', onBtnSubmit);
+refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
+//refs.formAuth.addEventListener('submit', onFormSubmit);
+refs.btnLogOut.addEventListener('click', onBtnLogOut);
+refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
+
+const STORAGE_KEY = 'feedback-form';
+//const STORAGE_KEY_NEW = 'feedback-form-login';
+
+const formData = {
+  name: '',
+  email: '',
+  password: '',
+};
+
+let currentFormData = formData;
+
+let users = [];
+
+if (localStorage.getItem(STORAGE_KEY)) {
+  users = JSON.parse(localStorage.getItem(STORAGE_KEY));
+}
+
+const { name, email, password } = formData;
+
+function onLoginGlobalBtn(e) {
+  e.preventDefault();
+  refs.formAuth.classList.remove('visually-hidden');
+
+  if (refs.btnLoginGlobal.textContent === 'Log out') {
+    refs.btnLogin.classList.add('visually-hidden');
+    refs.btnRegister.classList.add('visually-hidden');
+    refs.btnLogOut.classList.remove('visually-hidden');
+    refs.inputName.disabled = true;
+    refs.inputEmail.disabled = true;
+    refs.inputPassword.disabled = true;
   }
-  Notify.failure('ERROR');
-  console.log('Not a registered user');
+
+  if (refs.btnLoginGlobal.textContent === 'Log in') {
+    refs.btnLogin.classList.remove('visually-hidden');
+    refs.btnRegister.classList.remove('visually-hidden');
+    refs.btnLogOut.classList.add('visually-hidden');
+    refs.inputName.disabled = false;
+    refs.inputEmail.disabled = false;
+    refs.inputPassword.disabled = false;
+  }
+}
+
+function onBtnLogOut() {
+  refs.btnLogin.classList.remove('visually-hidden');
+  refs.btnRegister.classList.remove('visually-hidden');
+  refs.btnLogOut.classList.add('visually-hidden');
+  refs.btnLoginGlobal.textContent = 'Log in';
   closeModal();
 }
-/*const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};*/
+
+function getLocalStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+    const result = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    result.reduce((acc, user) => {
+      return acc.push(user);
+    }, []);
+  } catch (e) {
+    console.log('Error!');
+  }
+}
+
+function onBtnSubmit(e) {
+  e.preventDefault();
+  refs.inputName.value = name;
+  refs.inputEmail.value = email;
+  refs.inputPassword.value = password;
+
+  if (
+    onValidInput(email) === false ||
+    validate_password(password) === false ||
+    validate_name(name) === false
+  ) {
+    console.log('Name or Email or Password is wrong!');
+    // return Notify.failure('Name or Email or Password is wrong!');
+  } else {
+    console.log('Welcome to our site!');
+    //Notify.success('Welcome to our site!');
+    getLocalStorage();
+  }
+
+  /*if (localStorage.getItem(STORAGE_KEY).includes(email)) {
+    users.splice(users.indexOf(email), 1);
+  } else {
+    users.push(email);
+  }
+  console.log(users);*/
+
+  refs.btnLoginGlobal.textContent = 'Log out';
+  closeModal();
+  refs.formAuth.reset();
+}
+
+function onFormInput(e) {
+  e.preventDefault();
+  currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
+  const value = JSON.stringify(currentFormData);
+  localStorage.setItem(STORAGE_KEY, value);
+}
+
+function onBtnLogin(e) {
+  e.preventDefault();
+  currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if (STORAGE_KEY in localStorage) {
+    //  Notify.success('Welcome to our site!');
+    console.log('Welcome to our site!');
+  } else {
+    console.log('Fields to have wrong information!');
+    return;
+    //Notify.failure( 'Fields to have wrong information. Check plesase and try again!');
+  }
+}
+
+function onValidInput(email) {
+  expression = /^[^@]+@\w+(\.\w+)+\w$/;
+  if (expression.test(email) === true) {
+    return true;
+  } else {
+    return Notify.failure('Email is wrong!');
+  }
+}
+
+function validate_password(password) {
+  if (password < 6) {
+    return Notify.failure('Password is wrong!');
+  } else {
+    return true;
+  }
+}
+
+function validate_name(name) {
+  if (name === '') {
+    return Notify.failure('Name is wrong!');
+  } else {
+    return true;
+  }
+}
+
+window.addEventListener('keydown', e => {
+  if (
+    e.key === 'Escape' &&
+    !refs.formAuth.classList.contains('visually-hidden')
+  ) {
+    closeModal();
+  }
+});
+
+const btnCloseAuth = document.querySelector('.auth__btn-close');
+btnCloseAuth.addEventListener('click', () => closeModal());
+
+function closeModal() {
+  refs.formAuth.classList.add('visually-hidden');
+}

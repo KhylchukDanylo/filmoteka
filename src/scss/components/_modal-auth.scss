@@ -1,3 +1,7 @@
+html {
+  cursor: url(../images/donkey.png), auto;
+}
+
 .form__auth {
   width: 70%;
   z-index: 4;
@@ -194,7 +198,7 @@
     0 10px 10px rgba(250, 248, 248, 0.22);
 }
 
-.backdrop-auth {
+/*.backdrop-auth {
   position: fixed;
   top: 0;
   left: 0;
@@ -205,4 +209,4 @@
   z-index: 13;
   overflow: hidden;
   cursor: pointer;
-}
+}*/
