@@ -47,5 +47,6 @@ export const refs = {
   addFilterBtn: document.querySelector('.add__filter'),
   formFilter: document.querySelector('.filters'),
   lastGalleryCard: document.querySelector('.movie__last-img'),
-  addFilterButton: document.querySelector('.add__filter'),
+  body: document.querySelector('body'),
+  logoutButton: document.querySelector('.logout-button'),
 };

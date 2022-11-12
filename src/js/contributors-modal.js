@@ -1,6 +1,3 @@
-const main = document.querySelector('main');
-// main.classList.add('is-hidden');
-
 import { refs } from "./DOM-elements";
 import {renderCotributorsModal} from './contributors-markup';
 const { teamModalButton, contributorsModal, contributorsBackdrop} = refs;
