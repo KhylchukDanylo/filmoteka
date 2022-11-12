@@ -4,7 +4,6 @@ import {genresMaker} from './templates/genres-maker';
 import {
   paginationList,
   addPagination,
-  containerEl,
   CURRENT_PAGE,
   TOTAL_PAGES,
   CURRENT_STATE,
@@ -16,13 +15,13 @@ import { deleteNotFoundPage, onClearFiltersButtonClick } from './filters';
 import {renderMoviesCard} from './templates/movieCard';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
-const { lastCardLink } = refs;
+const { lastCardLink, container } = refs;
 
 
 export const formEl = document.querySelector('#search-form');
 const inputEl = document.querySelector('#search-box');
 export const listEl = document.querySelector('.movie');
-let screenWidth = containerEl.offsetWidth;
+let screenWidth = container.offsetWidth;
 export let moviesList = [];
 formEl.addEventListener('submit', searchMovies);
 

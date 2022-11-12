@@ -2,7 +2,7 @@ export function addSpinner() {
   const spinner = document.querySelector('.loader');
   const footer = document.querySelector('.footer');
   const html = document.querySelector('html');
-  const header = document.querySelector('.header');
+  const header = document.querySelector('header');
   const main = document.querySelector('main');
   spinner.classList.add('loader--visible');
   spinner.classList.remove('loader--hidden');

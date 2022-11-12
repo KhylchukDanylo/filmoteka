@@ -3,7 +3,6 @@ import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
 const {
-  trailerFrame,
   movieModal,
   movieBackdrop: backdrop,
   genresForm,
@@ -18,7 +17,6 @@ const listEl = document.querySelector('.movie');
 
 listEl.addEventListener('click', onImgClick);
 
-//сделал переменную через let ибо для открытия трейлера тоже нужен id
 let movieId;
 let queueText = '';
 let watchedText = '';
@@ -33,12 +31,14 @@ function onImgClick(evt) {
   }
   movieId = +evt.target.closest('li').id;
 
-  // const filterIsOpened =
-  //   !genresForm.classList.contains('is-hidden') ||
-  //   !yearsForm.classList.contains('is-hidden');
-  // if (filterIsOpened) {
-  //   return;
-  // }
+  if (genresForm) { 
+  const filterIsOpened =
+    !genresForm.classList.contains('is-hidden') ||
+    !yearsForm.classList.contains('is-hidden');
+  if (filterIsOpened) {
+    return;
+  }
+}
 
   openModal(movieId);
 
@@ -52,7 +52,6 @@ function onImgClick(evt) {
 }
 
 async function openModal(id) {
-  // trailerFrame.classList.add('hide-it');
   addSpinner();
   const resp = await fetchMovieById(id);
 
@@ -316,19 +315,23 @@ window.addEventListener('keydown', e => {
   }
 });
 
+
+const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};
 function addToQueue(movieId, movieTitle) {
   const btn = document.querySelector('#btn-queue');
   queueText = 'remove from queue';
+  btn.classList.add('selected');
   btn.textContent = queueText;
-  Notify.success(`"${movieTitle}" added to queue`);
+  Notify.success(`"${movieTitle}" added to queue`, trailerNotifyOptions);
   queueMovies.push(movieId);
   localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
 }
 
 function removeFromQueue(movieId, movieTitle) {
-  Notify.warning(`"${movieTitle}" removed from queue`);
+  Notify.warning(`"${movieTitle}" removed from queue`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-queue');
   queueText = 'add to queue';
+  btn.classList.remove('selected');
   btn.textContent = queueText;
   localStorage.removeItem('queue-movies');
   const movieIndex = queueMovies.findIndex((element, index) =>
@@ -339,9 +342,10 @@ function removeFromQueue(movieId, movieTitle) {
 }
 
 function addToWached(movieId, movieTitle) {
-  Notify.success(`"${movieTitle}" added to wached`);
+  Notify.success(`"${movieTitle}" added to wached`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-watched');
   btn.style.padding = '0';
+  btn.classList.add('selected');
   watchedText = 'remove from watched';
   btn.textContent = watchedText;
   watchedMovies.push(movieId);
@@ -349,9 +353,10 @@ function addToWached(movieId, movieTitle) {
 }
 
 function removeFromWached(movieId, movieTitle) {
-  Notify.warning(`"${movieTitle}" removed from wached`);
+  Notify.warning(`"${movieTitle}" removed from wached`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-watched');
   watchedText = 'add to watched';
+  btn.classList.remove('selected');
   btn.style.padding = '6px 27px';
   btn.textContent = watchedText;
 
