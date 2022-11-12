@@ -1,6 +1,5 @@
 import { leftArrowIcon, rightArrowIcon } from './svg-icons';
 export const paginationList = document.querySelector('.pagination-list');
-export const containerEl = document.querySelector('.container');
 export const CURRENT_PAGE = 'paginationCurrentPage';
 export const TOTAL_PAGES = 'paginationTotalPages';
 export const CURRENT_STATE = 'paginationCurrentState';

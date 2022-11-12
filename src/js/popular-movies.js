@@ -5,7 +5,6 @@ import {genresMaker} from './templates/genres-maker';
 import {
   paginationList,
   addPagination,
-  containerEl,
   CURRENT_PAGE,
   TOTAL_PAGES,
   CURRENT_STATE,
@@ -19,9 +18,9 @@ import { removeSpinner } from './spinner';
 import {lastCard} from './templates/lastCard';
 import {renderMoviesCard} from './templates/movieCard';
 import { FILTERS_PARAMS } from './filters';
-const { logoFromHeader} = refs;
+const { logoFromHeader, container} = refs;
 const listEl = document.querySelector('.movie');
-let screenWidth = containerEl.offsetWidth;
+let screenWidth = container.offsetWidth;
 export let popularMovies = [];
 
 logoFromHeader.addEventListener('click', onLogoClick);

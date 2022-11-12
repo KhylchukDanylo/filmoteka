@@ -49,7 +49,6 @@ allGenres.map(
 
 try {
   const response = JSON.parse(localStorage.getItem(FILTERS_PARAMS));
-  console.log(response);
   if (response === null) {
     throw new Error();
   }
@@ -67,8 +66,9 @@ try {
     }
   });
   
-  const arrOfSelectedGenres = response["with_genres"].split(',');
-  changeGenresButtonAppearance(arrOfSelectedGenres);
+  updateGenresButtonAppearance();
+  updateYearsButtonAppearance();
+  renderYearsInterval(generalFilterParams["primary_release_date.gte"], generalFilterParams["primary_release_date.lte"]);
   
 } catch (err) {
   console.log("You haven't selected any filters yet");
@@ -103,8 +103,8 @@ clearFiltersButton.addEventListener('click', onClearFiltersButtonClick);
 async function onFormSubmit(evt) {
   evt.preventDefault();
 
-  hideFiltersByGenres();
-  hideFiltersByYears();
+  updateGenresButtonAppearance();
+  updateYearsButtonAppearance();
 
   if (isInitialGeneralFilterParams(generalFilterParams)) {
     // localStorage.removeItem(FILTERS_PARAMS);
@@ -348,7 +348,7 @@ function closeYearsFilterOptions(evt) {
 }
 
 function clickOutOfFiltersByGenres() {
-  hideFiltersByGenres();
+  updateGenresButtonAppearance();
   if (areEqual(generalFilterParams, lastFetchedParams)) {
     return;
   }
@@ -364,7 +364,7 @@ function clickOutOfFiltersByGenres() {
 }
 
 function clickOutOfFiltersByYears() {
-  hideFiltersByYears();
+  updateYearsButtonAppearance();
   if (areEqual(generalFilterParams, lastFetchedParams)) {
     return;
   }
@@ -378,16 +378,14 @@ function clickOutOfFiltersByYears() {
   lastFetchedParams = { ...generalFilterParams };
 }
 
-function hideFiltersByGenres() {
+function updateGenresButtonAppearance() {
   genresForm.classList.add('is-hidden');
   const selectedGenresArr = generalFilterParams.with_genres.split(',');
   changeGenresButtonAppearance(selectedGenresArr);
   document.removeEventListener('click', closeGenresFilterOptions);
 }
 
-
-
-function hideFiltersByYears() {
+function updateYearsButtonAppearance() {
   yearsForm.classList.add('is-hidden');
 
   let selectedYear = `${generalFilterParams['primary_release_date.gte']} - ${generalFilterParams['primary_release_date.lte']}`;
@@ -535,10 +533,19 @@ function onInputChange(evt) {
     minValue = additionalVar;
   }
 
-  if (Number(minValue) === Number(maxValue)) {
-    rangeValues.innerHTML = minValue;
+  renderYearsInterval(minValue, maxValue);
+  // if (Number(minValue) === Number(maxValue)) {
+  //   rangeValues.innerHTML = minValue;
+  // } else {
+  //   rangeValues.innerHTML = `From ${minValue} to ${maxValue}`;
+  // }
+}
+
+function renderYearsInterval(min, max) {
+    if (+min === +max) {
+    rangeValues.innerHTML = min;
   } else {
-    rangeValues.innerHTML = `From ${minValue} to ${maxValue}`;
+    rangeValues.innerHTML = `From ${min} to ${max}`;
   }
 }
 
