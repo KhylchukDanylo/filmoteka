@@ -320,6 +320,7 @@ const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily:
 function addToQueue(movieId, movieTitle) {
   const btn = document.querySelector('#btn-queue');
   queueText = 'remove from queue';
+  btn.classList.add('selected');
   btn.textContent = queueText;
   Notify.success(`"${movieTitle}" added to queue`, trailerNotifyOptions);
   queueMovies.push(movieId);
@@ -330,6 +331,7 @@ function removeFromQueue(movieId, movieTitle) {
   Notify.warning(`"${movieTitle}" removed from queue`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-queue');
   queueText = 'add to queue';
+  btn.classList.remove('selected');
   btn.textContent = queueText;
   localStorage.removeItem('queue-movies');
   const movieIndex = queueMovies.findIndex((element, index) =>
@@ -343,6 +345,7 @@ function addToWached(movieId, movieTitle) {
   Notify.success(`"${movieTitle}" added to wached`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-watched');
   btn.style.padding = '0';
+  btn.classList.add('selected');
   watchedText = 'remove from watched';
   btn.textContent = watchedText;
   watchedMovies.push(movieId);
@@ -353,6 +356,7 @@ function removeFromWached(movieId, movieTitle) {
   Notify.warning(`"${movieTitle}" removed from wached`, trailerNotifyOptions);
   const btn = document.querySelector('#btn-watched');
   watchedText = 'add to watched';
+  btn.classList.remove('selected');
   btn.style.padding = '6px 27px';
   btn.textContent = watchedText;
 

@@ -11,3 +11,4 @@ import './modal-movie-render';
 import './filters';
 // import './localstorage_movies';
 import './add-filters-btn';
+import './local-registration';
