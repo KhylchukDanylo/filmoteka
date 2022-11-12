@@ -159,7 +159,3 @@ function getClassByVote(vote) {
     return 'red';
   }
 }
-
-if(document.location.pathname === '/library.html'){
-  console.log('you are here');
-}
