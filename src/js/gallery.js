@@ -7,22 +7,22 @@ import { closeModal } from './modal-movie-render';
 const movieList = document.querySelector('.movie');
 const containerNothing = document.querySelector('.wrap-gallery');
 const watchedList = localStorage.getItem('wached-movies');
-const parsedWatchedList = JSON.parse(watchedList);
+const parsedWatchedList = JSON.parse(watchedList) || [];
 const queueList = localStorage.getItem('queue-movies');
-const parsedQueueList = JSON.parse(queueList);
+const parsedQueueList = JSON.parse(queueList) || [];
 
 export { showWatchedList, showQueueList, parsedWatchedList, parsedQueueList };
 
 window.addEventListener('click', e => {
   if (e.target.id === 'btn-watched') {
     closeModal();
-    clear();
-    showWatchedList(parsedWatchedList);
+    // clear();
+    document.location.assign('./library.html');
   }
   if (e.target.id === 'btn-queue') {
     closeModal();
-    clear();
-    showQueueList(parsedQueueList);
+    // clear();
+    document.location.assign('./library.html#queue');
   }
 });
 
@@ -159,3 +159,8 @@ function getClassByVote(vote) {
     return 'red';
   }
 }
+
+if(document.location.pathname === '/library.html'){
+  console.log('you are here');
+}
+

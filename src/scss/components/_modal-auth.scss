@@ -1,5 +1,12 @@
 html {
   cursor: url(../images/donkey.png), auto;
+.modal-auth__backdrop{
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 3;
 }
 
 .form__auth {

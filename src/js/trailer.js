@@ -1,9 +1,9 @@
 import {fetchTrailer} from './api-service.js';
 import {refs} from './DOM-elements';
 import { Notify } from 'notiflix';
-const {trailerFrame, movieModal, movieBackdrop:backdrop, trailerBackdrop} = refs;
-// import { addSpinner, removeSpinner } from './spinner.js';
+const {trailerFrame, movieModal, movieBackdrop:backdrop, trailerBackdrop, body} = refs;
 import { movieId } from './modal-movie-render.js';
+const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};
 
 window.addEventListener('click', clickHandling);
 
@@ -15,12 +15,14 @@ function clickHandling(event){
 
 }
 
+
 function showTrailer(movieId){
   backdrop.classList.add('hide-modal');
     fetchTrailer(movieId).then(trailersInfo =>  trailersHandling(trailersInfo))
     .catch(error =>{
         console.log(error);
-        Notify.failure('trailer not found');
+        Notify.failure('trailer not found', trailerNotifyOptions);
+        closeTrailer(trailerBackdrop);
     });    
 }
 
@@ -33,7 +35,7 @@ const trailersHandling = trailersInfo =>{
 function showTrailerModal(){
   trailerBackdrop.classList.remove('hide-it');
   trailerBackdrop.addEventListener('click', closeTrailer);
-  document.body.classList.add('stop-scrolling');
+  body.classList.add('stop-scrolling');
 }
 
 function closeTrailer(event){
@@ -42,6 +44,7 @@ function closeTrailer(event){
     trailerBackdrop.classList.add('hide-it');
     backdrop.classList.remove('hide-modal');;
     trailerBackdrop.removeEventListener('click', closeTrailer);
-    document.body.classList.remove('stop-scrolling');
+    if(body.classList.contains('stop-scrolling')) {return;}
+    body.classList.remove('stop-scrolling');
   }
 }

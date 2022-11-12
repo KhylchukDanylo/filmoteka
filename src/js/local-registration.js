@@ -1,4 +1,4 @@
-/*import { refs } from './DOM-elements';
+import { refs } from './DOM-elements';
 const {
   formAuth: form,
   inputName: name,
@@ -25,4 +25,6 @@ function createNewUser() {
   localStorage.setItem('local-users', newUsersArray);
   bacdrop.classList.add('visually-hidden');
 }
-*/
+
+// в файле modalAuth нужно закоментировать строку ниже
+// refs.btnRegister.addEventListener('click', onBtnSubmit);

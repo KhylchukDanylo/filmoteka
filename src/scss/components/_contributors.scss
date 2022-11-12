@@ -20,10 +20,10 @@
     max-height: 80%;
     top: 5%;
     right: 50%;
-    padding: 25px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 5px 5px 20px #d9d9d9, -5px -5px 20px #ffffff;
-    background-color: var(--color-fon-footer);
+    background-color: var(--bg-body-color);
     overflow-y: scroll;
     transform: translateX(50%) scale(1);
     transition: transform var(--animation-duration) var(--timing-function);
@@ -34,7 +34,7 @@
       }
       @include tablert {
         overflow-y: hidden;
-        width: 500px;
+        width: 450px;
         top: 50%;
         right: 50%;
         transform: translate(50%, -50%);
@@ -49,11 +49,12 @@
     gap: 15px;
 }
 &__item{
-    padding: 10px;
+  
+    padding: 5px;
     font-size: 12px;
     border-radius: 5px;
     box-shadow: 3px 3px 5px #7c7a7a;
-    background: linear-gradient(white , gray, white 50% );    
+    background: linear-gradient(#fff , #808080, #fff 50%);  
     @include mobile {  
         flex-basis: 100%;
       }
@@ -63,7 +64,7 @@
 }
 &__photo{
     width: 75px;
-    margin: 0 auto 10px;
+    margin: 0 auto 5px;
     border-radius: 50%;
 }
 &__name{
