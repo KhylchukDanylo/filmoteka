@@ -194,7 +194,7 @@ import { Notify } from 'notiflix';
 import { refs } from './DOM-elements';
 const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};
 refs.btnLogin.addEventListener('click', onBtnLogin);
-refs.btnRegister.addEventListener('click', onBtnSubmit);
+// refs.btnRegister.addEventListener('click', onBtnSubmit);
 refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
 refs.formAuth.addEventListener('submit', onFormSubmit);
 refs.btnLogOut.addEventListener('click', onBtnLogOut);
