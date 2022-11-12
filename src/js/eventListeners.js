@@ -1,8 +1,10 @@
-import { paginationList, containerEl, setTargetPage, addPagination } from './pagination';
+import { paginationList, setTargetPage, addPagination } from './pagination';
 import { createMovieList } from './popular-movies';
 import { createMovieListBySearch } from './search-movies';
 import { transformParamsIntoQuery, renderFiltersResult } from './filters';
 import { fetchMoviesByFilters } from './api-service';
+import { refs } from './DOM-elements';
+const { container } = refs;
 
 paginationList.addEventListener('click', onPaginationBtnClick);
 window.addEventListener('resize', onWindowSizeChange);
@@ -39,7 +41,7 @@ export function renderTargetPage(targetPage) {
 }
 
 function onWindowSizeChange() {
-  const screenWidth = containerEl.offsetWidth;
+  const screenWidth = container.offsetWidth;
   addPagination({
     screenWidth,
     currentPage: paginationList.currentPage,
