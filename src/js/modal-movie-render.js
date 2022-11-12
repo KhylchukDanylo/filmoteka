@@ -31,12 +31,12 @@ function onImgClick(evt) {
   }
   movieId = +evt.target.closest('li').id;
 
-  const filterIsOpened =
-    !genresForm.classList.contains('is-hidden') ||
-    !yearsForm.classList.contains('is-hidden');
-  if (filterIsOpened) {
-    return;
-  }
+  // const filterIsOpened =
+  //   !genresForm.classList.contains('is-hidden') ||
+  //   !yearsForm.classList.contains('is-hidden');
+  // if (filterIsOpened) {
+  //   return;
+  // }
 
   openModal(movieId);
 
@@ -46,7 +46,7 @@ function onImgClick(evt) {
   watchedText = watchedMovies.includes(movieId)
     ? 'remove from watched'
     : 'add to watched';
-    watcheddBtnPadding = watchedMovies.includes(movieId) ? '0' : '6px 27px';
+  watcheddBtnPadding = watchedMovies.includes(movieId) ? '0' : '6px 27px';
 }
 
 async function openModal(id) {
@@ -272,7 +272,7 @@ async function openModal(id) {
   btnClose.addEventListener('click', () => closeModal());
 }
 
-function closeModal() {
+export function closeModal() {
   // movieModal.classList.add('is-hidden');
   backdrop.classList.add('hide-modal');
 
@@ -282,11 +282,10 @@ function closeModal() {
 window.addEventListener('click', e => {
   //костыль, можно красивее но пока что так
   let movieTitle = '';
-  if(e.target.parentNode.parentNode.firstElementChild.nodeName === 'H2'){
-   movieTitle = e.target.parentNode.parentNode.firstElementChild.textContent;
-  console.log(movieTitle);
+  if (e.target.parentNode.parentNode.firstElementChild.nodeName === 'H2') {
+    movieTitle = e.target.parentNode.parentNode.firstElementChild.textContent;
+    console.log(movieTitle);
   }
-
 
   if (e.target === backdrop) {
     closeModal();
@@ -354,7 +353,6 @@ function removeFromWached(movieId, movieTitle) {
   watchedText = 'add to watched';
   btn.style.padding = '6px 27px';
   btn.textContent = watchedText;
-
 
   localStorage.removeItem('wached-movies');
   const movieIndex = watchedMovies.findIndex((element, index) =>

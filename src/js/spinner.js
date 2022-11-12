@@ -9,7 +9,7 @@ export function addSpinner() {
   document.body.classList.add('bgcolor');
   footer.classList.add('stickyf');
   html.classList.add('stickyh');
-  header.classList.add('stickyhed');
+  // header.classList.add('stickyhed');
   main.classList.add('stickym');
 }
 
@@ -24,6 +24,6 @@ export function removeSpinner() {
   document.body.classList.remove('bgcolor');
   footer.classList.remove('stickyf');
   html.classList.remove('stickyh');
-  header.classList.remove('stickyhed');
+  // header.classList.remove('stickyhed');
   main.classList.remove('stickym');
 }
