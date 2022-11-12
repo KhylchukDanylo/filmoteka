@@ -192,7 +192,11 @@ function closeModal() {
 import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
 import { refs } from './DOM-elements';
-const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};
+const trailerNotifyOptions = {
+  position: 'center-top',
+  timeout: 1500,
+  fontFamily: 'Roboto',
+};
 refs.btnLogin.addEventListener('click', onBtnLogin);
 // refs.btnRegister.addEventListener('click', onBtnSubmit);
 refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
@@ -242,7 +246,7 @@ function onBtnLogOut() {
   refs.btnRegister.classList.remove('visually-hidden');
   refs.btnLogOut.classList.add('visually-hidden');
   refs.btnLoginGlobal.textContent = 'Log in';
-  
+
   closeModal(); //не совсем понял для чего тут закрывать модалку, она тут будет открыта?
 }
 function onFormInput(e) {
@@ -303,7 +307,7 @@ btnCloseAuth.addEventListener('click', () => closeModal());
 function closeModal() {
   // refs.formAuth.classList.add('visually-hidden');
   refs.modalAuthBackdrop.classList.add('vissualy-hidden');
-  window.location.reload();
+  // window.location.reload();
 }
 
 function onBtnLogin() {
@@ -323,8 +327,8 @@ function onBtnLogin() {
 }
 /*const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};*/
 
-function closeAuthModal(event){
-  if(event.target === event.currentTarget){
+function closeAuthModal(event) {
+  if (event.target === event.currentTarget) {
     refs.modalAuthBackdrop.classList.add('visually-hidden');
     refs.modalAuthBackdrop.removeEventListener('click', closeModal);
   }
