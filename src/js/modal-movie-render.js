@@ -3,7 +3,6 @@ import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
 const {
-  trailerFrame,
   movieModal,
   movieBackdrop: backdrop,
   genresForm,
@@ -18,7 +17,6 @@ const listEl = document.querySelector('.movie');
 
 listEl.addEventListener('click', onImgClick);
 
-//сделал переменную через let ибо для открытия трейлера тоже нужен id
 let movieId;
 let queueText = '';
 let watchedText = '';
@@ -52,7 +50,6 @@ function onImgClick(evt) {
 }
 
 async function openModal(id) {
-  // trailerFrame.classList.add('hide-it');
   addSpinner();
   const resp = await fetchMovieById(id);
 
@@ -368,9 +365,3 @@ function removeFromWached(movieId, movieTitle) {
 }
 
 export { movieId, backdrop };
-
-// const processingKeys = ['addToQueue', 'removeFromQueue', 'removeFromWached', 'removeItem']
-
-// function localStorageMovieHandling(movieId, processingKey){
-
-// }
