@@ -7,9 +7,9 @@ import { closeModal } from './modal-movie-render';
 const movieList = document.querySelector('.movie');
 const containerNothing = document.querySelector('.wrap-gallery');
 const watchedList = localStorage.getItem('wached-movies');
-const parsedWatchedList = JSON.parse(watchedList);
+const parsedWatchedList = JSON.parse(watchedList) || [];
 const queueList = localStorage.getItem('queue-movies');
-const parsedQueueList = JSON.parse(queueList);
+const parsedQueueList = JSON.parse(queueList) || [];
 
 export { showWatchedList, showQueueList, parsedWatchedList, parsedQueueList };
 
@@ -158,4 +158,8 @@ function getClassByVote(vote) {
   } else {
     return 'red';
   }
+}
+
+if(document.location.pathname === '/library.html'){
+  console.log('you are here');
 }
