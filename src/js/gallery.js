@@ -16,13 +16,13 @@ export { showWatchedList, showQueueList, parsedWatchedList, parsedQueueList };
 window.addEventListener('click', e => {
   if (e.target.id === 'btn-watched') {
     closeModal();
-    clear();
-    showWatchedList(parsedWatchedList);
+    // clear();
+    document.location.assign('./library.html');
   }
   if (e.target.id === 'btn-queue') {
     closeModal();
-    clear();
-    showQueueList(parsedQueueList);
+    // clear();
+    document.location.assign('./library.html#queue');
   }
 });
 
@@ -163,3 +163,4 @@ function getClassByVote(vote) {
 if(document.location.pathname === '/library.html'){
   console.log('you are here');
 }
+
