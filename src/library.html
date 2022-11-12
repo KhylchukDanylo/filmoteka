@@ -3,6 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- FavIcon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link
+      rel="mask-icon"
+      href="./favicon/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ff8c00" />
+
+    <!-- Font-Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,130 +70,20 @@
   </head>
 
   <body class="bg-body">
-    <header class="header-library">
-      <div class="container header-library-container">
-        <div class="header-library__wrap">
-          <a class="logo__link link" href="./index.html"
-            ><svg class="logo__icon" width="24" height="24">
-              <use href="./images/icons.svg#icon-film"></use></svg
-            ><span class="logo__text">Filmoteka</span></a
-          >
-          <ul class="library-nav__list list">
-            <li class="library-nav__item">
-              <a class="library-nav__link link" href="./index.html">Home</a>
-            </li>
-            <li class="library-nav__item">
-              <a class="library-nav__link link" href="./library.html"
-                >my library</a
-              >
-            </li>
-          </ul>
-        </div>
-        <ul class="library-btns__list list">
-          <li class="library-btns__item">
-            <button class="library-btn btn-active" type="button" id="watched">
-              watched
-            </button>
-          </li>
-          <li class="library-btns__item">
-            <button class="library-btn" type="button" id="queue">queue</button>
-          </li>
-        </ul>
-
-        <!----------- fixed header ------------->
-
-        <div class="fixed-header is-hidden">
-          <a class="logo__link logo__link--fixed link" href="./index.html"
-            ><svg class="logo__icon" width="24" height="24">
-              <use href="./images/icons.svg#icon-film"></use></svg
-            ><span class="logo__text">Filmoteka</span></a
-          >
-          <ul class="library-btns__list list">
-            <li class="library-btns__item">
-              <button class="library-btn btn-active" type="button" id="watched">
-                watched
-              </button>
-            </li>
-            <li class="library-btns__item">
-              <button class="library-btn" type="button" id="queue">
-                queue
-              </button>
-            </li>
-          </ul>
-          <ul class="library-nav__list list">
-            <li class="library-nav__item">
-              <a class="library-nav__link link" href="./index.html">Home</a>
-            </li>
-            <li class="library-nav__item">
-              <a class="library-nav__link link" href="./library.html"
-                >my library</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!----------- dark-ligth switcher ------------>
-
-        <fieldset class="switcher">
-          <legend class="switcher__legend">Scheme</legend>
-          <input
-            class="switcher__radio switcher__radio--light"
-            type="radio"
-            name="color-scheme"
-            value="light"
-            aria-label="light"
-          />
-          <input
-            class="switcher__radio switcher__radio--auto"
-            type="radio"
-            name="color-scheme"
-            value="auto"
-            aria-label="Default"
-            checked
-          />
-          <input
-            class="switcher__radio switcher__radio--dark"
-            type="radio"
-            name="color-scheme"
-            value="dark"
-            aria-label="Dark"
-          />
-          <div class="switcher__status"></div>
-        </fieldset>
-      </div>
-    </header>
-
+    <include src="./partials/loader.html"></include>
+    <include src="./partials/header-library.html"></include>
+    <include src="./partials/loader.html"></include>
     <main>
       <div class="container">
-        <div class="gallery-container">
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-        </div>
-        <ul class="movies-list"></ul>
+        <div class="wrap-gallery"></div>
+        <ul class="movie"></ul>
       </div>
+      <include src="./partials/pagination.html"></include>
     </main>
-    <footer class="footer">
-      <h3 class="footer__text">
-        <span class="footer__text--flex footer__text--bottom">
-          © 2020 | All Rights Reserved |
-        </span>
-        <span class="text__footer">
-          Developed withc
-          <svg class="footer__icon" width="14" height="12.75">
-            <use href="./images/icons.svg#icon-Vector"></use>
-          </svg>
-          by
-          <a class="footer__link" href="">GoIT Students</a>
-        </span>
-      </h3>
-    </footer>
+
+    <include src="./partials/footer.html"></include>
+    <include src="./partials/modal.html"></include>
+
     <script src="./js/library.js" type="module"></script>
     <script src="./js/light-dark.js" type="module"></script>
   </body>

@@ -8,8 +8,8 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-   
-  @include desktop{
+
+  @include desktop {
     gap: 30px;
   }
 }
@@ -19,15 +19,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   gap: 11px;
 
   @include tablert {
-gap: 8px;
+    gap: 8px;
   }
 
   @include desktop {
     flex-direction: row;
-    gap: 30PX;
+    gap: 30px;
   }
 }
 
@@ -48,63 +49,71 @@ gap: 8px;
 }
 
 .filters {
-  margin-top: 18px;
+  // margin-top: 18px;
   color: rgba(255, 255, 255, 0.85);
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
 
-  @include tablert {
-  margin-top: 20px;
+  @include desktop {
+    margin-top: 20px;
   }
-  
+
   &__button {
     display: block;
     border-radius: 20px;
     border: none;
     width: 95px;
-      height: 31px;
+    height: 31px;
     box-shadow: inset 0 0 8px 1px rgba(255, 0, 27, 0.7);
-      font-family: 'Roboto', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
     line-height: 1.33;
     color: rgba(255, 255, 255, 0.8);
     background-color: transparent;
     transition: transform 250ms linear;
-    
+
     @include tablert {
       width: 120px;
       height: 33px;
       box-shadow: inset 0 0 8px 1px rgba(255, 0, 27, 0.7);
     }
-    
+
     @include desktop {
       width: 140px;
-        height: 37px;
+      height: 37px;
       font-size: 14px;
-
     }
   }
 
   &__button:hover {
-    transform: scale(1.05);
+    // transform: scale(1.05);
     cursor: pointer;
   }
 
   &__button--clear {
+    position: absolute;
+    top: 96%;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: rgba(255, 0, 27, 0.6);
     border: none;
     transition: transform 250ms linear;
-
+    @include tablert {
+      top: 100%;
+    }
     @media screen and (max-width: 767.5px) {
       width: 115px;
     }
+    @include desktop {
+      position: relative;
+    }
   }
 
-  &__button--clear:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
+  // &__button--clear:hover {
+  //   transform: scale(1.05);
+  //   cursor: pointer;
+  // }
 }
 
 // add .years__form
@@ -124,10 +133,10 @@ gap: 8px;
   color: rgba(255, 255, 255, 0.85);
 
   @include tablert {
-  width: 230px;
-}
+    width: 230px;
+  }
 
-@include desktop {
+  @include desktop {
     top: 75px;
   }
 }
@@ -145,11 +154,11 @@ gap: 8px;
   padding: 18px 15px;
 
   @include tablert {
-  width: 400px;
-  height: 170px;
-  padding: 30px 50px;
-  top: 40px;
-  left: 50%;
+    width: 400px;
+    height: 170px;
+    padding: 30px 50px;
+    top: 40px;
+    left: 50%;
   }
 
   @include desktop {
@@ -166,7 +175,7 @@ gap: 8px;
   overflow-y: scroll;
 
   @include tablert {
-  height: 350px;
+    height: 350px;
   }
 }
 
@@ -188,8 +197,8 @@ gap: 8px;
     background-color: rgba(255, 255, 255, 0.75);
 
     @include tablert {
-    height: 42px;
-    font-size: 14px;
+      height: 42px;
+      font-size: 14px;
     }
   }
 
@@ -207,8 +216,6 @@ gap: 8px;
       font-size: 14px;
     }
   }
-
-     
 }
 
 .button:hover,
@@ -216,7 +223,7 @@ gap: 8px;
   cursor: pointer;
 }
 
-.adult{
+.adult {
   margin-left: 15px;
   font-size: 12px;
 
@@ -271,20 +278,10 @@ input[type='checkbox']:checked::before {
   gap: 6px;
   font-size: 14px;
 
-  @include tablert{
-  font-size: 15px;
+  @include tablert {
+    font-size: 15px;
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 $glass: rgba(255, 255, 255, 0.2);
 $glass-icon: rgba(255, 255, 255, 0.3);
@@ -320,8 +317,8 @@ $option: #320a28;
   cursor: pointer;
 
   @include tablert {
-      width: 135px;
-      height: 27px;
+    width: 135px;
+    height: 27px;
   }
 
   /* <option> colors */
@@ -344,18 +341,61 @@ $option: #320a28;
 .not-found-img {
   display: block;
   margin: 15px auto;
-  width: 75vw;
+  width: 100vw;
 
   @media screen and (min-width: 480px) {
-    width: 360px;
+    width: 480px;
   }
 
   @include tablert {
-width: 576px;
+    margin: 20px auto;
+    width: 700px;
   }
 
   @include desktop {
     margin: 30px auto;
-      width: 700px;
+    width: 1050px;
   }
+}
+
+.add__btn-filter {
+  display: flex;
+  flex-direction: column;
+
+  @include tablert {
+    text-align: center;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.add__filter {
+  background-color: transparent;
+  border: none;
+  color: var(--color-btn-white);
+  padding: 10px;
+
+  text-transform: uppercase;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: Roboto;
+  @include tablert {
+    width: 120px;
+  }
+  @include desktop {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.17;
+  }
+}
+
+.add__filter:hover,
+.add__filter:focus {
+  color: var(--color-active-btn);
+}
+
+.spawn-filter {
+  display: none;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(-100%);
 }

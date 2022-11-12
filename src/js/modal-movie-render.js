@@ -2,28 +2,20 @@ import { fetchMovieById } from './api-service';
 import svgIcon from '../images/icons.svg';
 import { refs } from './DOM-elements';
 import defaultImg from '../images/437973.webp';
-const {
-  trailerFrame,
-  movieModal,
-  movieBackdrop: backdrop,
-  genresForm,
-  yearsForm,
-} = refs;
-// import { showTrailer } from './trailer';
+const { movieModal, movieBackdrop: backdrop, genresForm, yearsForm } = refs;
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listEl = document.querySelector('.movie');
-// const movieModal = document.querySelector('.movie__modal'); перенёс в DOM-elements.js
-// const backdrop = document.querySelector('.backdrop');
 
 listEl.addEventListener('click', onImgClick);
 
-//сделал переменную через let ибо для открытия трейлера тоже нужен id
 let movieId;
 let queueText = '';
 let watchedText = '';
+let watcheddBtnPadding = '';
 const queueMovies = JSON.parse(localStorage.getItem('queue-movies')) || [];
 const watchedMovies = JSON.parse(localStorage.getItem('wached-movies')) || [];
 
@@ -32,17 +24,16 @@ function onImgClick(evt) {
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
-  // movieId = parseInt(evt.target.closest('li').id) ;
   movieId = +evt.target.closest('li').id;
 
-  const filterIsOpened =
-    !genresForm.classList.contains('is-hidden') ||
-    !yearsForm.classList.contains('is-hidden');
-  if (filterIsOpened) {
-    return;
+  if (genresForm) {
+    const filterIsOpened =
+      !genresForm.classList.contains('is-hidden') ||
+      !yearsForm.classList.contains('is-hidden');
+    if (filterIsOpened) {
+      return;
+    }
   }
-
-  // movieId = parseInt(evt.target.parentElement.parentElement.id);
 
   openModal(movieId);
 
@@ -52,10 +43,10 @@ function onImgClick(evt) {
   watchedText = watchedMovies.includes(movieId)
     ? 'remove from watched'
     : 'add to watched';
+  watcheddBtnPadding = watchedMovies.includes(movieId) ? '0' : '6px 27px';
 }
 
 async function openModal(id) {
-  trailerFrame.classList.add('hide-it');
   addSpinner();
   const resp = await fetchMovieById(id);
 
@@ -219,9 +210,9 @@ async function openModal(id) {
     <p class="movie__about">About</p>
     <p class="movie__description">${overview}</p>
     <div class="button-wrap">
-      <button type="button" class="movie__btn movie__btn-watched" id="btn-watched">
-         ${watchedText}
-     </button>
+      <button type="button" class="movie__btn movie__btn-watched" id="btn-watched" style="padding:${watcheddBtnPadding}">
+          ${watchedText}
+      </button>
           <button type="button" class="movie__btn movie__btn-queue" id="btn-queue">
     ${queueText}
       </button>
@@ -278,6 +269,10 @@ async function openModal(id) {
 }
 
 //close modal function and closing by backdrop & 'Escape'//
+export function closeModal() {
+  // movieModal.classList.add('is-hidden');
+  backdrop.classList.add('hide-modal');
+}
 
 function closeModal() {
   backdrop.classList.add('hide-modal');
@@ -291,84 +286,95 @@ window.addEventListener('keydown', e => {
 });
 
 window.addEventListener('click', e => {
+  //костыль, можно красивее но пока что так
+  let movieTitle = '';
+  if (e.target.parentNode.parentNode.firstElementChild.nodeName === 'H2') {
+    movieTitle = e.target.parentNode.parentNode.firstElementChild.textContent;
+    console.log(movieTitle);
+  }
+
   if (e.target === backdrop) {
     closeModal();
   }
 
-  // if (e.target.id === 'btn-watched') {
-  //   const btn = document.querySelector('#btn-watched');
-  //   btn.classList.toggle('selected');
-  //   if (btn.classList.contains('selected'))
-  //     btn.textContent = 'remove from watched';
-  //   else {
-  //     btn.textContent = 'add to watched';
-  //   }
-  // }
-
   if (e.target.id === 'btn-watched') {
-    const btn = document.querySelector('#btn-watched');
     if (!watchedMovies.includes(movieId)) {
-      addToWached(movieId);
-      watchedText = 'remove from watched';
-      btn.textContent = 'remove from watched';
+      addToWached(movieId, movieTitle);
     } else {
-      removeFromWached(movieId);
-      watchedText = 'add to watched';
-      btn.textContent = 'add to watched';
-      btn.style.padding = '6px 27px';
+      removeFromWached(movieId, movieTitle);
     }
   }
-
   if (e.target.id === 'btn-queue') {
-    const btn = document.querySelector('#btn-queue');
     if (!queueMovies.includes(movieId)) {
-      addToQueue(movieId);
-      queueText = 'remove from queue';
-      btn.textContent = 'remove from queue';
+      addToQueue(movieId, movieTitle);
     } else {
-      removeFromQueue(movieId);
-      queueText = 'add to queue';
-      btn.textContent = 'add to queue';
+      removeFromQueue(movieId, movieTitle);
     }
   }
 });
 
 function addToQueue(movieId) {
   console.log(movieId, 'added to queue');
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+}
+
+const trailerNotifyOptions = {
+  position: 'center-top',
+  timeout: 1500,
+  fontFamily: 'Roboto',
+};
+function addToQueue(movieId, movieTitle) {
+  const btn = document.querySelector('#btn-queue');
+  queueText = 'remove from queue';
+  btn.classList.add('selected');
+  btn.textContent = queueText;
+  Notify.success(`"${movieTitle}" added to queue`, trailerNotifyOptions);
   queueMovies.push(movieId);
-  console.log(queueMovies);
   localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
 }
 
-function removeFromQueue(movieId) {
+function removeFromQueue(movieId, movieTitle) {
+  Notify.warning(`"${movieTitle}" removed from queue`, trailerNotifyOptions);
+  const btn = document.querySelector('#btn-queue');
+  queueText = 'add to queue';
+  btn.classList.remove('selected');
+  btn.textContent = queueText;
   localStorage.removeItem('queue-movies');
   const movieIndex = queueMovies.findIndex((element, index) =>
     element === movieId ? index : null
   );
-  console.log(movieIndex);
-  console.log(movieId, 'removed from queue');
   queueMovies.splice(movieIndex, 1);
-  console.log(queueMovies);
   localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
 }
 
-function addToWached(movieId) {
-  console.log(movieId, 'added to wached');
+function addToWached(movieId, movieTitle) {
+  Notify.success(`"${movieTitle}" added to wached`, trailerNotifyOptions);
+  const btn = document.querySelector('#btn-watched');
+  btn.style.padding = '0';
+  btn.classList.add('selected');
+  watchedText = 'remove from watched';
+  btn.textContent = watchedText;
   watchedMovies.push(movieId);
-  console.log(watchedMovies);
-
   localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
 }
 
-function removeFromWached(movieId) {
+function removeFromWached(movieId, movieTitle) {
+  Notify.warning(`"${movieTitle}" removed from wached`, trailerNotifyOptions);
+  const btn = document.querySelector('#btn-watched');
+  watchedText = 'add to watched';
+  btn.classList.remove('selected');
+  btn.style.padding = '6px 27px';
+  btn.textContent = watchedText;
+
   localStorage.removeItem('wached-movies');
   const movieIndex = watchedMovies.findIndex((element, index) =>
     element === movieId ? index : null
   );
-  console.log(movieIndex);
-  console.log(movieId, 'removed from wached');
   watchedMovies.splice(movieIndex, 1);
-  console.log(watchedMovies);
   localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
 }
 

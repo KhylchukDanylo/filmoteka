@@ -1,13 +1,15 @@
-import { paginationList, containerEl, setTargetPage, addPagination } from './pagination';
+import { paginationList, setTargetPage, addPagination } from './pagination';
 import { createMovieList } from './popular-movies';
 import { createMovieListBySearch } from './search-movies';
 import { transformParamsIntoQuery, renderFiltersResult } from './filters';
 import { fetchMoviesByFilters } from './api-service';
+import { refs } from './DOM-elements';
+const { container } = refs;
 
 paginationList.addEventListener('click', onPaginationBtnClick);
 window.addEventListener('resize', onWindowSizeChange);
 
-function onPaginationBtnClick(evt) {
+export function onPaginationBtnClick(evt) {
   if (evt.target.closest('button') === null) {
     return;
   }
@@ -15,7 +17,11 @@ function onPaginationBtnClick(evt) {
     return;
   }
 
-    const targetPage = setTargetPage(evt.target, evt.currentTarget.currentPage);
+  const targetPage = setTargetPage(evt.target, evt.currentTarget.currentPage);
+  renderTargetPage(targetPage); 
+}
+
+export function renderTargetPage(targetPage) {
   if (paginationList.currentState === 'popular') {
       createMovieList(targetPage);
       scrollToTop();
@@ -35,7 +41,7 @@ function onPaginationBtnClick(evt) {
 }
 
 function onWindowSizeChange() {
-  const screenWidth = containerEl.offsetWidth;
+  const screenWidth = container.offsetWidth;
   addPagination({
     screenWidth,
     currentPage: paginationList.currentPage,

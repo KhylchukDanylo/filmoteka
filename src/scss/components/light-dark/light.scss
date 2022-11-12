@@ -11,7 +11,8 @@
   --color-footer: #545454;
 }
 
-.movie__name {
+.movie__name,
+.movie__btn-close {
   --color-name-film: #000;
 }
 
@@ -41,4 +42,8 @@
 
 .header-wrapper .switcher__status {
   --bgc-status-main: rgba(236, 29, 29, 0.801);
+}
+
+.wrap-gallery {
+  filter: invert(0);
 }

@@ -1,65 +1,50 @@
-ul {
-  margin: 0;
-  padding-left: 0;
-}
-
-.link {
-  text-decoration: none;
-}
-
-.list {
-  list-style: none;
-}
-
 .header {
   padding-top: 40px;
   padding-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
-  width: 100%;
-  max-width: 480px;
-  background-repeat: no-repeat;
+  background-image: url(../images/bg-header.jpg);
+  background-color: #2f364a;
   background-position: center;
-  background-size: cover;
   height: 270px;
   padding-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
-  width: 100%;
-  max-width: 480px;
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
 
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    background-image: url(../images/abstract-background-with-red-lines-mob-2x.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
 
   @include tablert {
     height: 229px;
-    max-width: 768px;
+    max-width: 1280px;
+    min-width: 768px;
     background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url(../images/abstract-background-with-red-lines-tab-2x.jpg);
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.15)
+        ),
+        url(../images/abstract-background-with-red-lines-tab-2x.jpg);
     }
   }
 
   @include desktop {
     height: 216px;
-    max-width: 1280px;
-    background-image: url(../images/abstract-background-with-red-lines-desc.jpg);
+    max-width: 2100px;
+    min-width: 1280px;
+    background-image: url(../images/bg-header.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),
       (min-resolution: 2dppx) {
-      background-image: url(../images/abstract-background-with-red-lines-desc-2x.jpg);
+      background-image: url(../images/bg-header.jpg);
     }
   }
 }
@@ -147,7 +132,7 @@ ul {
   content: '';
   width: 100%;
   height: 3px;
-  background-color: #ff001b;
+  background-color: #ff0019;
   display: block;
   position: absolute;
   bottom: 6px;
@@ -190,7 +175,7 @@ ul {
 
 .header__link-home:hover,
 .header__link-home:focus {
-  color: #ff001b;
+  color: #ff0019;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     color 250ms cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -286,7 +271,7 @@ ul {
 }
 
 .form__header-input:focus::-webkit-input-placeholder {
-  color: #ff001b;
+  color: #9b575e;
 }
 
 .form__header-btn {
@@ -304,7 +289,8 @@ ul {
 
 .fixed-headers {
   background-color: #2f364a;
-  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+    url(../images/abstract-background-with-red-lines-mob.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -326,7 +312,8 @@ ul {
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    background-image: url(../images/abstract-background-with-red-lines-mob-2x.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
 
   @media screen and (min-width: 480px) {
@@ -338,7 +325,8 @@ ul {
     padding-left: 32px;
     padding-right: 32px;
     left: calc((100% - 768px) / 2);
-    background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
+      url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
       (min-resolution: 192dpi),

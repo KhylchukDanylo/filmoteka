@@ -1,6 +1,5 @@
 import { leftArrowIcon, rightArrowIcon } from './svg-icons';
 export const paginationList = document.querySelector('.pagination-list');
-export const containerEl = document.querySelector('.container');
 export const CURRENT_PAGE = 'paginationCurrentPage';
 export const TOTAL_PAGES = 'paginationTotalPages';
 export const CURRENT_STATE = 'paginationCurrentState';
@@ -101,14 +100,14 @@ function renderPagination(markup) {
 //===================== Choose a new currentPage based on the user's selection  ===========================//
 export function setTargetPage(element, currentPage) {
   if (
-    element.closest('button').classList.contains('arrow-to-start-button-js')
+    element?.closest('button')?.classList?.contains('arrow-to-start-button-js')
   ) {
     return currentPage - 1;
   }
-  if (element.closest('button').classList.contains('arrow-to-end-button-js')) {
+  if (element?.closest('button')?.classList.contains('arrow-to-end-button-js') || element?.closest('.movie__last-img')) {
     return currentPage + 1;
   }
-  return Number(element.closest('button').textContent);
+  return Number(element?.closest('button')?.textContent);
 }
 
 

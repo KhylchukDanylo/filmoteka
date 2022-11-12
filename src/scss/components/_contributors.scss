@@ -8,37 +8,33 @@
   z-index: 3;
 }
 
-.contributors__modal.hide-it {
-    // width: 0;
-    // height: 0;
-    // padding: 0;
-    visibility: hidden;
-    transform: translateX(50%) scale(0.5);
+.hide-it .contributors__modal{
+    transform: translate(50%, 5%) scale(0.3);
     @include tablert {
-    transform: translate(50%, -50%) scale(0.5);
+    transform: translate(50%, -50%) scale(0.3);
     }
 }
 
 .contributors__modal{
     position: absolute;
-    max-height: 90%;
+    max-height: 80%;
     top: 5%;
     right: 50%;
-    padding: 25px;
+    padding: 15px;
     border-radius: 10px;
     box-shadow: 5px 5px 20px #d9d9d9, -5px -5px 20px #ffffff;
-    background-color: var(--color-fon-footer);
+    background-color: var(--bg-body-color);
     overflow-y: scroll;
     transform: translateX(50%) scale(1);
-    opacity: 1;
     transition: transform var(--animation-duration) var(--timing-function);
     visibility: visible;
     @include mobile {  
+        transform: translate(50%, 5%);
         width: 200px;
       }
       @include tablert {
         overflow-y: hidden;
-        width: 500px;
+        width: 450px;
         top: 50%;
         right: 50%;
         transform: translate(50%, -50%);
@@ -50,24 +46,25 @@
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 15px;
 }
 &__item{
-    padding: 10px;
+  
+    padding: 5px;
     font-size: 12px;
     border-radius: 5px;
     box-shadow: 3px 3px 5px #7c7a7a;
-    background: linear-gradient(white , gray, white 50% );    
+    background: linear-gradient(#fff , #808080, #fff 50%);  
     @include mobile {  
         flex-basis: 100%;
       }
       @include tablert {
-        flex-basis: calc((100% - 60px) / 3);
+        flex-basis: calc((100% - 30px) / 3);
       }
 }
 &__photo{
-    width: 100px;
-    margin: 0 auto 10px;
+    width: 75px;
+    margin: 0 auto 5px;
     border-radius: 50%;
 }
 &__name{
@@ -84,21 +81,18 @@
     list-style: none;
 }
 &__link{
+    background-color: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 44px;
-    height: 44px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
 }
 &__link:hover{
-    background: radial-gradient(circle, gray, white 80%);
+    background-color:  rgba(154, 153, 153, 0.544);
+    transition: background-color var(--animation-duration) var(--timing-function);
 }
 }
 
-// .hide-it{
-//     opacity: 0;
-//     transition: opacity var(--animation-duration) var(--timing-function);
-//     visibility: hidden;
-//     pointer-events: none;
-//   }
+  

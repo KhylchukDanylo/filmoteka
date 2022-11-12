@@ -1,0 +1,86 @@
+<header class="header-library">
+  <div class="container header-library-container">
+    <div class="header-library__wrap">
+      <a class="logo__link link" href="./index.html"
+        ><svg class="logo__icon" width="24" height="24">
+          <use href="./images/icons.svg#icon-film"></use></svg><span class="logo__text">Filmoteka</span></a
+      >
+      <ul class="library-nav__list list">
+        <li class="library-nav__item">
+          <a class="library-nav__link link" href="./index.html">Home</a>
+        </li>
+        <li class="library-nav__item">
+          <!-- <a class="library-nav__link link" href="./library.html">my library</a> -->
+          <a href="#" class="header__link-log link auth-link logout-button">logout</a>
+        </li>
+      </ul>
+    </div>
+    <ul class="library-btns__list list">
+      <li class="library-btns__item">
+        <button class="library-btn btn-active" type="button" id="watched">
+          watched
+        </button>
+      </li>
+      <li class="library-btns__item">
+        <button class="library-btn" type="button" id="queue">queue</button>
+      </li>
+    </ul>
+
+    <!----------- fixed header ------------->
+
+    <div class="fixed-header is-hidden">
+      <a class="logo__link logo__link--fixed link" href="./index.html"
+        ><svg class="logo__icon" width="24" height="24">
+          <use href="./images/icons.svg#icon-film"></use></svg><span class="logo__text">Filmoteka</span></a
+      >
+      <ul class="library-btns__list list">
+        <li class="library-btns__item">
+          <button class="library-btn btn-active" type="button" id="watched">
+            watched
+          </button>
+        </li>
+        <li class="library-btns__item">
+          <button class="library-btn" type="button" id="queue">queue</button>
+        </li>
+      </ul>
+      <ul class="library-nav__list list">
+        <li class="library-nav__item">
+          <a class="library-nav__link link" href="./index.html">Home</a>
+        </li>
+        <li class="library-nav__item">
+          <!-- <a class="library-nav__link link" href="./library.html">my library</a> -->
+          <a href="#" class="header__link-log link auth-link logout-button">logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <!----------- dark-ligth switcher ------------>
+
+    <fieldset class="switcher">
+      <legend class="switcher__legend">Scheme</legend>
+      <input
+        class="switcher__radio switcher__radio--light"
+        type="radio"
+        name="color-scheme"
+        value="light"
+        aria-label="light"
+      />
+      <input
+        class="switcher__radio switcher__radio--auto"
+        type="radio"
+        name="color-scheme"
+        value="auto"
+        aria-label="Default"
+        checked
+      />
+      <input
+        class="switcher__radio switcher__radio--dark"
+        type="radio"
+        name="color-scheme"
+        value="dark"
+        aria-label="Dark"
+      />
+      <div class="switcher__status"></div>
+    </fieldset>
+  </div>
+</header>
