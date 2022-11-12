@@ -41,8 +41,15 @@ let generalFilterParams = {
 let lastFetchedParams = {
   ...initialFilterParams,
 };
+
+let listOfGenres = {};
+allGenres.map(
+  genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` })
+);
+
 try {
   const response = JSON.parse(localStorage.getItem(FILTERS_PARAMS));
+  console.log(response);
   if (response === null) {
     throw new Error();
   }
@@ -51,19 +58,40 @@ try {
   if (response['include_adult']) {
     checkingForBeingAdultInput.setAttribute('checked', true);
   }
-  
+
   const selectedSortQuery = response["sort_by"];
-  console.log('selectedSortQuery',selectedSortQuery);
+  sortFormOptions.forEach(option => {
+    option.removeAttribute('selected');
+    if (option.value === selectedSortQuery) {
+      option.setAttribute('selected', true);
+    }
+  });
+  
+  const arrOfSelectedGenres = response["with_genres"].split(',');
+  changeGenresButtonAppearance(arrOfSelectedGenres);
+  
 } catch (err) {
   console.log("You haven't selected any filters yet");
 }
 
-console.log(sortFormOptions);
+function changeGenresButtonAppearance(selectedGenresArr) {
+  let selectedGenres = 'Genres';
+  if (selectedGenresArr.length === 1 && selectedGenresArr[0] !== '') {
+    selectedGenres = listOfGenres[selectedGenresArr[0]];
+  }
+  if (selectedGenresArr.length > 1) {
+    selectedGenres =
+      listOfGenres[selectedGenresArr[0]] + `, +${selectedGenresArr.length - 1}`;
+  }
 
-let listOfGenres = {};
-allGenres.map(
-  genre => (listOfGenres = { ...listOfGenres, [genre.id]: `${genre.name}` })
-);
+  openFilterByGenresBtn.textContent = selectedGenres;
+  openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
+
+  if (openFilterByGenresBtn.textContent === 'Genres') {
+    openFilterByGenresBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  }
+}
 
 filterForm.addEventListener('change', onFormChange);
 filterForm.addEventListener('reset', onFormReset);
@@ -269,7 +297,6 @@ function showFiltersByGenres() {
     const allInputs = document.querySelectorAll('.genres__wrap input');
     allInputs.forEach(input => {
       input.removeAttribute('checked');
-      console.log(input);
     });
   }
   document.addEventListener(
@@ -278,7 +305,7 @@ function showFiltersByGenres() {
       document.addEventListener('click', closeGenresFilterOptions);
     },
     { once: true }
-    );
+  );
 }
 
 function showFiltersByYears() {
@@ -316,6 +343,7 @@ function closeYearsFilterOptions(evt) {
   if (!evt.target.closest('.years__form')) {
     evt.preventDefault();
     clickOutOfFiltersByYears(); 
+    filterForm.addEventListener('click', openFiltersOptions);
   }
 }
 
@@ -353,25 +381,11 @@ function clickOutOfFiltersByYears() {
 function hideFiltersByGenres() {
   genresForm.classList.add('is-hidden');
   const selectedGenresArr = generalFilterParams.with_genres.split(',');
-
-  let selectedGenres = 'Genres';
-  if (selectedGenresArr.length === 1 && selectedGenresArr[0] !== '') {
-    selectedGenres = listOfGenres[selectedGenresArr[0]];
-  }
-  if (selectedGenresArr.length > 1) {
-    selectedGenres =
-      listOfGenres[selectedGenresArr[0]] + `, +${selectedGenresArr.length - 1}`;
-  }
-
-  openFilterByGenresBtn.textContent = selectedGenres;
-  openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
-
-  if (openFilterByGenresBtn.textContent === 'Genres') {
-    openFilterByGenresBtn.style.boxShadow =
-      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-  }
+  changeGenresButtonAppearance(selectedGenresArr);
   document.removeEventListener('click', closeGenresFilterOptions);
 }
+
+
 
 function hideFiltersByYears() {
   yearsForm.classList.add('is-hidden');
