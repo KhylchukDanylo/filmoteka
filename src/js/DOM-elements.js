@@ -23,16 +23,18 @@ export const refs = {
   openFilterByYearsBtn: document.querySelector('.filters__years-button'),
   genresForm: document.querySelector('.genres__form'),
   yearsForm: document.querySelector('.years__form'),
+  sortFormOptions: document.querySelectorAll('.sort__form option'),
   clearFiltersButton: document.querySelector('.filters__button--clear'),
   lowerValueInput: document.querySelector('.lower-value'),
   higerValueInput: document.querySelector('.higher-value'),
   rangeValues: document.querySelector('.range-values'),
+  checkingForBeingAdultInput: document.querySelector('.adult__form input'),
   logoFromHeader: document.querySelector('.link-logo'),
   logoFromFixedHeader: document.querySelector('.logo-link__fixed'),
   logoFromLibrarysHeader: document.querySelector('.logo__link'),
   logoFromLibrarysFixedHeader: document.querySelector('.logo__link--fixed'),
   //этот элемент уже есть выше
-  containerEl: document.querySelector('.container'),
+  // containerEl: document.querySelector('.container'),
   notFoundPage: document.querySelector('.not-found-page'),
   modalAuthBackdrop: document.querySelector('.modal-auth__backdrop'),
   inputName: document.querySelector('.input__auth__name'),
@@ -47,5 +49,4 @@ export const refs = {
   lastGalleryCard: document.querySelector('.movie__last-img'),
   body: document.querySelector('body'),
   logoutButton: document.querySelector('.logout-button'),
-
 };
