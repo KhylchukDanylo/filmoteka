@@ -9,5 +9,5 @@ function logoutHandling(event){
     event.preventDefault();
     Notify.info('you have logged out', trailerNotifyOptions);
     Notify.warning('redirect to main page', trailerNotifyOptions);
-    window.setTimeout((() => document.location.assign('../index.html')), 3000);
+    window.setTimeout((() => document.location.assign('./index.html')), 3000);
 }
