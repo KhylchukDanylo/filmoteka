@@ -319,10 +319,45 @@ function closeModal() {
 
 */
 /////////////////////ТЕКУЩЕЕ РАЗБИРАТЕЛЬСТВО/////////////
-
+////////////////МИШИНА ЧАСТЬ///////////////////////////////
 import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
 import { refs } from './DOM-elements';
+
+const {
+  formAuth: form,
+  inputName: name,
+  inputEmail: email,
+  inputPassword: password,
+  btnRegister,
+  modalAuthBackdrop: bacdrop,
+} = refs;
+
+btnRegister.addEventListener('click', createNewUser);
+
+const users = JSON.parse(localStorage.getItem('local-users')) || [];
+console.log(users);
+function createNewUser() {
+  const newUser = {};
+  newUser.name = name.value;
+  newUser.email = email.value;
+  newUser.password = password.value;
+  users.push(newUser);
+
+  const newUsersArray = JSON.stringify(users);
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.setItem('local-users', newUsersArray);
+  bacdrop.classList.add('visually-hidden');
+}
+
+/*import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix';
+import { refs } from './DOM-elements';
+const trailerNotifyOptions = {
+  position: 'center-top',
+  timeout: 1500,
+  fontFamily: 'Roboto',
+};*/
 
 refs.btnLogin.addEventListener('click', onBtnLogin);
 refs.btnRegister.addEventListener('click', onBtnSubmit);
@@ -342,13 +377,7 @@ const formData = {
 
 let currentFormData = formData;
 
-let users = [];
-
-if (localStorage.getItem(STORAGE_KEY)) {
-  users = JSON.parse(localStorage.getItem(STORAGE_KEY));
-}
-
-const { name, email, password } = formData;
+//const { name, email, password } = formData;
 
 function onLoginGlobalBtn(e) {
   e.preventDefault();
@@ -381,18 +410,6 @@ function onBtnLogOut() {
   closeModal();
 }
 
-function getLocalStorage() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
-    const result = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    result.reduce((acc, user) => {
-      return acc.push(user);
-    }, []);
-  } catch (e) {
-    console.log('Error!');
-  }
-}
-
 function onBtnSubmit(e) {
   e.preventDefault();
   refs.inputName.value = name;
@@ -404,21 +421,11 @@ function onBtnSubmit(e) {
     validate_password(password) === false ||
     validate_name(name) === false
   ) {
-    console.log('Name or Email or Password is wrong!');
-    // return Notify.failure('Name or Email or Password is wrong!');
+    return Notify.failure('Name or Email or Password is wrong!');
   } else {
-    console.log('Welcome to our site!');
-    //Notify.success('Welcome to our site!');
-    getLocalStorage();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
+    Notify.success('Welcome to our site!');
   }
-
-  /*if (localStorage.getItem(STORAGE_KEY).includes(email)) {
-    users.splice(users.indexOf(email), 1);
-  } else {
-    users.push(email);
-  }
-  console.log(users);*/
-
   refs.btnLoginGlobal.textContent = 'Log out';
   closeModal();
   refs.formAuth.reset();
@@ -435,12 +442,11 @@ function onBtnLogin(e) {
   e.preventDefault();
   currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (STORAGE_KEY in localStorage) {
-    //  Notify.success('Welcome to our site!');
-    console.log('Welcome to our site!');
+    Notify.success('Welcome to our site!');
   } else {
-    console.log('Fields to have wrong information!');
-    return;
-    //Notify.failure( 'Fields to have wrong information. Check plesase and try again!');
+    return Notify.failure(
+      'Fields to have wrong information. Check plesase and try again!'
+    );
   }
 }
 
