@@ -160,6 +160,7 @@ function getClassByVote(vote) {
   }
 }
 
-if (document.location.pathname === '/library.html') {
+if(document.location.pathname === '/library.html'){
   console.log('you are here');
 }
+
