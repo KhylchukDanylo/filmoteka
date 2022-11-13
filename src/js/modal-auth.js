@@ -10,7 +10,7 @@ import {
   signOut,
 } from 'firebase/auth';
 import { getDatabase, ref, set, remove } from 'firebase/database';
-import { backdrop } from './modal-movie-render';
+//import { backdrop } from './modal-movie-render';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB2TbFY0wugbjLukonpxHQ4tn4oKoQ7Qn8',
@@ -34,10 +34,13 @@ refs.btnRegister.addEventListener('click', onBtnRegister);
 refs.input.addEventListener('input', throttle(onValidInput, 300));
 refs.btnLogOut.addEventListener('click', onBtnLogOut);
 refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
+refs.modalAuthBackdrop.addEventListener('click', closeAuthModal);
 
 function onLoginGlobalBtn(e) {
   e.preventDefault();
   refs.formAuth.classList.remove('visually-hidden');
+  refs.modalAuthBackdrop.classList.add('modal-auth__backdrop');
+  document.body.classList.add('scroll-auth');
 }
 
 function onBtnRegister(e) {
@@ -64,6 +67,8 @@ function onBtnRegister(e) {
         lastLogin: Date.now(),
       });
       refs.formAuth.classList.add('visually-hidden');
+      refs.modalAuthBackdrop.classList.remove('modal-auth__backdrop');
+      document.body.classList.remove('scroll-auth');
       refs.btnMyLibrary.classList.remove('disabled');
       Notify.success('User created succesfully!');
     })
@@ -84,6 +89,8 @@ function onBtnLogin(e) {
   signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       refs.formAuth.classList.add('visually-hidden');
+      refs.modalAuthBackdrop.classList.remove('modal-auth__backdrop');
+      document.body.classList.remove('scroll-auth');
       refs.btnMyLibrary.classList.remove('disabled');
       Notify.success('User logged in succesfully!');
     })
@@ -97,6 +104,8 @@ onAuthStateChanged(auth, user => {
     const uid = user.uid;
     localStorage.setItem('uid', uid);
     refs.formAuth.classList.add('visually-hidden');
+    refs.modalAuthBackdrop.classList.remove('modal-auth__backdrop');
+    document.body.classList.remove('scroll-auth');
     refs.btnRegister.classList.add('visually-hidden');
     refs.btnLogin.classList.add('visually-hidden');
     refs.btnLogOut.classList.remove('visually-hidden');
@@ -126,6 +135,8 @@ function onBtnLogOut(e) {
       refs.btnLogin.classList.remove('visually-hidden');
       refs.btnRegister.classList.remove('visually-hidden');
       refs.formAuth.classList.remove('visually-hidden');
+      refs.modalAuthBackdrop.classList.add('modal-auth__backdrop');
+      document.body.classList.add('scroll-auth');
       refs.btnLogOut.classList.add('visually-hidden');
       refs.btnLoginGlobal.textContent = 'Log in';
       const uid = user.uid;
@@ -176,48 +187,21 @@ btnCloseAuth.addEventListener('click', () => closeModal());
 
 function closeModal() {
   refs.formAuth.classList.add('is-hidden');
-  // backdrop.classList.add('is-hidden');
-  window.location.reload();
+  refs.modalAuthBackdrop.classList.remove('modal-auth__backdrop');
+  document.body.classList.remove('scroll-auth');
+}
+
+function closeAuthModal(event) {
+  if (event.target === event.currentTarget) {
+    refs.modalAuthBackdrop.classList.add('visually-hidden');
+    refs.modalAuthBackdrop.removeEventListener('click', closeModal);
+  }
 }
 */
-///////////////////////////LOCALSTORAGE//////////////////////////////
-/*import throttle from 'lodash.throttle';
-import { Notify } from 'notiflix';
-import { refs } from './DOM-elements';
-import { createNewUser } from './local-registration';
-const {
-  formAuth: form,
-  inputName: name,
-  inputEmail: email,
-  inputPassword: password,
-  btnRegister,
-  modalAuthBackdrop: bacdrop,
-} = refs;
-
-btnRegister.addEventListener('click', createNewUser);
-
-const users = JSON.parse(localStorage.getItem('local-users')) || [];
-console.log(users);
-function createNewUser() {
-  const newUser = {};
-  newUser.id += 1;
-  newUser.name = name.value;
-  newUser.email = email.value;
-  newUser.password = password.value;
-  users.push(newUser);
-
-  const newUsersArray = JSON.stringify(users);
-  localStorage.removeItem('local-users');
-  localStorage.setItem('local-users', newUsersArray);
-  backdrop.classList.add('visually-hidden');
-}*/
-
-///////////////////////LOCALSTORAGE/////////////////////////////////
-
+///////////////////////////LOCALSTORAGE/////////////////////////////
 import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
 import { refs } from './DOM-elements';
-//import { users } from './local-registration';
 const trailerNotifyOptions = {
   position: 'center-top',
   timeout: 1500,
@@ -225,7 +209,6 @@ const trailerNotifyOptions = {
 };
 
 let BTN_KEY = 'Textcontent for Log out';
-
 let textLogOut = JSON.parse(localStorage.getItem(BTN_KEY)) || 0;
 
 function checkLogOut() {
@@ -308,8 +291,7 @@ function onBtnSubmit(e) {
   if (refs.inputEmail.value === '') {
     return Notify.failure('Wrong email!', trailerNotifyOptions);
   }
-  const localUser = JSON.parse(localStorage.getItem('local-users')) || {};
-  // const localUser = JSON.stringify(users);
+  const localUser = JSON.parse(localStorage.getItem('local-users'));
   const guestUser = JSON.stringify(currentFormData);
   console.log('123', localUser);
   console.log(guestUser);
@@ -319,7 +301,6 @@ function onBtnSubmit(e) {
     textLogOut = 'LOG OUT';
     refs.btnLoginGlobal.textContent = textLogOut;
     localStorage.setItem(BTN_KEY, JSON.stringify(textLogOut));
-    //  textLogOut = JSON.parse(localStorage.getItem(BTN_KEY));
     closeModal();
     refs.formAuth.reset();
     return Notify.success('Registration is over!', trailerNotifyOptions);
@@ -340,7 +321,6 @@ function onFormInput(e) {
 function onBtnLogin(e) {
   e.preventDefault();
   const localUser = JSON.parse(localStorage.getItem('local-users')) || {};
-  //const localUser = JSON.stringify(users);
   const guestUser = JSON.stringify(currentFormData);
   console.log(localUser);
   console.log(guestUser);
@@ -350,7 +330,6 @@ function onBtnLogin(e) {
     textLogOut = 'LOG OUT';
     refs.btnLoginGlobal.textContent = textLogOut;
     localStorage.setItem(BTN_KEY, JSON.stringify(textLogOut));
-    // textLogOut = JSON.parse(localStorage.getItem(BTN_KEY));
     closeModal();
     refs.formAuth.reset();
     return Notify.success('User logged in!', trailerNotifyOptions);
