@@ -5,7 +5,6 @@ const {
   inputEmail: email,
   inputPassword: password,
   btnRegister,
-  modalAuthBackdrop: bacdrop,
 } = refs;
 
 btnRegister.addEventListener('click', createNewUser);
@@ -23,7 +22,6 @@ function createNewUser() {
   const newUsersArray = JSON.stringify(users);
   localStorage.removeItem('local-users');
   localStorage.setItem('local-users', newUsersArray);
-  bacdrop.classList.add('visually-hidden');
 }
 
 */

@@ -7,7 +7,7 @@ const trailerNotifyOptions = {
   fontFamily: 'Roboto',
 };
 
-/*logoutButton.addEventListener('click', logoutHandling);
+logoutButton.addEventListener('click', logoutHandling);
 
 function logoutHandling(event) {
   event.preventDefault();
@@ -15,4 +15,3 @@ function logoutHandling(event) {
   Notify.warning('redirect to main page', trailerNotifyOptions);
   window.setTimeout(() => document.location.assign('./index.html'), 3000);
 }
-*/

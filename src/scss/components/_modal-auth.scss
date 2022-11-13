@@ -1,15 +1,20 @@
-html {
+/*html {
   cursor: url(../images/donkey.png), auto;
-}
+}*/
 
-/*.modal-auth__backdrop {
+.modal-auth__backdrop {
   position: absolute;
   top: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 3;
-}*/
+}
+
+.scroll-auth {
+  position: relative;
+  overflow: hidden;
+}
 
 .form__auth {
   width: 70%;
@@ -57,8 +62,8 @@ html {
 
 .form__auth__header {
   display: inline-block;
-  font-size: 15px;
-  font-weight: 900px;
+  font-size: 12px;
+  font-weight: 700px;
   text-transform: uppercase;
   letter-spacing: 1px;
 
@@ -70,6 +75,15 @@ html {
     )
     1;
   background-clip: text;
+
+  @include tablert {
+    font-size: 13px;
+  }
+
+  @include desktop {
+    font-size: 15px;
+    font-weight: 900px;
+  }
 }
 
 .input__auth__cont {
@@ -151,17 +165,37 @@ html {
 
   font-family: Montserrat;
   letter-spacing: 1px;
-  font-weight: 900;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 10px;
 
   cursor: pointer;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @include tablert {
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  @include desktop {
+    font-weight: 900;
+    font-size: 14px;
+  }
 }
 
 .visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.visually-hidden-backdrop {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   height: 1px;
@@ -176,13 +210,25 @@ html {
 }
 
 .auth__btn-close {
-  top: 8px;
-  right: 8px;
+  top: 5px;
+  right: 5px;
   position: absolute;
   background-color: transparent;
   border: none;
-  font-size: 20px;
+  font-size: 16px;
   cursor: pointer;
+
+  @include tablert {
+    font-size: 18px;
+    top: 6px;
+    right: 6px;
+  }
+
+  @include desktop {
+    font-size: 20px;
+    top: 8px;
+    right: 8px;
+  }
 }
 
 .button-authent {
@@ -199,8 +245,4 @@ html {
   display: inline-block;
   box-shadow: 0 14px 28px rgba(245, 242, 242, 0.25),
     0 10px 10px rgba(250, 248, 248, 0.22);
-}
-
-.stop-scrolling-auth {
-  overflow: hidden;
 }
