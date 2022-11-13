@@ -13,7 +13,7 @@
 <li>Front-end developer: <a href="https://github.com/S-Mariia" >Mariia Savchyn</a></li>
 <li>Front-end developer: <a href="https://github.com/Landar-S" >Serhii Landar</a></li>
 
-<p>Наш проект побудований на основі Figma макету. Ми реалізували адаптований сайт за 3 розмірами : мобільна (min-width: 320px), планшетна (min-width: 768px), десктопна (min-width: 1280px). Проект був реалізований вчасно, за 7 днів.</p>
+<p>Наш проект побудований на основі Figma макету. Ми реалізували адаптований сайт за 3 розмірами : мобільна (min-width: 320px), планшетна (min-width: 768px), десктопна (min-width: 1280px). Проект був реалізований вчасно, за 11 днів.</p>
 
 <h2 align="center">░Д░л░я░ ░п░р░о░е░к░т░у░ ░м░и░ ░в░и░к░о░р░и░с░т░о░в░у░в░а░л░и░:░</h2>
 <ul>
@@ -60,7 +60,7 @@
 <li>Front-end developer: <a href="https://github.com/S-Mariia" >Mariia Savchyn</a></li>
 <li>Front-end developer: <a href="https://github.com/Landar-S" >Serhii Landar</a></li>
 
-<p>Our project came from Figma maket. We implemented an adapted site in 3 sizes: mobile (min-width: 320px), tablet (min-width: 768px), desktop (min-width: 1280px). It was realized in time, for 7 days.</p>
+<p>Our project came from Figma maket. We implemented an adaptive site in 3 sizes: mobile (min-width: 320px), tablet (min-width: 768px), desktop (min-width: 1280px). It was realized in time, 11 days.</p>
 
 <h2 align="center">𝕱𝖔𝖗 𝖕𝖗𝖔𝖏𝖊𝖈𝖙 𝖜𝖊 𝖍𝖆𝖛𝖊 𝖚𝖘𝖊𝖉 𝖓𝖊𝖝𝖙 𝖙𝖊𝖈𝖍𝖓𝖔𝖑𝖔𝖌𝖎𝖊𝖘:</h2>
 <ul>
@@ -80,14 +80,14 @@
 
 <h2 align="center">𝖂𝖊 𝖗𝖊𝖆𝖑𝖎𝖟𝖊𝖉 𝖓𝖊𝖝𝖙 𝖙𝖊𝖈𝖍𝖓𝖎𝖈𝖎𝖆𝖓 𝖙𝖆𝖘𝖐𝖘:</h2>
 <ul>
-<li>develop a website for searching of popular film;</li>
-<li>give to users an opportunity to search films by genre;</li>
-<li>orgonize user's library for collecting favourite and watched films;</li>
-<li>develop a movie card with detailed description;</li>
-<li>implement viewing of movie trailers at the user's request;</li>
-<li>develop user authorization on website;</li>
-<li>develop website themes: day/night;</li>
-<li>develop pagination.</li>
+<li>developed a website for searching of popular film;</li>
+<li>gave to users an opportunity to search films by genre;</li>
+<li>orgonized user's library for collecting favourite and watched films;</li>
+<li>developed a movie card with detailed description;</li>
+<li>implemented viewing of movie trailers at the user's request;</li>
+<li>developed user authorization on website;</li>
+<li>developed website themes: day/night;</li>
+<li>developed pagination.</li>
 </ul>
 <p align="center">
 Enjoy our project you can right here khylchukdanylo.github.io/filmoteka/</p>

@@ -102,13 +102,20 @@ onAuthStateChanged(auth, user => {
     refs.btnLogOut.classList.remove('visually-hidden');
     refs.btnLoginGlobal.textContent = 'log out';
     refs.btnMyLibrary.classList.remove('disabled');
-    document.querySelector('.input__auth__email').value = '';
-    document.querySelector('.input__auth__password').value = '';
-    document.querySelector('.input__auth__name').value = '';
-
+    refs.inputName.value = '';
+    refs.inputEmail.value = '';
+    refs.inputPassword.value = '';
+    refs.inputName.disabled = true;
+    refs.inputEmail.disabled = true;
+    refs.inputPassword.disabled = true;
+    refs.btnMyLibrary.classList.remove('disabled');
     return uid;
   } else {
     localStorage.removeItem('uid');
+    refs.inputName.disabled = false;
+    refs.inputEmail.disabled = false;
+    refs.inputPassword.disabled = false;
+    refs.btnMyLibrary.classList.add('disabled');
   }
 });
 
@@ -125,7 +132,7 @@ function onBtnLogOut(e) {
       uid = null;
     })
     .catch(error => {
-      Notify.failure('User is logged out!');
+      Notify.warning('User is logged out!');
     });
 }
 
@@ -169,25 +176,43 @@ btnCloseAuth.addEventListener('click', () => closeModal());
 
 function closeModal() {
   refs.formAuth.classList.add('is-hidden');
-  backdrop.classList.add('is-hidden');
+  // backdrop.classList.add('is-hidden');
   window.location.reload();
-}*/
-
-/*function noScroll() {
-  if (!refs.formAuth.classList.contains('visually-hidden')) {
-    document.body.classList.add('stop-scrolling');
-  } else {
-    document.body.classList.remove('stop-scrolling');
-  }
-}*/
-
-/*function onBackdropClick(event) {
-  if (event.target === event.currentTarget) {
-    onCloseModalAuth();
-  }
-}*/
-
+}
+*/
 ///////////////////////////LOCALSTORAGE//////////////////////////////
+/*import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix';
+import { refs } from './DOM-elements';
+import { createNewUser } from './local-registration';
+const {
+  formAuth: form,
+  inputName: name,
+  inputEmail: email,
+  inputPassword: password,
+  btnRegister,
+  modalAuthBackdrop: bacdrop,
+} = refs;
+
+btnRegister.addEventListener('click', createNewUser);
+
+const users = JSON.parse(localStorage.getItem('local-users')) || [];
+console.log(users);
+function createNewUser() {
+  const newUser = {};
+  newUser.id += 1;
+  newUser.name = name.value;
+  newUser.email = email.value;
+  newUser.password = password.value;
+  users.push(newUser);
+
+  const newUsersArray = JSON.stringify(users);
+  localStorage.removeItem('local-users');
+  localStorage.setItem('local-users', newUsersArray);
+  backdrop.classList.add('visually-hidden');
+}
+
+////////////////////////////////////////////////////////////////
 
 import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
@@ -197,32 +222,244 @@ const trailerNotifyOptions = {
   timeout: 1500,
   fontFamily: 'Roboto',
 };
+
+refs.btnRegister.addEventListener('click', onBtnSubmit);
 refs.btnLogin.addEventListener('click', onBtnLogin);
-// refs.btnRegister.addEventListener('click', onBtnSubmit);
 refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
-refs.formAuth.addEventListener('submit', onFormSubmit);
 refs.btnLogOut.addEventListener('click', onBtnLogOut);
 refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
 
 const STORAGE_KEY = 'feedback-form';
 
 const formData = {
-  text: '',
+  name: '',
   email: '',
   password: '',
 };
 
 let currentFormData = formData;
 
-resultForm();
+function onLoginGlobalBtn(e) {
+  e.preventDefault();
+  refs.formAuth.classList.remove('visually-hidden');
+}*/
+//refs.modalAuthBackdrop.classList.remove('visually-hidden');
+//refs.modalAuthBackdrop.addEventListener('click', closeAuthModal);
+
+/* if (refs.btnLoginGlobal.textContent === 'Log out') {
+    refs.btnLogin.classList.add('visually-hidden');
+    refs.btnRegister.classList.add('visually-hidden');
+    refs.btnLogOut.classList.remove('visually-hidden');
+    refs.inputName.disabled = true;
+    refs.inputEmail.disabled = true;
+    refs.inputPassword.disabled = true;*/
+// document.body.classList.remove('stop-scrolling-auth');
+// refs.modalAuthBackdrop.classList.remove('visually-hidden');
+/*  }
+
+  if (refs.btnLoginGlobal.textContent === 'Log in') {
+    refs.btnLogin.classList.remove('visually-hidden');
+    refs.btnRegister.classList.remove('visually-hidden');
+    refs.btnLogOut.classList.add('visually-hidden');
+    refs.inputName.disabled = false;
+    refs.inputEmail.disabled = false;
+    refs.inputPassword.disabled = false;*/
+//document.body.classList.add('stop-scrolling-auth');
+//  refs.modalAuthBackdrop.classList.add('visually-hidden');
+/* }
+}
+
+function onBtnLogOut(e) {
+  e.preventDefault();
+  refs.btnLogin.classList.remove('visually-hidden');
+  refs.btnRegister.classList.remove('visually-hidden');
+  refs.btnLogOut.classList.add('visually-hidden');
+  refs.btnLoginGlobal.textContent = 'Log in';
+  closeModal();
+}
+
+function onBtnSubmit(e) {
+  e.preventDefault();
+
+  if (refs.inputName.value === '') {
+    return Notify.failure('Form has empty fields!', trailerNotifyOptions);
+  }
+  if (refs.inputPassword.value.length <= 0) {
+    return Notify.failure(
+      'Password has minimum 6 symbols!',
+      trailerNotifyOptions
+    );
+  }
+  if (refs.inputEmail.value === '') {
+    return Notify.failure('Wrong email!', trailerNotifyOptions);
+  }
+
+  const localUser = JSON.stringify(users);
+  const guestUser = JSON.stringify(currentFormData);
+  console.log(localUser);
+  console.log(guestUser);
+
+  if (localUser !== guestUser) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
+    refs.btnLoginGlobal.textContent = 'Log out';
+    closeModal();
+    refs.formAuth.reset();
+    return Notify.success('Registration is over!', trailerNotifyOptions);
+  }
+
+  return localUser === guestUser
+    ? Notify.failure('User was registered already! Log in please!')
+    : Notify.success('Registration was succesful!');
+}
+
+function onFormInput(e) {
+  e.preventDefault();
+  currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
+  const value = JSON.stringify(currentFormData);
+  localStorage.setItem(STORAGE_KEY, value);
+}
+
+function onBtnLogin(e) {
+  e.preventDefault();
+  const localUser = JSON.stringify(users);
+  const guestUser = JSON.stringify(currentFormData);
+  console.log(localUser);
+  console.log(guestUser);
+
+  if (localUser === guestUser) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
+    refs.btnLoginGlobal.textContent = 'Log out';
+    closeModal();
+    refs.formAuth.reset();
+    return Notify.success('User logged in!', trailerNotifyOptions);
+  } else {
+    return Notify.failure('Log in impossible!', trailerNotifyOptions);
+  }
+}
+
+function onValidInput(email) {
+  expression = /^[^@]+@\w+(\.\w+)+\w$/;
+  if (expression.test(email) === true) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function validate_password(password) {
+  if (password < 6) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validate_name(name) {
+  if (name.length <= 0) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+if (!refs.formAuth.classList.contains('visually-hidden')) {
+  document.body.classList.add('stop-scrolling-auth');
+} else {
+  document.body.classList.remove('stop-scrolling-auth');
+}
+
+window.addEventListener('keydown', e => {
+  if (
+    e.key === 'Escape' &&
+    !refs.formAuth.classList.contains('visually-hidden')
+  ) {
+    closeModal();
+  }
+});
+
+const btnCloseAuth = document.querySelector('.auth__btn-close');
+btnCloseAuth.addEventListener('click', () => closeModal());
+
+function closeModal() {
+  refs.formAuth.classList.add('visually-hidden');
+}*/
+
+/*function closeAuthModal(event) {
+  if (event.target === event.currentTarget) {
+    refs.modalAuthBackdrop.classList.add('visually-hidden');
+    refs.modalAuthBackdrop.removeEventListener('click', closeModal);
+  }
+}*/
+///////////////////ADD BACKDROPE////////////////////////////////////////////////////////////////////////////////////
+import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix';
+import { refs } from './DOM-elements';
+import { createNewUser } from './local-registration';
+const {
+  formAuth: form,
+  inputName: name,
+  inputEmail: email,
+  inputPassword: password,
+  btnRegister,
+} = refs;
+
+btnRegister.addEventListener('click', createNewUser);
+
+const users = JSON.parse(localStorage.getItem('local-users')) || [];
+console.log(users);
+function createNewUser() {
+  const newUser = {};
+  newUser.id += 1;
+  newUser.name = name.value;
+  newUser.email = email.value;
+  newUser.password = password.value;
+  users.push(newUser);
+
+  const newUsersArray = JSON.stringify(users);
+  localStorage.removeItem('local-users');
+  localStorage.setItem('local-users', newUsersArray);
+}
+
+//////////////////////////////////////////////
+
+import throttle from 'lodash.throttle';
+import { Notify } from 'notiflix';
+import { refs } from './DOM-elements';
+const trailerNotifyOptions = {
+  position: 'center-top',
+  timeout: 1500,
+  fontFamily: 'Roboto',
+};
+
+refs.btnRegister.addEventListener('click', onBtnSubmit);
+refs.btnLogin.addEventListener('click', onBtnLogin);
+refs.formAuth.addEventListener('input', throttle(onFormInput, 300));
+refs.btnLogOut.addEventListener('click', onBtnLogOut);
+refs.btnLoginGlobal.addEventListener('click', onLoginGlobalBtn);
+refs.modalAuthBackdrop.addEventListener('click', closeAuthModal);
+
+const STORAGE_KEY = 'feedback-form';
+
+const formData = {
+  name: '',
+  email: '',
+  password: '',
+};
+
+let currentFormData = formData;
+let BTN_KEY = 'Textcontent for Log out';
+let textLogOut = '';
 
 function onLoginGlobalBtn(e) {
   e.preventDefault();
-  // refs.formAuth.classList.remove('visually-hidden');
-  refs.modalAuthBackdrop.classList.remove('visually-hidden');
-  refs.modalAuthBackdrop.addEventListener('click', closeAuthModal);
+  refs.formAuth.classList.remove('visually-hidden');
+  refs.modalAuthBackdrop.classList.add('modal-auth__backdrop');
+  document.body.classList.add('scroll-auth');
 
-  if (refs.btnLoginGlobal.textContent === 'Log out') {
+  if (refs.btnLoginGlobal.textContent === 'LOG OUT') {
+    refs.formAuth.classList.remove('visually-hidden');
+    refs.modalAuthBackdrop.classList.add('modal-auth__backdrop');
+    document.body.classList.add('scroll-auth');
     refs.btnLogin.classList.add('visually-hidden');
     refs.btnRegister.classList.add('visually-hidden');
     refs.btnLogOut.classList.remove('visually-hidden');
@@ -232,6 +469,7 @@ function onLoginGlobalBtn(e) {
   }
 
   if (refs.btnLoginGlobal.textContent === 'Log in') {
+    localStorage.removeItem(BTN_KEY);
     refs.btnLogin.classList.remove('visually-hidden');
     refs.btnRegister.classList.remove('visually-hidden');
     refs.btnLogOut.classList.add('visually-hidden');
@@ -241,14 +479,53 @@ function onLoginGlobalBtn(e) {
   }
 }
 
-function onBtnLogOut() {
+function onBtnLogOut(e) {
+  e.preventDefault();
   refs.btnLogin.classList.remove('visually-hidden');
   refs.btnRegister.classList.remove('visually-hidden');
   refs.btnLogOut.classList.add('visually-hidden');
   refs.btnLoginGlobal.textContent = 'Log in';
-
-  closeModal(); //не совсем понял для чего тут закрывать модалку, она тут будет открыта?
+  localStorage.removeItem(BTN_KEY);
+  closeModal();
 }
+
+function onBtnSubmit(e) {
+  e.preventDefault();
+
+  if (refs.inputName.value === '') {
+    return Notify.failure('Form has empty fields!', trailerNotifyOptions);
+  }
+  if (refs.inputPassword.value.length <= 0) {
+    return Notify.failure(
+      'Password has minimum 6 symbols!',
+      trailerNotifyOptions
+    );
+  }
+  if (refs.inputEmail.value === '') {
+    return Notify.failure('Wrong email!', trailerNotifyOptions);
+  }
+
+  const localUser = JSON.stringify(users);
+  const guestUser = JSON.stringify(currentFormData);
+  console.log(localUser);
+  console.log(guestUser);
+
+  if (localUser !== guestUser) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
+    textLogOut = 'LOG OUT';
+    refs.btnLoginGlobal.textContent = textLogOut;
+    localStorage.setItem(BTN_KEY, JSON.stringify(textLogOut));
+    textLogOut = JSON.parse(localStorage.getItem(BTN_KEY));
+    closeModal();
+    refs.formAuth.reset();
+    return Notify.success('Registration is over!', trailerNotifyOptions);
+  }
+
+  return localUser === guestUser
+    ? Notify.failure('User was registered already! Log in please!')
+    : Notify.success('Registration was succesful!');
+}
+
 function onFormInput(e) {
   e.preventDefault();
   currentFormData = { ...currentFormData, [e.target.name]: e.target.value };
@@ -256,47 +533,32 @@ function onFormInput(e) {
   localStorage.setItem(STORAGE_KEY, value);
 }
 
-function resultForm() {
-  const { text, email, password } = populateEmail();
-  refs.inputName.value = text;
-  refs.inputEmail.value = email;
-  refs.inputPassword.value = password;
-}
-
-function onFormSubmit(e) {
+function onBtnLogin(e) {
   e.preventDefault();
-  currentFormData = formData;
-  const value = JSON.stringify(currentFormData);
-  localStorage.setItem(STORAGE_KEY, value);
+  const localUser = JSON.stringify(users);
+  const guestUser = JSON.stringify(currentFormData);
+  console.log(localUser);
+  console.log(guestUser);
 
-  //window.location.reload();
-}
-
-function populateEmail() {
-  currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || formData;
-  console.log(currentFormData);
-  return currentFormData;
-}
-
-function onBtnSubmit() {
-  if (
-    refs.inputName.value !== '' ||
-    refs.inputEmail.value !== '' ||
-    refs.inputPassword.value !== ''
-  ) {
-    Notify.success('Welcome to our site!');
-    refs.btnLoginGlobal.textContent = 'Log out';
+  if (localUser === guestUser) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
+    textLogOut = 'LOG OUT';
+    refs.btnLoginGlobal.textContent = textLogOut;
+    localStorage.setItem(BTN_KEY, JSON.stringify(textLogOut));
+    textLogOut = JSON.parse(localStorage.getItem(BTN_KEY));
+    closeModal();
+    refs.formAuth.reset();
+    return Notify.success('User logged in!', trailerNotifyOptions);
   } else {
-    Notify.failure(
-      'Your form has empty fields. Add information and try again.'
-    );
+    return Notify.failure('Log in impossible!', trailerNotifyOptions);
   }
-  refs.formAuth.reset();
-  closeModal();
 }
 
 window.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
+  if (
+    e.key === 'Escape' &&
+    !refs.formAuth.classList.contains('visually-hidden')
+  ) {
     closeModal();
   }
 });
@@ -305,27 +567,10 @@ const btnCloseAuth = document.querySelector('.auth__btn-close');
 btnCloseAuth.addEventListener('click', () => closeModal());
 
 function closeModal() {
-  // refs.formAuth.classList.add('visually-hidden');
-  refs.modalAuthBackdrop.classList.add('vissualy-hidden');
-  // window.location.reload();
+  refs.formAuth.classList.add('visually-hidden');
+  refs.modalAuthBackdrop.classList.remove('modal-auth__backdrop');
+  document.body.classList.add('scroll-auth');
 }
-
-function onBtnLogin() {
-  const currentFormData = JSON.parse(localStorage.getItem(STORAGE_KEY));
-  let newCurrentFormData =
-    'refs.inputName.value && refs.inputEmail.value && refs.inputPassword.value';
-  if (currentFormData === newCurrentFormData) {
-    Notify.success('Welcome to our site!');
-    console.log('Login successful');
-  } else {
-    Notify.failure('ERROR');
-    console.log('Wrong user');
-  }
-  Notify.failure('ERROR');
-  console.log('Not a registered user');
-  closeModal();
-}
-/*const trailerNotifyOptions =  {position: 'center-top',timeout: 1500, fontFamily: 'Roboto',};*/
 
 function closeAuthModal(event) {
   if (event.target === event.currentTarget) {

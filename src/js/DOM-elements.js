@@ -36,7 +36,7 @@ export const refs = {
   //этот элемент уже есть выше
   // containerEl: document.querySelector('.container'),
   notFoundPage: document.querySelector('.not-found-page'),
-  modalAuthBackdrop: document.querySelector('.modal-auth__backdrop'),
+  modalAuthBackdrop: document.querySelector('.wrapper-backdrop'),
   inputName: document.querySelector('.input__auth__name'),
   inputEmail: document.querySelector('.input__auth__email'),
   inputPassword: document.querySelector('.input__auth__password'),
