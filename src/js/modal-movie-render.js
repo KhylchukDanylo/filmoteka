@@ -372,7 +372,7 @@ function removeFromWached(movieId, movieTitle) {
 
   localStorage.removeItem('wached-movies');
   const movieIndex = watchedMovies.findIndex((element, index) =>
-    element === movieId ? index : null
+    element === movieId 
   );
   watchedMovies.splice(movieIndex, 1);
   localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
