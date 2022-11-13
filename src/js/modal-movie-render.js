@@ -345,9 +345,7 @@ function removeFromQueue(movieId, movieTitle) {
   btn.classList.remove('selected');
   btn.textContent = queueText;
   localStorage.removeItem('queue-movies');
-  const movieIndex = queueMovies.findIndex((element, index) =>
-    element === movieId ? index : null
-  );
+  const movieIndex = queueMovies.findIndex(element => element === movieId );
   queueMovies.splice(movieIndex, 1);
   localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
 }
