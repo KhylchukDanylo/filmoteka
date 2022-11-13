@@ -421,8 +421,8 @@ function createNewUser() {
 }
 
 //////////////////////////////////////////////
-
-import throttle from 'lodash.throttle';
+import { throttle } from 'lodash.throttle';
+// import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
 import { refs } from './DOM-elements';
 const trailerNotifyOptions = {
