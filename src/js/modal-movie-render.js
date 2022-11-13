@@ -213,6 +213,7 @@ async function openModal(id) {
       <button type="button" class="movie__btn movie__btn-watched" id="btn-watched" style="padding:${watcheddBtnPadding}">
           ${watchedText}
       </button>
+      <span id="${movieId}" style="display:none"></span>
           <button type="button" class="movie__btn movie__btn-queue" id="btn-queue">
     ${queueText}
       </button>
@@ -290,7 +291,7 @@ window.addEventListener('click', e => {
   let movieTitle = '';
   if (e.target.parentNode.parentNode.firstElementChild.nodeName === 'H2') {
     movieTitle = e.target.parentNode.parentNode.firstElementChild.textContent;
-    console.log(movieTitle);
+    // console.log(movieTitle);
   }
 
   if (e.target === backdrop) {
@@ -345,7 +346,7 @@ function removeFromQueue(movieId, movieTitle) {
   btn.textContent = queueText;
   localStorage.removeItem('queue-movies');
   const movieIndex = queueMovies.findIndex((element, index) =>
-    element === movieId ? index : null
+    element === movieId 
   );
   queueMovies.splice(movieIndex, 1);
   localStorage.setItem('queue-movies', JSON.stringify(queueMovies));
@@ -378,4 +379,4 @@ function removeFromWached(movieId, movieTitle) {
   localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
 }
 
-export { movieId, backdrop };
+export { movieId, backdrop, removeFromWached, removeFromQueue };
