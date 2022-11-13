@@ -57,14 +57,14 @@
 
   &-image:hover,
   &-image:focus {
-    transform: scale(1.07);
+    transform: scale(1.07) ;
   }
 
   &-image {
     border-radius: 5px;
     width: 280px;
     height: 402px;
-
+transition: transform 300ms linear;
     @include tablert {
       width: 336px;
       height: 455px;
@@ -79,7 +79,7 @@
     object-fit: cover;
 
 
-    transition: transform var(--animation-duration) var(--timing-function);
+    
   }
 
   &__link {
@@ -89,6 +89,7 @@
   }
 
   &__wrapper {
+   
     overflow: hidden;
     border-radius: 5px;
   }
@@ -109,12 +110,7 @@
       width: 395px;
       height: 574px;
     }
-
-    // height: 100%;
-    // width: 100%;
-    // object-fit: cover;
-
-    transition: transform var(--animation-duration) var(--timing-function);
+    // transition: transform var(--animation-duration) var(--timing-function);
 
   }
 
