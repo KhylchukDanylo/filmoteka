@@ -129,19 +129,12 @@
 
 .movie__characters {
   flex: 1 0 auto;
-  // list-style: none;
-  // padding: 0;
-  // margin: 0;
   margin-right: 5px;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
   color: #8c8c8c;
 
-  // & p {
-  //   margin: 0;
-  //   padding: 0;
-  // }
   & li:not(:last-child) {
     margin-bottom: 8px;
   }
@@ -157,17 +150,12 @@
 }
 
 .movie__data {
-  // list-style: none;
-  // padding: 0;
-  // margin: 0;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
   color: var(--text-color-dark);
 
   & p {
-    // margin: 0;
-    // padding: 0;
     line-height: 1.4;
   }
 
@@ -185,69 +173,28 @@
   color: var(--text-color-dark);
 }
 .movie__description {
+  max-height: 180px;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.67;
   margin-bottom: 20px;
   color: var(--text-color-dark);
+  overflow-y: auto;
+  @include tablert {
+    max-height: 300px;
+  }
+  @include tablert {
+    max-height: 380px;
+  }
 }
 
 .button-wrap {
   display: flex;
 }
 
-// .movie__btn-watched {
-//   width: 118px;
-//   height: 44px;
-//   padding: 6px 27px;
-//   border: none;
-//   border: 1px solid #000000;
-//   background: #ffffff;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   font-size: 12px;
-//   line-height: 1.33;
-//   text-transform: uppercase;
-//   color: #000000;
-//   margin-right: 20px;
-
-//   @include tablert {
-//     margin-right: 15px;
-//     width: 125px;
-//     padding: 0;
-//   }
-
-//   @include desktop {
-//     width: 136px;
-//   }
-// }
-// .movie__btn-queue {
-//   width: 118px;
-//   height: 44px;
-//   padding: 14px 0 12px;
-//   border: 1px solid #000000;
-//   background: #ffffff;
-//   border-radius: 5px;
-//   cursor: pointer;
-//   font-size: 12px;
-//   line-height: 1.33;
-//   text-transform: uppercase;
-//   color: #000000;
-
-//   @include tablert {
-//     width: 125px;
-//     padding: 0;
-//   }
-
-//   @include desktop {
-//     width: 136px;
-//   }
-// }
-
 .movie__btn {
   width: 118px;
   height: 44px;
-  border: none;
   border: 1px solid #000000;
   background: #ffffff;
   border-radius: 5px;
