@@ -3,8 +3,7 @@ import { allGenres } from './data/jenres.js';
 import { refs } from './DOM-elements';
 import { addPagination, paginationList, CURRENT_PAGE,
   TOTAL_PAGES,
-  CURRENT_STATE,
-  MOVIE_TO_SEARCH, } from './pagination';
+  CURRENT_STATE,} from './pagination';
 import { createMovieList } from './popular-movies';
 import { listEl } from './search-movies';
 import notFoundImg from '../images/library/gallery-nothing.jpg';
@@ -54,6 +53,7 @@ try {
   }
   generalFilterParams = { ...response };
   lastFetchedParams = { ...response };
+
   if (response['include_adult']) {
     checkingForBeingAdultInput.setAttribute('checked', true);
   }
@@ -107,8 +107,6 @@ async function onFormSubmit(evt) {
   updateYearsButtonAppearance();
 
   if (isInitialGeneralFilterParams(generalFilterParams)) {
-    // localStorage.removeItem(FILTERS_PARAMS);
-    // localStorage.setItem(CURRENT_STATE, "popular");
     deleteNotFoundPage();
     createMovieList(1);
     lastFetchedParams = { ...generalFilterParams };
@@ -250,7 +248,15 @@ export async function renderFiltersResult(list) {
   });
 
   paginationList.currentPage = data.page;
-  paginationList.totalPages = data.total_pages;
+  paginationList.totalPages = data.total_pages;//--------------------------------------------------------------------------
+  localStorage.setItem(
+        CURRENT_PAGE,
+        JSON.stringify(paginationList.currentPage)
+      );
+      localStorage.setItem(
+        TOTAL_PAGES,
+        JSON.stringify(paginationList.totalPages)
+      );
 
   genresMaker(movies);
   renderMoviesCard(movies);
@@ -420,28 +426,20 @@ export function fetchAndRenderMoviesByFilter() {
   paginationList.queryParams = { ...filtersParams };
 } catch (err) {
   paginationList.queryParams = { ...generalFilterParams };
-}
+  }
+  try {
+  const currentPage = JSON.parse(localStorage.getItem(CURRENT_PAGE));
+  const totalPages = JSON.parse(localStorage.getItem(TOTAL_PAGES));
 
-  // paginationList.currentState = 'filter';
-
-  // paginationList.queryParams = { ...generalFilterParams };
-  // localStorage.setItem(FILTERS_PARAMS, JSON.stringify(paginationList.queryParams));
-  // localStorage.setItem(
-  //       CURRENT_PAGE,
-  //       JSON.stringify(paginationList.currentPage)
-  //     );
-  //     localStorage.setItem(
-  //       TOTAL_PAGES,
-  //       JSON.stringify(paginationList.totalPages)
-  //     );
-  //     localStorage.setItem(
-  //       CURRENT_STATE,
-  //       JSON.stringify(paginationList.currentState)
-  //     );
+  paginationList.currentPage = currentPage;
+  paginationList.totalPages = totalPages;
+  } catch (err) {
+    console.log('pagination error');
+  }
 
   addSpinner();
   const queryString = transformParamsIntoQuery(paginationList.queryParams);
-  fetchMoviesByFilters(queryString, 1)
+  fetchMoviesByFilters(queryString, paginationList.currentPage)
     .then(resp => {
       if (resp.data['total_results'] === 0) {
         renderNotFoundPage();
@@ -456,15 +454,9 @@ export function fetchAndRenderMoviesByFilter() {
 
 function setCurrentFiltersSettingsToLocalStorage() {
   paginationList.currentState = 'filter';
-localStorage.setItem(FILTERS_PARAMS, JSON.stringify(generalFilterParams));
-  localStorage.setItem(
-        CURRENT_PAGE,
-        JSON.stringify(paginationList.currentPage)
-      );
-      localStorage.setItem(
-        TOTAL_PAGES,
-        JSON.stringify(paginationList.totalPages)
-      );
+  paginationList.currentPage = 1;
+  localStorage.setItem(CURRENT_PAGE, JSON.stringify(paginationList.currentPage));
+  localStorage.setItem(FILTERS_PARAMS, JSON.stringify(generalFilterParams));
       localStorage.setItem(
         CURRENT_STATE,
         JSON.stringify(paginationList.currentState),
@@ -551,4 +543,14 @@ function renderYearsInterval(min, max) {
 
 function getArrayOfGenresFromString(string) {
   return string.split(',');
+}
+
+export function resetFiltersButtonAppereance() {
+  openFilterByGenresBtn.textContent = "Genres";
+  openFilterByGenresBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  
+  openFilterByYearsBtn.textContent = "Years";
+  openFilterByYearsBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
 }
