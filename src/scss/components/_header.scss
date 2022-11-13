@@ -17,8 +17,8 @@
   background-size: cover;
 
   @media (min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
       url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
@@ -28,10 +28,12 @@
     background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.15),
-          rgba(0, 0, 0, 0.15)),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.15)
+        ),
         url(../images/abstract-background-with-red-lines-tab-2x.jpg);
     }
   }
@@ -311,8 +313,8 @@
   padding-right: 20px;
 
   @media (min-device-pixel-ratio: 2),
-  (min-resolution: 192dpi),
-  (min-resolution: 2dppx) {
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
       url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
@@ -330,10 +332,12 @@
       url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)),
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: linear-gradient(
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
         url(../images/abstract-background-with-red-lines-tab-2x.jpg);
     }
   }

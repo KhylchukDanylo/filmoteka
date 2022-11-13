@@ -407,7 +407,7 @@ btnRegister.addEventListener('click', createNewUser);
 
 const users = JSON.parse(localStorage.getItem('local-users')) || [];
 console.log(users);
-function createNewUser() {
+function createNewUser(evt) {
   const newUser = {};
   newUser.id += 1;
   newUser.name = name.value;
