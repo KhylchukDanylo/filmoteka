@@ -1,50 +1,53 @@
 .header {
   padding-top: 40px;
   padding-bottom: 20px;
-  background-image: url(../images/bg-header.jpg);
+  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
   background-color: #2f364a;
   background-position: center;
   height: 270px;
+  min-width: 320px;
+  max-width: 767;
+  width: 100%;
   padding-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
   background-size: cover;
 
   @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
       url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
 
   @include tablert {
     height: 229px;
-    max-width: 1280px;
     min-width: 768px;
+    max-width: 1279px;
+    background-repeat: repeat-x;
     background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: linear-gradient(
-          rgba(0, 0, 0, 0.15),
-          rgba(0, 0, 0, 0.15)
-        ),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.15),
+          rgba(0, 0, 0, 0.15)),
         url(../images/abstract-background-with-red-lines-tab-2x.jpg);
     }
   }
 
   @include desktop {
     height: 216px;
-    max-width: 2100px;
     min-width: 1280px;
-    background-image: url(../images/bg-header.jpg);
+    max-width: 100%;
+    background-repeat: repeat-x;
+    background-image: url(../images/abstract-background-with-red-lines-desc.jpg);
 
     @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: url(../images/bg-header.jpg);
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+      background-image: url(../images/abstract-background-with-red-lines-desc-2x.jpg);
     }
   }
 }
@@ -83,6 +86,7 @@
 
 .logo-text {
   display: none;
+
   @include tablert {
     max-width: 768px;
     font-family: 'Roboto';
@@ -106,6 +110,7 @@
 .header__item {
   display: flex;
   align-items: center;
+  margin-left: 20px;
 }
 
 .header__list {
@@ -122,7 +127,6 @@
   line-height: 1.17;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-right: 20px;
   text-transform: uppercase;
   color: #ffffff;
   position: relative;
@@ -144,7 +148,6 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.17;
-  margin-right: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
   text-transform: uppercase;
@@ -233,6 +236,7 @@
   color: white;
   background-color: #00000000;
   border-bottom: solid #ffffff 1px;
+
   @include tablert {
     max-width: 768px;
     border: none;
@@ -247,6 +251,7 @@
     background-color: #00000000;
     border-bottom: solid #ffffff 1px;
   }
+
   @include desktop {
     max-width: 1280px;
     border: none;
@@ -310,8 +315,8 @@
   padding-right: 20px;
 
   @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
     background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
       url(../images/abstract-background-with-red-lines-mob-2x.jpg);
   }
@@ -329,12 +334,10 @@
       url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
-      background-image: linear-gradient(
-          rgba(0, 0, 0, 0.56),
-          rgba(0, 0, 0, 0.56)
-        ),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)),
         url(../images/abstract-background-with-red-lines-tab-2x.jpg);
     }
   }
@@ -356,6 +359,7 @@
 
 .logo-text__fixed {
   display: none;
+
   @include tablert {
     max-width: 768px;
     font-family: 'Roboto';
