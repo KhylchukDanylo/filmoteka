@@ -37,6 +37,7 @@ function showFixedHeader() {
 
 function onBtnClick(e) {
   if (e.target.id === 'watched') {
+    localStorage.setItem('openedPage', 'watched');
     showWatchedList(parsedWatchedList);
     watchedBtn.forEach(element => {
       element.classList.add('btn-active');
@@ -45,6 +46,7 @@ function onBtnClick(e) {
       element.classList.remove('btn-active');
     });
   } else if (e.target.id === 'queue') {
+    localStorage.setItem('openedPage', 'queue');
     showQueueList(parsedQueueList);
     watchedBtn.forEach(element => {
       element.classList.remove('btn-active');

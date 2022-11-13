@@ -13,30 +13,56 @@ const queueList = localStorage.getItem('queue-movies');
 const parsedQueueList = JSON.parse(queueList) || [];
 
 export { showWatchedList, showQueueList, parsedWatchedList, parsedQueueList };
-
+let moviesList = [];
+const watchedBtn = Array.from(document.querySelectorAll('#watched'));
+const queueBtn = Array.from(document.querySelectorAll('#queue'));
+    
+try {
+  const openedPage = localStorage.getItem('openedPage');
+  if (openedPage === null) {
+    throw new Error();
+  }
+  if (openedPage === 'watched') {
+    clear();
+    showWatchedList(parsedWatchedList);
+    watchedBtn.forEach(element => {
+      element.classList.add('btn-active');
+    });
+    queueBtn.forEach(element => {
+      element.classList.remove('btn-active');
+    });
+  } else if (openedPage === 'queue') { 
+    clear();
+    showQueueList(parsedQueueList);
+    watchedBtn.forEach(element => {
+      element.classList.remove('btn-active');
+    });
+    queueBtn.forEach(element => {
+      element.classList.add('btn-active');
+    });
+  }
+} catch {
+  clear();
+  showWatchedList(parsedWatchedList);
+}
+  
 window.addEventListener('click', e => {
 
   if (e.target.id === 'btn-watched') {
       const movieId = e.target.nextElementSibling.id;
     closeModal();
-    // removeFromWached(movieId);
-    // const newParsedWatchedList = JSON.parse(watchedList) || [];
-    // movieList.innerHTML = '';
-    // showWatchedList(newParsedWatchedList, 'hi');
-    // console.log(newParsedWatchedList);
     clear();
     document.location.assign('./library.html');
   }
   if (e.target.id === 'btn-queue') {
     const movieId = e.target.previousElementSibling.id;
     closeModal();
-    // removeFromQueue(movieId);
     clear();
     document.location.assign('./library.html');
   }
 });
 
-let moviesList = [];
+
 
 function showWatchedList(list) {
   if (parsedWatchedList.length > 0) {
@@ -68,7 +94,7 @@ function clear() {
   movieList.innerHTML = '';
 }
 
-showWatchedList(parsedWatchedList);
+// showWatchedList(parsedWatchedList);
 
 async function createMovieList(id) {
   try {
