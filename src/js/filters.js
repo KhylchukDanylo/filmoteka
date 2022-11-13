@@ -74,8 +74,6 @@ try {
   console.log("You haven't selected any filters yet");
 }
 
-
-
 filterForm.addEventListener('change', onFormChange);
 filterForm.addEventListener('reset', onFormReset);
 filterForm.addEventListener('submit', onFormSubmit);
@@ -98,6 +96,7 @@ async function onFormSubmit(evt) {
   setCurrentFiltersSettingsToLocalStorage();
   fetchAndRenderMoviesByFilter();
   lastFetchedParams = { ...generalFilterParams };
+  filterForm.addEventListener('click', openFiltersOptions);
 }
 
 function onFormChange(evt) {
