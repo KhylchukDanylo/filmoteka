@@ -15,24 +15,15 @@ const parsedQueueList = JSON.parse(queueList) || [];
 export { showWatchedList, showQueueList, parsedWatchedList, parsedQueueList };
 
 window.addEventListener('click', e => {
-
   if (e.target.id === 'btn-watched') {
-      const movieId = e.target.nextElementSibling.id;
     closeModal();
-    removeFromWached(movieId);
-    const newParsedWatchedList = JSON.parse(watchedList) || [];
-    movieList.innerHTML = '';
-    showWatchedList(newParsedWatchedList, 'hi');
-    console.log(newParsedWatchedList);
     // clear();
-    // document.location.assign('./library.html');
+    document.location.assign('./library.html');
   }
   if (e.target.id === 'btn-queue') {
-    const movieId = e.target.previousElementSibling.id;
     closeModal();
-    removeFromQueue(movieId);
     // clear();
-    // document.location.assign('./library.html');
+    document.location.assign('./library.html#queue');
   }
 });
 
