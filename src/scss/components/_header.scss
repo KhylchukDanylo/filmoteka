@@ -1,19 +1,13 @@
 .header {
   padding-top: 40px;
   padding-bottom: 20px;
-
-  background-image: url(../images/bg-header-long.jpg);
-
+  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
   background-color: #2f364a;
   background-position: center;
   height: 270px;
-  min-width: 320px;
-  max-width: 767;
   width: 100%;
   padding-top: 40px;
-
   background-repeat: no-repeat;
-
   background-size: cover;
 
   @media (min-device-pixel-ratio: 2),
@@ -156,8 +150,19 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 1.17;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-transform: uppercase;
   color: #ffffff;
+  cursor: pointer;
+}
+
+.auth__login-logout:hover,
+.auth__login-logout:focus {
+  color: #ff0019;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header__link-log {
