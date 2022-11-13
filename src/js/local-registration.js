@@ -1,4 +1,4 @@
-/*import { refs } from './DOM-elements';
+import { refs } from './DOM-elements';
 const {
   formAuth: form,
   inputName: name,
@@ -9,19 +9,16 @@ const {
 
 btnRegister.addEventListener('click', createNewUser);
 
-const users = JSON.parse(localStorage.getItem('local-users')) || [];
+const users = JSON.parse(localStorage.getItem('local-users')) || {};
 console.log(users);
 function createNewUser() {
   const newUser = {};
-  newUser.id += 1;
   newUser.name = name.value;
   newUser.email = email.value;
   newUser.password = password.value;
-  users.push(newUser);
 
-  const newUsersArray = JSON.stringify(users);
+  const newUsersArray = JSON.stringify(newUser);
   localStorage.removeItem('local-users');
   localStorage.setItem('local-users', newUsersArray);
 }
-
-*/
+export { users };
