@@ -552,3 +552,15 @@ function renderYearsInterval(min, max) {
 function getArrayOfGenresFromString(string) {
   return string.split(',');
 }
+
+export function resetFiltersButtonAppereance() {
+  console.log('1');
+  openFilterByGenresBtn.textContent = "Genres";
+  console.log('2');
+  openFilterByGenresBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+console.log('3');
+  openFilterByYearsBtn.textContent = "Years";
+  openFilterByYearsBtn.style.boxShadow =
+    'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+}

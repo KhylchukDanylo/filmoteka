@@ -17,7 +17,7 @@ import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 import {lastCard} from './templates/lastCard';
 import {renderMoviesCard} from './templates/movieCard';
-import { FILTERS_PARAMS } from './filters';
+import { FILTERS_PARAMS, resetFiltersButtonAppereance } from './filters';
 const { logoFromHeader, container} = refs;
 const listEl = document.querySelector('.movie');
 let screenWidth = container.offsetWidth;
@@ -32,12 +32,16 @@ try {
   }
   const totalPages = JSON.parse(localStorage.getItem(TOTAL_PAGES));
   const currentState = JSON.parse(localStorage.getItem(CURRENT_STATE));
+  if (currentState !== "filter") {
+    resetFiltersButtonAppereance();
+  }
 
   paginationList.currentPage = currentPage;
   paginationList.totalPages = totalPages;
   paginationList.currentState = currentState;
 } catch (err) {
   paginationList.currentPage = 1;
+  resetFiltersButtonAppereance();
 }
 
 try {
@@ -135,6 +139,7 @@ function onLogoClick() {
   localStorage.removeItem(TOTAL_PAGES);
   localStorage.removeItem(CURRENT_STATE);
   localStorage.removeItem(MOVIE_TO_SEARCH);
+  resetFiltersButtonAppereance();
 }
 
 export function addLastCard() {
