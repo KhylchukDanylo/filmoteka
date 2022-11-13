@@ -1,19 +1,13 @@
 .header {
   padding-top: 40px;
   padding-bottom: 20px;
-
-  background-image: url(../images/bg-header-long.jpg);
-
+  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
   background-color: #2f364a;
   background-position: center;
   height: 270px;
-  min-width: 320px;
-  max-width: 767;
   width: 100%;
   padding-top: 40px;
-
   background-repeat: no-repeat;
-
   background-size: cover;
 
   @media (min-device-pixel-ratio: 2),
