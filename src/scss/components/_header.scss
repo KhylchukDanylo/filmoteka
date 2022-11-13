@@ -1,7 +1,9 @@
 .header {
   padding-top: 40px;
   padding-bottom: 20px;
-  background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
+
+  background-image: url(../images/bg-header-long.jpg);
+
   background-color: #2f364a;
   background-position: center;
   height: 270px;
@@ -9,9 +11,9 @@
   max-width: 767;
   width: 100%;
   padding-top: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  background-repeat: repeat-x;
+
+  background-repeat: no-repeat;
+
   background-size: cover;
 
   @media (min-device-pixel-ratio: 2),
@@ -23,9 +25,6 @@
 
   @include tablert {
     height: 229px;
-    min-width: 768px;
-    max-width: 1279px;
-    background-repeat: repeat-x;
     background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
@@ -39,15 +38,12 @@
 
   @include desktop {
     height: 216px;
-    min-width: 1280px;
-    max-width: 100%;
-    background-repeat: repeat-x;
-    background-image: url(../images/abstract-background-with-red-lines-desc.jpg);
+    background-image: url(../images/bg-header-long.jpg);
 
     @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-      background-image: url(../images/abstract-background-with-red-lines-desc-2x.jpg);
+      (min-resolution: 192dpi),
+      (min-resolution: 2dppx) {
+      background-image: url(../images/bg-header-long.jpg);
     }
   }
 }
@@ -306,7 +302,7 @@
   align-items: center;
   min-height: 50px;
   width: 100%;
-  max-width: 480px;
+  // max-width: 480px;
   margin-right: auto;
   margin-left: auto;
   top: 0;
@@ -322,14 +318,14 @@
   }
 
   @media screen and (min-width: 480px) {
-    left: calc((100% - 480px) / 2);
+    // left: calc((100% - 480px) / 2);
   }
 
   @include tablert {
-    max-width: 768px;
+    // max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
-    left: calc((100% - 768px) / 2);
+    // left: calc((100% - 768px) / 2);
     background-image: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15)),
       url(../images/abstract-background-with-red-lines-tab.jpg);
 
