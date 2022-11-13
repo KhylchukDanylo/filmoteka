@@ -9,10 +9,10 @@ button {
 }
 
 .header-library {
-  margin-left: auto;
-  margin-right: auto;
+  // margin-left: auto;
+  // margin-right: auto;
   background-color: #c4c4c4;
-  width: 100%;
+  // width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url(../images/library/header-bg-mobile.jpg);
 
@@ -27,7 +27,7 @@ button {
   }
 
   @include tablert {
-    width: 768px;
+    min-width: 768px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/library/header-bg-tablet.jpg);
     @media (min-device-pixel-ratio: 2),
@@ -41,7 +41,7 @@ button {
     }
   }
   @include desktop {
-    width: 1280px;
+    min-width: 1280px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/library/header-bg-desktop.jpg);
     @media (min-device-pixel-ratio: 2),
@@ -171,7 +171,7 @@ button {
   align-items: center;
   min-height: 50px;
   width: 100%;
-  max-width: 480px;
+  // max-width: 480px;
   margin-right: auto;
   margin-left: auto;
   top: 0;
@@ -186,13 +186,13 @@ button {
       url(../images/library/header-bg-mobile-2x.jpg);
   }
   @media screen and (min-width: 480px) {
-    left: calc((100% - 480px) / 2);
+    // left: calc((100% - 480px) / 2);
   }
   @include tablert {
-    max-width: 768px;
+    // max-width: 768px;
     padding-left: 32px;
     padding-right: 32px;
-    left: calc((100% - 768px) / 2);
+    // left: calc((100% - 768px) / 2);
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/library/header-bg-tablet.jpg);
     @media (min-device-pixel-ratio: 2),
@@ -206,8 +206,8 @@ button {
     }
   }
   @include desktop {
-    max-width: 1280px;
-    left: calc((100% - 1280px) / 2);
+    // max-width: 1280px;
+    // left: calc((100% - 1280px) / 2);
     background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url(../images/library/header-bg-desktop.jpg);
     @media (min-device-pixel-ratio: 2),
