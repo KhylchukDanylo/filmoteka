@@ -74,24 +74,7 @@ try {
   console.log("You haven't selected any filters yet");
 }
 
-function changeGenresButtonAppearance(selectedGenresArr) {
-  let selectedGenres = 'Genres';
-  if (selectedGenresArr.length === 1 && selectedGenresArr[0] !== '') {
-    selectedGenres = listOfGenres[selectedGenresArr[0]];
-  }
-  if (selectedGenresArr.length > 1) {
-    selectedGenres =
-      listOfGenres[selectedGenresArr[0]] + `, +${selectedGenresArr.length - 1}`;
-  }
 
-  openFilterByGenresBtn.textContent = selectedGenres;
-  openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
-
-  if (openFilterByGenresBtn.textContent === 'Genres') {
-    openFilterByGenresBtn.style.boxShadow =
-      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-  }
-}
 
 filterForm.addEventListener('change', onFormChange);
 filterForm.addEventListener('reset', onFormReset);
@@ -553,4 +536,23 @@ export function resetFiltersButtonAppereance() {
   openFilterByYearsBtn.textContent = "Years";
   openFilterByYearsBtn.style.boxShadow =
     'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+}
+
+function changeGenresButtonAppearance(selectedGenresArr) {
+  let selectedGenres = 'Genres';
+  if (selectedGenresArr.length === 1 && selectedGenresArr[0] !== '') {
+    selectedGenres = listOfGenres[selectedGenresArr[0]];
+  }
+  if (selectedGenresArr.length > 1) {
+    selectedGenres =
+      listOfGenres[selectedGenresArr[0]] + `, +${selectedGenresArr.length - 1}`;
+  }
+
+  openFilterByGenresBtn.textContent = selectedGenres;
+  openFilterByGenresBtn.style.boxShadow = 'inset 0 0 8px 1px rgba(0,128,0,0.6)';
+
+  if (openFilterByGenresBtn.textContent === 'Genres') {
+    openFilterByGenresBtn.style.boxShadow =
+      'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  }
 }
