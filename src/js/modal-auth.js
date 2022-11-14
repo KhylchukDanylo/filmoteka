@@ -10,7 +10,6 @@ import {
   signOut,
 } from 'firebase/auth';
 import { getDatabase, ref, set, remove } from 'firebase/database';
-//import { backdrop } from './modal-movie-render';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB2TbFY0wugbjLukonpxHQ4tn4oKoQ7Qn8',
@@ -196,8 +195,8 @@ function closeAuthModal(event) {
     refs.modalAuthBackdrop.classList.add('visually-hidden');
     refs.modalAuthBackdrop.removeEventListener('click', closeModal);
   }
-}
-*/
+}*/
+
 ///////////////////////////LOCALSTORAGE/////////////////////////////
 import throttle from 'lodash.throttle';
 import { Notify } from 'notiflix';
@@ -356,12 +355,13 @@ btnCloseAuth.addEventListener('click', () => closeModal());
 function closeModal() {
   refs.formAuth.classList.add('visually-hidden');
   refs.modalAuthBackdrop.classList.remove('modal-auth__backdrop');
-  document.body.classList.add('scroll-auth');
+  document.body.classList.remove('scroll-auth');
 }
 
 function closeAuthModal(event) {
   if (event.target === event.currentTarget) {
     refs.modalAuthBackdrop.classList.add('visually-hidden');
+    document.body.classList.remove('scroll-auth');
     refs.modalAuthBackdrop.removeEventListener('click', closeModal);
   }
 }
