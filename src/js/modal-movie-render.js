@@ -43,7 +43,14 @@ function onImgClick(evt) {
   watchedText = watchedMovies.includes(movieId)
     ? 'remove from watched'
     : 'add to watched';
-  watcheddBtnPadding = watchedMovies.includes(movieId) ? '0' : '6px 27px';
+    // if( watchedMovies.includes(movieId)){
+    //   watchedText = 'remove from watched';
+
+    // }
+    // if(!watchedMovies.includes(movieId)){
+    //   watchedText = 'add to watched';
+    // }
+    watcheddBtnPadding = watchedMovies.includes(movieId) ? '0' : '6px 27px';
 }
 
 async function openModal(id) {
@@ -210,11 +217,11 @@ async function openModal(id) {
     <p class="movie__about">About</p>
     <p class="movie__description">${overview}</p>
     <div class="button-wrap">
-      <button type="button" class="movie__btn movie__btn-watched" id="btn-watched" style="padding:${watcheddBtnPadding}">
+      <button type="button" class="movie__btn movie__btn-watched" data-btnid="watched" style="padding:${watcheddBtnPadding}">
           ${watchedText}
       </button>
       <span id="${movieId}" style="display:none"></span>
-          <button type="button" class="movie__btn movie__btn-queue" id="btn-queue">
+          <button type="button" class="movie__btn movie__btn-queue" data-btnid="queue">
     ${queueText}
       </button>
     </div>
@@ -267,6 +274,11 @@ async function openModal(id) {
   removeSpinner();
   const btnClose = document.querySelector('.movie__btn-close');
   btnClose.addEventListener('click', () => closeModal());
+
+  const queueButton = movieModal.querySelector('.movie__btn-queue');
+  const wachedButton = movieModal.querySelector('.movie__btn-watched')
+  if(queueMovies.includes(movieId)) queueButton.classList.add('selected');
+  if(watchedMovies.includes(movieId)) wachedButton.classList.add('selected');
 }
 
 //close modal function and closing by backdrop & 'Escape'//
@@ -298,14 +310,14 @@ window.addEventListener('click', e => {
     closeModal();
   }
 
-  if (e.target.id === 'btn-watched') {
+  if (e.target.dataset.btnid === 'watched') {
     if (!watchedMovies.includes(movieId)) {
       addToWached(movieId, movieTitle);
     } else {
       removeFromWached(movieId, movieTitle);
     }
   }
-  if (e.target.id === 'btn-queue') {
+  if (e.target.dataset.btnid === 'queue') {
     if (!queueMovies.includes(movieId)) {
       addToQueue(movieId, movieTitle);
     } else {
@@ -329,7 +341,7 @@ const trailerNotifyOptions = {
   fontFamily: 'Roboto',
 };
 function addToQueue(movieId, movieTitle) {
-  const btn = document.querySelector('#btn-queue');
+  const btn = document.querySelector('[data-btnid="queue"');
   queueText = 'remove from queue';
   btn.classList.add('selected');
   btn.textContent = queueText;
@@ -340,7 +352,7 @@ function addToQueue(movieId, movieTitle) {
 
 function removeFromQueue(movieId, movieTitle) {
   Notify.warning(`"${movieTitle}" removed from queue`, trailerNotifyOptions);
-  const btn = document.querySelector('#btn-queue');
+  const btn = document.querySelector('[data-btnid="queue"');
   queueText = 'add to queue';
   btn.classList.remove('selected');
   btn.textContent = queueText;
@@ -352,7 +364,7 @@ function removeFromQueue(movieId, movieTitle) {
 
 function addToWached(movieId, movieTitle) {
   Notify.success(`"${movieTitle}" added to wached`, trailerNotifyOptions);
-  const btn = document.querySelector('#btn-watched');
+  const btn = document.querySelector('[data-btnid="watched"');
   btn.style.padding = '0';
   btn.classList.add('selected');
   watchedText = 'remove from watched';
@@ -363,7 +375,7 @@ function addToWached(movieId, movieTitle) {
 
 function removeFromWached(movieId, movieTitle) {
   Notify.warning(`"${movieTitle}" removed from wached`, trailerNotifyOptions);
-  const btn = document.querySelector('#btn-watched');
+  const btn = document.querySelector('[data-btnid="watched"');
   watchedText = 'add to watched';
   btn.classList.remove('selected');
   btn.style.padding = '6px 27px';
@@ -371,7 +383,6 @@ function removeFromWached(movieId, movieTitle) {
 
   localStorage.removeItem('wached-movies');
   const movieIndex = watchedMovies.findIndex(element => element === movieId);
-  console.log('tyt',movieIndex);
   watchedMovies.splice(movieIndex, 1);
   localStorage.setItem('wached-movies', JSON.stringify(watchedMovies));
 }

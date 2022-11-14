@@ -9,8 +9,14 @@ import {
   MOVIE_TO_SEARCH,
 } from './pagination';
 import { scrollToTop } from './eventListeners';
+const { logoFromFixedHeader, 
+  openFilterByGenresBtn:genresButton, 
+  openFilterByYearsBtn:yearsButton,
+  genresForm,
+  yearsForm,
+  sortFormOptions,
+} = refs;
 import { resetFiltersForms } from './filters';
-const { logoFromFixedHeader } = refs;
 
 let header = document.querySelector('.header');
 let fixedHeader = document.querySelector('.fixed-headers');
@@ -38,5 +44,20 @@ function onLogoClick(evt) {
   resetFiltersForms();
   createMovieList(1);
   scrollToTop();
-  formEl.reset();
 }
+/*
+function resetFiltersStyles(){
+  genresButton.style.boxShadow =
+  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  yearsButton.style.boxShadow =
+  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  genresButton.textContent = 'Genres';
+  yearsButton.textContent = 'Years';
+}
+
+function resetFiltersForms(){
+  genresForm.reset();
+  yearsForm.reset();
+  // sortFormOptions.reset(); нужно подумать как очищать селекты
+}
+*/

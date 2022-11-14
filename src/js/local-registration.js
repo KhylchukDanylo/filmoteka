@@ -9,8 +9,7 @@ const {
 
 btnRegister.addEventListener('click', createNewUser);
 
-let users = JSON.parse(localStorage.getItem('local-users')) || [];
-console.log(users);
+const users = JSON.parse(localStorage.getItem('local-users')) || {};
 function createNewUser() {
   const newUser = {};
   newUser.name = name.value;

@@ -45,13 +45,13 @@ try {
   
 window.addEventListener('click', e => {
 
-  if (e.target.id === 'btn-watched') {
+  if (e.target.dataset.btnid === 'watched') {
       const movieId = e.target.nextElementSibling.id;
     closeModal();
     clear();
     document.location.assign('./library.html');
   }
-  if (e.target.id === 'btn-queue') {
+  if (e.target.dataset.btnid === 'queue') {
     const movieId = e.target.previousElementSibling.id;
     closeModal();
     clear();
