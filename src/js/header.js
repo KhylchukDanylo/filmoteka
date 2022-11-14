@@ -40,12 +40,12 @@ function onLogoClick(evt) {
   localStorage.removeItem(CURRENT_STATE);
   localStorage.removeItem(MOVIE_TO_SEARCH);
   formEl.reset();
-  resetFiltersStyles();
-  resetFiltersForms();
+  // resetFiltersStyles();
+  // resetFiltersForms();
   createMovieList(1);
   scrollToTop();
 }
-
+/*
 function resetFiltersStyles(){
   genresButton.style.boxShadow =
   'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
@@ -60,3 +60,4 @@ function resetFiltersForms(){
   yearsForm.reset();
   // sortFormOptions.reset(); нужно подумать как очищать селекты
 }
+*/
