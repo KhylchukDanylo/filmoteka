@@ -4,7 +4,7 @@
   background-image: url(../images/abstract-background-with-red-lines-mob.jpg);
   background-color: #2f364a;
   background-position: center;
-  height: 270px;
+  height: 290px;
   width: 100%;
   padding-top: 40px;
   background-repeat: no-repeat;
@@ -18,7 +18,7 @@
   }
 
   @include tablert {
-    height: 229px;
+    height: 240px;
     background-image: url(../images/abstract-background-with-red-lines-tab.jpg);
 
     @media (min-device-pixel-ratio: 2),
@@ -31,7 +31,7 @@
   }
 
   @include desktop {
-    height: 216px;
+    height: 235px;
     background-image: url(../images/bg-header-long.jpg);
 
     @media (min-device-pixel-ratio: 2),

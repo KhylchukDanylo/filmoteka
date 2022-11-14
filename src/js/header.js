@@ -45,19 +45,3 @@ function onLogoClick(evt) {
   createMovieList(1);
   scrollToTop();
 }
-/*
-function resetFiltersStyles(){
-  genresButton.style.boxShadow =
-  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-  yearsButton.style.boxShadow =
-  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
-  genresButton.textContent = 'Genres';
-  yearsButton.textContent = 'Years';
-}
-
-function resetFiltersForms(){
-  genresForm.reset();
-  yearsForm.reset();
-  // sortFormOptions.reset(); нужно подумать как очищать селекты
-}
-*/
