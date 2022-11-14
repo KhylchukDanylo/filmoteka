@@ -9,7 +9,13 @@ import {
   MOVIE_TO_SEARCH,
 } from './pagination';
 import { scrollToTop } from './eventListeners';
-const { logoFromFixedHeader } = refs;
+const { logoFromFixedHeader, 
+  openFilterByGenresBtn:genresButton, 
+  openFilterByYearsBtn:yearsButton,
+  genresForm,
+  yearsForm,
+  sortFormOptions,
+} = refs;
 
 let header = document.querySelector('.header');
 let fixedHeader = document.querySelector('.fixed-headers');
@@ -33,7 +39,24 @@ function onLogoClick(evt) {
   localStorage.removeItem(TOTAL_PAGES);
   localStorage.removeItem(CURRENT_STATE);
   localStorage.removeItem(MOVIE_TO_SEARCH);
+  formEl.reset();
+  resetFiltersStyles();
+  resetFiltersForms();
   createMovieList(1);
   scrollToTop();
-  formEl.reset();
+}
+
+function resetFiltersStyles(){
+  genresButton.style.boxShadow =
+  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  yearsButton.style.boxShadow =
+  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  genresButton.textContent = 'Genres';
+  yearsButton.textContent = 'Years';
+}
+
+function resetFiltersForms(){
+  genresForm.reset();
+  yearsForm.reset();
+  // sortFormOptions.reset(); нужно подумать как очищать селекты
 }
