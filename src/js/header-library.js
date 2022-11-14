@@ -13,6 +13,8 @@ import {
   parsedWatchedList,
   parsedQueueList,
 } from './gallery';
+// import { resetFiltersStyles } from './popular-movies';
+// import { resetFiltersForms } from './filters';
 
 let header = document.querySelector('.header-library');
 let fixedHeader = document.querySelector('.fixed-header');
@@ -57,10 +59,15 @@ function onBtnClick(e) {
   }
 }
 
-function onLogoClick() {
-  console.log('logolibrary');
+function onLogoClick(evt) {
+  evt.preventDefault();
   localStorage.removeItem(CURRENT_PAGE);
   localStorage.removeItem(TOTAL_PAGES);
   localStorage.removeItem(CURRENT_STATE);
   localStorage.removeItem(MOVIE_TO_SEARCH);
+  sessionStorage.setItem("reloading", "true");
+  document.location.assign('./index.html');
 }
+
+
+
