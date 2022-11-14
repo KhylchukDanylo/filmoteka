@@ -291,12 +291,16 @@ function onBtnSubmit(e) {
   if (refs.inputEmail.value === '') {
     return Notify.failure('Wrong email!', trailerNotifyOptions);
   }
-  const localUser = JSON.parse(localStorage.getItem('local-users'));
+  const localUser = JSON.parse(localStorage.getItem('local-users')) || '';
+  const newLocalUser = JSON.stringify(localUser);
   const guestUser = JSON.stringify(currentFormData);
-  console.log('123', localUser);
-  console.log(guestUser);
 
-  if (localUser !== guestUser) {
+  console.log(typeof localUser === typeof guestUser ? true : false);
+  console.log(typeof localUser);
+  console.log(typeof guestUser);
+  console.log(typeof newLocalUser);
+
+  if (newLocalUser !== guestUser) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
     textLogOut = 'LOG OUT';
     refs.btnLoginGlobal.textContent = textLogOut;
@@ -306,7 +310,7 @@ function onBtnSubmit(e) {
     return Notify.success('Registration is over!', trailerNotifyOptions);
   }
 
-  return localUser === guestUser
+  return newLocalUser === guestUser
     ? Notify.failure('User was registered already! Log in please!')
     : Notify.success('Registration was succesful!');
 }
@@ -320,12 +324,11 @@ function onFormInput(e) {
 
 function onBtnLogin(e) {
   e.preventDefault();
-  const localUser = JSON.parse(localStorage.getItem('local-users')) || {};
+  const localUser = JSON.parse(localStorage.getItem('local-users')) || '';
+  const newLocalUser = JSON.stringify(localUser);
   const guestUser = JSON.stringify(currentFormData);
-  console.log(localUser);
-  console.log(guestUser);
 
-  if (localUser === guestUser) {
+  if (newLocalUser === guestUser) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(currentFormData));
     textLogOut = 'LOG OUT';
     refs.btnLoginGlobal.textContent = textLogOut;
