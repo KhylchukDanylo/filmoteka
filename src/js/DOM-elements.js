@@ -17,7 +17,6 @@ export const refs = {
   queueBtn: document.querySelectorAll('#queue'),
   movieBackdrop: document.querySelector('.backdrop'),
   filterForm: document.querySelector('.filters__form'),
-  //ниже дублируеться строка
   container: document.querySelector('.container'),
   openFilterByGenresBtn: document.querySelector('.filters__genres-button'),
   openFilterByYearsBtn: document.querySelector('.filters__years-button'),
@@ -33,8 +32,6 @@ export const refs = {
   logoFromFixedHeader: document.querySelector('.logo-link__fixed'),
   logoFromLibrarysHeader: document.querySelector('.logo__link'),
   logoFromLibrarysFixedHeader: document.querySelector('.logo__link--fixed'),
-  //этот элемент уже есть выше
-  // containerEl: document.querySelector('.container'),
   notFoundPage: document.querySelector('.not-found-page'),
   modalAuthBackdrop: document.querySelector('.wrapper-backdrop'),
   inputName: document.querySelector('.input__auth__name'),

@@ -1,9 +1,6 @@
 import defaultImg from '../images/437973.webp';
 import { fetchMovieById } from './api-service';
-import { addSpinner } from './spinner';
-import { removeSpinner } from './spinner';
 import { closeModal, removeFromWached, removeFromQueue } from './modal-movie-render';
-import { genresMaker } from './templates/genres-maker';
 
 const movieList = document.querySelector('.movie');
 const containerNothing = document.querySelector('.wrap-gallery');
