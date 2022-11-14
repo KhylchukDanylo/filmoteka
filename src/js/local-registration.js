@@ -15,9 +15,9 @@ function createNewUser() {
   newUser.name = name.value;
   newUser.email = email.value;
   newUser.password = password.value;
+  users.push(newUser);
 
   const newUsersArray = JSON.stringify(newUser);
   localStorage.removeItem('local-users');
   localStorage.setItem('local-users', newUsersArray);
 }
-export { users };

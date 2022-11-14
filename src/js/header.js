@@ -1,6 +1,6 @@
 const throttle = require('lodash.throttle');
 import { refs } from './DOM-elements';
-import { createMovieList } from './popular-movies';
+import { createMovieList, resetFiltersStyles } from './popular-movies';
 import { formEl } from './search-movies';
 import {
   CURRENT_PAGE,
@@ -16,6 +16,7 @@ const { logoFromFixedHeader,
   yearsForm,
   sortFormOptions,
 } = refs;
+import { resetFiltersForms } from './filters';
 
 let header = document.querySelector('.header');
 let fixedHeader = document.querySelector('.fixed-headers');
@@ -39,9 +40,8 @@ function onLogoClick(evt) {
   localStorage.removeItem(TOTAL_PAGES);
   localStorage.removeItem(CURRENT_STATE);
   localStorage.removeItem(MOVIE_TO_SEARCH);
-  formEl.reset();
-  // resetFiltersStyles();
-  // resetFiltersForms();
+  resetFiltersStyles();
+  resetFiltersForms();
   createMovieList(1);
   scrollToTop();
 }

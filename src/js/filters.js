@@ -67,9 +67,10 @@ try {
   });
   
   updateGenresButtonAppearance();
+  // const selectedGenresArr = generalFilterParams.with_genres.split(',');
+  // changeGenresButtonAppearance(selectedGenresArr);
   updateYearsButtonAppearance();
   renderYearsInterval(generalFilterParams["primary_release_date.gte"], generalFilterParams["primary_release_date.lte"]);
-  
 } catch (err) {
   console.log("You haven't selected any filters yet");
 }
@@ -91,6 +92,7 @@ async function onFormSubmit(evt) {
     deleteNotFoundPage();
     createMovieList(1);
     lastFetchedParams = { ...generalFilterParams };
+    filterForm.addEventListener('click', openFiltersOptions);
     return;
   }
   setCurrentFiltersSettingsToLocalStorage();
@@ -152,6 +154,11 @@ function onFormReset(evt) {
     generalFilterParams.with_genres = '';
     openFilterByGenresBtn.style.boxShadow =
       'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+    
+    const allInputs = document.querySelectorAll('.genres__wrap input');
+    allInputs.forEach(input => {
+      input.removeAttribute('checked');
+    });
   }
   if (isYearsForm) {
     generalFilterParams['primary_release_date.lte'] = '2022';
@@ -163,6 +170,7 @@ function onFormReset(evt) {
     'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   openFilterByYearsBtn.style.boxShadow =
     'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+
 }
 
 function updateGenresParams(form) {
@@ -465,6 +473,13 @@ export function onClearFiltersButtonClick() {
   openFilterByGenresBtn.textContent = 'Genres';
   openFilterByYearsBtn.textContent = 'Years';
   checkingForBeingAdultInput.removeAttribute('checked');
+  rangeValues.innerHTML = 'From 1900 to 2022';
+  sortFormOptions.forEach(option => {
+    option.removeAttribute('selected');
+    if (option.value === "popularity.desc") {
+      option.setAttribute('selected', true);
+    }
+    });
   generalFilterParams = { ...initialFilterParams };
   lastFetchedParams = { ...initialFilterParams };
   deleteNotFoundPage();
@@ -508,11 +523,6 @@ function onInputChange(evt) {
   }
 
   renderYearsInterval(minValue, maxValue);
-  // if (Number(minValue) === Number(maxValue)) {
-  //   rangeValues.innerHTML = minValue;
-  // } else {
-  //   rangeValues.innerHTML = `From ${minValue} to ${maxValue}`;
-  // }
 }
 
 function renderYearsInterval(min, max) {
@@ -555,3 +565,20 @@ function changeGenresButtonAppearance(selectedGenresArr) {
       'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
   }
 }
+
+export function resetFiltersForms() {
+  const listOfForms = filterForm.querySelectorAll('form');
+  listOfForms.forEach(form => form.reset());
+  checkingForBeingAdultInput.removeAttribute('checked');
+  rangeValues.innerHTML = "From 1900 to 2022";
+
+    sortFormOptions.forEach(option => {
+    option.removeAttribute('selected');
+    if (option.value === "popularity.desc") {
+      option.setAttribute('selected', true);
+    }
+    });
+  generalFilterParams = { ...initialFilterParams };
+  lastFetchedParams = { ...initialFilterParams };
+}
+

@@ -11,14 +11,17 @@ import {
   MOVIE_TO_SEARCH,
 } from './pagination';
 import { refs } from './DOM-elements';
-import { getClassByVote } from './search-movies';
-import { allGenres } from './data/jenres.js';
 import { addSpinner } from './spinner';
 import { removeSpinner } from './spinner';
 import {lastCard} from './templates/lastCard';
 import {renderMoviesCard} from './templates/movieCard';
-import { FILTERS_PARAMS } from './filters';
-const { logoFromHeader, container} = refs;
+import { FILTERS_PARAMS, resetFiltersForms} from './filters';
+import {fetchAndRenderMoviesByFilter} from './filters'
+const { logoFromFixedHeader, logoFromHeader,
+  openFilterByGenresBtn:genresButton, 
+  openFilterByYearsBtn:yearsButton,
+  container,
+} = refs;
 const listEl = document.querySelector('.movie');
 let screenWidth = container.offsetWidth;
 export let popularMovies = [];
@@ -71,10 +74,18 @@ if (paginationList.currentState === 'search') {
     paginationList.currentPage
   );
 }
-import {fetchAndRenderMoviesByFilter} from './filters'
 if (paginationList.currentState === 'filter') {
   fetchAndRenderMoviesByFilter();
 }
+
+try {
+  const reloading = sessionStorage.getItem("reloading");
+  if (reloading) {
+    sessionStorage.removeItem("reloading");
+    resetFiltersStyles();
+    resetFiltersForms();
+  }
+} catch{}
 // // ================ fetch popular movies for start pages ==================//
 
 export async function createMovieList(page) {
@@ -130,11 +141,24 @@ export async function createMovieList(page) {
 
 }
 
-function onLogoClick() {
+function onLogoClick(evt) {
+  evt.preventDefault();
   localStorage.removeItem(CURRENT_PAGE);
   localStorage.removeItem(TOTAL_PAGES);
   localStorage.removeItem(CURRENT_STATE);
   localStorage.removeItem(MOVIE_TO_SEARCH);
+  resetFiltersStyles();
+  resetFiltersForms();
+  createMovieList(1);
+}
+
+export function resetFiltersStyles() {
+  genresButton.style.boxShadow =
+  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  yearsButton.style.boxShadow =
+  'inset 0 0 8px 1px rgba(255, 0, 27, 0.6)';
+  genresButton.textContent = 'Genres';
+  yearsButton.textContent = 'Years';
 }
 
 export function addLastCard() {
